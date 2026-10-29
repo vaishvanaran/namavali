@@ -18,6 +18,7 @@
 </head>
 <body>
 <header class="bar"><div class="wrap">
+  <button class="menu" id="menuBtn" aria-label="பட்டியல் / Menu" aria-controls="drawer" aria-expanded="false"><span></span><span></span><span></span></button>
   <a class="brand" href="#"><b>नामावलिः</b><span>நாமாவளி</span></a>
   <div class="seg" id="scripts" role="group" aria-label="எழுத்து / Script">
     <button data-s="deva" class="deva" title="देवनागरी">देव</button>
@@ -32,6 +33,20 @@
     <button class="icon" id="fsUp" title="எழுத்து பெரிதாக / larger">அ+</button>
   </div>
 </div></header>
+
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer" aria-label="பட்டியல்" aria-hidden="true">
+  <div class="dtop"><b class="deva">नामावलयः</b><button class="icon" id="drawerClose" aria-label="மூடு">✕</button></div>
+  <nav>
+    <a href="#" class="dl"><span class="sym xs">⌂</span><span>முகப்பு</span></a>
+    <div class="dsec">நாமாவளிகள்</div>
+    <div id="dKinds"></div>
+    <div class="dsec">தேவதைகள்</div>
+    <div id="dGroups"></div>
+    <div class="dsec"></div>
+    <a href="#about" class="dl"><span class="sym xs">i</span><span>இந்த ஆப் பற்றி</span></a>
+  </nav>
+</aside>
 
 <main id="home" class="wrap">
   <section class="welcome">
@@ -57,6 +72,14 @@
   </div>
   <nav id="kJump" class="chips jump" aria-label="தேவதைகள்"></nav>
   <div id="klist"></div>
+</main>
+
+<main id="group" class="wrap" hidden>
+  <div class="ghead">
+    <button class="back" data-home>← முகப்பு</button>
+    <div class="gtitle"><span class="sym" id="gSym"></span><div><h1 id="gDeva" class="deva"></h1><div id="gAlt" class="alt"></div></div></div>
+  </div>
+  <div id="glist"></div>
 </main>
 
 <main id="reader" class="wrap" hidden>

@@ -1,30 +1,29 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9A2233"/><stop offset="1" stop-color="#6E1221"/></linearGradient>
-    <linearGradient id="brass" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#B9831C"/><stop offset=".45" stop-color="#F6D27A"/><stop offset="1" stop-color="#A8720F"/></linearGradient>
-    <radialGradient id="glow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FFE9A8" stop-opacity=".55"/><stop offset="1" stop-color="#FFE9A8" stop-opacity="0"/></radialGradient>
-    <linearGradient id="flame" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#FF8A1E"/><stop offset=".6" stop-color="#FFC94A"/><stop offset="1" stop-color="#FFF4C2"/></linearGradient>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5B1530"/><stop offset=".55" stop-color="#B8402E"/><stop offset="1" stop-color="#F0A23A"/>
+    </linearGradient>
+    <linearGradient id="snow" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#F3D9C4"/></linearGradient>
+    <radialGradient id="sun" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FFF3C4"/><stop offset=".5" stop-color="#FFD36B" stop-opacity=".9"/><stop offset="1" stop-color="#FFD36B" stop-opacity="0"/></radialGradient>
+    <linearGradient id="leaf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3E7A3A"/><stop offset="1" stop-color="#1F4A27"/></linearGradient>
   </defs>
-  <rect width="512" height="512" fill="url(#bg)"/>
-  <circle cx="256" cy="150" r="150" fill="url(#glow)"/>
-  <!-- flames -->
-  <g fill="url(#flame)">
-    <path d="M256 70c-14 22-20 36-20 50a20 20 0 0 0 40 0c0-14-6-28-20-50z"/>
-    <path d="M176 104c-11 17-16 28-16 39a16 16 0 0 0 32 0c0-11-5-22-16-39z"/>
-    <path d="M336 104c-11 17-16 28-16 39a16 16 0 0 0 32 0c0-11-5-22-16-39z"/>
+  <rect width="512" height="512" fill="url(#sky)"/>
+  <circle cx="256" cy="150" r="130" fill="url(#sun)"/>
+  <!-- Kailasa -->
+  <path d="M30 340 L170 170 L222 132 L256 82 L290 132 L342 170 L482 340 Z" fill="#7A3B4E"/><path d="M256 82 L290 132 L342 170 L482 340 L330 340 Z" fill="#62283C"/>
+  <path d="M256 82 L290 132 L330 160 L304 168 L284 152 L270 174 L256 150 L242 174 L228 152 L208 168 L182 160 L222 132 Z" fill="url(#snow)"/>
+  <!-- ground -->
+  <path d="M0 420 Q256 360 512 420 V512 H0 Z" fill="#3A1A16"/>
+  <!-- aerial roots and trunk -->
+  <g stroke="#4A2A1C" stroke-linecap="round" fill="none">
+    <path d="M256 330 V430" stroke-width="30"/>
+    <path d="M256 360 Q220 380 200 430" stroke-width="10"/>
+    <path d="M256 360 Q292 380 312 430" stroke-width="10"/>
+    <g stroke-width="5">
+      <path d="M110 336 V420"/><path d="M146 340 V428"/><path d="M180 344 V432"/>
+      <path d="M332 344 V432"/><path d="M366 340 V428"/><path d="M402 336 V420"/>
+    </g>
   </g>
-  <g fill="url(#brass)">
-    <!-- bowl with spouts -->
-    <path d="M140 160h232c-6 26-30 44-60 48H200c-30-4-54-22-60-48z"/>
-    <path d="M160 158l16-12 16 12zM240 158l16-14 16 14zM320 158l16-12 16 12z"/>
-    <!-- stem with knops -->
-    <rect x="246" y="206" width="20" height="170"/>
-    <ellipse cx="256" cy="226" rx="26" ry="10"/>
-    <ellipse cx="256" cy="282" rx="32" ry="13"/>
-    <ellipse cx="256" cy="336" rx="24" ry="9"/>
-    <!-- base tiers -->
-    <path d="M206 376h100l14 22H192z"/>
-    <path d="M176 398h160l20 30H156z"/>
-    <rect x="140" y="428" width="232" height="18" rx="9"/>
-  </g>
+  <!-- banyan canopy -->
+  <g><circle cx="96" cy="318" r="30" fill="#24502A"/><circle cx="136" cy="318" r="30" fill="#24502A"/><circle cx="176" cy="318" r="30" fill="#24502A"/><circle cx="216" cy="318" r="30" fill="#24502A"/><circle cx="256" cy="318" r="30" fill="#24502A"/><circle cx="296" cy="318" r="30" fill="#24502A"/><circle cx="336" cy="318" r="30" fill="#24502A"/><circle cx="376" cy="318" r="30" fill="#24502A"/><circle cx="416" cy="318" r="30" fill="#24502A"/><circle cx="128" cy="292" r="33" fill="#2E6230"/><circle cx="170" cy="292" r="33" fill="#2E6230"/><circle cx="212" cy="292" r="33" fill="#2E6230"/><circle cx="254" cy="292" r="33" fill="#2E6230"/><circle cx="296" cy="292" r="33" fill="#2E6230"/><circle cx="338" cy="292" r="33" fill="#2E6230"/><circle cx="380" cy="292" r="33" fill="#2E6230"/><circle cx="178" cy="266" r="33" fill="#3A7337"/><circle cx="217" cy="266" r="33" fill="#3A7337"/><circle cx="256" cy="266" r="33" fill="#3A7337"/><circle cx="295" cy="266" r="33" fill="#3A7337"/><circle cx="334" cy="266" r="33" fill="#3A7337"/><circle cx="226" cy="242" r="30" fill="#46833F"/><circle cx="286" cy="242" r="30" fill="#46833F"/><circle cx="90" cy="308" r="14" fill="#7DB35C" opacity=".18"/><circle cx="130" cy="308" r="14" fill="#7DB35C" opacity=".18"/><circle cx="170" cy="308" r="14" fill="#7DB35C" opacity=".18"/><circle cx="210" cy="308" r="14" fill="#7DB35C" opacity=".18"/><circle cx="250" cy="308" r="14" fill="#7DB35C" opacity=".18"/><circle cx="290" cy="308" r="14" fill="#7DB35C" opacity=".18"/><circle cx="330" cy="308" r="14" fill="#7DB35C" opacity=".18"/><circle cx="370" cy="308" r="14" fill="#7DB35C" opacity=".18"/><circle cx="410" cy="308" r="14" fill="#7DB35C" opacity=".18"/><circle cx="122" cy="282" r="15" fill="#7DB35C" opacity=".18"/><circle cx="164" cy="282" r="15" fill="#7DB35C" opacity=".18"/><circle cx="206" cy="282" r="15" fill="#7DB35C" opacity=".18"/><circle cx="248" cy="282" r="15" fill="#7DB35C" opacity=".18"/><circle cx="290" cy="282" r="15" fill="#7DB35C" opacity=".18"/><circle cx="332" cy="282" r="15" fill="#7DB35C" opacity=".18"/><circle cx="374" cy="282" r="15" fill="#7DB35C" opacity=".18"/><circle cx="172" cy="256" r="15" fill="#7DB35C" opacity=".18"/><circle cx="211" cy="256" r="15" fill="#7DB35C" opacity=".18"/><circle cx="250" cy="256" r="15" fill="#7DB35C" opacity=".18"/><circle cx="289" cy="256" r="15" fill="#7DB35C" opacity=".18"/><circle cx="328" cy="256" r="15" fill="#7DB35C" opacity=".18"/><circle cx="220" cy="232" r="14" fill="#7DB35C" opacity=".18"/><circle cx="280" cy="232" r="14" fill="#7DB35C" opacity=".18"/></g>
 </svg>

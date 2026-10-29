@@ -4,7 +4,7 @@
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const FONT = { deva: "var(--deva)", taml: "var(--tamil)", gran: "var(--gran)", latn: "var(--latn)" };
   const CONV = { deva: s => s, taml: T.tamil, gran: T.grantha, latn: T.iast };
-  const VERSION = "2026.10.29d";
+  const VERSION = "2026.10.29e";
   const KINDS = [
     { k: "108", deva: "अष्टोत्तरशतनामावलिः", ta: "அஷ்டோத்தரம்", en: "Ashtottaram · 108 names" },
     { k: "300", deva: "त्रिशतीनामावलिः", ta: "த்ரிஶதீ", en: "Trishati · 300 names" },
@@ -91,6 +91,33 @@
       `<div class="grid">${items.filter(i => i.group === g.key).map(card).join("")}</div></section>`).join("");
   }
 
+  /* ---------- one deity, all its namavalis (108 / 300 / 1000) ---------- */
+  function renderGroup() {
+    const g = INDEX.groups.find(x => x.key === groupKey); if (!g) return;
+    $("gSym").innerHTML = window.symbolSVG(g.key);
+    $("gDeva").textContent = g.deva;
+    $("gAlt").innerHTML = `<span class="taml">${esc(g.ta)}</span><span class="gran">${esc(T.grantha(g.deva))}</span><span>${esc(g.en)}</span>`;
+    const items = INDEX.items.filter(i => i.group === g.key);
+    $("glist").innerHTML = KINDS.filter(K => items.some(i => i.kind === K.k)).map(K =>
+      `<section class="sec"><h2><span class="sym sm num">${K.k}</span><span class="d">${esc(K.deva)}</span><span class="t">${esc(K.ta)}</span></h2>` +
+      `<div class="grid">${items.filter(i => i.kind === K.k).map(card).join("")}</div></section>`).join("");
+  }
+
+  /* ---------- side menu ---------- */
+  function renderDrawer() {
+    $("dKinds").innerHTML = KINDS.map(K => `<a class="dl" href="#k-${K.k}"><span class="sym xs num">${K.k}</span><span><span class="dd">${esc(K.deva)}</span><span class="dt">${esc(K.ta)}</span></span></a>`).join("");
+    $("dGroups").innerHTML = INDEX.groups.map(g => `<a class="dl" href="#g-${g.key}"><span class="sym xs">${window.symbolSVG(g.key)}</span><span><span class="dd">${esc(g.deva)}</span><span class="dt">${esc(g.ta)}</span></span><span class="dn">${INDEX.items.filter(i => i.group === g.key).length}</span></a>`).join("");
+  }
+  function markDrawer() {
+    const h = location.hash || "#";
+    document.querySelectorAll("#drawer a.dl").forEach(a => a.classList.toggle("on", a.getAttribute("href") === h));
+  }
+  function drawer(open) {
+    $("drawer").classList.toggle("open", open); $("scrim").hidden = !open;
+    $("drawer").setAttribute("aria-hidden", !open); $("menuBtn").setAttribute("aria-expanded", open);
+    document.body.classList.toggle("noscroll", open);
+  }
+
   /* ---------- reader ---------- */
   async function loadDoc(id) {
     if (docs[id]) return docs[id];
@@ -173,7 +200,7 @@
   }
   function show(v) {
     view = v;
-    ["home", "kind", "reader", "about"].forEach(x => ($(x).hidden = x !== v));
+    ["home", "kind", "group", "reader", "about"].forEach(x => ($(x).hidden = x !== v));
     $("rtools").hidden = v !== "reader";
     if (v !== "reader" && !$("archana").hidden) closeArchana();
     keepAwake(v === "reader");
@@ -181,6 +208,10 @@
   async function route() {
     const id = decodeURIComponent(location.hash.slice(1));
     if (id === "about") { show("about"); window.scrollTo(0, 0); return; }
+    markDrawer();
+    if (id.startsWith("g-") && INDEX.groups.some(g => g.key === id.slice(2))) {
+      groupKey = id.slice(2); show("group"); renderGroup(); window.scrollTo(0, 0); return;
+    }
     if (id.startsWith("k-") && KINDS.some(k => k.k === id.slice(2))) {
       kindKey = id.slice(2); show("kind"); renderKind(); window.scrollTo(0, 0); return;
     }
@@ -208,11 +239,16 @@
     if (prefs.cur[current.id] === i) { delete prefs.cur[current.id]; save(); li.classList.remove("cur"); } else setCur(i);
   };
   $("archBtn").onclick = openArchana;
+  $("menuBtn").onclick = () => drawer(true);
+  $("drawerClose").onclick = () => drawer(false);
+  $("scrim").onclick = () => drawer(false);
+  $("drawer").onclick = e => { if (e.target.closest("a")) drawer(false); };
   $("aClose").onclick = closeArchana;
   $("aName").onclick = () => archStep(1);
   $("aNext").onclick = () => archStep(1);
   $("aPrev").onclick = () => archStep(-1);
   document.addEventListener("keydown", e => {
+    if (e.key === "Escape" && $("drawer").classList.contains("open")) { drawer(false); return; }
     if ($("archana").hidden) return;
     if (e.key === "ArrowRight" || e.key === " ") { e.preventDefault(); archStep(1); }
     else if (e.key === "ArrowLeft") archStep(-1);
@@ -229,6 +265,6 @@
   $("ver").textContent = "பதிப்பு " + VERSION;
 
   applyPrefs();
-  fetch("data/index.json").then(r => r.json()).then(j => { INDEX = j; route(); })
+  fetch("data/index.json").then(r => r.json()).then(j => { INDEX = j; renderDrawer(); route(); })
     .catch(() => ($("tiles").innerHTML = `<p class="empty">பட்டியலை ஏற்ற முடியவில்லை.</p>`));
 })();
