@@ -5,14 +5,14 @@ files = sorted(str(p.relative_to(site)) for p in site.rglob('*') if p.is_file() 
 h = hashlib.sha1(b''.join((site / f).read_bytes() for f in files)).hexdigest()[:10]
 (site / 'sw.js').write_text(f"""const CACHE = "namavali-{h}";
 const FILES = {['./'] + files!r};
-self.addEventListener("install", e => {{ e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES)).then(() => self.skipWaiting())); }});
+self.addEventListener("install", e => {{ e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES.map(f => new Request(f, {{ cache: "reload" }})))).then(() => self.skipWaiting())); }});
 self.addEventListener("activate", e => {{ e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim())); }});
 self.addEventListener("fetch", e => {{
   const url = new URL(e.request.url);
   if (e.request.method !== "GET" || url.origin !== location.origin) return;
   const put = res => {{ if (res.ok) {{ const copy = res.clone(); caches.open(CACHE).then(c => c.put(e.request, copy)); }} return res; }};
-  if (url.pathname.includes("/fonts/") || url.pathname.includes("/icons/")) {{
-    // fonts and icons never change: cache first
+  if (url.pathname.includes("/fonts/")) {{
+    // fonts never change: cache first
     e.respondWith(caches.match(e.request).then(r => r || fetch(e.request).then(put)));
     return;
   }}
