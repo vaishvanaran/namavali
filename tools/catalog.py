@@ -3,14 +3,14 @@
 
 GROUPS = [
     # key, Devanagari, Tamil, English
-    ("guru", "गुरवः", "குரு, ஆசார்யர்கள்", "Guru & Acharyas"),
     ("ganapati", "गणपतिः", "கணபதி", "Ganapati"),
-    ("subrahmanya", "सुब्रह्मण्यः", "ஸுப்ரஹ்மண்யர்", "Subrahmanya"),
+    ("guru", "गुरवः", "குரு, ஆசார்யர்கள்", "Guru & Acharyas"),
     ("shiva", "शिवः", "சிவன்", "Shiva"),
+    ("devi", "अम्बिका", "அம்பாள்", "Ambal (Devi)"),
+    ("subrahmanya", "सुब्रह्मण्यः", "ஸுப்ரஹ்மண்யர்", "Subrahmanya"),
     ("vishnu", "विष्णुः", "விஷ்ணு", "Vishnu"),
     ("hanuman", "आञ्जनेयः", "ஆஞ்சநேயர்", "Hanuman"),
-    ("devi", "देवी", "தேவி", "Devi"),
-    ("others", "अन्ये देवताः", "மற்ற தேவதைகள், நதிகள்", "Other devatas & rivers"),
+    ("others", "अन्ये देवताः", "ஸூர்யன், நதிகள், மற்றவை", "Surya, rivers & others"),
 ]
 
 S = "stotrasamhita"   # friend's Namavali-manjari

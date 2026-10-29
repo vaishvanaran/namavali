@@ -25,6 +25,7 @@
     <button data-s="latn" title="English (IAST)">Eng</button>
   </div>
   <div class="tools" id="rtools" hidden>
+    <button class="icon arch" id="archBtn" title="அர்ச்சனை — ஒவ்வொரு நாமமாக / one name at a time">அர்ச்சனை</button>
     <button class="icon" id="omBtn" title="ஒவ்வொரு நாமத்துக்கும் ஓம் / ॐ before every name">ॐ</button>
     <button class="icon" id="fsDown" title="எழுத்து சிறிதாக / smaller">அ−</button>
     <button class="icon" id="fsUp" title="எழுத்து பெரிதாக / larger">அ+</button>
@@ -32,25 +33,36 @@
 </div></header>
 
 <main id="home" class="wrap">
-  <section class="hero">
-    <h1>नामावलिः</h1>
-    <div class="sub">அஷ்டோத்தரம் · த்ரிஶதீ · ஸஹஸ்ரநாமம்</div>
-    <p>பூஜைக்குத் தேவையான நாமாவளிகள் ஒரே இடத்தில். தேவதையைத் தொட்டால் நாமாவளி திறக்கும். மேலே உள்ள பொத்தானால் படிக்கும் எழுத்தை மாற்றலாம்.</p>
+  <section class="welcome">
+    <div class="shrih">॥ श्रीः ॥</div>
+    <h1 class="deva">अष्टोत्तरशतनामावलिः</h1>
+    <div class="sub">அஷ்டோத்தர ஶதநாமாவளி · த்ரிஶதீ · ஸஹஸ்ரநாமம்</div>
+    <blockquote class="mangala" id="mangala"></blockquote>
   </section>
   <div class="find">
-    <input id="q" type="search" autocomplete="off" placeholder="தேடுக — लक्ष्मी · லக்ஷ்மீ · lakshmi" aria-label="தேடல் / Search">
-    <div class="seg" id="kinds" role="group" aria-label="வகை">
-      <button data-k="">எல்லாம்</button><button data-k="108">108</button><button data-k="300">300</button><button data-k="1000">1000</button>
-    </div>
+    <input id="q" type="search" autocomplete="off" placeholder="நாமாவளியைத் தேடுக — लक्ष्मी · லக்ஷ்மீ · lakshmi" aria-label="தேடல் / Search">
     <button class="install" id="installBtn" hidden>ஆப்பாக நிறுவு</button>
   </div>
-  <div id="cat"><p class="empty">ஏற்றுகிறது…</p></div>
+  <section id="recentBox" class="recent" hidden><h2 class="lbl">சமீபத்தில் படித்தவை</h2><div id="recent" class="chips"></div></section>
+  <section id="tilesBox"><h2 class="lbl">தேவதைகள்</h2><div id="tiles" class="tiles"></div></section>
+  <section id="results" hidden></section>
   <footer class="foot"><a href="#about">இந்த ஆப் பற்றி · நன்றி</a><span id="ver"></span></footer>
+</main>
+
+<main id="group" class="wrap" hidden>
+  <div class="ghead">
+    <button class="back" data-home>← தேவதைகள்</button>
+    <div class="gtitle"><span class="sym" id="gSym"></span><div><h1 id="gDeva" class="deva"></h1><div id="gAlt" class="alt"></div></div></div>
+  </div>
+  <div class="seg" id="kinds" role="group" aria-label="வகை">
+    <button data-k="">எல்லாம்</button><button data-k="108">அஷ்டோத்தரம்</button><button data-k="300">த்ரிஶதீ</button><button data-k="1000">ஸஹஸ்ரம்</button>
+  </div>
+  <div id="glist" class="grid list"></div>
 </main>
 
 <main id="reader" class="wrap" hidden>
   <div class="rhead">
-    <button class="back" id="backBtn">← எல்லா நாமாவளிகளும்</button>
+    <button class="back" id="backBtn">←</button>
     <h1 id="rTitle"></h1>
     <div class="alt" id="rAlt"></div>
     <div class="note" id="rNote" hidden></div>
@@ -88,7 +100,14 @@
   </div>
 </main>
 
+<div id="archana" class="archana" hidden role="dialog" aria-label="அர்ச்சனை">
+  <div class="atop"><span id="aCount"></span><span id="aTitle"></span><button class="icon" id="aClose">✕</button></div>
+  <button class="aname" id="aName"></button>
+  <div class="anav"><button class="icon" id="aPrev">← முன்</button><span class="ahint">பெயரைத் தொட்டால் அடுத்தது</span><button class="icon" id="aNext">அடுத்து →</button></div>
+</div>
+
 <script src="translit.js"></script>
+<script src="symbols.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

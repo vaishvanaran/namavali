@@ -109,3 +109,58 @@ a{color:var(--kumkum)}
   .names{columns:1}
 }
 @media (prefers-reduced-motion:no-preference){.names li,.card{transition:background .15s,border-color .15s}}
+
+/* ---------- welcome / home ---------- */
+.welcome{text-align:center;padding-block:30px 10px}
+.shrih{font-family:var(--deva);color:var(--haldi);letter-spacing:.08em;font-size:1rem}
+.welcome h1{font-family:var(--deva);font-weight:400;color:var(--kumkum);font-size:clamp(2rem,7.5vw,3.4rem);line-height:1.2;margin:.3rem 0 0;text-wrap:balance;overflow-wrap:anywhere}
+.welcome .sub{font-family:var(--tamil);color:var(--muted);margin-top:.3rem}
+.mangala{margin:22px auto 0;max-width:34rem;padding:14px 18px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-family:var(--script);font-size:1.12rem;line-height:1.8;display:flex;flex-direction:column}
+.find{justify-content:center}
+.lbl{font-family:var(--tamil);font-weight:600;font-size:1rem;color:var(--muted);margin:22px 0 10px;letter-spacing:.02em}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.tile{display:flex;flex-direction:column;align-items:center;text-align:center;gap:1px;padding:16px 10px 12px;border:1px solid var(--line);border-radius:16px;background:var(--paper);text-decoration:none;color:inherit;min-width:0}
+.tile:hover{border-color:var(--kumkum)}
+.tile>span{overflow-wrap:anywhere;max-width:100%}
+.sym{display:grid;place-items:center;width:76px;height:76px;border-radius:50%;background:var(--hl);color:var(--kumkum);box-shadow:inset 0 0 0 2px var(--haldi);margin-bottom:8px;flex:none}
+.sym svg{width:46px;height:46px}
+.tile .d{font-family:var(--deva);font-size:1.3rem;color:var(--kumkum);line-height:1.3}
+.tile .t{font-family:var(--tamil);font-size:1rem;line-height:1.4}
+.tile .e{font-size:.8rem;color:var(--muted)}
+.tile .n{font-size:.75rem;color:var(--haldi);margin-top:4px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
+.chip{display:flex;align-items:baseline;gap:8px;flex:none;border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:6px 12px;text-decoration:none;color:inherit}
+.chip .d{font-family:var(--deva);color:var(--kumkum)} .chip .t{font-family:var(--tamil);font-size:.9rem}
+
+/* ---------- deity page ---------- */
+.ghead{padding-block:18px 10px}
+.gtitle{display:flex;align-items:center;gap:16px;margin-top:10px}
+.gtitle h1{font-weight:400;color:var(--kumkum);font-size:clamp(1.8rem,6vw,2.6rem);margin:0;line-height:1.2}
+#group .seg{margin-bottom:14px;flex-wrap:wrap}
+.grid.list{padding-bottom:40px}
+
+/* ---------- archana ---------- */
+.icon.arch{font-family:var(--tamil);background:var(--kumkum);color:var(--paper);border-color:var(--kumkum)}
+body.noscroll{overflow:hidden}
+.archana{position:fixed;inset:0;z-index:20;background:var(--bg);display:flex;flex-direction:column;
+  padding:calc(env(safe-area-inset-top,0px) + 12px) max(16px,env(safe-area-inset-right,0px)) calc(env(safe-area-inset-bottom,0px) + 16px) max(16px,env(safe-area-inset-left,0px))}
+.atop{display:flex;align-items:center;gap:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.atop #aTitle{margin-right:auto;font-family:var(--script);color:var(--kumkum)}
+.atop #aCount{font-size:1.05rem}
+.aname{flex:1;border:0;background:none;cursor:pointer;font-family:var(--script);color:var(--fg);font-size:clamp(2rem,9vw,4.2rem);line-height:1.45;padding:12px;overflow-wrap:anywhere;-webkit-tap-highlight-color:transparent}
+.aname .om{color:var(--kumkum)}
+.anav{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.anav .icon{height:48px;padding:0 18px;font-size:1rem;font-family:var(--tamil)}
+.anav #aNext{background:var(--kumkum);color:var(--paper);border-color:var(--kumkum)}
+.anav .icon:disabled{opacity:.35}
+.ahint{color:var(--muted);font-size:.8rem;text-align:center;font-family:var(--tamil)}
+@media (max-width:520px){ .ahint{display:none} .tiles{grid-template-columns:repeat(2,minmax(0,1fr))} .sym{width:66px;height:66px} .sym svg{width:40px;height:40px} }
+#group .seg{border-radius:14px}
+.tile>span{overflow-wrap:break-word}
+.tile .t{font-size:.95rem}
+.tile{padding-inline:6px}
+.blk-shloka p,.blk-para p,.blk-end,.blk-head,.mangala span{overflow-wrap:anywhere}
+.tile .t{overflow-wrap:normal;font-size:.92rem}
+.sym svg{width:56px;height:56px}
+@media (min-width:700px){.tiles{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media (max-width:520px){.sym svg{width:48px;height:48px}}
