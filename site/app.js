@@ -4,7 +4,7 @@
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const FONT = { deva: "var(--deva)", taml: "var(--tamil)", gran: "var(--gran)", latn: "var(--latn)" };
   const CONV = { deva: s => s, taml: T.tamil, gran: T.grantha, latn: T.iast };
-  const VERSION = "2026.10.29e";
+  const VERSION = "2026.10.29f";
   const KINDS = [
     { k: "108", deva: "अष्टोत्तरशतनामावलिः", ta: "அஷ்டோத்தரம்", en: "Ashtottaram · 108 names" },
     { k: "300", deva: "त्रिशतीनामावलिः", ta: "த்ரிஶதீ", en: "Trishati · 300 names" },
@@ -12,9 +12,10 @@
   ];
   const MANGALA = ["शुक्लाम्बरधरं विष्णुं शशिवर्णं चतुर्भुजम् ।", "प्रसन्नवदनं ध्यायेत् सर्वविघ्नोपशान्तये ॥"];
 
-  let prefs = { script: "taml", omEach: false, fs: 1.45, kind: "", cur: {}, recent: [] };
+  let prefs = { script: "taml", omEach: false, fs: 1.45, kind: "", cur: {}, recent: [], fav: [] };
   try { Object.assign(prefs, JSON.parse(localStorage.getItem("nv-prefs") || "{}")); } catch (e) {}
   if (!Array.isArray(prefs.recent)) prefs.recent = [];
+  if (!Array.isArray(prefs.fav)) prefs.fav = [];
   const save = () => { try { localStorage.setItem("nv-prefs", JSON.stringify(prefs)); } catch (e) {} };
 
   let INDEX = null, current = null, view = "home", groupKey = null;
@@ -38,8 +39,10 @@
   const four = (deva, en) =>
     `<span class="d">${esc(deva)}</span><span class="t">${esc(T.tamil(deva))}</span>` +
     `<span class="g">${esc(T.grantha(deva))}</span><span class="e">${esc(en)}</span>`;
+  const isFav = id => prefs.fav.includes(id);
+  const star = id => `<button class="cstar" data-fav="${id}" aria-pressed="${isFav(id)}" title="பிடித்தவை">${isFav(id) ? "★" : "☆"}</button>`;
   const card = it =>
-    `<a class="card" href="#${it.id}">${four(it.deva, it.en)}<span class="meta">` +
+    `<a class="card" href="#${it.id}">${star(it.id)}${four(it.deva, it.en)}<span class="meta">` +
     `<span class="pill k">${it.count} · ${kindLabel(it.kind)}</span>` +
     (it.note ? `<span class="pill">${esc(it.note)}</span>` : "") + `</span></a>`;
 
@@ -49,6 +52,12 @@
     $("mangala").innerHTML = MANGALA.map(l => `<span>${esc(tr(l))}</span>`).join("");
     const raw = $("q").value.trim();
     $("tilesBox").hidden = !!raw; $("results").hidden = !raw;
+    const favs = prefs.fav.map(byId).filter(Boolean);
+    $("favBox").hidden = !!raw;
+    $("favMore").hidden = favs.length <= 6;
+    $("favHome").innerHTML = favs.length
+      ? `<div class="grid">${favs.slice(0, 6).map(card).join("")}</div>`
+      : `<p class="hint favempty">அடிக்கடி படிக்கும் நாமாவளிகளில் உள்ள <b class="star">☆</b> குறியைத் தொட்டால் அவை இங்கே முதலிலேயே வரும்.</p>`;
     const rec = prefs.recent.map(byId).filter(Boolean);
     $("recentBox").hidden = !!raw || !rec.length;
     $("recent").innerHTML = rec.map(it => `<a class="chip" href="#${it.id}"><span class="d">${esc(it.deva)}</span><span class="t">${esc(T.tamil(it.deva))}</span><span class="pill">${it.count}</span></a>`).join("");
@@ -101,6 +110,31 @@
     $("glist").innerHTML = KINDS.filter(K => items.some(i => i.kind === K.k)).map(K =>
       `<section class="sec"><h2><span class="sym sm num">${K.k}</span><span class="d">${esc(K.deva)}</span><span class="t">${esc(K.ta)}</span></h2>` +
       `<div class="grid">${items.filter(i => i.kind === K.k).map(card).join("")}</div></section>`).join("");
+  }
+
+  /* ---------- favourites ---------- */
+  function toggleFav(id) {
+    prefs.fav = isFav(id) ? prefs.fav.filter(x => x !== id) : [...prefs.fav, id];
+    save(); refreshStars();
+  }
+  function moveFav(id, dir) {
+    const i = prefs.fav.indexOf(id), j = i + dir;
+    if (i < 0 || j < 0 || j >= prefs.fav.length) return;
+    [prefs.fav[i], prefs.fav[j]] = [prefs.fav[j], prefs.fav[i]]; save(); renderFav();
+  }
+  function refreshStars() {
+    document.querySelectorAll("[data-fav]").forEach(b => { const on = isFav(b.dataset.fav); b.setAttribute("aria-pressed", on); b.textContent = on ? "★" : "☆"; });
+    if (current) { const on = isFav(current.id); $("rFav").setAttribute("aria-pressed", on); $("rFav").querySelector(".star").textContent = on ? "★" : "☆"; $("rFav").querySelector(".fl").textContent = on ? "பிடித்தவையில் உள்ளது" : "பிடித்தவையில் சேர்"; }
+    $("dFavN").textContent = prefs.fav.length || "";
+    if (view === "fav") renderFav();
+    if (view === "home") renderHome();
+  }
+  function renderFav() {
+    const favs = prefs.fav.map(byId).filter(Boolean);
+    $("favHint").hidden = !!favs.length && false;
+    $("favList").innerHTML = favs.map((it, i) =>
+      `<li><a class="card" href="#${it.id}">${four(it.deva, it.en)}<span class="meta"><span class="pill k">${it.count} · ${kindLabel(it.kind)}</span>${it.note ? `<span class="pill">${esc(it.note)}</span>` : ""}</span></a>` +
+      `<span class="ord"><button class="icon" data-up="${it.id}" ${i === 0 ? "disabled" : ""} aria-label="மேலே">↑</button><button class="icon" data-down="${it.id}" ${i === favs.length - 1 ? "disabled" : ""} aria-label="கீழே">↓</button><button class="icon" data-fav="${it.id}" aria-pressed="true" title="நீக்கு">★</button></span></li>`).join("");
   }
 
   /* ---------- side menu ---------- */
@@ -200,7 +234,7 @@
   }
   function show(v) {
     view = v;
-    ["home", "kind", "group", "reader", "about"].forEach(x => ($(x).hidden = x !== v));
+    ["home", "kind", "group", "fav", "reader", "about"].forEach(x => ($(x).hidden = x !== v));
     $("rtools").hidden = v !== "reader";
     if (v !== "reader" && !$("archana").hidden) closeArchana();
     keepAwake(v === "reader");
@@ -208,6 +242,7 @@
   async function route() {
     const id = decodeURIComponent(location.hash.slice(1));
     if (id === "about") { show("about"); window.scrollTo(0, 0); return; }
+    if (id === "fav") { show("fav"); renderFav(); window.scrollTo(0, 0); return; }
     markDrawer();
     if (id.startsWith("g-") && INDEX.groups.some(g => g.key === id.slice(2))) {
       groupKey = id.slice(2); show("group"); renderGroup(); window.scrollTo(0, 0); return;
@@ -219,7 +254,7 @@
       try { current = await loadDoc(id); } catch (e) { $("rBody").innerHTML = `<p class="empty">ஏற்ற முடியவில்லை. இணைய இணைப்பைச் சரிபார்க்கவும்.</p>`; }
       prefs.recent = [id, ...prefs.recent.filter(x => x !== id)].slice(0, 6); save();
       kindKey = (byId(id) || {}).kind;
-      show("reader"); renderReader(); window.scrollTo(0, 0); return;
+      show("reader"); renderReader(); refreshStars(); window.scrollTo(0, 0); return;
     }
     current = null; show("home"); renderHome();
   }
@@ -239,6 +274,13 @@
     if (prefs.cur[current.id] === i) { delete prefs.cur[current.id]; save(); li.classList.remove("cur"); } else setCur(i);
   };
   $("archBtn").onclick = openArchana;
+  $("rFav").onclick = () => current && toggleFav(current.id);
+  document.addEventListener("click", e => {
+    const f = e.target.closest("[data-fav]"), u = e.target.closest("[data-up]"), d = e.target.closest("[data-down]");
+    if (f) { e.preventDefault(); e.stopPropagation(); toggleFav(f.dataset.fav); }
+    else if (u) { e.preventDefault(); moveFav(u.dataset.up, -1); }
+    else if (d) { e.preventDefault(); moveFav(d.dataset.down, 1); }
+  }, true);
   $("menuBtn").onclick = () => drawer(true);
   $("drawerClose").onclick = () => drawer(false);
   $("scrim").onclick = () => drawer(false);
@@ -265,6 +307,6 @@
   $("ver").textContent = "பதிப்பு " + VERSION;
 
   applyPrefs();
-  fetch("data/index.json").then(r => r.json()).then(j => { INDEX = j; renderDrawer(); route(); })
+  fetch("data/index.json").then(r => r.json()).then(j => { INDEX = j; renderDrawer(); $("dFavN").textContent = prefs.fav.length || ""; route(); })
     .catch(() => ($("tiles").innerHTML = `<p class="empty">பட்டியலை ஏற்ற முடியவில்லை.</p>`));
 })();

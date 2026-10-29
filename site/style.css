@@ -206,3 +206,28 @@ body.noscroll{overflow:hidden}
 .sym.xs{width:36px;height:36px;margin:0;box-shadow:inset 0 0 0 1.5px var(--haldi);font-size:.8rem}
 .sym.xs svg{width:24px;height:24px}
 .sym.sm.num{font-size:.8rem}
+
+/* ---------- favourites ---------- */
+.star{color:var(--haldi)}
+.card{position:relative}
+.cstar{position:absolute;top:6px;right:6px;width:40px;height:40px;border:0;background:none;cursor:pointer;font-size:1.35rem;line-height:1;color:var(--muted);border-radius:50%}
+.cstar[aria-pressed="true"]{color:var(--haldi)}
+.cstar:hover{background:var(--chip)}
+.card>.d{padding-right:36px}
+.lbl .star{margin-right:4px}
+.lbl .more{float:right;font-weight:400;font-size:.9rem}
+.favempty{background:var(--paper);border:1px dashed var(--line);border-radius:12px;padding:12px 14px;margin:0}
+.rtitle{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px}
+.rtitle h1{flex:1 1 auto;min-width:0}
+.favbtn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:5px 12px 5px 9px;cursor:pointer;font-family:var(--tamil);font-size:.9rem}
+.favbtn .star{font-size:1.2rem;line-height:1}
+.favbtn[aria-pressed="true"]{border-color:var(--haldi);background:var(--hl)}
+.sym.star{font-size:1.1rem}
+.sym.big{font-size:2.2rem}
+.favlist{list-style:none;padding:0;margin:14px 0 40px;display:grid;gap:10px}
+.favlist li{display:flex;gap:8px;align-items:stretch}
+.favlist .card{flex:1;min-width:0}
+.favlist .ord{display:flex;flex-direction:column;gap:6px}
+.favlist .ord .icon{flex:1;min-height:34px}
+.favlist .ord [data-fav]{color:var(--haldi);font-size:1.1rem}
+.icon:disabled{opacity:.3}

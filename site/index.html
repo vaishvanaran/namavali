@@ -39,6 +39,7 @@
   <div class="dtop"><b class="deva">नामावलयः</b><button class="icon" id="drawerClose" aria-label="மூடு">✕</button></div>
   <nav>
     <a href="#" class="dl"><span class="sym xs">⌂</span><span>முகப்பு</span></a>
+    <a href="#fav" class="dl"><span class="sym xs star">★</span><span>என் நாமாவளிகள் (பிடித்தவை)</span><span class="dn" id="dFavN"></span></a>
     <div class="dsec">நாமாவளிகள்</div>
     <div id="dKinds"></div>
     <div class="dsec">தேவதைகள்</div>
@@ -59,6 +60,7 @@
     <input id="q" type="search" autocomplete="off" placeholder="நாமாவளியைத் தேடுக — लक्ष्मी · லக்ஷ்மீ · lakshmi" aria-label="தேடல் / Search">
     <button class="install" id="installBtn" hidden>ஆப்பாக நிறுவு</button>
   </div>
+  <section id="favBox" class="favbox"><h2 class="lbl"><span class="star">★</span> என் நாமாவளிகள்<a href="#fav" class="more" id="favMore">எல்லாம் →</a></h2><div id="favHome"></div></section>
   <section id="recentBox" class="recent" hidden><h2 class="lbl">சமீபத்தில் படித்தவை</h2><div id="recent" class="chips"></div></section>
   <section id="tilesBox"><div id="tiles" class="kinds3"></div></section>
   <section id="results" hidden></section>
@@ -82,10 +84,19 @@
   <div id="glist"></div>
 </main>
 
+<main id="fav" class="wrap" hidden>
+  <div class="ghead">
+    <button class="back" data-home>← முகப்பு</button>
+    <div class="gtitle"><span class="sym star big">★</span><div><h1 class="taml">என் நாமாவளிகள்</h1><div class="alt"><span>பிடித்தவை · Favourites</span></div></div></div>
+  </div>
+  <p class="hint" id="favHint">ஒவ்வொரு நாமாவளியிலும் உள்ள ☆ குறியைத் தொட்டால் இங்கே சேரும். அடிக்கடி உபயோகிப்பவற்றை இப்படி ஒரே இடத்தில் வைத்துக்கொள்ளலாம்.</p>
+  <ol id="favList" class="favlist"></ol>
+</main>
+
 <main id="reader" class="wrap" hidden>
   <div class="rhead">
     <button class="back" id="backBtn">←</button>
-    <h1 id="rTitle"></h1>
+    <div class="rtitle"><h1 id="rTitle"></h1><button class="favbtn" id="rFav" aria-pressed="false"><span class="star">☆</span><span class="fl">பிடித்தவையில் சேர்</span></button></div>
     <div class="alt" id="rAlt"></div>
     <div class="note" id="rNote" hidden></div>
     <div class="src" id="rSrc"></div>
