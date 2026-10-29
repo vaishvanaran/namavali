@@ -4,7 +4,7 @@
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const FONT = { deva: "var(--deva)", taml: "var(--tamil)", gran: "var(--gran)", latn: "var(--latn)" };
   const CONV = { deva: s => s, taml: T.tamil, gran: T.grantha, latn: T.iast };
-  const VERSION = "2026.10.29c";
+  const VERSION = "2026.10.29d";
   const KINDS = [
     { k: "108", deva: "अष्टोत्तरशतनामावलिः", ta: "அஷ்டோத்தரம்", en: "Ashtottaram · 108 names" },
     { k: "300", deva: "त्रिशतीनामावलिः", ta: "த்ரிஶதீ", en: "Trishati · 300 names" },

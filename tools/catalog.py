@@ -1,5 +1,5 @@
 # Catalogue: which lists the app shows, under which deity group, with short names.
-# id, source file (namavali-manjari path or 'book:...'), short Devanagari name, English name, group, variant note (Tamil)
+# id, source file (namavali-manjari path), short Devanagari name, English name, group, variant note (Tamil)
 
 GROUPS = [
     # key, Devanagari, Tamil, English
@@ -14,12 +14,10 @@ GROUPS = [
 ]
 
 S = "stotrasamhita"   # friend's Namavali-manjari
-B = "book"            # Ashtottara Shatanamavali (R. Muralikrishna Shrouti)
 
 ITEMS = [
     # guru
     ("dakshinamurti", "100/Dakshinamurti_108.tex", "दक्षिणामूर्तिः", "Dakshinamurti", "guru", ""),
-    ("dakshinamurti-b", "book:dakshinamurti", "दक्षिणामूर्तिः", "Dakshinamurti", "guru", "பாடம் 2"),
     ("vyasa", "100/Vyasa_108.tex", "वेदव्यासः", "Veda Vyasa", "guru", ""),
     ("adi-shankara", "100/AdiShankaracharya_108.tex", "आदिशङ्कराचार्यः", "Adi Shankaracharya", "guru", ""),
     ("chandrashekharendra", "100/ChandrashekharendraSaraswati_108.tex", "चन्द्रशेखरेन्द्रसरस्वती", "Chandrashekharendra Saraswati", "guru", ""),
