@@ -4,7 +4,7 @@
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const FONT = { deva: "var(--deva)", taml: "var(--tamil)", gran: "var(--gran)", latn: "var(--latn)" };
   const CONV = { deva: s => s, taml: T.tamil, gran: T.grantha, latn: T.iast };
-  const VERSION = "2026.10.29f";
+  const VERSION = "2026.10.29g";
   const KINDS = [
     { k: "108", deva: "अष्टोत्तरशतनामावलिः", ta: "அஷ்டோத்தரம்", en: "Ashtottaram · 108 names" },
     { k: "300", deva: "त्रिशतीनामावलिः", ta: "த்ரிஶதீ", en: "Trishati · 300 names" },
@@ -40,7 +40,7 @@
     `<span class="d">${esc(deva)}</span><span class="t">${esc(T.tamil(deva))}</span>` +
     `<span class="g">${esc(T.grantha(deva))}</span><span class="e">${esc(en)}</span>`;
   const isFav = id => prefs.fav.includes(id);
-  const star = id => `<button class="cstar" data-fav="${id}" aria-pressed="${isFav(id)}" title="பிடித்தவை">${isFav(id) ? "★" : "☆"}</button>`;
+  const star = id => `<button class="cstar" data-fav="${id}" aria-pressed="${isFav(id)}" title="அடிக்கடி படிப்பவை">${isFav(id) ? "★" : "☆"}</button>`;
   const card = it =>
     `<a class="card" href="#${it.id}">${star(it.id)}${four(it.deva, it.en)}<span class="meta">` +
     `<span class="pill k">${it.count} · ${kindLabel(it.kind)}</span>` +
@@ -124,7 +124,7 @@
   }
   function refreshStars() {
     document.querySelectorAll("[data-fav]").forEach(b => { const on = isFav(b.dataset.fav); b.setAttribute("aria-pressed", on); b.textContent = on ? "★" : "☆"; });
-    if (current) { const on = isFav(current.id); $("rFav").setAttribute("aria-pressed", on); $("rFav").querySelector(".star").textContent = on ? "★" : "☆"; $("rFav").querySelector(".fl").textContent = on ? "பிடித்தவையில் உள்ளது" : "பிடித்தவையில் சேர்"; }
+    if (current) { const on = isFav(current.id); $("rFav").setAttribute("aria-pressed", on); $("rFav").querySelector(".star").textContent = on ? "★" : "☆"; $("rFav").querySelector(".fl").textContent = on ? "அடிக்கடி படிப்பவையில் உள்ளது" : "அடிக்கடி படிப்பவையில் சேர்"; }
     $("dFavN").textContent = prefs.fav.length || "";
     if (view === "fav") renderFav();
     if (view === "home") renderHome();
