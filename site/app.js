@@ -4,7 +4,12 @@
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const FONT = { deva: "var(--deva)", taml: "var(--tamil)", gran: "var(--gran)", latn: "var(--latn)" };
   const CONV = { deva: s => s, taml: T.tamil, gran: T.grantha, latn: T.iast };
-  const VERSION = "2026.10.29b";
+  const VERSION = "2026.10.29c";
+  const KINDS = [
+    { k: "108", deva: "अष्टोत्तरशतनामावलिः", ta: "அஷ்டோத்தரம்", en: "Ashtottaram · 108 names" },
+    { k: "300", deva: "त्रिशतीनामावलिः", ta: "த்ரிஶதீ", en: "Trishati · 300 names" },
+    { k: "1000", deva: "सहस्रनामावलिः", ta: "ஸஹஸ்ரநாமம்", en: "Sahasranamam · 1000 names" },
+  ];
   const MANGALA = ["शुक्लाम्बरधरं विष्णुं शशिवर्णं चतुर्भुजम् ।", "प्रसन्नवदनं ध्यायेत् सर्वविघ्नोपशान्तये ॥"];
 
   let prefs = { script: "taml", omEach: false, fs: 1.45, kind: "", cur: {}, recent: [] };
@@ -26,7 +31,6 @@
     r.setProperty("--script", FONT[prefs.script]);
     r.setProperty("--fs", prefs.fs + "rem");
     document.querySelectorAll("#scripts button").forEach(b => b.setAttribute("aria-pressed", b.dataset.s === prefs.script));
-    document.querySelectorAll("#kinds button").forEach(b => b.setAttribute("aria-pressed", b.dataset.k === prefs.kind));
     $("omBtn").setAttribute("aria-pressed", prefs.omEach);
   }
 
@@ -62,26 +66,29 @@
         : `<p class="empty">“${esc(raw)}” — எதுவும் கிடைக்கவில்லை.</p>`;
       return;
     }
-    $("tiles").innerHTML = INDEX.groups.map(g => {
-      const n = INDEX.items.filter(i => i.group === g.key).length;
-      return `<a class="tile" href="#g-${g.key}"><span class="sym">${window.symbolSVG(g.key)}</span>` +
-        `<span class="d">${esc(g.deva)}</span><span class="t">${esc(g.ta)}</span><span class="e">${esc(g.en)}</span>` +
-        `<span class="n">${n} நாமாவளிகள்</span></a>`;
+    $("tiles").innerHTML = KINDS.map(K => {
+      const items = INDEX.items.filter(i => i.kind === K.k);
+      const gs = INDEX.groups.filter(g => items.some(i => i.group === g.key)).map(g => g.ta.split(",")[0]);
+      return `<a class="ktile" href="#k-${K.k}"><span class="sym num">${K.k}</span><span class="kt">` +
+        `<span class="d">${esc(K.deva)}</span><span class="t">${esc(K.ta)}</span><span class="e">${esc(K.en)}</span>` +
+        `<span class="n">${items.length} நாமாவளிகள் · ${esc(gs.slice(0, 5).join(", "))}${gs.length > 5 ? "…" : ""}</span></span></a>`;
     }).join("");
   }
 
-  /* ---------- deity group ---------- */
-  function renderGroup() {
-    const g = INDEX.groups.find(x => x.key === groupKey); if (!g) return;
-    $("gSym").innerHTML = window.symbolSVG(g.key);
-    $("gDeva").textContent = g.deva;
-    $("gAlt").innerHTML = `<span class="taml">${esc(g.ta)}</span><span class="gran">${esc(T.grantha(g.deva))}</span><span>${esc(g.en)}</span>`;
-    const all = INDEX.items.filter(i => i.group === g.key);
-    const kinds = new Set(all.map(i => i.kind));
-    document.querySelectorAll("#kinds button").forEach(b => (b.hidden = b.dataset.k !== "" && !kinds.has(b.dataset.k)));
-    $("kinds").hidden = kinds.size < 2;
-    const k = kinds.has(prefs.kind) ? prefs.kind : "";
-    $("glist").innerHTML = all.filter(i => !k || i.kind === k).map(card).join("");
+  /* ---------- one kind (108 / 300 / 1000), grouped by deity ---------- */
+  let kindKey = null;
+  function renderKind() {
+    const K = KINDS.find(x => x.k === kindKey); if (!K) return;
+    $("kNum").textContent = K.k;
+    $("kDeva").textContent = K.deva;
+    $("kAlt").innerHTML = `<span class="taml">${esc(K.ta)}</span><span class="gran">${esc(T.grantha(K.deva))}</span><span>${esc(K.en)}</span>`;
+    const items = INDEX.items.filter(i => i.kind === K.k);
+    const groups = INDEX.groups.filter(g => items.some(i => i.group === g.key));
+    $("kJump").hidden = groups.length < 3;
+    $("kJump").innerHTML = groups.map(g => `<button class="chip" data-g="${g.key}"><span class="d">${esc(g.deva)}</span><span class="t">${esc(g.ta.split(",")[0])}</span></button>`).join("");
+    $("klist").innerHTML = groups.map(g =>
+      `<section class="sec" id="sec-${g.key}"><h2><span class="sym sm">${window.symbolSVG(g.key)}</span><span class="d">${esc(g.deva)}</span><span class="t">${esc(g.ta)}</span><span class="e">${esc(g.en)}</span></h2>` +
+      `<div class="grid">${items.filter(i => i.group === g.key).map(card).join("")}</div></section>`).join("");
   }
 
   /* ---------- reader ---------- */
@@ -99,8 +106,7 @@
   function renderReader() {
     const d = current; if (!d) return;
     const meta = byId(d.id) || {};
-    const g = INDEX.groups.find(x => x.key === meta.group) || {};
-    $("backBtn").textContent = "← " + (g.ta || "தேவதைகள்");
+    $("backBtn").textContent = "← " + ((KINDS.find(k => k.k === meta.kind) || {}).ta || "நாமாவளிகள்");
     const sc = prefs.script;
     $("rTitle").textContent = tr(d.title);
     $("rAlt").innerHTML = ["deva", "taml", "gran", "latn"].filter(s => s !== sc).map(s => `<span class="${s}">${esc(tr(d.title, s))}</span>`).join("");
@@ -167,7 +173,7 @@
   }
   function show(v) {
     view = v;
-    ["home", "group", "reader", "about"].forEach(x => ($(x).hidden = x !== v));
+    ["home", "kind", "reader", "about"].forEach(x => ($(x).hidden = x !== v));
     $("rtools").hidden = v !== "reader";
     if (v !== "reader" && !$("archana").hidden) closeArchana();
     keepAwake(v === "reader");
@@ -175,13 +181,13 @@
   async function route() {
     const id = decodeURIComponent(location.hash.slice(1));
     if (id === "about") { show("about"); window.scrollTo(0, 0); return; }
-    if (id.startsWith("g-") && INDEX.groups.some(g => g.key === id.slice(2))) {
-      groupKey = id.slice(2); show("group"); renderGroup(); window.scrollTo(0, 0); return;
+    if (id.startsWith("k-") && KINDS.some(k => k.k === id.slice(2))) {
+      kindKey = id.slice(2); show("kind"); renderKind(); window.scrollTo(0, 0); return;
     }
     if (id && INDEX && byId(id)) {
       try { current = await loadDoc(id); } catch (e) { $("rBody").innerHTML = `<p class="empty">ஏற்ற முடியவில்லை. இணைய இணைப்பைச் சரிபார்க்கவும்.</p>`; }
       prefs.recent = [id, ...prefs.recent.filter(x => x !== id)].slice(0, 6); save();
-      groupKey = (byId(id) || {}).group;
+      kindKey = (byId(id) || {}).kind;
       show("reader"); renderReader(); window.scrollTo(0, 0); return;
     }
     current = null; show("home"); renderHome();
@@ -189,12 +195,12 @@
 
   /* ---------- events ---------- */
   $("scripts").onclick = e => { const b = e.target.closest("button"); if (!b) return; prefs.script = b.dataset.s; save(); applyPrefs(); if (view === "reader") renderReader(); if (view === "home") renderHome(); };
-  $("kinds").onclick = e => { const b = e.target.closest("button"); if (!b) return; prefs.kind = b.dataset.k; save(); applyPrefs(); renderGroup(); };
+  $("kJump").onclick = e => { const b = e.target.closest("button[data-g]"); if (!b) return; const el = $("sec-" + b.dataset.g); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + scrollY - $("kJump").offsetHeight - 70, behavior: "smooth" }); };
   $("omBtn").onclick = () => { prefs.omEach = !prefs.omEach; save(); applyPrefs(); renderReader(); };
   $("fsUp").onclick = () => { prefs.fs = Math.min(3.2, +(prefs.fs + 0.15).toFixed(2)); save(); applyPrefs(); };
   $("fsDown").onclick = () => { prefs.fs = Math.max(0.95, +(prefs.fs - 0.15).toFixed(2)); save(); applyPrefs(); };
   $("q").oninput = renderHome;
-  $("backBtn").onclick = () => (location.hash = groupKey ? "g-" + groupKey : "");
+  $("backBtn").onclick = () => (location.hash = kindKey ? "k-" + kindKey : "");
   document.querySelectorAll("[data-home]").forEach(b => (b.onclick = () => (location.hash = "")));
   $("rBody").onclick = e => {
     const li = e.target.closest("li[data-i]"); if (!li || !current) return;

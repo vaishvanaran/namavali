@@ -164,3 +164,21 @@ body.noscroll{overflow:hidden}
 .sym svg{width:56px;height:56px}
 @media (min-width:700px){.tiles{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media (max-width:520px){.sym svg{width:48px;height:48px}}
+
+/* ---------- three kinds on home ---------- */
+.kinds3{display:grid;gap:12px;margin-top:18px}
+@media (min-width:760px){.kinds3{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.ktile{display:flex;align-items:center;gap:16px;padding:18px;border:1px solid var(--line);border-radius:16px;background:var(--paper);text-decoration:none;color:inherit;min-width:0}
+.ktile:hover{border-color:var(--kumkum)}
+.kt{display:flex;flex-direction:column;min-width:0}
+.ktile .d{font-family:var(--deva);font-size:1.35rem;color:var(--kumkum);line-height:1.3;overflow-wrap:anywhere}
+.ktile .t{font-family:var(--tamil);font-size:1.15rem;font-weight:600}
+.ktile .e{font-size:.82rem;color:var(--muted)}
+.ktile .n{font-size:.8rem;color:var(--haldi);margin-top:4px;font-family:var(--tamil)}
+.sym.num{font-family:var(--ui);font-weight:700;font-size:1.3rem;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+.sym.sm{width:40px;height:40px;margin:0;box-shadow:inset 0 0 0 1.5px var(--haldi)}
+.sym.sm svg{width:28px;height:28px}
+.sec h2{align-items:center}
+.jump{position:sticky;top:calc(env(safe-area-inset-top,0px) + 51px);z-index:4;background:var(--bg);padding-block:8px;margin-inline:-4px;padding-inline:4px}
+.jump .chip{cursor:pointer;font:inherit}
+#klist{padding-bottom:40px}

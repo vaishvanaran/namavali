@@ -35,8 +35,8 @@
 <main id="home" class="wrap">
   <section class="welcome">
     <div class="shrih">॥ श्रीः ॥</div>
-    <h1 class="deva">अष्टोत्तरशतनामावलिः</h1>
-    <div class="sub">அஷ்டோத்தர ஶதநாமாவளி · த்ரிஶதீ · ஸஹஸ்ரநாமம்</div>
+    <h1 class="deva">नामावलयः</h1>
+    <div class="sub">நாமாவளிகள்</div>
     <blockquote class="mangala" id="mangala"></blockquote>
   </section>
   <div class="find">
@@ -44,20 +44,18 @@
     <button class="install" id="installBtn" hidden>ஆப்பாக நிறுவு</button>
   </div>
   <section id="recentBox" class="recent" hidden><h2 class="lbl">சமீபத்தில் படித்தவை</h2><div id="recent" class="chips"></div></section>
-  <section id="tilesBox"><h2 class="lbl">தேவதைகள்</h2><div id="tiles" class="tiles"></div></section>
+  <section id="tilesBox"><div id="tiles" class="kinds3"></div></section>
   <section id="results" hidden></section>
   <footer class="foot"><a href="#about">இந்த ஆப் பற்றி · நன்றி</a><span id="ver"></span></footer>
 </main>
 
-<main id="group" class="wrap" hidden>
+<main id="kind" class="wrap" hidden>
   <div class="ghead">
-    <button class="back" data-home>← தேவதைகள்</button>
-    <div class="gtitle"><span class="sym" id="gSym"></span><div><h1 id="gDeva" class="deva"></h1><div id="gAlt" class="alt"></div></div></div>
+    <button class="back" data-home>← நாமாவளிகள்</button>
+    <div class="gtitle"><span class="sym num" id="kNum"></span><div><h1 id="kDeva" class="deva"></h1><div id="kAlt" class="alt"></div></div></div>
   </div>
-  <div class="seg" id="kinds" role="group" aria-label="வகை">
-    <button data-k="">எல்லாம்</button><button data-k="108">அஷ்டோத்தரம்</button><button data-k="300">த்ரிஶதீ</button><button data-k="1000">ஸஹஸ்ரம்</button>
-  </div>
-  <div id="glist" class="grid list"></div>
+  <nav id="kJump" class="chips jump" aria-label="தேவதைகள்"></nav>
+  <div id="klist"></div>
 </main>
 
 <main id="reader" class="wrap" hidden>
