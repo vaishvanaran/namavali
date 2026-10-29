@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ta">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>நாமாவளி · नामावलिः</title>
+<meta name="description" content="பூஜைக்கான அஷ்டோத்தர, த்ரிஶதீ, ஸஹஸ்ர நாமாவளிகள் — தேவநாகரி, தமிழ், க்ரந்தம், English. இணையம் இல்லாமலும் வேலை செய்யும்.">
+<meta name="theme-color" content="#8E1B2C">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="நாமாவளி">
+<link rel="preload" href="fonts/deva.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/tamil.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="bar"><div class="wrap">
+  <a class="brand" href="#"><b>नामावलिः</b><span>நாமாவளி</span></a>
+  <div class="seg" id="scripts" role="group" aria-label="எழுத்து / Script">
+    <button data-s="deva" class="deva" title="देवनागरी">देव</button>
+    <button data-s="taml" class="taml" title="தமிழ்">தமிழ்</button>
+    <button data-s="gran" class="gran" title="Grantha">𑌗𑍍𑌰</button>
+    <button data-s="latn" title="English (IAST)">Eng</button>
+  </div>
+  <div class="tools" id="rtools" hidden>
+    <button class="icon" id="omBtn" title="ஒவ்வொரு நாமத்துக்கும் ஓம் / ॐ before every name">ॐ</button>
+    <button class="icon" id="fsDown" title="எழுத்து சிறிதாக / smaller">அ−</button>
+    <button class="icon" id="fsUp" title="எழுத்து பெரிதாக / larger">அ+</button>
+  </div>
+</div></header>
+
+<main id="home" class="wrap">
+  <section class="hero">
+    <h1>नामावलिः</h1>
+    <div class="sub">அஷ்டோத்தரம் · த்ரிஶதீ · ஸஹஸ்ரநாமம்</div>
+    <p>பூஜைக்குத் தேவையான நாமாவளிகள் ஒரே இடத்தில். தேவதையைத் தொட்டால் நாமாவளி திறக்கும். மேலே உள்ள பொத்தானால் படிக்கும் எழுத்தை மாற்றலாம்.</p>
+  </section>
+  <div class="find">
+    <input id="q" type="search" autocomplete="off" placeholder="தேடுக — लक्ष्मी · லக்ஷ்மீ · lakshmi" aria-label="தேடல் / Search">
+    <div class="seg" id="kinds" role="group" aria-label="வகை">
+      <button data-k="">எல்லாம்</button><button data-k="108">108</button><button data-k="300">300</button><button data-k="1000">1000</button>
+    </div>
+    <button class="install" id="installBtn" hidden>ஆப்பாக நிறுவு</button>
+  </div>
+  <div id="cat"><p class="empty">ஏற்றுகிறது…</p></div>
+  <footer class="foot"><a href="#about">இந்த ஆப் பற்றி · நன்றி</a><span id="ver"></span></footer>
+</main>
+
+<main id="reader" class="wrap" hidden>
+  <div class="rhead">
+    <button class="back" id="backBtn">← எல்லா நாமாவளிகளும்</button>
+    <h1 id="rTitle"></h1>
+    <div class="alt" id="rAlt"></div>
+    <div class="note" id="rNote" hidden></div>
+    <div class="src" id="rSrc"></div>
+  </div>
+  <div class="body" id="rBody"></div>
+  <p class="hint">ஒரு நாமத்தைத் தொட்டால் அது குறிக்கப்படும். பூஜையில் எங்கே இருக்கிறோம் என்று தெரியும்.</p>
+</main>
+
+<main id="about" class="wrap" hidden>
+  <div class="about">
+    <button class="back" data-home>← எல்லா நாமாவளிகளும்</button>
+    <h1>இந்த ஆப் பற்றி</h1>
+    <p>வைதிக பூஜையின் போது ஒவ்வொரு தேவதைக்கும் நாமாவளியைப் புத்தகங்களிலும் PDF-களிலும் தேடாமல், ஒரே இடத்தில் எல்லா நாமாவளிகளும் கிடைக்க வேண்டும் என்பதற்காக இது செய்யப்பட்டது. எல்லோருக்கும் இலவசம், விளம்பரம் இல்லை.</p>
+    <p class="en">A free, ad-free collection of nāmāvalis for pūjā, readable in Devanagari, Tamil, Grantha and English (IAST). Works offline once opened.</p>
+
+    <h2>மூலங்கள் · நன்றி</h2>
+    <ul>
+      <li><a href="https://stotrasamhita.github.io/" target="_blank" rel="noopener">ஸ்தோத்ர ஸம்ஹிதா (StotraSamhita)</a> — நாமாவளீ மஞ்ஜரீ. பெரும்பாலான நாமாவளிகள் இங்கிருந்து, அனுமதியுடன் எடுக்கப்பட்டவை.</li>
+      <li>அஷ்டோத்தர ஶதநாமாவளி ஶதகம் — ப்ரஹ்மஶ்ரீ ரா. முரளீக்ருஷ்ண ஶ்ரௌதிகள் (வித்வத் ஸபா, சென்னை). “பாடம் 2” என்று குறிக்கப்பட்டவை இந்தப் புத்தகத்திலிருந்து.</li>
+    </ul>
+
+    <h2>தொகுப்பு</h2>
+    <p>தொகுத்தவர்: <a href="https://github.com/vaishvanaran" target="_blank" rel="noopener">vaishvanaran</a>. Claude (Anthropic) உதவியுடன் உருவாக்கப்பட்டது. பிழைகள் இருந்தால் தெரிவியுங்கள்: <a href="https://github.com/vaishvanaran/namavali/issues" target="_blank" rel="noopener">github.com/vaishvanaran/namavali</a></p>
+
+    <h2>போனில் ஆப்பாக நிறுவ</h2>
+    <ul>
+      <li><b>Android:</b> Chrome-ல் இந்தப் பக்கத்தைத் திறந்து, மேலே ⋮ → “Install app” அல்லது “Add to Home screen”.</li>
+      <li><b>iPhone:</b> Safari-ல் திறந்து, கீழே Share (□↑) → “Add to Home Screen”.</li>
+      <li>ஒருமுறை திறந்த பிறகு இணையம் இல்லாமலும் எல்லா நாமாவளிகளும் வேலை செய்யும்.</li>
+    </ul>
+
+    <h2>எழுத்துருக்கள்</h2>
+    <p class="en">Tiro Devanagari Sanskrit, Noto Serif Tamil, Noto Serif Grantha, Noto Sans Tamil — SIL Open Font License.</p>
+  </div>
+</main>
+
+<script src="translit.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
