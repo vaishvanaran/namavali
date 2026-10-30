@@ -12,6 +12,7 @@ Text format (see content/README.md):
   @include name      insert content/puja/_common/name.txt
   @include-katha n   insert content/katha/n.txt (headings moved one level down)
   @namavali id ...   buttons that open those namavalis
+  @link puja title   button that opens another puja (e.g. purvanga) at the part/section with that title
   @note ta | en      a note for the reader
   anything else      prose (consecutive lines kept together)
 """
@@ -89,6 +90,9 @@ def parse(path):
         elif s.startswith('(') and s.endswith(')') and '|' in s:
             p = [c.strip() for c in s[1:-1].split('|')] + ['', '']
             blocks().append({'t': 'rubric', 'sa': p[0], 'ta': p[1], 'en': p[2]}); add.gap = True
+        elif s.startswith('@link '):
+            bits = s.split(None, 2)
+            blocks().append({'t': 'link', 'puja': bits[1], 'sec': bits[2].strip() if len(bits) > 2 else ''}); add.gap = True
         elif s.startswith('@namavali '):
             blocks().append({'t': 'namavali', 'ids': s.split()[1:]}); add.gap = True
         elif s.startswith('@note '):
@@ -109,7 +113,7 @@ def main():
     idx_path = ROOT / 'site' / 'data' / 'index.json'
     if idx_path.exists():
         known = {i['id'] for i in json.loads(idx_path.read_text(encoding='utf-8'))['items']}
-    listing, problems = [], []
+    listing, problems, links, titles = [], [], [], {}
     for f in sorted((CONTENT / 'puja').glob('*.txt')):
         head, parts = parse(f)
         pid = f.stem
@@ -118,13 +122,18 @@ def main():
                 for b in s['blocks']:
                     if b['t'] == 'namavali':
                         problems += [f'{pid}: unknown namavali "{n}"' for n in b['ids'] if known and n not in known]
+                    if b['t'] == 'link': links.append((pid, b['puja'], b['sec']))
                     for x in (b.get('x') if isinstance(b.get('x'), list) else [b.get('x', '')]):
                         if isinstance(x, str) and '{' in x: problems.append(f'{pid}: unfilled placeholder in "{x[:40]}"')
-        doc = {'id': pid, **{k: head.get(k, '') for k in ('title', 'ta', 'en', 'deity', 'when_ta', 'when_en')}, 'parts': parts}
+        doc = {'id': pid, **{k: head.get(k, '') for k in ('title', 'ta', 'en', 'deity', 'when_ta', 'when_en', 'kind')}, 'parts': parts}
+        titles[pid] = {p['title'] for p in parts} | {s['title'] for p in parts for s in p['sections']}
         (OUT / f'{pid}.json').write_text(json.dumps(doc, ensure_ascii=False, separators=(',', ':')), encoding='utf-8')
         listing.append({'id': pid, 'title': doc['title'], 'ta': doc['ta'], 'en': doc['en'], 'deity': doc['deity'],
-                        'when_ta': doc['when_ta'], 'when_en': doc['when_en'], 'order': int(head.get('order', 100)),
+                        'when_ta': doc['when_ta'], 'when_en': doc['when_en'], 'order': int(head.get('order', 100)), 'kind': head.get('kind', ''),
                         'parts': [p['title'] for p in parts]})
+    for src, tgt, sec in links:
+        if tgt not in titles: problems.append(f'{src}: link to unknown puja "{tgt}"')
+        elif sec and sec not in titles[tgt]: problems.append(f'{src}: "{tgt}" has no part or section "{sec}"')
     listing.sort(key=lambda x: (x['order'], x['id']))
     (ROOT / 'site' / 'data' / 'pujas.json').write_text(json.dumps(listing, ensure_ascii=False, separators=(',', ':')), encoding='utf-8')
     print(f'{len(listing)} pujas')

@@ -31,6 +31,7 @@ def clean(t):
 
 def parse(path):
     src = pathlib.Path(path).read_text(encoding='utf-8')
+    src = src.replace('\\\\%', '\\\\ %')
     src = '\n'.join(re.sub(r'(?<!\\)%.*$', '', l) for l in src.split('\n'))
     title, blocks, buf = None, [], []
     def flush():
