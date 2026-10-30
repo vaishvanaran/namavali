@@ -38,7 +38,7 @@ ITEMS = [
     ("devasena", "100/Devasena_108.tex", "देवसेना", "Devasena", "subrahmanya", ""),
     # shiva
     ("shiva", "100/Shiva_108.tex", "शिवः", "Shiva", "shiva", ""),
-    ("shiva-1008", "1000/Shiva_1008.tex", "शिवः", "Shiva", "shiva", ""),
+    ("shiva-1008", "1000/Shiva_1008.tex", "शिवः", "Shiva", "shiva", "மஹாபாரதம்"),
     ("rudra-300", "300/Rudra_300.tex", "रुद्रः", "Rudra", "shiva", "ஸ்வரத்துடன்"),
     ("mrtyunjaya", "100/Mrtyunjaya_108.tex", "मृत्युञ्जयः", "Mrityunjaya", "shiva", ""),
     ("ardhanarishvara", "100/Ardhanarishvara_108.tex", "अर्धनारीश्वरः", "Ardhanarishvara", "shiva", "216 நாமங்கள்"),

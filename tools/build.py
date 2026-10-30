@@ -55,8 +55,8 @@ for f in sorted(TXT.glob('[a-z]*.txt')):
     it = {'id': iid, 'deva': h['deva'], 'en': h['en'], 'group': h['group'], 'note': h.get('note', ''), 'count': n,
           'kind': '1000' if n >= 900 else '300' if n >= 250 else '108', 'title': h['title'], 'source': doc['source'], 'svara': False}
     index['items'].append(it)
-ORDER = 'navagraha surya surya-mahabharata chandra angaraka budha brihaspati shukra shani rahu ketu indra agni yama nirriti varuna vayu soma kubera ishana brahma vastu'.split()
-index['items'].sort(key=lambda i: ORDER.index(i['id']) if i['id'] in ORDER else -1)
+ORDER = 'lalita-300 lalita-1000 lakshmi-1000 durga-1000 saraswati-1008 navagraha surya surya-mahabharata chandra angaraka budha brihaspati shukra shani rahu ketu indra agni yama nirriti varuna vayu soma kubera ishana brahma vastu'.split()
+index['items'].sort(key=lambda i: ORDER.index(i['id']) if i['id'] in ORDER else 500)
 index['items'].sort(key=lambda i: [g[0] for g in GROUPS].index(i['group']))
 # variants: lists of the same deity and kind become one card with a choice of pāṭha inside
 vg = {}
