@@ -4,7 +4,7 @@ en: Sri Rudram (Rudra Prashna)
 deity: shiva
 when_ta: ருத்ராபிஷேகம், ப்ரதோஷம், ஶிவ பூஜைகளுக்கு
 when_en: For Rudrabhishekam, Pradosham and Shiva pujas
-order: 7
+order: 8
 kind: vidhana
 
 # रुद्रप्रश्नः

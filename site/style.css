@@ -334,3 +334,7 @@ body.en .icon.vbtn{font-family:var(--ui)}
 .svarafont{font-family:var(--deva)}
 .plist .g{display:block;font-family:var(--tamil);font-size:.78rem;color:var(--muted);text-align:right}
 body.en .plist .g{font-family:var(--ui)}
+.sktools{display:contents}
+.pvedic .vl{display:block;font-family:var(--tamil);font-size:.75rem;color:var(--haldi);font-weight:600;margin-bottom:2px}
+body.en .pvedic .vl{font-family:var(--ui)}
+.tools{flex-wrap:wrap}

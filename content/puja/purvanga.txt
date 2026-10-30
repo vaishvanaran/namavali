@@ -2,9 +2,9 @@ title: पूर्वाङ्ग-पूजा
 ta: பூர்வாங்க பூஜை
 en: Pūrvāṅga Pūjā
 deity: ganapati
-devata: (देवता)
-devaya: (देवतायै) नमः
-devatam: (देवताम्)
+devata: ___
+devaya: ___ नमः
+devatam: ___
 when_ta: எல்லா பூஜைகளுக்கும் முன்பு — விக்நேஶ்வர பூஜை, ஆஸனம், கண்டா, கலஶம், ஆத்ம, பீட பூஜை, ப்ராணப்ரதிஷ்டை
 when_en: Before every pūjā — Vighneśvara pūjā, āsana, ghaṇṭā, kalaśa, ātma, pīṭha pūjā, prāṇa-pratiṣṭhā
 order: 1

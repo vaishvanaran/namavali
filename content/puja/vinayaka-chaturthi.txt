@@ -4,7 +4,7 @@ en: Vinayaka Chaturthi
 deity: ganapati
 devata: श्री-सिद्धिविनायक
 devaya: श्री-सिद्धिविनायकाय नमः
-devatam: श्री-सिद्धिविनायकम्
+devatam: श्री-सिद्धिविनायकं
 sukta: purusha-sukta-vidhana
 when_ta: பாத்ரபத (ஆவணி/புரட்டாசி) சுக்ல சதுர்த்தி — மத்யாஹ்நம்
 when_en: Bhādrapada śukla chaturthī — at midday
