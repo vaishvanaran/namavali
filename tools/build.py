@@ -9,7 +9,7 @@ OUT = pathlib.Path(__file__).parent.parent / 'site' / 'data'
 OUT.mkdir(parents=True, exist_ok=True)
 SRC = {
   'stotrasamhita': {'ta': 'ஸ்தோத்ர ஸம்ஹிதா — நாமாவளீ மஞ்ஜரீ', 'en': 'StotraSamhita — Nāmāvalī-mañjarī', 'url': 'https://stotrasamhita.github.io/'},
-  'yogesha': {'ta': 'திருவிடைமருதூர் யோகேஶ ஶர்மா', 'en': 'Thiruvidaimarudur Yogesha Sharma'},
+  'yogesha': {'ta': 'திருவிடைமருதூர் யோகேஶ ஶர்மா', 'en': 'Thiruvidaimarudur Yogeśa Śarmā'},
 }
 # order of lists inside a group: text lists are placed after these ids
 AFTER = {'navagraha': 'surya-mahabharata', 'dikpala': None}

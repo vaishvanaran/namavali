@@ -4,7 +4,7 @@
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const FONT = { deva: "var(--deva)", taml: "var(--tamil)", gran: "var(--gran)", latn: "var(--latn)" };
   const CONV = { deva: s => s, taml: T.tamil, gran: T.grantha, latn: T.iast };
-  const VERSION = "2026.10.30h";
+  const VERSION = "2026.10.30i";
   const KINDS = [
     { k: "108", deva: "अष्टोत्तरशतनामावलिः", ta: "அஷ்டோத்தரம்", en: "Ashtottaram", sub: { ta: "108 நாமங்கள்", en: "108 names" } },
     { k: "300", deva: "त्रिशतीनामावलिः", ta: "த்ரிஶதீ", en: "Trishati", sub: { ta: "300 நாமங்கள்", en: "300 names" } },
@@ -243,21 +243,26 @@
     $("dVidhana").innerHTML = PUJAS.filter(p => p.kind === "vidhana").map(p => `<a class="dl" href="#p-${p.id}"><span class="sym xs">${window.symbolSVG(p.deity)}</span><span><span class="dd">${esc(p.title)}</span><span class="dt">${esc(pujaName(p))}</span></span></a>`).join("");
     $("dVeda").innerHTML = PUJAS.filter(p => p.kind === "veda").map(p => `<a class="dl" href="#p-${p.id}"><span class="sym xs">${window.symbolSVG(p.deity)}</span><span><span class="dd">${esc(p.title)}</span><span class="dt">${esc(pujaName(p))}</span></span></a>`).join("");
     $("dPujas").innerHTML = PUJAS.filter(p => !p.kind || p.kind === "common").map(p => `<a class="dl" href="#p-${p.id}"><span class="sym xs">${window.symbolSVG(p.deity)}</span><span><span class="dd">${esc(p.title)}</span><span class="dt">${esc(pujaName(p))}</span></span></a>`).join("");
-    $("dKinds").innerHTML = KINDS.map(K => `<a class="dl" href="#k-${K.k}"><span class="sym xs num">${K.k}</span><span><span class="dd">${esc(K.deva)}</span><span class="dt">${esc(K[L()])}</span></span></a>`).join("");
-    // each devata opens in place to list its namavalis, so one can go straight to the next one during a puja
-    const openG = (byId((location.hash || "").slice(1)) || {}).group || (location.hash.startsWith("#g-") ? location.hash.slice(3) : "");
-    $("dGroups").innerHTML = INDEX.groups.map(g => {
-      const its = prim(INDEX.items.filter(i => i.group === g.key));
-      return `<details class="dg" data-g="${g.key}" ${g.key === openG ? "open" : ""}><summary class="dl"><span class="sym xs">${window.symbolSVG(g.key)}</span><span><span class="dd">${esc(g.deva)}</span><span class="dt">${esc(gName(g))}</span></span><span class="dn">${its.length}</span><span class="chev" aria-hidden="true">›</span></summary>` +
-        `<div class="dsub">` + its.map(i => `<a class="dl sub" href="#${i.id}"><span class="cnt">${i.count}</span><span><span class="dd">${esc(i.deva)}</span><span class="dt">${esc(T.tamil(i.deva))}${variants(i).length > 1 ? " · " + esc(t("nVar", variants(i).length)) : i.note ? " · " + esc(noteL(i.note)) : ""}</span></span></a>`).join("") +
-        `<a class="dl sub all" href="#g-${g.key}"><span class="dt">${esc(t("all"))}</span></a></div></details>`;
+    // namavalis: kind (108 / 300 / 1000) → devata → that devata's lists of this kind only
+    const subRow = i => `<a class="dl sub" href="#${i.id}"><span class="cnt">${i.count}</span><span><span class="dd">${esc(i.deva)}</span><span class="dt">${esc(T.tamil(i.deva))}${variants(i).length > 1 ? " · " + esc(t("nVar", variants(i).length)) : i.note ? " · " + esc(noteL(i.note)) : ""}</span></span></a>`;
+    $("dKinds").innerHTML = KINDS.map(K => {
+      const kits = prim(INDEX.items.filter(i => i.kind === K.k));
+      const gs = INDEX.groups.filter(g => kits.some(i => i.group === g.key));
+      return `<details class="dg dk" data-k="${K.k}"><summary class="dl"><span class="sym xs num">${K.k}</span><span><span class="dd">${esc(K.deva)}</span><span class="dt">${esc(K[L()])}</span></span><span class="dn">${kits.length}</span><span class="chev" aria-hidden="true">›</span></summary><div class="dsub">` +
+        gs.map(g => {
+          const its = kits.filter(i => i.group === g.key);
+          return `<details class="dg" data-k="${K.k}" data-g="${g.key}"><summary class="dl sub gsum"><span class="sym xxs">${window.symbolSVG(g.key)}</span><span><span class="dd">${esc(g.deva)}</span><span class="dt">${esc(gName(g))}</span></span><span class="dn">${its.length}</span><span class="chev" aria-hidden="true">›</span></summary>` +
+            `<div class="dsub">${its.map(subRow).join("")}</div></details>`;
+        }).join("") + `<a class="dl sub all" href="#k-${K.k}"><span class="dt">${esc(t("all"))}</span></a></div></details>`;
     }).join("");
   }
   function markDrawer() {
     const h = location.hash || "#";
     const vgOf = id => (byId(id) || {}).vg;
     const g = (byId(h.slice(1)) || {}).group || (h.startsWith("#g-") ? h.slice(3) : "");
-    const dg = g && document.querySelector(`#dGroups details[data-g="${g}"]`); if (dg) dg.open = true;
+    const k = (byId(h.slice(1)) || {}).kind || (h.startsWith("#k-") ? h.slice(3) : "");
+    if (k) { const dk = document.querySelector(`#dKinds details.dk[data-k="${k}"]`); if (dk) dk.open = true;
+      const dg = g && document.querySelector(`#dKinds details[data-k="${k}"][data-g="${g}"]`); if (dg) dg.open = true; }
     document.querySelectorAll("#drawer a.dl").forEach(a => { const hr = a.getAttribute("href"); a.classList.toggle("on", hr === h || (a.classList.contains("sub") && vgOf(hr.slice(1)) && vgOf(hr.slice(1)) === vgOf(h.slice(1)))); });
   }
   function drawer(open) {

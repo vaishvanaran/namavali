@@ -345,7 +345,7 @@ body.en .pvedic .vl{font-family:var(--ui)}
 .dg>summary{list-style:none;cursor:pointer}
 .dg>summary::-webkit-details-marker{display:none}
 .dg .chev{margin-left:4px;color:var(--muted);transition:transform .15s;font-size:1.1rem}
-.dg[open] .chev{transform:rotate(90deg)}
+.dg[open]>summary .chev{transform:rotate(90deg)}
 .dsub{margin:2px 0 8px 22px;border-left:2px solid var(--line);padding-left:6px}
 .dl.sub{padding:5px 8px;gap:10px}
 .dl.sub .cnt{min-width:2.6em;font-size:.72rem;color:var(--muted);font-variant-numeric:tabular-nums;text-align:right}
@@ -353,3 +353,7 @@ body.en .pvedic .vl{font-family:var(--ui)}
 .dl.sub .dt{font-size:.8rem}
 .dl.sub.all .dt{color:var(--kumkum)}
 .vedah{font-family:var(--tamil);font-size:.85rem;color:var(--muted);margin:4px 2px 8px;font-weight:600}
+.sym.xxs{width:26px;height:26px;flex:none}
+.sym.xxs svg{width:16px;height:16px}
+.dl.sub.gsum{padding:6px 8px}
+.dsub .dsub{margin-left:14px}
