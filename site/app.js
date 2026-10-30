@@ -4,7 +4,7 @@
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const FONT = { deva: "var(--deva)", taml: "var(--tamil)", gran: "var(--gran)", latn: "var(--latn)" };
   const CONV = { deva: s => s, taml: T.tamil, gran: T.grantha, latn: T.iast };
-  const VERSION = "2026.10.31a";
+  const VERSION = "2026.10.31b";
   const KINDS = [
     { k: "108", deva: "अष्टोत्तरशतनामावलिः", ta: "அஷ்டோத்தரம்", en: "Ashtottaram", sub: { ta: "108 நாமங்கள்", en: "108 names" } },
     { k: "300", deva: "त्रिशतीनामावलिः", ta: "த்ரிஶதீ", en: "Trishati", sub: { ta: "300 நாமங்கள்", en: "300 names" } },
@@ -167,6 +167,66 @@
     box.hidden = false;
   }
 
+  /* ---------- search: namavalis, stotras, pujas and veda pages, typed in any script ---------- */
+  // Tamil typed loosely: ச/ஸ/ஶ/ஷ/ஜ, ந/ன/ண, ல/ள/ழ, ர/ற, long/short vowels, aspiration marks
+  const tl = x => (x || "").replace(/[²³⁴₂₃₄\u200c\u200d:ः]/g, "").replace(/க்ஷ/g, "ட்ச").replace(/ட்சு/g, "ட்ச").replace(/ஶ்ரீ|ஸ்ரீ/g, "ஸ்ரீ")
+    .replace(/[ஶஸஷஜச]/g, "ச").replace(/[னண]/g, "ந").replace(/[ளழ]/g, "ல").replace(/ற/g, "ர").replace(/ஹ/g, "க")
+    .replace(/ீ/g, "ி").replace(/ூ/g, "ு").replace(/ே/g, "ெ").replace(/ோ/g, "ொ").replace(/ை/g, "ெ")
+    .replace(/ஈ/g, "இ").replace(/ஊ/g, "உ").replace(/ஏ/g, "எ").replace(/ஓ/g, "ஒ").replace(/ட்ட/g, "ட்").replace(/த்த/g, "த்").replace(/[்\s]/g, "").toLowerCase();
+  const KIND_WORDS = { "108": "அஷ்டோத்தரம் அஷ்டோத்திரம் நாமாவளி ashtottaram ashtothram 108 namavali", "300": "த்ரிஶதீ திரிசதி நாமாவளி trishati trisati 300 namavali",
+    "1000": "ஸஹஸ்ரநாமம் சகஸ்ரநாமம் நாமாவளி sahasranamam sahasranama 1000 namavali", small: "நாமாவளி namavali" };
+  const GROUP_ALIAS = { ganapati: "ganesha ganesh vinayaka pillaiyar பிள்ளையார் விநாயகர் கணேசர் கணபதி", shiva: "siva sivan shivan சிவன் ஈஸ்வரன் ஈசன் மகாதேவன்",
+    devi: "amman ambal ambika devi அம்மன் அம்பாள் தேவி", subrahmanya: "murugan muruga skanda kartikeya subramanya முருகன் கந்தன் சுப்பிரமணியர் ஷண்முகர்",
+    vishnu: "perumal narayana பெருமாள் நாராயணன்", hanuman: "anjaneya hanuman ஆஞ்சநேயர் அனுமன் ஹனுமான்", navagraha: "navagraha graha நவகிரகம் நவக்கிரகம் கிரகம்",
+    guru: "acharya guru ஆசார்யர் குரு", dikpala: "dikpalaka திக்பாலகர்" };
+  let SEARCH = null;
+  function searchIndex() {
+    if (SEARCH) return SEARCH;
+    const grp = k => INDEX.groups.find(g => g.key === k) || {};
+    const ent = (type, href, deva, ta, en, extra, sub, sym, rank) => {
+      const names = [deva, ta, en];
+      return { type, href, deva, ta, en, sub, sym, rank,
+        nameTA: tl([T.tamil(deva), ta].join(" ")), nameLA: T.looseLatin(en + " " + T.key(deva)),
+        TA: tl([T.tamil(deva), ta, ...extra.map(x => /[\u0900-\u097F]/.test(x) ? T.tamil(x) : x)].join(" ")),
+        LA: T.looseLatin([en, T.key(deva), ...extra.map(x => /[\u0900-\u097F]/.test(x) ? T.key(x) : x)].join(" ")),
+        DV: [deva, ...extra].join(" ") };
+    };
+    const E = [];
+    for (const x of STOTRAS) { const g = grp(x.group);
+      E.push(ent("sto", "#s-" + x.id, x.title, x.ta, x.en, [g.deva, g.ta, g.en || "", GROUP_ALIAS[x.group] || "", "ஸ்தோத்ரம் ஸ்தோத்திரம் stotram stotra", x.note], "", x.group, 0)); }
+    for (const it of INDEX.items) { const g = grp(it.group), K = KINDS.find(k => k.k === it.kind) || {};
+      E.push(ent("nama", "#" + it.id, it.deva, T.tamil(it.deva), it.en, [it.title, g.deva, g.ta, g.en || "", GROUP_ALIAS[it.group] || "", K.deva || "", K.ta || "", K.en || "", KIND_WORDS[it.kind] || "", it.note, String(it.count)],
+        `${it.count} · ${kindLabel(it.kind)}${it.note ? " · " + noteL(it.note) : ""}`, it.group, 1));
+      Object.assign(E[E.length - 1], { showD: it.title, showT: T.tamil(it.title) }); }
+    for (const p of PUJAS) {
+      const w = p.kind === "veda" ? "வேதம் மந்த்ரம் veda mantra sukta ஸூக்தம்" : p.kind === "vidhana" ? "விதானம் பூஜை vidhana puja" : "பூஜை பூஜா வ்ரதம் விரதம் puja pooja vratam";
+      E.push(ent(p.kind === "veda" ? "veda" : "puja", "#p-" + p.id, p.title, p.ta, p.en, [w, p.when_ta || "", p.when_en || "", GROUP_ALIAS[p.deity] || ""], "", p.deity, 2)); }
+    return (SEARCH = E);
+  }
+  function searchFind(raw) {
+    const toks = raw.trim().split(/\s+/).filter(Boolean);
+    const test = (e, q, name) => {
+      if (/[\u0B80-\u0BFF]/.test(q)) { const z = tl(q), H = name ? e.nameTA : e.TA; return !!z && (H.includes(z) || (z.length > 4 && /ம$/.test(z) && H.includes(z.slice(0, -1)))); }
+      if (/[\u0900-\u097F]/.test(q)) return (name ? e.deva : e.DV).includes(q) || (name ? e.nameTA : e.TA).includes(tl(T.tamil(q)));
+      let z = T.looseLatin(q.toLowerCase()); if (z.length < 2 && !/^\d+$/.test(q)) return false;
+      const H = name ? e.nameLA : e.LA;
+      return H.includes(z) || (z.length > 5 && /m$/.test(z) && H.includes(z.slice(0, -1)));
+    };
+    return searchIndex().map(e => {
+      if (!toks.every(q => test(e, q, false))) return null;
+      return { e, score: toks.filter(q => test(e, q, true)).length * 10 - e.rank };
+    }).filter(Boolean).sort((a, b) => b.score - a.score).map(x => x.e);
+  }
+  function renderSearch(raw) {
+    const found = searchFind(raw);
+    const row = e => `<a class="hit" href="${e.href}"><span class="sym xs">${window.symbolSVG(e.sym)}</span><span class="hb"><span class="d">${esc(e.showD || e.deva)}</span>` +
+      `<span class="t">${esc(L() === "en" ? e.en : (e.showT || e.ta))}</span>${e.sub ? `<span class="hs">${esc(e.sub)}</span>` : ""}</span></a>`;
+    const SECT = [["sto", t("stotras")], ["nama", t("namavalis")], ["puja", t("pujas")], ["veda", t("veda")]];
+    $("results").innerHTML = found.length
+      ? SECT.map(([k, lbl]) => { const xs = found.filter(e => e.type === k); return xs.length ? `<h2 class="lbl">${esc(lbl)} · ${xs.length}</h2><div class="hits">${xs.map(row).join("")}</div>` : ""; }).join("")
+      : `<p class="empty">${esc(t("notFound", raw))}</p>`;
+  }
+
   /* ---------- home ---------- */
   function renderHome() {
     if (!INDEX) return;
@@ -183,20 +243,7 @@
     const rec = prefs.recent.map(id => id.startsWith("s-") ? (x => x && { id, deva: x.title, en: x.en, ta: x.ta, count: "" })(STOTRAS.find(x => "s-" + x.id === id)) : id.startsWith("p-") ? (p => p && { id, deva: p.title, en: p.en, ta: p.ta, count: "" })(PUJAS.find(p => "p-" + p.id === id)) : byId(id)).filter(Boolean);
     $("recentBox").hidden = !!raw || !rec.length;
     $("recent").innerHTML = rec.map(it => `<a class="chip" href="#${it.id}"><span class="d">${esc(it.deva)}</span><span class="t">${esc(L() === "en" ? it.en : (it.ta || T.tamil(it.deva)))}</span>${it.count ? `<span class="pill">${it.count}</span>` : ""}</a>`).join("");
-    if (raw) {
-      const q = raw.toLowerCase(), ql = T.looseLatin(raw);
-      const hit = it => {
-        const g = INDEX.groups.find(x => x.key === it.group) || {};
-        const hay = [it.deva, it.title, T.tamil(it.deva), T.tamil(it.title), it.en.toLowerCase(), it.note, g.ta, g.deva, (g.en || "").toLowerCase()].join(" ");
-        if (hay.includes(raw) || hay.includes(q)) return true;
-        return ql.length > 1 && (T.key(it.deva + it.title).includes(ql) || T.looseLatin(it.en + " " + (g.en || "")).includes(ql));
-      };
-      const found = INDEX.items.filter(hit);
-      $("results").innerHTML = found.length
-        ? `<h2 class="lbl">${t("nNamavalis", found.length)}</h2><div class="grid">${found.map(card).join("")}</div>`
-        : `<p class="empty">${esc(t("notFound", raw))}</p>`;
-      return;
-    }
+    if (raw) { renderToday(raw); renderSearch(raw); return; }
     $("pujaTiles").innerHTML = PUJAS.filter(p => !p.kind || p.kind === "common").map(pujaCard).join("");
     $("vidhanaTiles").innerHTML = PUJAS.filter(p => p.kind === "vidhana").map(pujaCard).join("");
     $("vedaTiles").innerHTML = VEDAS.filter(v => PUJAS.some(p => p.kind === "veda" && p.veda === v)).map(v =>
@@ -571,7 +618,7 @@
     if (view === "home") renderHome(); else if (view === "kind") renderKind(); else if (view === "group") renderGroup();
     else if (view === "fav") renderFav(); else if (view === "reader") { renderReader(); refreshStars(); } else if (view === "puja") { renderPuja(); refreshStars(); } else if (view === "stotra") renderStotra();
   }
-  function setLang(l) { prefs.lang = l; save(); rerenderAll(); }
+  function setLang(l) { prefs.lang = l; save(); SEARCH = null; rerenderAll(); }
   function paintSetup() {
     const l = L();
     document.querySelectorAll("#setupLang button").forEach(b => b.setAttribute("aria-pressed", b.dataset.l === prefs.lang));
@@ -595,6 +642,9 @@
   $("fsUp").onclick = () => { prefs.fs = Math.min(3.2, +(prefs.fs + 0.15).toFixed(2)); save(); applyPrefs(); };
   $("fsDown").onclick = () => { prefs.fs = Math.max(0.95, +(prefs.fs - 0.15).toFixed(2)); save(); applyPrefs(); };
   $("q").oninput = renderHome;
+  $("q").addEventListener("focus", () => { const f = document.querySelector(".find"), bar = document.querySelector(".bar");
+    setTimeout(() => window.scrollTo({ top: f.getBoundingClientRect().top + scrollY - (bar ? bar.offsetHeight : 0) - 8, behavior: "smooth" }), 250); });
+  $("q").addEventListener("keydown", e => { if (e.key === "Enter") { const a = $("results").querySelector("a.hit"); if (a) { $("q").blur(); location.hash = a.getAttribute("href"); } } });
   $("backBtn").onclick = () => (location.hash = kindKey ? "k-" + kindKey : "");
   document.querySelectorAll("[data-home]").forEach(b => (b.onclick = () => (location.hash = "")));
   $("rBody").onclick = e => {
