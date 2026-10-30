@@ -325,3 +325,12 @@ body.en .lbl2{font-family:var(--ui)}
 .retpuja{position:fixed;z-index:15;left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom,0px) + 16px);margin:0;width:max-content;max-width:calc(100% - 32px);white-space:normal;text-align:center;line-height:1.35;box-shadow:0 6px 18px rgba(74,12,25,.3);padding:10px 18px;font-size:.95rem}
 .nlink small{font-family:var(--tamil);font-size:.75em;color:var(--muted)}
 body.en .nlink small{font-family:var(--ui)}
+
+/* ---------- sukta toggle, glossary ---------- */
+.icon.vbtn{font-family:var(--tamil);font-size:.85rem}
+body.en .icon.vbtn{font-family:var(--ui)}
+.pvedic{margin:6px 0 10px;padding:8px 12px;border-radius:12px;background:var(--hl);border:1px solid var(--haldi)}
+.pvedic .pverse,.pvedic .pprose{border-left:0;padding-left:0;margin:4px 0}
+.svarafont{font-family:var(--deva)}
+.plist .g{display:block;font-family:var(--tamil);font-size:.78rem;color:var(--muted);text-align:right}
+body.en .plist .g{font-family:var(--ui)}
