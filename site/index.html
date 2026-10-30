@@ -17,8 +17,8 @@
 </head>
 <body>
 <header class="bar"><div class="wrap">
-  <button class="menu" id="menuBtn" aria-label="பட்டியல் / Menu" aria-controls="drawer" aria-expanded="false"><span></span><span></span><span></span></button>
-  <a class="brand" href="#"><b>नामावलिः</b><span>நாமாவளி</span></a>
+  <button class="menu" id="menuBtn" aria-label="Menu" data-ta="menu" aria-controls="drawer" aria-expanded="false"><span></span><span></span><span></span></button>
+  <a class="brand" href="#"><b>नामावलिः</b><span data-t="appName">நாமாவளி</span></a>
   <div class="seg" id="scripts" role="group" aria-label="எழுத்து / Script">
     <button data-s="deva" class="deva" title="देवनागरी">देव</button>
     <button data-s="taml" class="taml" title="தமிழ்">தமிழ்</button>
@@ -26,25 +26,26 @@
     <button data-s="latn" title="English (IAST)">Eng</button>
   </div>
   <div class="tools" id="rtools" hidden>
-    <button class="icon arch" id="archBtn" title="அர்ச்சனை — ஒவ்வொரு நாமமாக / one name at a time">அர்ச்சனை</button>
-    <button class="icon" id="omBtn" title="ஒவ்வொரு நாமத்துக்கும் ஓம் / ॐ before every name">ॐ</button>
-    <button class="icon" id="fsDown" title="எழுத்து சிறிதாக / smaller">அ−</button>
-    <button class="icon" id="fsUp" title="எழுத்து பெரிதாக / larger">அ+</button>
+    <button class="icon arch" id="archBtn" data-tt="archanaTitle" data-t="archana">அர்ச்சனை</button>
+    <button class="icon" id="omBtn" data-tt="omTitle">ॐ</button>
+    <button class="icon" id="fsDown" data-tt="smaller">அ−</button>
+    <button class="icon" id="fsUp" data-tt="larger">அ+</button>
   </div>
 </div></header>
 
 <div class="scrim" id="scrim" hidden></div>
-<aside class="drawer" id="drawer" aria-label="பட்டியல்" aria-hidden="true">
-  <div class="dtop"><b class="deva">नामावलयः</b><button class="icon" id="drawerClose" aria-label="மூடு">✕</button></div>
+<aside class="drawer" id="drawer" data-ta="menu" aria-hidden="true">
+  <div class="dtop"><b class="deva">नामावलयः</b><button class="icon" id="drawerClose" data-ta="close">✕</button></div>
   <nav>
-    <a href="#" class="dl"><span class="sym xs">⌂</span><span>முகப்பு</span></a>
-    <a href="#fav" class="dl"><span class="sym xs star">★</span><span>அடிக்கடி படிப்பவை</span><span class="dn" id="dFavN"></span></a>
-    <div class="dsec">நாமாவளிகள்</div>
+    <a href="#" class="dl"><span class="sym xs">⌂</span><span data-t="home">முகப்பு</span></a>
+    <a href="#fav" class="dl"><span class="sym xs star">★</span><span data-t="fav">அடிக்கடி படிப்பவை</span><span class="dn" id="dFavN"></span></a>
+    <div class="dsec" data-t="namavalis">நாமாவளிகள்</div>
     <div id="dKinds"></div>
-    <div class="dsec">தேவதைகள்</div>
+    <div class="dsec" data-t="devatas">தேவதைகள்</div>
     <div id="dGroups"></div>
-    <div class="dsec"></div>
-    <a href="#about" class="dl"><span class="sym xs">i</span><span>இந்த ஆப் பற்றி</span></a>
+    <div class="dsec" data-t="settings">அமைப்பு</div>
+    <div class="dlang"><div class="seg" id="langSeg" role="group" aria-label="Language"><button data-l="ta">தமிழ்</button><button data-l="en">English</button></div></div>
+    <a href="#about" class="dl"><span class="sym xs">i</span><span data-t="about">இந்த ஆப் பற்றி</span></a>
   </nav>
 </aside>
 
@@ -52,32 +53,32 @@
   <section class="welcome">
     <div class="shrih">॥ श्रीः ॥</div>
     <h1 class="deva">नामावलयः</h1>
-    <div class="sub">நாமாவளிகள்</div>
+    <div class="sub" data-t="namavalis">நாமாவளிகள்</div>
     <blockquote class="mangala" id="mangala"></blockquote>
   </section>
   <div class="find">
-    <input id="q" type="search" autocomplete="off" placeholder="நாமாவளியைத் தேடுக — लक्ष्मी · லக்ஷ்மீ · lakshmi" aria-label="தேடல் / Search">
-    <button class="install" id="installBtn" hidden>ஆப்பாக நிறுவு</button>
+    <input id="q" type="search" autocomplete="off" data-tp="search" data-ta="searchLabel">
+    <button class="install" id="installBtn" hidden data-t="install">ஆப்பாக நிறுவு</button>
   </div>
-  <section id="favBox" class="favbox"><h2 class="lbl"><span class="star">★</span> அடிக்கடி படிப்பவை<a href="#fav" class="more" id="favMore">எல்லாம் →</a></h2><div id="favHome"></div></section>
-  <section id="recentBox" class="recent" hidden><h2 class="lbl">சமீபத்தில் படித்தவை</h2><div id="recent" class="chips"></div></section>
+  <section id="favBox" class="favbox"><h2 class="lbl"><span class="star">★</span> <span data-t="fav">அடிக்கடி படிப்பவை</span><a href="#fav" class="more" id="favMore" data-t="all">எல்லாம் →</a></h2><div id="favHome"></div></section>
+  <section id="recentBox" class="recent" hidden><h2 class="lbl" data-t="recent">சமீபத்தில் படித்தவை</h2><div id="recent" class="chips"></div></section>
   <section id="tilesBox"><div id="tiles" class="kinds3"></div></section>
   <section id="results" hidden></section>
-  <footer class="foot"><a href="#about">இந்த ஆப் பற்றி · நன்றி</a><span id="ver"></span></footer>
+  <footer class="foot"><a href="#about" data-t="aboutThanks">இந்த ஆப் பற்றி · நன்றி</a><span id="ver"></span></footer>
 </main>
 
 <main id="kind" class="wrap" hidden>
   <div class="ghead">
-    <button class="back" data-home>← நாமாவளிகள்</button>
+    <button class="back" data-home data-t="backNamavalis">← நாமாவளிகள்</button>
     <div class="gtitle"><span class="sym num" id="kNum"></span><div><h1 id="kDeva" class="deva"></h1><div id="kAlt" class="alt"></div></div></div>
   </div>
-  <nav id="kJump" class="chips jump" aria-label="தேவதைகள்"></nav>
+  <nav id="kJump" class="chips jump" data-ta="devatas"></nav>
   <div id="klist"></div>
 </main>
 
 <main id="group" class="wrap" hidden>
   <div class="ghead">
-    <button class="back" data-home>← முகப்பு</button>
+    <button class="back" data-home data-t="backHome">← முகப்பு</button>
     <div class="gtitle"><span class="sym" id="gSym"></span><div><h1 id="gDeva" class="deva"></h1><div id="gAlt" class="alt"></div></div></div>
   </div>
   <div id="glist"></div>
@@ -85,56 +86,99 @@
 
 <main id="fav" class="wrap" hidden>
   <div class="ghead">
-    <button class="back" data-home>← முகப்பு</button>
-    <div class="gtitle"><span class="sym star big">★</span><div><h1 class="taml">அடிக்கடி படிப்பவை</h1><div class="alt"><span>Favourites</span></div></div></div>
+    <button class="back" data-home data-t="backHome">← முகப்பு</button>
+    <div class="gtitle"><span class="sym star big">★</span><div><h1 data-t="fav">அடிக்கடி படிப்பவை</h1></div></div>
   </div>
-  <p class="hint" id="favHint">அடிக்கடி படிக்கும் நாமாவளிகளில் உள்ள ☆ குறியைத் தொட்டால் இங்கே சேரும். ↑ ↓ பொத்தான்களால் வரிசையை மாற்றலாம்.</p>
+  <p class="hint" id="favHint" data-t="favHint"></p>
   <ol id="favList" class="favlist"></ol>
 </main>
 
 <main id="reader" class="wrap" hidden>
   <div class="rhead">
     <button class="back" id="backBtn">←</button>
-    <div class="rtitle"><h1 id="rTitle"></h1><button class="favbtn" id="rFav" aria-pressed="false"><span class="star">☆</span><span class="fl">அடிக்கடி படிப்பவையில் சேர்</span></button></div>
+    <div class="rtitle"><h1 id="rTitle"></h1><button class="favbtn" id="rFav" aria-pressed="false"><span class="star">☆</span><span class="fl"></span></button></div>
     <div class="alt" id="rAlt"></div>
     <div class="note" id="rNote" hidden></div>
-    <div class="src" id="rSrc"></div>
   </div>
   <div class="body" id="rBody"></div>
-  <p class="hint">ஒரு நாமத்தைத் தொட்டால் அது குறிக்கப்படும். பூஜையில் எங்கே இருக்கிறோம் என்று தெரியும்.</p>
+  <p class="hint" data-t="tapHint"></p>
 </main>
 
 <main id="about" class="wrap" hidden>
   <div class="about">
-    <button class="back" data-home>← எல்லா நாமாவளிகளும்</button>
-    <h1>இந்த ஆப் பற்றி</h1>
-    <p>வைதிக பூஜையின் போது ஒவ்வொரு தேவதைக்கும் நாமாவளியைப் புத்தகங்களிலும் PDF-களிலும் தேடாமல், ஒரே இடத்தில் எல்லா நாமாவளிகளும் கிடைக்க வேண்டும் என்பதற்காக இது செய்யப்பட்டது. எல்லோருக்கும் இலவசம், விளம்பரம் இல்லை.</p>
-    <p class="en">A free, ad-free collection of nāmāvalis for pūjā, readable in Devanagari, Tamil, Grantha and English (IAST). Works offline once opened.</p>
-
-    <h2>மூலங்கள் · நன்றி</h2>
-    <ul>
-      <li><a href="https://stotrasamhita.github.io/" target="_blank" rel="noopener">ஸ்தோத்ர ஸம்ஹிதா (StotraSamhita)</a> — நாமாவளீ மஞ்ஜரீ. பெரும்பாலான நாமாவளிகள் இங்கிருந்து, அனுமதியுடன் எடுக்கப்பட்டவை.</li>
-    </ul>
-
-    <h2>தொகுப்பு</h2>
-    <p>தொகுத்தவர்: <a href="https://github.com/vaishvanaran" target="_blank" rel="noopener">vaishvanaran</a>. Claude (Anthropic) உதவியுடன் உருவாக்கப்பட்டது. பிழைகள் இருந்தால் தெரிவியுங்கள்: <a href="https://github.com/vaishvanaran/namavali/issues" target="_blank" rel="noopener">github.com/vaishvanaran/namavali</a></p>
-
-    <h2>போனில் ஆப்பாக நிறுவ</h2>
-    <ul>
-      <li><b>Android:</b> Chrome-ல் இந்தப் பக்கத்தைத் திறந்து, மேலே ⋮ → “Install app” அல்லது “Add to Home screen”.</li>
-      <li><b>iPhone:</b> Safari-ல் திறந்து, கீழே Share (□↑) → “Add to Home Screen”.</li>
-      <li>ஒருமுறை திறந்த பிறகு இணையம் இல்லாமலும் எல்லா நாமாவளிகளும் வேலை செய்யும்.</li>
-    </ul>
-
-    <h2>எழுத்துருக்கள்</h2>
+    <button class="back" data-home data-t="backHome">← முகப்பு</button>
+    <div class="lang-ta">
+      <h1>இந்த ஆப் பற்றி</h1>
+      <p>வைதிக பூஜையின் போது ஒவ்வொரு தேவதைக்கும் நாமாவளியைப் புத்தகங்களிலும் PDF-களிலும் தேடாமல், எல்லா நாமாவளிகளும் ஒரே இடத்தில் கிடைக்க வேண்டும் என்பதற்காக இது செய்யப்பட்டது. எல்லோருக்கும் இலவசம், விளம்பரம் இல்லை. தேவநாகரி, தமிழ், க்ரந்தம், English நான்கு எழுத்திலும் படிக்கலாம்.</p>
+      <h2>மூலங்கள் · நன்றி</h2>
+      <ul><li><a href="https://stotrasamhita.github.io/" target="_blank" rel="noopener">ஸ்தோத்ர ஸம்ஹிதா (StotraSamhita)</a> — நாமாவளீ மஞ்ஜரீ. நாமாவளிகள் இங்கிருந்து அனுமதியுடன் எடுக்கப்பட்டவை.</li></ul>
+      <h2>தொகுப்பு</h2>
+      <p>தொகுத்தவர்: <a href="https://github.com/vaishvanaran" target="_blank" rel="noopener">vaishvanaran</a>. Claude (Anthropic) உதவியுடன் உருவாக்கப்பட்டது. பிழைகள் இருந்தால் தெரிவியுங்கள்: <a href="https://github.com/vaishvanaran/namavali/issues" target="_blank" rel="noopener">github.com/vaishvanaran/namavali</a></p>
+      <h2>எப்படி உபயோகிப்பது</h2>
+      <ul>
+        <li>மேலே உள்ள <b>देव · தமிழ் · 𑌗𑍍𑌰 · Eng</b> பொத்தானால் நாமாவளியைப் படிக்கும் எழுத்தை எப்போது வேண்டுமானாலும் மாற்றலாம்.</li>
+        <li><b>அர்ச்சனை</b> பொத்தான்: ஒரு நாமம் மட்டும் பெரிதாக வரும்; தொட்டால் அடுத்தது.</li>
+        <li><b>☆</b> குறி: அடிக்கடி படிப்பவையில் சேர்க்க.</li>
+        <li><b>ॐ</b> பொத்தான்: ஒவ்வொரு நாமத்துக்கும் முன் ஓம் சேர்க்க. <b>அ− அ+</b>: எழுத்தின் அளவு.</li>
+      </ul>
+      <h2>போனில் ஆப்பாக நிறுவ</h2>
+      <ul>
+        <li><b>Android:</b> Chrome-ல் திறந்து ⋮ → “Install app” அல்லது “Add to Home screen”.</li>
+        <li><b>iPhone:</b> Safari-ல் திறந்து Share (□↑) → “Add to Home Screen”.</li>
+        <li>ஒருமுறை திறந்த பிறகு இணையம் இல்லாமலும் வேலை செய்யும்.</li>
+      </ul>
+    </div>
+    <div class="lang-en">
+      <h1>About this app</h1>
+      <p>Made so that during a Vaidika pūjā you do not have to hunt for each devatā's nāmāvali in books and PDFs: they are all in one place. Free for everyone, no ads. Read in Devanagari, Tamil, Grantha or English (IAST).</p>
+      <h2>Sources · Thanks</h2>
+      <ul><li><a href="https://stotrasamhita.github.io/" target="_blank" rel="noopener">StotraSamhita</a> — Nāmāvalī-mañjarī. The nāmāvalis are taken from here with permission.</li></ul>
+      <h2>Compiled by</h2>
+      <p><a href="https://github.com/vaishvanaran" target="_blank" rel="noopener">vaishvanaran</a>, built with the help of Claude (Anthropic). Report mistakes at <a href="https://github.com/vaishvanaran/namavali/issues" target="_blank" rel="noopener">github.com/vaishvanaran/namavali</a></p>
+      <h2>How to use</h2>
+      <ul>
+        <li>The <b>देव · தமிழ் · 𑌗𑍍𑌰 · Eng</b> switch at the top changes the script you read the nāmāvali in, any time.</li>
+        <li><b>Archana</b>: one name at a time, large; tap the name for the next one.</li>
+        <li><b>☆</b>: add to Favourites, shown first on the home screen.</li>
+        <li><b>ॐ</b>: add Om before every name. <b>A− A+</b>: text size.</li>
+      </ul>
+      <h2>Install on your phone</h2>
+      <ul>
+        <li><b>Android:</b> open in Chrome, ⋮ → “Install app” or “Add to Home screen”.</li>
+        <li><b>iPhone:</b> open in Safari, Share (□↑) → “Add to Home Screen”.</li>
+        <li>After the first visit it works without internet.</li>
+      </ul>
+    </div>
+    <h2>Fonts</h2>
     <p class="en">Tiro Devanagari Sanskrit, Noto Serif Tamil, Noto Serif Grantha, Noto Sans Tamil — SIL Open Font License.</p>
   </div>
 </main>
 
-<div id="archana" class="archana" hidden role="dialog" aria-label="அர்ச்சனை">
+<div id="setup" class="setup" hidden role="dialog" aria-modal="true" aria-labelledby="setupTitle">
+  <div class="setup-card">
+    <img src="icons/icon-192-om.png" alt="" width="72" height="72">
+    <h1 id="setupTitle" class="deva">नामावलयः</h1>
+    <p class="st">மொழி · Language</p>
+    <div class="choices" id="setupLang">
+      <button data-l="ta"><b>தமிழ்</b><span>அறிவுரைகள் தமிழில்</span></button>
+      <button data-l="en"><b>English</b><span>Instructions in English</span></button>
+    </div>
+    <p class="st" id="setupScriptLbl">நாமாவளியைப் படிக்கும் எழுத்து</p>
+    <div class="choices four" id="setupScript">
+      <button data-s="deva"><b class="deva">ॐ गणेशाय नमः</b><span>देवनागरी</span></button>
+      <button data-s="taml"><b class="taml">ஓம் க³ணேஶாய நம:</b><span>தமிழ்</span></button>
+      <button data-s="gran"><b class="gran">𑍐 𑌗𑌣𑍇𑌶𑌾𑌯 𑌨𑌮𑌃</b><span>Grantha</span></button>
+      <button data-s="latn"><b class="latn">oṃ gaṇeśāya namaḥ</b><span>English (IAST)</span></button>
+    </div>
+    <p class="hint" id="setupNote"></p>
+    <button class="go" id="setupGo">தொடங்கு →</button>
+  </div>
+</div>
+
+<div id="archana" class="archana" hidden role="dialog" data-ta="archana">
   <div class="atop"><span id="aCount"></span><span id="aTitle"></span><button class="icon" id="aClose">✕</button></div>
   <button class="aname" id="aName"></button>
-  <div class="anav"><button class="icon" id="aPrev">← முன்</button><span class="ahint">பெயரைத் தொட்டால் அடுத்தது</span><button class="icon" id="aNext">அடுத்து →</button></div>
+  <div class="anav"><button class="icon" id="aPrev" data-t="prev">← முன்</button><span class="ahint" data-t="tapNext"></span><button class="icon" id="aNext">அடுத்து →</button></div>
 </div>
 
 <script src="translit.js"></script>

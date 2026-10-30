@@ -231,3 +231,26 @@ body.noscroll{overflow:hidden}
 .favlist .ord .icon{flex:1;min-height:34px}
 .favlist .ord [data-fav]{color:var(--haldi);font-size:1.1rem}
 .icon:disabled{opacity:.3}
+
+/* ---------- language ---------- */
+.lang-en{display:none} body.en .lang-en{display:block} body.en .lang-ta{display:none}
+body.en .about h1,body.en .about h2,body.en .about p,body.en .about li{font-family:var(--ui)}
+.dlang{padding:4px 8px}
+#langSeg button{padding:5px 16px}
+
+/* ---------- first-run setup ---------- */
+.setup{position:fixed;inset:0;z-index:40;background:var(--bg);overflow-y:auto;display:flex;justify-content:center;
+  padding:calc(env(safe-area-inset-top,0px) + 24px) max(16px,env(safe-area-inset-right,0px)) calc(env(safe-area-inset-bottom,0px) + 24px) max(16px,env(safe-area-inset-left,0px))}
+.setup-card{width:100%;max-width:520px;text-align:center;margin:auto 0}
+.setup-card img{border-radius:18px;box-shadow:0 6px 18px rgba(74,12,25,.25)}
+.setup-card h1{font-weight:400;color:var(--kumkum);font-size:2.2rem;margin:.4rem 0 .2rem}
+.st{font-weight:600;color:var(--muted);margin:22px 0 10px}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.choices button{display:flex;flex-direction:column;gap:2px;align-items:center;border:1.5px solid var(--line);background:var(--paper);border-radius:14px;padding:14px 10px;cursor:pointer;min-width:0}
+.choices button b{font-size:1.15rem;font-weight:600;color:var(--fg);overflow-wrap:anywhere}
+.choices.four b{font-weight:400;color:var(--kumkum)}
+.choices button span{font-size:.8rem;color:var(--muted)}
+.choices button[aria-pressed="true"]{border-color:var(--kumkum);background:var(--hl);box-shadow:inset 0 0 0 1px var(--kumkum)}
+.go{margin-top:18px;width:100%;height:52px;border:0;border-radius:14px;background:var(--kumkum);color:var(--paper);font-size:1.1rem;font-weight:600;cursor:pointer}
+.go:disabled{opacity:.4;cursor:default}
+#setupNote{margin-top:14px}
