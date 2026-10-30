@@ -1,6 +1,6 @@
 {
   "weekdays": [
-    {"ta": "ஞாயிறு — ஸூர்யன்", "en": "Sunday — Surya", "deity": "others", "links": ["surya"],
+    {"ta": "ஞாயிறு — ஸூர்யன்", "en": "Sunday — Surya", "deity": "navagraha", "links": ["surya", "navagraha"],
      "shloka": ["जपाकुसुमसङ्काशं काश्यपेयं महाद्युतिम्।", "तमोऽरिं सर्वपापघ्नं प्रणतोऽस्मि दिवाकरम्॥"]},
     {"ta": "திங்கள் — சிவன்", "en": "Monday — Shiva", "deity": "shiva", "links": ["shiva", "rudra-300"],
      "shloka": ["नमः शिवाय शान्ताय कारणत्रयहेतवे।", "निवेदयामि चात्मानं त्वं गतिः परमेश्वर॥"]},
@@ -12,7 +12,7 @@
      "shloka": ["गुरवे सर्वलोकानां भिषजे भवरोगिणाम्।", "निधये सर्वविद्यानां दक्षिणामूर्तये नमः॥"]},
     {"ta": "வெள்ளி — லக்ஷ்மீ, அம்பாள்", "en": "Friday — Lakshmi, Ambal", "deity": "devi", "links": ["lakshmi", "lalita-300"],
      "shloka": ["नमस्तेऽस्तु महामाये श्रीपीठे सुरपूजिते।", "शङ्खचक्रगदाहस्ते महालक्ष्मि नमोऽस्तु ते॥"]},
-    {"ta": "சனி — வேங்கடேசர், ஆஞ்சநேயர்", "en": "Saturday — Venkatesha, Hanuman", "deity": "hanuman", "links": ["venkatesha", "anjaneya"],
+    {"ta": "சனி — வேங்கடேசர், ஆஞ்சநேயர்", "en": "Saturday — Venkatesha, Hanuman", "deity": "hanuman", "links": ["venkatesha", "anjaneya", "shani"],
      "shloka": ["मनोजवं मारुततुल्यवेगं जितेन्द्रियं बुद्धिमतां वरिष्ठम्।", "वातात्मजं वानरयूथमुख्यं श्रीरामदूतं शरणं प्रपद्ये॥"]}
   ],
   "dates": []

@@ -4,7 +4,7 @@
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const FONT = { deva: "var(--deva)", taml: "var(--tamil)", gran: "var(--gran)", latn: "var(--latn)" };
   const CONV = { deva: s => s, taml: T.tamil, gran: T.grantha, latn: T.iast };
-  const VERSION = "2026.10.30e";
+  const VERSION = "2026.10.30f";
   const KINDS = [
     { k: "108", deva: "अष्टोत्तरशतनामावलिः", ta: "அஷ்டோத்தரம்", en: "Ashtottaram", sub: { ta: "108 நாமங்கள்", en: "108 names" } },
     { k: "300", deva: "त्रिशतीनामावलिः", ta: "த்ரிஶதீ", en: "Trishati", sub: { ta: "300 நாமங்கள்", en: "300 names" } },
@@ -275,7 +275,13 @@
   }
   let suktaDocs = [], usedSk = null;
   const SB = { "purusha-sukta-vidhana": ["புருஷஸூக்தம்", "Purusha Suktam"], "sri-sukta-vidhana": ["ஶ்ரீஸூக்தம்", "Sri Suktam"], "rudra-vidhana": ["ருத்ர விதானம்", "Rudra Vidhanam"] };
-  const suktaIds = () => ((pujaDoc && pujaDoc.sukta) || "").split(/\s+/).filter(id => id && PUJAS.some(p => p.id === id));
+  // exactly one Vedic vidhana per puja, by deity: Shiva → Rudra, Ambal → Sri Sukta, every other deity → Purusha Sukta
+  const VIDHANA_BY_DEITY = { shiva: "rudra-vidhana", devi: "sri-sukta-vidhana" };
+  const suktaIds = () => {
+    if (!pujaDoc || pujaDoc.kind) return [];
+    const id = (pujaDoc.sukta || "").split(/\s+/)[0] || VIDHANA_BY_DEITY[pujaDoc.deity] || "purusha-sukta-vidhana";
+    return PUJAS.some(p => p.id === id) ? [id] : [];
+  };
   const skOn = id => !!(prefs.suktaOn || {})[id];
   async function ensureSukta() {
     suktaDocs = [];

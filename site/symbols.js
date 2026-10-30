@@ -14,7 +14,11 @@ window.SYMBOLS = {
   vishnu: `<circle cx="22" cy="30" r="11"/><circle cx="22" cy="30" r="3"/><path d="M22 19v22M11 30h22M14 22l16 16M30 22L14 38"/><path d="M44 18c6 0 10 6 9 13-1 6-5 9-9 9s-7-3-7-7 3-6 6-6c2 0 4 2 3 4"/><path d="M44 40v6l-3 4h6l-3-4"/><path d="M10 54h44"/>`,
   // Hanuman — gada
   hanuman: `<path d="M36 26l14 26"/><path d="M48 50l4 7"/><ellipse cx="30" cy="18" rx="11" ry="12" transform="rotate(-28 30 18)"/><path d="M22 14l14 8M24 22l10-14"/><path d="M33 31l6-2"/>`,
-  // Others — sun
-  others: `<circle cx="32" cy="32" r="10"/><path d="M32 8v8M32 48v8M8 32h8M48 32h8M15 15l6 6M43 43l6 6M49 15l-6 6M21 43l-6 6"/>`,
+  // Navagraha — sun with eight grahas around
+  navagraha: `<circle cx="32" cy="32" r="8"/><circle cx="32" cy="10" r="3.5"/><circle cx="32" cy="54" r="3.5"/><circle cx="10" cy="32" r="3.5"/><circle cx="54" cy="32" r="3.5"/><circle cx="16.5" cy="16.5" r="3.5"/><circle cx="47.5" cy="47.5" r="3.5"/><circle cx="47.5" cy="16.5" r="3.5"/><circle cx="16.5" cy="47.5" r="3.5"/>`,
+  // Dikpalas — eight directions
+  dikpala: `<circle cx="32" cy="32" r="22"/><path d="M32 6l5 21-5 5-5-5zM32 58l-5-21 5-5 5 5zM6 32l21-5 5 5-5 5zM58 32l-21 5-5-5 5-5z"/><path d="M15 15l9 9M49 49l-9-9M49 15l-9 9M15 49l9-9"/>`,
+  // Others — kalasha with mango leaves
+  others: `<path d="M20 34c0-6 5-10 12-10s12 4 12 10c0 10-5 18-12 18s-12-8-12-18z"/><path d="M24 24h16M26 52h12"/><path d="M32 22c0-5 0-9 0-12M32 14c-4-4-9-4-12-2 3 3 8 4 12 2zM32 14c4-4 9-4 12-2-3 3-8 4-12 2z"/><path d="M22 36h20"/>`,
 };
 window.symbolSVG = k => `<svg viewBox="0 0 64 64" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">${window.SYMBOLS[k] || window.SYMBOLS.others}</svg>`;

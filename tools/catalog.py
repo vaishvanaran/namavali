@@ -10,7 +10,9 @@ GROUPS = [
     ("subrahmanya", "सुब्रह्मण्यः", "ஸுப்ரஹ்மண்யர்", "Subrahmanya"),
     ("vishnu", "विष्णुः", "விஷ்ணு", "Vishnu"),
     ("hanuman", "आञ्जनेयः", "ஆஞ்சநேயர்", "Hanuman"),
-    ("others", "अन्ये देवताः", "ஸூர்யன், நதிகள், மற்றவை", "Surya, rivers & others"),
+    ("navagraha", "नवग्रहाः", "நவக்ரஹங்கள்", "Navagraha"),
+    ("dikpala", "दिक्पालाः", "திக்பாலகர்கள்", "Dikpalas"),
+    ("others", "अन्ये देवताः", "ப்ரஹ்மா, வாஸ்து, நதிகள், மற்றவை", "Brahma, Vastu, rivers & others"),
 ]
 
 S = "stotrasamhita"   # friend's Namavali-manjari
@@ -72,9 +74,9 @@ ITEMS = [
     ("goda", "100/Goda_108.tex", "गोदा", "Goda (Andal)", "devi", ""),
     ("shakti-divyasthaniya", "100/Shakti_divyasthaniya_108.tex", "शक्तिः — दिव्यस्थानानि", "Shakti — sacred places", "devi", "க்ஷேத்ர நாமங்கள்"),
     # others
-    ("surya", "100/Surya_108.tex", "सूर्यः", "Surya", "others", ""),
-    ("surya-mahabharata", "100/Surya_Mahabharatam_108.tex", "सूर्यः", "Surya", "others", "மஹாபாரதம்"),
-    ("kubera", "100/Kubera_108.tex", "कुबेरः", "Kubera", "others", ""),
+    ("surya", "100/Surya_108.tex", "सूर्यः", "Surya", "navagraha", ""),
+    ("surya-mahabharata", "100/Surya_Mahabharatam_108.tex", "सूर्यः", "Surya", "navagraha", "மஹாபாரதம்"),
+    ("kubera", "100/Kubera_108.tex", "कुबेरः", "Kubera", "dikpala", ""),
     ("ganga", "100/Ganga_108.tex", "गङ्गा", "Ganga", "others", "மஹாபாகவதம்"),
     ("ganga-2", "100/Ganga_108_2.tex", "गङ्गा", "Ganga", "others", "பாடம் 2"),
     ("kaveri", "100/Kaveri_108.tex", "कावेरी", "Kaveri", "others", ""),
