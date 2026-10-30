@@ -4,7 +4,7 @@
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const FONT = { deva: "var(--deva)", taml: "var(--tamil)", gran: "var(--gran)", latn: "var(--latn)" };
   const CONV = { deva: s => s, taml: T.tamil, gran: T.grantha, latn: T.iast };
-  const VERSION = "2026.10.31e";
+  const VERSION = "2026.10.31f";
   const KINDS = [
     { k: "108", deva: "अष्टोत्तरशतनामावलिः", ta: "அஷ்டோத்தரம்", en: "Ashtottaram", sub: { ta: "108 நாமங்கள்", en: "108 names" } },
     { k: "300", deva: "त्रिशतीनामावलिः", ta: "த்ரிஶதீ", en: "Trishati", sub: { ta: "300 நாமங்கள்", en: "300 names" } },
@@ -464,7 +464,8 @@
   }
   const stos = {};
   async function loadSto(id) { if (stos[id]) return stos[id]; return (stos[id] = await getJSON(`data/stotra/${id}.json`)); }
-  const rMode = id => ((byId(id) || {}).st && !prefs.returnTo && (prefs.rmode || {})[id] === "s") ? "s" : "n";
+  let forceNama = false; // opened from a puja: show the names first, until the reader taps Stotram
+  const rMode = id => ((byId(id) || {}).st && !forceNama && (prefs.rmode || {})[id] === "s") ? "s" : "n";
   let flat = []; // names of the current doc, in order
   const nameHTML = (x, i, d) => {
     const pre = (prefs.omEach && !/^(ॐ|ओं)/.test(x)) || (!d.svara && i === 0 && !/^(ॐ|ओं)/.test(x)) ? `<span class="om">${esc(tr("ॐ"))}</span> ` : "";
@@ -610,6 +611,7 @@
       try { current = await loadDoc(id); } catch (e) { $("rBody").innerHTML = `<p class="empty">${t("loadFail")}</p>`; }
       prefs.recent = [id, ...prefs.recent.filter(x => x !== id)].slice(0, 6); save();
       kindKey = (byId(id) || {}).kind;
+      forceNama = !!prefs.returnTo;
       show("reader"); renderReader(); refreshStars(); window.scrollTo(0, 0); return;
     }
     current = null; show("home"); renderHome();
@@ -657,7 +659,7 @@
     if (prefs.cur[current.id] === i) { delete prefs.cur[current.id]; save(); li.classList.remove("cur"); } else setCur(i);
   };
   $("archBtn").onclick = openArchana;
-  $("rMode").onclick = e => { const b = e.target.closest("button"); if (!b || !current) return; prefs.rmode = prefs.rmode || {}; prefs.rmode[current.id] = b.dataset.m; save(); renderReader(); };
+  $("rMode").onclick = e => { const b = e.target.closest("button"); if (!b || !current) return; forceNama = false; prefs.rmode = prefs.rmode || {}; prefs.rmode[current.id] = b.dataset.m; save(); renderReader(); window.scrollTo(0, 0); };
   $("pSteps").onclick = e => { const b = e.target.closest("[data-step]"); if (!b) return; const el = $("part-" + b.dataset.step); window.scrollTo({ top: el.getBoundingClientRect().top + scrollY - $("pSteps").getBoundingClientRect().bottom + 2, behavior: "smooth" }); };
   $("pBody").onclick = e => {
     if (!pujaDoc) return;
