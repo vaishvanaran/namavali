@@ -25,7 +25,7 @@ ITEMS = [
     ("chandrashekharendra", "100/ChandrashekharendraSaraswati_108.tex", "चन्द्रशेखरेन्द्रसरस्वती", "Chandrashekharendra Saraswati", "guru", ""),
     # ganapati
     ("ganapati", "100/Ganapati_108.tex", "गणपतिः", "Ganapati", "ganapati", "கணேச புராணம்"),
-    ("ganesha", "100/Ganesha_108.tex", "गणेशः", "Ganesha", "ganapati", ""),
+    ("ganesha", "100/Ganesha_108.tex", "गणपतिः", "Ganapati", "ganapati", ""),
     ("gakaradi-ganapati", "100/GakaradiGanapati_108.tex", "गकारादि गणपतिः", "Gakaradi Ganapati", "ganapati", ""),
     ("gakaradi-ganapati-1000", "1000/GakaradiGanapati_1000.tex", "गकारादि गणपतिः", "Gakaradi Ganapati", "ganapati", ""),
     ("vakratunda-1000", "1000/VakratundaMahaganapati_1000.tex", "वक्रतुण्ड महागणपतिः", "Vakratunda Mahaganapati", "ganapati", ""),
@@ -53,7 +53,7 @@ ITEMS = [
     ("jagadanandakaraka", "100/Jagadanandakaraka_100.tex", "जगदानन्दकारकः", "Jagadanandakaraka", "vishnu", "100 நாமங்கள்"),
     ("krishna", "100/Krishna_108.tex", "कृष्णः", "Krishna", "vishnu", ""),
     ("lakshmi-nrisimha", "100/LakshmiNrisimha_108.tex", "लक्ष्मीनृसिंहः", "Lakshmi Nrisimha", "vishnu", ""),
-    ("nrisimha", "100/Nrisimha_108.tex", "नृसिंहः", "Nrisimha", "vishnu", "பாடம் 2"),
+    ("nrisimha", "100/Nrisimha_108.tex", "नृसिंहः", "Nrisimha", "vishnu", ""),
     ("venkatesha", "100/Venkatesha_108.tex", "वेङ्कटेशः", "Venkatesha", "vishnu", ""),
     ("venkateshwara", "100/Venkateshwara_108.tex", "वेङ्कटेशः", "Venkatesha", "vishnu", "வராஹ புராணம்"),
     ("dhanvantari", "100/Dhanvantari_108.tex", "धन्वन्तरिः", "Dhanvantari", "vishnu", ""),
@@ -78,7 +78,7 @@ ITEMS = [
     ("surya-mahabharata", "100/Surya_Mahabharatam_108.tex", "सूर्यः", "Surya", "navagraha", "மஹாபாரதம்"),
     ("kubera", "100/Kubera_108.tex", "कुबेरः", "Kubera", "dikpala", ""),
     ("ganga", "100/Ganga_108.tex", "गङ्गा", "Ganga", "others", "மஹாபாகவதம்"),
-    ("ganga-2", "100/Ganga_108_2.tex", "गङ्गा", "Ganga", "others", "பாடம் 2"),
+    ("ganga-2", "100/Ganga_108_2.tex", "गङ्गा", "Ganga", "others", ""),
     ("kaveri", "100/Kaveri_108.tex", "कावेरी", "Kaveri", "others", ""),
     ("tulasi", "100/Tulasi_108.tex", "तुलसी", "Tulasi", "others", ""),
 ]

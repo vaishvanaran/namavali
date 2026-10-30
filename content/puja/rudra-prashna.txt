@@ -1,11 +1,12 @@
 title: श्री-रुद्रप्रश्नः
-ta: ஶ்ரீ ருத்ரம் (ருத்ரப்ரஶ்னம்)
-en: Sri Rudram (Rudra Prashna)
+ta: ஶ்ரீ ருத்ரம் (நமகம்)
+en: Sri Rudram (Namakam)
 deity: shiva
 when_ta: ருத்ராபிஷேகம், ப்ரதோஷம், ஶிவ பூஜைகளுக்கு
 when_en: For Rudrabhishekam, Pradosham and Shiva pujas
-order: 8
-kind: vidhana
+order: 20
+kind: veda
+veda: yajur
 
 # रुद्रप्रश्नः
 

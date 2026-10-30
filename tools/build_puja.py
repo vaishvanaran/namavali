@@ -129,7 +129,7 @@ def main():
         titles[pid] = {p['title'] for p in parts} | {s['title'] for p in parts for s in p['sections']}
         (OUT / f'{pid}.json').write_text(json.dumps(doc, ensure_ascii=False, separators=(',', ':')), encoding='utf-8')
         listing.append({'id': pid, 'title': doc['title'], 'ta': doc['ta'], 'en': doc['en'], 'deity': doc['deity'],
-                        'when_ta': doc['when_ta'], 'when_en': doc['when_en'], 'order': int(head.get('order', 100)), 'kind': head.get('kind', ''), 'sukta': head.get('sukta', ''),
+                        'when_ta': doc['when_ta'], 'when_en': doc['when_en'], 'order': int(head.get('order', 100)), 'kind': head.get('kind', ''), 'sukta': head.get('sukta', ''), 'veda': head.get('veda', ''),
                         'parts': [p['title'] for p in parts]})
     for src, tgt, sec in links:
         if tgt not in titles: problems.append(f'{src}: link to unknown puja "{tgt}"')

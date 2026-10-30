@@ -338,3 +338,18 @@ body.en .plist .g{font-family:var(--ui)}
 .pvedic .vl{display:block;font-family:var(--tamil);font-size:.75rem;color:var(--haldi);font-weight:600;margin-bottom:2px}
 body.en .pvedic .vl{font-family:var(--ui)}
 .tools{flex-wrap:wrap}
+.vchips{margin:10px 0 2px;align-items:center}
+.vchips .vl{font-family:var(--tamil);font-size:.85rem;color:var(--muted)}
+.vchips .chip{font-family:var(--tamil);font-size:.9rem;padding:5px 12px}
+.vchips .chip[aria-current="true"]{background:var(--kumkum);color:var(--paper);border-color:var(--kumkum)}
+.dg>summary{list-style:none;cursor:pointer}
+.dg>summary::-webkit-details-marker{display:none}
+.dg .chev{margin-left:4px;color:var(--muted);transition:transform .15s;font-size:1.1rem}
+.dg[open] .chev{transform:rotate(90deg)}
+.dsub{margin:2px 0 8px 22px;border-left:2px solid var(--line);padding-left:6px}
+.dl.sub{padding:5px 8px;gap:10px}
+.dl.sub .cnt{min-width:2.6em;font-size:.72rem;color:var(--muted);font-variant-numeric:tabular-nums;text-align:right}
+.dl.sub .dd{font-size:.95rem}
+.dl.sub .dt{font-size:.8rem}
+.dl.sub.all .dt{color:var(--kumkum)}
+.vedah{font-family:var(--tamil);font-size:.85rem;color:var(--muted);margin:4px 2px 8px;font-weight:600}

@@ -58,6 +58,14 @@ for f in sorted(TXT.glob('[a-z]*.txt')):
 ORDER = 'navagraha surya surya-mahabharata chandra angaraka budha brihaspati shukra shani rahu ketu indra agni yama nirriti varuna vayu soma kubera ishana brahma vastu'.split()
 index['items'].sort(key=lambda i: ORDER.index(i['id']) if i['id'] in ORDER else -1)
 index['items'].sort(key=lambda i: [g[0] for g in GROUPS].index(i['group']))
+# variants: lists of the same deity and kind become one card with a choice of pāṭha inside
+vg = {}
+for it in index['items']:
+    vg.setdefault((it['group'], it['kind'], it['deva']), []).append(it)
+for mem in vg.values():
+    for it in mem:
+        it['vg'] = mem[0]['id']
+        if len(mem) > 1 and not it['note']: it['note'] = 'ப்ரஸித்த பாடம்'
 index['sources'] = SRC
 (OUT / 'index.json').write_text(json.dumps(index, ensure_ascii=False, separators=(',', ':')))
 print(len(index['items']), 'lists;', sum(i['count'] for i in index['items']), 'names')

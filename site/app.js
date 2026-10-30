@@ -4,7 +4,7 @@
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const FONT = { deva: "var(--deva)", taml: "var(--tamil)", gran: "var(--gran)", latn: "var(--latn)" };
   const CONV = { deva: s => s, taml: T.tamil, gran: T.grantha, latn: T.iast };
-  const VERSION = "2026.10.30g";
+  const VERSION = "2026.10.30h";
   const KINDS = [
     { k: "108", deva: "अष्टोत्तरशतनामावलिः", ta: "அஷ்டோத்தரம்", en: "Ashtottaram", sub: { ta: "108 நாமங்கள்", en: "108 names" } },
     { k: "300", deva: "त्रिशतीनामावलिः", ta: "த்ரிஶதீ", en: "Trishati", sub: { ta: "300 நாமங்கள்", en: "300 names" } },
@@ -12,7 +12,7 @@
   ];
   const STR = {
     ta: {
-      vidhana: "வேதம் · விதானம்", suktaOn: n => n, glossTitle: "தமிழ் பெயர்", today: "இன்று", upcoming: "வரும் நாட்கள்", pujas: "பூஜை · வ்ரதம்", tagline: "பூஜை · வ்ரதம் · அர்ச்சனை", archanaH: "அர்ச்சனை · நாமாவளிகள்", backToPuja: t => `← ${t} பூஜைக்குத் திரும்பு`,
+      vidhana: "விதான பூஜை", suktaOn: n => n, glossTitle: "தமிழ் பெயர்", today: "இன்று", upcoming: "வரும் நாட்கள்", pujas: "பூஜை · வ்ரதம்", tagline: "பூஜை · வ்ரதம் · அர்ச்சனை", archanaH: "அர்ச்சனை · நாமாவளிகள்", backToPuja: t => `← ${t} பூஜைக்குத் திரும்பு`,
       openNamavali: "நாமாவளியைத் திற", steps: "படிகள்", nParts: n => `${n} படிகள்`,
       appName: "பூஜாநிதி", menu: "பட்டியல்", close: "மூடு", home: "முகப்பு", fav: "அடிக்கடி படிப்பவை", namavalis: "நாமாவளிகள்",
       devatas: "தேவதைகள்", settings: "அமைப்பு", about: "இந்த ஆப் பற்றி", aboutThanks: "இந்த ஆப் பற்றி · நன்றி",
@@ -24,6 +24,7 @@
       tapHint: "ஒரு நாமத்தைத் தொட்டால் அது குறிக்கப்படும். பூஜையில் எங்கே இருக்கிறோம் என்று தெரியும்.",
       archana: "அர்ச்சனை", archanaTitle: "அர்ச்சனை — ஒவ்வொரு நாமமாக", omTitle: "ஒவ்வொரு நாமத்துக்கும் ஓம்",
       smaller: "எழுத்து சிறிதாக", larger: "எழுத்து பெரிதாக", prev: "← முன்", next: "அடுத்து →", done: "நிறைவு ✓", tapNext: "பெயரைத் தொட்டால் அடுத்தது",
+      nVar: n => `${n} பாடங்கள்`, paatha: "பாடம்", veda: "வேத மந்த்ரங்கள்", yajur: "க்ருஷ்ண யஜுர்வேதம்", sama: "ஸாமவேதம்",
       names: n => `${n} நாமங்கள்`, nNamavalis: n => `${n} நாமாவளிகள்`, notFound: q => `“${q}” — எதுவும் கிடைக்கவில்லை.`,
       loadFail: "ஏற்ற முடியவில்லை. இணைய இணைப்பைச் சரிபார்க்கவும்.", listFail: "பட்டியலை ஏற்ற முடியவில்லை.",
       svaraNote: "ஸ்வரக் குறிகள் தேவநாகரி, க்ரந்தத்தில் மட்டும் காட்டப்படும்.", version: "பதிப்பு",
@@ -31,7 +32,7 @@
       setupScript: "நாமாவளியைப் படிக்கும் எழுத்து", setupNote: "இவற்றைப் பிறகு எப்போது வேண்டுமானாலும் மாற்றலாம்: எழுத்தை மேலே உள்ள பொத்தானிலும், மொழியை ☰ பட்டியலிலும்.", start: "தொடங்கு →",
     },
     en: {
-      vidhana: "Veda · Vidhana", suktaOn: n => n, glossTitle: "Name", today: "Today", upcoming: "Coming up", pujas: "Puja · Vrata", tagline: "Puja · Vrata · Archana", archanaH: "Archana · Namavalis", backToPuja: t => `← Back to ${t}`,
+      vidhana: "Vidhana puja", suktaOn: n => n, glossTitle: "Name", today: "Today", upcoming: "Coming up", pujas: "Puja · Vrata", tagline: "Puja · Vrata · Archana", archanaH: "Archana · Namavalis", backToPuja: t => `← Back to ${t}`,
       openNamavali: "Open namavali", steps: "Steps", nParts: n => `${n} steps`,
       appName: "Pujanidhi", menu: "Menu", close: "Close", home: "Home", fav: "Favourites", namavalis: "Namavalis",
       devatas: "Devatas", settings: "Settings", about: "About this app", aboutThanks: "About · Thanks",
@@ -43,6 +44,7 @@
       tapHint: "Tap a name to mark it, so you keep your place during the puja.",
       archana: "Archana", archanaTitle: "Archana — one name at a time", omTitle: "Om before every name",
       smaller: "Smaller text", larger: "Larger text", prev: "← Back", next: "Next →", done: "Done ✓", tapNext: "Tap the name for the next one",
+      nVar: n => `${n} versions`, paatha: "Version", veda: "Veda mantras", yajur: "Krishna Yajurveda", sama: "Samaveda",
       names: n => `${n} names`, nNamavalis: n => `${n} namavalis`, notFound: q => `Nothing found for “${q}”.`,
       loadFail: "Could not load. Check your internet connection.", listFail: "Could not load the list.",
       svaraNote: "Svara marks are shown only in Devanagari and Grantha.", version: "Version",
@@ -53,7 +55,7 @@
   const NOTE_EN = { "கணேச புராணம்": "Ganesha Purana", "ஸ்காந்தம்": "Skanda Purana", "ஸ்வரத்துடன்": "with svaras", "216 நாமங்கள்": "216 names",
     "க்ஷேத்ர நாமங்கள்": "sacred places", "பத்ம புராணம்": "Padma Purana", "ராம ரஹஸ்யம்": "Rama Rahasya", "100 நாமங்கள்": "100 names",
     "பாடம் 2": "version 2", "வராஹ புராணம்": "Varaha Purana", "27 நாமங்கள்": "27 names", "ஆனந்த ராமாயணம்": "Ananda Ramayana",
-    "மஹாபாரதம்": "Mahabharata", "மஹாபாகவதம்": "Mahabhagavata" };
+    "மஹாபாரதம்": "Mahabharata", "மஹாபாகவதம்": "Mahabhagavata", "ப்ரஸித்த பாடம்": "common version" };
   const MANGALA = ["शुक्लाम्बरधरं विष्णुं शशिवर्णं चतुर्भुजम् ।", "प्रसन्नवदनं ध्यायेत् सर्वविघ्नोपशान्तये ॥"];
 
   let prefs = { script: "taml", omEach: false, fs: 1.45, kind: "", cur: {}, recent: [], fav: [] };
@@ -103,11 +105,17 @@
     `<span class="g">${esc(T.grantha(deva))}</span><span class="e">${esc(en)}</span>`;
   const isFav = id => prefs.fav.includes(id);
   const star = id => `<button class="cstar" data-fav="${id}" aria-pressed="${isFav(id)}" title="${t("fav")}">${isFav(id) ? "★" : "☆"}</button>`;
-  const card = it =>
-    `<a class="card" href="#${it.id}">${star(it.id)}${four(it.deva, it.en)}<span class="meta">` +
-    `<span class="pill k">${it.count} · ${kindLabel(it.kind)}</span>` +
-    (it.note ? `<span class="pill">${esc(noteL(it.note))}</span>` : "") + `</span></a>`;
+  const variants = it => INDEX.items.filter(x => x.vg === it.vg);
+  const prim = items => items.filter(i => i.vg === i.id);
+  const card = it => {
+    const vs = variants(it), many = vs.length > 1;
+    return `<a class="card" href="#${it.id}">${star(it.id)}${four(it.deva, it.en)}<span class="meta">` +
+      `<span class="pill k">${it.count} · ${kindLabel(it.kind)}</span>` +
+      (many ? `<span class="pill">${esc(t("nVar", vs.length))}: ${vs.map(v => esc(noteL(v.note))).join(" · ")}</span>`
+            : it.note ? `<span class="pill">${esc(noteL(it.note))}</span>` : "") + `</span></a>`;
+  };
 
+  const VEDAS = ["yajur", "sama"];
   const pujaName = p => (L() === "en" ? p.en : p.ta);
   const pujaCard = p =>
     `<a class="card pcard" href="#p-${p.id}">${star("p-" + p.id)}<span class="sym sm">${window.symbolSVG(p.deity)}</span>` +
@@ -163,11 +171,13 @@
         : `<p class="empty">${esc(t("notFound", raw))}</p>`;
       return;
     }
-    $("pujaTiles").innerHTML = PUJAS.filter(p => p.kind !== "vidhana").map(pujaCard).join("");
+    $("pujaTiles").innerHTML = PUJAS.filter(p => !p.kind || p.kind === "common").map(pujaCard).join("");
     $("vidhanaTiles").innerHTML = PUJAS.filter(p => p.kind === "vidhana").map(pujaCard).join("");
+    $("vedaTiles").innerHTML = VEDAS.filter(v => PUJAS.some(p => p.kind === "veda" && p.veda === v)).map(v =>
+      `<h3 class="lbl2 vedah">${esc(t(v))}</h3><div class="grid pujas">${PUJAS.filter(p => p.kind === "veda" && p.veda === v).map(pujaCard).join("")}</div>`).join("");
     renderToday(raw);
     $("tiles").innerHTML = KINDS.map(K => {
-      const items = INDEX.items.filter(i => i.kind === K.k);
+      const items = prim(INDEX.items.filter(i => i.kind === K.k));
       const gs = INDEX.groups.filter(g => items.some(i => i.group === g.key)).map(gShort);
       return `<a class="ktile" href="#k-${K.k}"><span class="sym num">${K.k}</span><span class="kt">` +
         `<span class="d">${esc(K.deva)}</span><span class="t">${esc(K[L()])}</span><span class="e">${esc(K.sub[L()])}</span>` +
@@ -188,7 +198,7 @@
     $("kJump").innerHTML = groups.map(g => `<button class="chip" data-g="${g.key}"><span class="d">${esc(g.deva)}</span><span class="t">${esc(gShort(g))}</span></button>`).join("");
     $("klist").innerHTML = groups.map(g =>
       `<section class="sec" id="sec-${g.key}"><h2><span class="sym sm">${window.symbolSVG(g.key)}</span><span class="d">${esc(g.deva)}</span><span class="t">${esc(gName(g))}</span></h2>` +
-      `<div class="grid">${items.filter(i => i.group === g.key).map(card).join("")}</div></section>`).join("");
+      `<div class="grid">${prim(items.filter(i => i.group === g.key)).map(card).join("")}</div></section>`).join("");
   }
 
   /* ---------- one deity, all its namavalis (108 / 300 / 1000) ---------- */
@@ -200,7 +210,7 @@
     const items = INDEX.items.filter(i => i.group === g.key);
     $("glist").innerHTML = KINDS.filter(K => items.some(i => i.kind === K.k)).map(K =>
       `<section class="sec"><h2><span class="sym sm num">${K.k}</span><span class="d">${esc(K.deva)}</span><span class="t">${esc(K[L()])}</span></h2>` +
-      `<div class="grid">${items.filter(i => i.kind === K.k).map(card).join("")}</div></section>`).join("");
+      `<div class="grid">${prim(items.filter(i => i.kind === K.k)).map(card).join("")}</div></section>`).join("");
   }
 
   /* ---------- favourites ---------- */
@@ -231,13 +241,24 @@
   /* ---------- side menu ---------- */
   function renderDrawer() {
     $("dVidhana").innerHTML = PUJAS.filter(p => p.kind === "vidhana").map(p => `<a class="dl" href="#p-${p.id}"><span class="sym xs">${window.symbolSVG(p.deity)}</span><span><span class="dd">${esc(p.title)}</span><span class="dt">${esc(pujaName(p))}</span></span></a>`).join("");
-    $("dPujas").innerHTML = PUJAS.filter(p => p.kind !== "vidhana").map(p => `<a class="dl" href="#p-${p.id}"><span class="sym xs">${window.symbolSVG(p.deity)}</span><span><span class="dd">${esc(p.title)}</span><span class="dt">${esc(pujaName(p))}</span></span></a>`).join("");
+    $("dVeda").innerHTML = PUJAS.filter(p => p.kind === "veda").map(p => `<a class="dl" href="#p-${p.id}"><span class="sym xs">${window.symbolSVG(p.deity)}</span><span><span class="dd">${esc(p.title)}</span><span class="dt">${esc(pujaName(p))}</span></span></a>`).join("");
+    $("dPujas").innerHTML = PUJAS.filter(p => !p.kind || p.kind === "common").map(p => `<a class="dl" href="#p-${p.id}"><span class="sym xs">${window.symbolSVG(p.deity)}</span><span><span class="dd">${esc(p.title)}</span><span class="dt">${esc(pujaName(p))}</span></span></a>`).join("");
     $("dKinds").innerHTML = KINDS.map(K => `<a class="dl" href="#k-${K.k}"><span class="sym xs num">${K.k}</span><span><span class="dd">${esc(K.deva)}</span><span class="dt">${esc(K[L()])}</span></span></a>`).join("");
-    $("dGroups").innerHTML = INDEX.groups.map(g => `<a class="dl" href="#g-${g.key}"><span class="sym xs">${window.symbolSVG(g.key)}</span><span><span class="dd">${esc(g.deva)}</span><span class="dt">${esc(gName(g))}</span></span><span class="dn">${INDEX.items.filter(i => i.group === g.key).length}</span></a>`).join("");
+    // each devata opens in place to list its namavalis, so one can go straight to the next one during a puja
+    const openG = (byId((location.hash || "").slice(1)) || {}).group || (location.hash.startsWith("#g-") ? location.hash.slice(3) : "");
+    $("dGroups").innerHTML = INDEX.groups.map(g => {
+      const its = prim(INDEX.items.filter(i => i.group === g.key));
+      return `<details class="dg" data-g="${g.key}" ${g.key === openG ? "open" : ""}><summary class="dl"><span class="sym xs">${window.symbolSVG(g.key)}</span><span><span class="dd">${esc(g.deva)}</span><span class="dt">${esc(gName(g))}</span></span><span class="dn">${its.length}</span><span class="chev" aria-hidden="true">›</span></summary>` +
+        `<div class="dsub">` + its.map(i => `<a class="dl sub" href="#${i.id}"><span class="cnt">${i.count}</span><span><span class="dd">${esc(i.deva)}</span><span class="dt">${esc(T.tamil(i.deva))}${variants(i).length > 1 ? " · " + esc(t("nVar", variants(i).length)) : i.note ? " · " + esc(noteL(i.note)) : ""}</span></span></a>`).join("") +
+        `<a class="dl sub all" href="#g-${g.key}"><span class="dt">${esc(t("all"))}</span></a></div></details>`;
+    }).join("");
   }
   function markDrawer() {
     const h = location.hash || "#";
-    document.querySelectorAll("#drawer a.dl").forEach(a => a.classList.toggle("on", a.getAttribute("href") === h));
+    const vgOf = id => (byId(id) || {}).vg;
+    const g = (byId(h.slice(1)) || {}).group || (h.startsWith("#g-") ? h.slice(3) : "");
+    const dg = g && document.querySelector(`#dGroups details[data-g="${g}"]`); if (dg) dg.open = true;
+    document.querySelectorAll("#drawer a.dl").forEach(a => { const hr = a.getAttribute("href"); a.classList.toggle("on", hr === h || (a.classList.contains("sub") && vgOf(hr.slice(1)) && vgOf(hr.slice(1)) === vgOf(h.slice(1)))); });
   }
   function drawer(open) {
     $("drawer").classList.toggle("open", open); $("scrim").hidden = !open;
@@ -361,6 +382,10 @@
     if (meta.note && !/நாமங்கள்$/.test(meta.note)) notes.push(noteL(meta.note));
     if (d.svara && (sc === "taml" || sc === "latn")) notes.push(t("svaraNote"));
     $("rNote").hidden = false; $("rNote").textContent = notes.join(" · ");
+    const vs = meta.vg ? variants(meta) : [];
+    $("rVar").hidden = vs.length < 2;
+    $("rVar").innerHTML = vs.length < 2 ? "" : `<span class="vl">${esc(t("paatha"))}:</span>` + vs.map(v =>
+      `<a class="chip" href="#${v.id}" ${v.id === d.id ? 'aria-current="true"' : ""}>${esc(noteL(v.note))}</a>`).join("");
     document.body.classList.toggle("svara", !!d.svara);
     const curI = prefs.cur[d.id];
     let n = 0, h = ""; flat = [];
