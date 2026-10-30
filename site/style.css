@@ -362,3 +362,9 @@ body.en .pvedic .vl{font-family:var(--ui)}
 .gshloka{margin:14px auto 0;max-width:34rem;font-family:var(--script);font-size:1.15rem;line-height:1.8;color:var(--kumkum);display:flex;flex-direction:column;align-items:center;text-align:center}
 .gshloka span{overflow-wrap:anywhere}
 .guru + .mangala{margin-top:14px}
+/* Grantha: break lines only between words (the browser otherwise breaks inside words), and a little heavier — the font is thin */
+html[data-script="gran"] body{word-break:keep-all}
+html[data-script="gran"] :is(.names .x,.blk-shloka,.blk-para,.blk-head,.blk-end,.mangala,.gshloka,.aname,.rhead h1,.pverse,.pprose,.poffer,.plist,.steps .chip,.atop #aTitle){-webkit-text-stroke:.35px currentColor;overflow-wrap:break-word}
+html[data-script="gran"] :is(.blk-shloka p,.blk-para p,.mangala span,.gshloka span){overflow-wrap:break-word}
+.gran,.card .g{-webkit-text-stroke:.3px currentColor;word-break:keep-all}
+.nw{display:inline-block;max-width:100%;text-indent:0}

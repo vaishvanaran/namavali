@@ -4,7 +4,7 @@
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const FONT = { deva: "var(--deva)", taml: "var(--tamil)", gran: "var(--gran)", latn: "var(--latn)" };
   const CONV = { deva: s => s, taml: T.tamil, gran: T.grantha, latn: T.iast };
-  const VERSION = "2026.10.30w";
+  const VERSION = "2026.10.30x";
   const KINDS = [
     { k: "108", deva: "अष्टोत्तरशतनामावलिः", ta: "அஷ்டோத்தரம்", en: "Ashtottaram", sub: { ta: "108 நாமங்கள்", en: "108 names" } },
     { k: "300", deva: "त्रिशतीनामावलिः", ta: "த்ரிஶதீ", en: "Trishati", sub: { ta: "300 நாமங்கள்", en: "300 names" } },
@@ -16,7 +16,7 @@
       vidhana: "விதான பூஜை", suktaOn: n => n, glossTitle: "தமிழ் பெயர்", today: "இன்று", upcoming: "வரும் நாட்கள்", pujas: "பூஜை · வ்ரதம்", tagline: "பூஜை · வ்ரதம் · அர்ச்சனை", archanaH: "அர்ச்சனை · நாமாவளிகள்", backToPuja: t => `← ${t} பூஜைக்குத் திரும்பு`,
       openNamavali: "நாமாவளியைத் திற", steps: "படிகள்", nParts: n => `${n} படிகள்`,
       appName: "பூஜாநிதி", menu: "பட்டியல்", close: "மூடு", home: "முகப்பு", fav: "அடிக்கடி படிப்பவை", namavalis: "நாமாவளிகள்",
-      devatas: "தேவதைகள்", settings: "அமைப்பு", about: "இந்த ஆப் பற்றி", aboutThanks: "இந்த ஆப் பற்றி · நன்றி",
+      devatas: "தேவதைகள்", settings: "அமைப்பு", thAuto: "தானாக", thLight: "பகல்", thDark: "இரவு", about: "இந்த ஆப் பற்றி", aboutThanks: "இந்த ஆப் பற்றி · நன்றி",
       search: "நாமாவளியைத் தேடுக — लक्ष्मी · லக்ஷ்மீ · lakshmi", searchLabel: "தேடல்", install: "ஆப்பாக நிறுவு", all: "எல்லாம் →",
       recent: "சமீபத்தில் படித்தவை", backHome: "← முகப்பு", backNamavalis: "← நாமாவளிகள்",
       favEmpty: 'அடிக்கடி படிக்கும் நாமாவளிகளில் உள்ள <b class="star">☆</b> குறியைத் தொட்டால் அவை இங்கே முதலிலேயே வரும்.',
@@ -36,7 +36,7 @@
       vidhana: "Vidhana puja", suktaOn: n => n, glossTitle: "Name", today: "Today", upcoming: "Coming up", pujas: "Puja · Vrata", tagline: "Puja · Vrata · Archana", archanaH: "Archana · Namavalis", backToPuja: t => `← Back to ${t}`,
       openNamavali: "Open namavali", steps: "Steps", nParts: n => `${n} steps`,
       appName: "Pujanidhi", menu: "Menu", close: "Close", home: "Home", fav: "Favourites", namavalis: "Namavalis",
-      devatas: "Devatas", settings: "Settings", about: "About this app", aboutThanks: "About · Thanks",
+      devatas: "Devatas", settings: "Settings", thAuto: "Auto", thLight: "Light", thDark: "Dark", about: "About this app", aboutThanks: "About · Thanks",
       search: "Search — lakshmi · लक्ष्मी · லக்ஷ்மீ", searchLabel: "Search", install: "Install app", all: "All →",
       recent: "Recently read", backHome: "← Home", backNamavalis: "← Namavalis",
       favEmpty: 'Tap the <b class="star">☆</b> on any namavali you read often and it will appear here first.',
@@ -60,7 +60,7 @@
   const GURU_SHLOKA = ["कामाक्षीकरुणारूपं कामकोटिजगद्गुरुम् ।", "चिन्मूर्तिं कलये चित्ते शङ्कराचार्यमव्ययम् ॥"];
   const MANGALA = ["शुक्लाम्बरधरं विष्णुं शशिवर्णं चतुर्भुजम् ।", "प्रसन्नवदनं ध्यायेत् सर्वविघ्नोपशान्तये ॥"];
 
-  let prefs = { script: "taml", omEach: false, fs: 1.45, kind: "", cur: {}, recent: [], fav: [] };
+  let prefs = { theme: "auto", script: "taml", omEach: false, fs: 1.45, kind: "", cur: {}, recent: [], fav: [] };
   try { Object.assign(prefs, JSON.parse(localStorage.getItem("nv-prefs") || "{}")); } catch (e) {}
   if (!Array.isArray(prefs.recent)) prefs.recent = [];
   if (!Array.isArray(prefs.fav)) prefs.fav = [];
@@ -93,9 +93,32 @@
   }
   const byId = id => INDEX.items.find(i => i.id === id);
 
+  // Grantha: browsers break lines anywhere inside Grantha words; wrap each word so lines break only at spaces
+  const GRAN_RE = /[\u{11300}-\u{1137F}]/u;
+  let granObs = null;
+  function granWrap(root) {
+    const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, { acceptNode: n => (n.parentNode && !n.parentNode.closest(".nw,input,textarea,script,style") && GRAN_RE.test(n.data)) ? 1 : 2 });
+    const list = []; while (w.nextNode()) list.push(w.currentNode);
+    list.forEach(n => {
+      const f = document.createDocumentFragment();
+      n.data.replace(/[ \t]+(?=[।॥|])/g, "\u00a0").split(/([ \t\n\r]+)/).forEach(p => { if (!p) return; if (/^[ \t\n\r]+$/.test(p) || !GRAN_RE.test(p)) f.append(p); else { const s = document.createElement("span"); s.className = "nw"; s.textContent = p; f.append(s); } });
+      n.replaceWith(f);
+    });
+  }
+  function granWatch() {
+    if (prefs.script === "gran") {
+      granWrap(document.body);
+      if (!granObs) { granObs = new MutationObserver(ms => { granObs.disconnect(); ms.forEach(m => m.addedNodes.forEach(x => granWrap(x.nodeType === 1 ? x : x.parentNode || document.body))); granObs.observe(document.body, { childList: true, subtree: true, characterData: true }); }); }
+      granObs.observe(document.body, { childList: true, subtree: true, characterData: true });
+    } else if (granObs) { granObs.disconnect(); }
+  }
   function applyPrefs() {
     const r = document.documentElement.style;
     r.setProperty("--script", FONT[prefs.script]);
+    document.documentElement.dataset.script = prefs.script;
+    granWatch();
+    if (prefs.theme === "light" || prefs.theme === "dark") document.documentElement.dataset.theme = prefs.theme; else delete document.documentElement.dataset.theme;
+    document.querySelectorAll("#themeSeg button").forEach(b => b.setAttribute("aria-pressed", b.dataset.th === (prefs.theme || "auto")));
     r.setProperty("--fs", prefs.fs + "rem");
     document.querySelectorAll("#scripts button").forEach(b => b.setAttribute("aria-pressed", b.dataset.s === prefs.script));
     $("omBtn").setAttribute("aria-pressed", prefs.omEach);
@@ -514,6 +537,7 @@
   $("setupLang").onclick = e => { const b = e.target.closest("button"); if (!b) return; prefs.lang = b.dataset.l; if (!prefs.scriptChosen) prefs.script = b.dataset.l === "en" ? "latn" : "taml"; applyPrefs(); applyLang(); paintSetup(); };
   $("setupScript").onclick = e => { const b = e.target.closest("button"); if (!b) return; prefs.script = b.dataset.s; prefs.scriptChosen = true; applyPrefs(); paintSetup(); };
   $("setupGo").onclick = () => { if (!prefs.lang) return; prefs.setupDone = true; save(); $("setup").hidden = true; document.body.classList.remove("noscroll"); rerenderAll(); };
+  $("themeSeg").onclick = e => { const b = e.target.closest("button"); if (b) { prefs.theme = b.dataset.th; save(); applyPrefs(); } };
   $("langSeg").onclick = e => { const b = e.target.closest("button"); if (b) setLang(b.dataset.l); };
 
   /* ---------- events ---------- */
