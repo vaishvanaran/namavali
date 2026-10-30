@@ -9,6 +9,7 @@ OUT = pathlib.Path(__file__).parent.parent / 'site' / 'data'
 OUT.mkdir(parents=True, exist_ok=True)
 SRC = {
   'stotrasamhita': {'ta': 'ஸ்தோத்ர ஸம்ஹிதா — நாமாவளீ மஞ்ஜரீ', 'en': 'StotraSamhita — Nāmāvalī-mañjarī', 'url': 'https://stotrasamhita.github.io/'},
+  'kamakoti-1943': {'ta': 'ஶ்ரீவிஷ்ணு ஸஹஸ்ரநாம ஸ்தோத்ரம் — ஶ்ரீகாமகோடி கோஶஸ்தானம், 1943', 'en': 'Śrī Viṣṇu Sahasranāma Stotram — Śrī Kāmakoṭi Kośasthānam, 1943'},
   'yogesha': {'ta': 'திருவிடைமருதூர் யோகேஶ ஶர்மா', 'en': 'Thiruvidaimarudur Yogeśa Śarmā'},
 }
 # order of lists inside a group: text lists are placed after these ids
@@ -71,27 +72,39 @@ for mem in vg.values():
     for it in mem:
         it['vg'] = mem[0]['id']
         if len(mem) > 1 and not it['note']: it['note'] = 'ப்ரஸித்த பாடம்'
-# mūla stotra beside a namavali: content/stotra/<namavali id>.txt  ('## head', ': prose', verses separated by blank lines)
+# stotras: content/stotra/<id>.txt — headers title/ta/en/group[/namavali/order/note], then
+# '## head', ': prose', verses separated by blank lines. 'namavali:' links it to a namavali's stotra tab.
 STO = pathlib.Path(__file__).parent.parent / 'content' / 'stotra'
 (OUT / 'stotra').mkdir(exist_ok=True)
 ids = {i['id']: i for i in index['items']}
+gkeys = [g[0] for g in GROUPS]
+stotras = []
 for f in sorted(STO.glob('*.txt')):
-    if f.stem not in ids: sys.exit(f'stotra {f.name}: no namavali with that id')
     head, blocks, buf = {}, [], []
     L = f.read_text(encoding='utf-8').split('\n'); i = 0
     while i < len(L) and re.match(r'^[a-z_]+:\s', L[i]):
         k, v = L[i].split(':', 1); head[k] = v.strip(); i += 1
+    for k in ('title', 'ta', 'en', 'group'):
+        if k not in head: sys.exit(f'stotra {f.name}: header {k}: missing')
+    if head['group'] not in gkeys: sys.exit(f'stotra {f.name}: unknown group {head["group"]}')
+    nv = head.get('namavali', '')
+    if nv and nv not in ids: sys.exit(f'stotra {f.name}: no namavali {nv}')
     def flush():
         if buf: blocks.append({'t': 'shloka', 'x': buf[:]}); buf.clear()
     for ln in L[i:]:
-        s = ln.strip()
-        if not s: flush(); continue
-        if s.startswith('## '): flush(); blocks.append({'t': 'head', 'x': s[3:]})
-        elif s.startswith(': '): flush(); blocks.append({'t': 'para', 'x': [s[2:]]})
-        else: buf.append(s)
+        s_ = ln.strip()
+        if not s_: flush(); continue
+        if s_.startswith('## '): flush(); blocks.append({'t': 'head', 'x': s_[3:]})
+        elif s_.startswith(': '): flush(); blocks.append({'t': 'para', 'x': [s_[2:]]})
+        else: buf.append(s_)
     flush()
-    (OUT / 'stotra' / f'{f.stem}.json').write_text(json.dumps({'id': f.stem, 'title': head.get('title', ''), 'blocks': blocks}, ensure_ascii=False, separators=(',', ':')))
-    ids[f.stem]['st'] = 1
+    (OUT / 'stotra' / f'{f.stem}.json').write_text(json.dumps({'id': f.stem, 'title': head['title'], 'blocks': blocks}, ensure_ascii=False, separators=(',', ':')))
+    stotras.append({'id': f.stem, 'title': head['title'], 'ta': head['ta'], 'en': head['en'], 'group': head['group'],
+                    'namavali': nv, 'note': head.get('note', ''), 'order': int(head.get('order', 500)),
+                    'verses': sum(1 for b in blocks if b['t'] == 'shloka')})
+    if nv: ids[nv]['st'] = f.stem
+stotras.sort(key=lambda x: (gkeys.index(x['group']), x['order'], x['id']))
+(OUT / 'stotras.json').write_text(json.dumps(stotras, ensure_ascii=False, separators=(',', ':')))
 index['sources'] = SRC
 (OUT / 'index.json').write_text(json.dumps(index, ensure_ascii=False, separators=(',', ':')))
 print(len(index['items']), 'lists;', sum(i['count'] for i in index['items']), 'names')

@@ -4,7 +4,7 @@
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const FONT = { deva: "var(--deva)", taml: "var(--tamil)", gran: "var(--gran)", latn: "var(--latn)" };
   const CONV = { deva: s => s, taml: T.tamil, gran: T.grantha, latn: T.iast };
-  const VERSION = "2026.10.30z";
+  const VERSION = "2026.10.31a";
   const KINDS = [
     { k: "108", deva: "अष्टोत्तरशतनामावलिः", ta: "அஷ்டோத்தரம்", en: "Ashtottaram", sub: { ta: "108 நாமங்கள்", en: "108 names" } },
     { k: "300", deva: "त्रिशतीनामावलिः", ta: "த்ரிஶதீ", en: "Trishati", sub: { ta: "300 நாமங்கள்", en: "300 names" } },
@@ -25,7 +25,7 @@
       tapHint: "ஒரு நாமத்தைத் தொட்டால் அது குறிக்கப்படும். பூஜையில் எங்கே இருக்கிறோம் என்று தெரியும்.",
       archana: "அர்ச்சனை", archanaTitle: "அர்ச்சனை — ஒவ்வொரு நாமமாக", omTitle: "ஒவ்வொரு நாமத்துக்கும் ஓம்",
       smaller: "எழுத்து சிறிதாக", larger: "எழுத்து பெரிதாக", prev: "← முன்", next: "அடுத்து →", done: "நிறைவு ✓", tapNext: "பெயரைத் தொட்டால் அடுத்தது",
-      nVar: n => `${n} பாடங்கள்`, paatha: "பாடம்", mNama: "நாமாவளி", mStotra: "ஸ்தோத்ரம்", veda: "வேத மந்த்ரங்கள்", yajur: "க்ருஷ்ண யஜுர்வேதம்", sama: "ஸாமவேதம்",
+      nVar: n => `${n} பாடங்கள்`, paatha: "பாடம்", stotras: "ஸ்தோத்ரங்கள்", toNama: "நாமாவளி", toSto: "ஸ்தோத்ரம்", nVerses: n => `${n} ஶ்லோகங்கள்`, mNama: "நாமாவளி", mStotra: "ஸ்தோத்ரம்", veda: "வேத மந்த்ரங்கள்", yajur: "க்ருஷ்ண யஜுர்வேதம்", sama: "ஸாமவேதம்",
       names: n => `${n} நாமங்கள்`, nNamavalis: n => `${n} நாமாவளிகள்`, notFound: q => `“${q}” — எதுவும் கிடைக்கவில்லை.`,
       loadFail: "ஏற்ற முடியவில்லை. இணைய இணைப்பைச் சரிபார்க்கவும்.", listFail: "பட்டியலை ஏற்ற முடியவில்லை.",
       svaraNote: "ஸ்வரக் குறிகள் தேவநாகரி, க்ரந்தத்தில் மட்டும் காட்டப்படும்.", version: "பதிப்பு",
@@ -45,7 +45,7 @@
       tapHint: "Tap a name to mark it, so you keep your place during the puja.",
       archana: "Archana", archanaTitle: "Archana — one name at a time", omTitle: "Om before every name",
       smaller: "Smaller text", larger: "Larger text", prev: "← Back", next: "Next →", done: "Done ✓", tapNext: "Tap the name for the next one",
-      nVar: n => `${n} versions`, paatha: "Version", mNama: "Nāmāvalī", mStotra: "Stotram", veda: "Veda mantras", yajur: "Krishna Yajurveda", sama: "Samaveda",
+      nVar: n => `${n} versions`, paatha: "Version", stotras: "Stotras", toNama: "Nāmāvalī", toSto: "Stotram", nVerses: n => `${n} verses`, mNama: "Nāmāvalī", mStotra: "Stotram", veda: "Veda mantras", yajur: "Krishna Yajurveda", sama: "Samaveda",
       names: n => `${n} names`, nNamavalis: n => `${n} namavalis`, notFound: q => `Nothing found for “${q}”.`,
       loadFail: "Could not load. Check your internet connection.", listFail: "Could not load the list.",
       svaraNote: "Svara marks are shown only in Devanagari and Grantha.", version: "Version",
@@ -56,7 +56,7 @@
   const NOTE_EN = { "கணேச புராணம்": "Ganesha Purana", "ஸ்காந்தம்": "Skanda Purana", "ஸ்வரத்துடன்": "with svaras", "216 நாமங்கள்": "216 names",
     "க்ஷேத்ர நாமங்கள்": "sacred places", "பத்ம புராணம்": "Padma Purana", "ராம ரஹஸ்யம்": "Rama Rahasya", "100 நாமங்கள்": "100 names",
     "பாடம் 2": "version 2", "வராஹ புராணம்": "Varaha Purana", "27 நாமங்கள்": "27 names", "ஆனந்த ராமாயணம்": "Ananda Ramayana",
-    "மஹாபாரதம்": "Mahabharata", "மஹாபாகவதம்": "Mahabhagavata", "ப்ரஸித்த பாடம்": "common version", "லிங்க புராணம்": "Linga Purana", "ருத்ரயாமளம்": "Rudrayamala", "ஸுப்ரஹ்மண்ய ஶாஸ்த்ரிகள்": "by Subrahmanya Shastri", "10 நாமங்கள்": "10 names", "8 நாமங்கள்": "8 names", "மஹாஸிம்ஹாதி": "Mahāsiṃhādi", "புஷ்கராக்ஷாதி": "Puṣkarākṣādi", "த்ரிபுரா ரஹஸ்யம்": "Tripura Rahasya" };
+    "மஹாபாரதம்": "Mahabharata", "மஹாபாகவதம்": "Mahabhagavata", "ப்ரஸித்த பாடம்": "common version", "லிங்க புராணம்": "Linga Purana", "ருத்ரயாமளம்": "Rudrayamala", "ஸுப்ரஹ்மண்ய ஶாஸ்த்ரிகள்": "by Subrahmanya Shastri", "10 நாமங்கள்": "10 names", "8 நாமங்கள்": "8 names", "மஹாஸிம்ஹாதி": "Mahāsiṃhādi", "புஷ்கராக்ஷாதி": "Puṣkarākṣādi", "த்ரிபுரா ரஹஸ்யம்": "Tripura Rahasya", "ஶ்ரீஶங்கரபகவத்பாதர்களுடைய பாஷ்யத்தை அனுசரித்த பாடம்": "the reading followed in Śrī Śaṅkara Bhagavatpāda’s bhāṣya" };
   const GURU_SHLOKA = ["कामाक्षीकरुणारूपं कामकोटिजगद्गुरुम् ।", "चिन्मूर्तिं कलये चित्ते शङ्कराचार्यमव्ययम् ॥"];
   const MANGALA = ["शुक्लाम्बरधरं विष्णुं शशिवर्णं चतुर्भुजम् ।", "प्रसन्नवदनं ध्यायेत् सर्वविघ्नोपशान्तये ॥"];
 
@@ -67,7 +67,7 @@
   if (prefs.sukta === true) { prefs.suktaOn = { "purusha-sukta-vidhana": true }; delete prefs.sukta; }
   const save = () => { try { localStorage.setItem("nv-prefs", JSON.stringify(prefs)); } catch (e) {} };
 
-  let GLOSS = {}, DAYS = null, INDEX = null, PUJAS = [], current = null, view = "home", groupKey = null, pujaDoc = null;
+  let GLOSS = {}, DAYS = null, INDEX = null, PUJAS = [], STOTRAS = [], stoDoc = null, current = null, view = "home", groupKey = null, pujaDoc = null;
   const docs = {};
   const tr = (s, sc = prefs.script) => {
     const out = CONV[sc](s);
@@ -180,7 +180,7 @@
     $("favHome").innerHTML = favs.length
       ? `<div class="grid">${favs.slice(0, 6).map(favCard).join("")}</div>`
       : `<p class="hint favempty">${t("favEmpty")}</p>`;
-    const rec = prefs.recent.map(id => id.startsWith("p-") ? (p => p && { id, deva: p.title, en: p.en, ta: p.ta, count: "" })(PUJAS.find(p => "p-" + p.id === id)) : byId(id)).filter(Boolean);
+    const rec = prefs.recent.map(id => id.startsWith("s-") ? (x => x && { id, deva: x.title, en: x.en, ta: x.ta, count: "" })(STOTRAS.find(x => "s-" + x.id === id)) : id.startsWith("p-") ? (p => p && { id, deva: p.title, en: p.en, ta: p.ta, count: "" })(PUJAS.find(p => "p-" + p.id === id)) : byId(id)).filter(Boolean);
     $("recentBox").hidden = !!raw || !rec.length;
     $("recent").innerHTML = rec.map(it => `<a class="chip" href="#${it.id}"><span class="d">${esc(it.deva)}</span><span class="t">${esc(L() === "en" ? it.en : (it.ta || T.tamil(it.deva)))}</span>${it.count ? `<span class="pill">${it.count}</span>` : ""}</a>`).join("");
     if (raw) {
@@ -269,6 +269,13 @@
     $("dVidhana").innerHTML = PUJAS.filter(p => p.kind === "vidhana").map(p => `<a class="dl" href="#p-${p.id}"><span class="sym xs">${window.symbolSVG(p.deity)}</span><span><span class="dd">${esc(p.title)}</span><span class="dt">${esc(pujaName(p))}</span></span></a>`).join("");
     $("dVeda").innerHTML = PUJAS.filter(p => p.kind === "veda").map(p => `<a class="dl" href="#p-${p.id}"><span class="sym xs">${window.symbolSVG(p.deity)}</span><span><span class="dd">${esc(p.title)}</span><span class="dt">${esc(pujaName(p))}</span></span></a>`).join("");
     $("dPujas").innerHTML = PUJAS.filter(p => !p.kind || p.kind === "common").map(p => `<a class="dl" href="#p-${p.id}"><span class="sym xs">${window.symbolSVG(p.deity)}</span><span><span class="dd">${esc(p.title)}</span><span class="dt">${esc(pujaName(p))}</span></span></a>`).join("");
+    const sgs = INDEX.groups.filter(g => STOTRAS.some(x => x.group === g.key));
+    $("dStotraSec").hidden = !STOTRAS.length;
+    $("dStotra").innerHTML = sgs.map(g => {
+      const xs = STOTRAS.filter(x => x.group === g.key);
+      return `<details class="dg ds" data-g="${g.key}"><summary class="dl gsum"><span class="sym xs">${window.symbolSVG(g.key)}</span><span><span class="dd">${esc(g.deva)}</span><span class="dt">${esc(gName(g))}</span></span><span class="dn">${xs.length}</span><span class="chev" aria-hidden="true">›</span></summary><div class="dsub">` +
+        xs.map(x => `<a class="dl sub" href="#s-${x.id}"><span class="cnt">${x.verses}</span><span><span class="dd">${esc(x.title)}</span><span class="dt">${esc(L() === "en" ? x.en : x.ta)}</span></span></a>`).join("") + `</div></details>`;
+    }).join("");
     // namavalis: kind (108 / 300 / 1000) → devata → that devata's lists of this kind only
     const subRow = i => `<a class="dl sub" href="#${i.id}"><span class="cnt">${i.count}</span><span><span class="dd">${esc(i.deva)}</span><span class="dt">${esc(T.tamil(i.deva))}${variants(i).length > 1 ? " · " + esc(t("nVar", variants(i).length)) : i.note ? " · " + esc(noteL(i.note)) : ""}</span></span></a>`;
     $("dKinds").innerHTML = KINDS.map(K => {
@@ -289,6 +296,7 @@
     const k = (byId(h.slice(1)) || {}).kind || (h.startsWith("#k-") ? h.slice(3) : "");
     if (k) { const dk = document.querySelector(`#dKinds details.dk[data-k="${k}"]`); if (dk) dk.open = true;
       const dg = g && document.querySelector(`#dKinds details[data-k="${k}"][data-g="${g}"]`); if (dg) dg.open = true; }
+    if (h.startsWith("#s-")) { const x = STOTRAS.find(x => x.id === h.slice(3)); const dg = x && document.querySelector(`#dStotra details[data-g="${x.group}"]`); if (dg) dg.open = true; }
     document.querySelectorAll("#drawer a.dl").forEach(a => { const hr = a.getAttribute("href"); a.classList.toggle("on", hr === h || (a.classList.contains("sub") && vgOf(hr.slice(1)) && vgOf(hr.slice(1)) === vgOf(h.slice(1)))); });
   }
   function drawer(open) {
@@ -301,8 +309,7 @@
   const pdocs = {};
   async function loadPuja(id) {
     if (pdocs[id]) return pdocs[id];
-    const r = await fetch(`data/puja/${id}.json`); if (!r.ok) throw new Error(r.status);
-    return (pdocs[id] = await r.json());
+    return (pdocs[id] = await getJSON(`data/puja/${id}.json`));
   }
   function blockHTML(b) {
     switch (b.t) {
@@ -388,15 +395,24 @@
     clearTimeout(scrollSaveT); scrollSaveT = setTimeout(() => { if (pujaDoc) { prefs.pscroll = prefs.pscroll || {}; prefs.pscroll[pujaDoc.id] = Math.round(scrollY); save(); } }, 400);
   }, { passive: true });
 
+  /* data: packed .dat on the published site (zlib + xor), plain .json while developing */
+  const PK = new TextEncoder().encode("pujanidhi:nidhishvara-shrautinah");
+  async function getJSON(path) {
+    const r = await fetch(path.replace(/\.json$/, ".dat"));
+    if (r.ok && !/text\/html/.test(r.headers.get("content-type") || "")) {
+      const u = new Uint8Array(await r.arrayBuffer());
+      for (let i = 0; i < u.length; i++) u[i] ^= PK[i % PK.length];
+      return JSON.parse(await new Response(new Blob([u]).stream().pipeThrough(new DecompressionStream("deflate"))).text());
+    }
+    const j = await fetch(path); if (!j.ok) throw new Error(j.status); return j.json();
+  }
   /* ---------- reader ---------- */
   async function loadDoc(id) {
     if (docs[id]) return docs[id];
-    const r = await fetch(`data/${id}.json`);
-    if (!r.ok) throw new Error(r.status);
-    return (docs[id] = await r.json());
+    return (docs[id] = await getJSON(`data/${id}.json`));
   }
   const stos = {};
-  async function loadSto(id) { if (stos[id]) return stos[id]; const r = await fetch(`data/stotra/${id}.json`); if (!r.ok) throw new Error(r.status); return (stos[id] = await r.json()); }
+  async function loadSto(id) { if (stos[id]) return stos[id]; return (stos[id] = await getJSON(`data/stotra/${id}.json`)); }
   const rMode = id => ((byId(id) || {}).st && !prefs.returnTo && (prefs.rmode || {})[id] === "s") ? "s" : "n";
   let flat = []; // names of the current doc, in order
   const nameHTML = (x, i, d) => {
@@ -405,6 +421,15 @@
   };
   const markHTML = l => esc(tr(l)).replace(/\[([^\]]+)\]/g, '<span class="mk">$1</span>');
   const blocksHTML = bl => bl.map(b => b.t === "head" ? `<div class="blk-head">${esc(tr(b.x))}</div>` : `<div class="blk-${b.t}">${b.x.map(l => `<p>${markHTML(l)}</p>`).join("")}</div>`).join("");
+  function renderStotra() {
+    const x = stoDoc && STOTRAS.find(s => s.id === stoDoc.id); if (!x) return;
+    $("sTitle").textContent = tr(x.title);
+    $("sAlt").innerHTML = ["deva", "taml", "gran", "latn"].filter(s => s !== prefs.script).map(s => `<span class="${s}">${esc(tr(x.title, s))}</span>`).join("");
+    const nv = x.namavali && byId(x.namavali);
+    $("sNote").textContent = [x.note ? noteL(x.note) : ""].filter(Boolean).join(" · "); $("sNote").hidden = !x.note;
+    $("sNama").hidden = !nv; if (nv) { $("sNama").href = "#" + nv.id; $("sNama").textContent = t("toNama") + " · " + tr(nv.deva) + " →"; }
+    $("sBody").innerHTML = blocksHTML(stoDoc.blocks);
+  }
   function renderReader() {
     const d = current; if (!d) return;
     const meta = byId(d.id) || {};
@@ -430,7 +455,7 @@
     if (view === "reader") $("archBtn").hidden = stoMode;
     if (stoMode) {
       const want = d.id;
-      loadSto(d.id).then(S => { if (!current || current.id !== want || rMode(want) !== "s") return; $("rBody").innerHTML = blocksHTML(S.blocks); })
+      loadSto(meta.st).then(S => { if (!current || current.id !== want || rMode(want) !== "s") return; $("rBody").innerHTML = blocksHTML(S.blocks); })
         .catch(() => { $("rBody").innerHTML = `<p class="empty">${t("loadFail")}</p>`; });
       flat = d.blocks.filter(b => b.t === "names").flatMap(b => b.x);
       return;
@@ -491,12 +516,12 @@
   }
   function show(v) {
     view = v;
-    ["home", "kind", "group", "fav", "puja", "reader", "about"].forEach(x => ($(x).hidden = x !== v));
-    $("rtools").hidden = v !== "reader" && v !== "puja";
+    ["home", "kind", "group", "fav", "puja", "reader", "stotra", "about"].forEach(x => ($(x).hidden = x !== v));
+    $("rtools").hidden = v !== "reader" && v !== "puja" && v !== "stotra";
     $("omBtn").hidden = v !== "reader"; $("archBtn").hidden = v !== "reader" || document.body.classList.contains("sto");
     if (v !== "puja") $("suktaBtns").innerHTML = "";
     if (v !== "reader" && !$("archana").hidden) closeArchana();
-    keepAwake(v === "reader" || v === "puja");
+    keepAwake(v === "reader" || v === "puja" || v === "stotra");
   }
   async function route() {
     const id = decodeURIComponent(location.hash.slice(1));
@@ -515,6 +540,12 @@
         window.scrollTo(0, back || 0); markStep();
       });
       return;
+    }
+    if (id.startsWith("s-") && STOTRAS.some(x => x.id === id.slice(2))) {
+      const sid = id.slice(2);
+      try { stoDoc = await loadSto(sid); } catch (e) { stoDoc = null; $("sBody").innerHTML = `<p class="empty">${t("loadFail")}</p>`; }
+      prefs.recent = [id, ...prefs.recent.filter(x => x !== id)].slice(0, 6); save();
+      markDrawer(); show("stotra"); renderStotra(); window.scrollTo(0, 0); return;
     }
     if (!byId(id) && prefs.returnTo) { delete prefs.returnTo; save(); }
     markDrawer();
@@ -538,7 +569,7 @@
     applyLang(); if (!INDEX) return;
     renderDrawer(); $("dFavN").textContent = prefs.fav.length || "";
     if (view === "home") renderHome(); else if (view === "kind") renderKind(); else if (view === "group") renderGroup();
-    else if (view === "fav") renderFav(); else if (view === "reader") { renderReader(); refreshStars(); } else if (view === "puja") { renderPuja(); refreshStars(); }
+    else if (view === "fav") renderFav(); else if (view === "reader") { renderReader(); refreshStars(); } else if (view === "puja") { renderPuja(); refreshStars(); } else if (view === "stotra") renderStotra();
   }
   function setLang(l) { prefs.lang = l; save(); rerenderAll(); }
   function paintSetup() {
@@ -558,7 +589,7 @@
   $("langSeg").onclick = e => { const b = e.target.closest("button"); if (b) setLang(b.dataset.l); };
 
   /* ---------- events ---------- */
-  $("scripts").onclick = e => { const b = e.target.closest("button"); if (!b) return; prefs.script = b.dataset.s; save(); applyPrefs(); if (view === "reader") renderReader(); if (view === "puja") renderPuja(); if (view === "home") renderHome(); };
+  $("scripts").onclick = e => { const b = e.target.closest("button"); if (!b) return; prefs.script = b.dataset.s; save(); applyPrefs(); if (view === "reader") renderReader(); if (view === "puja") renderPuja(); if (view === "stotra") renderStotra(); if (view === "home") renderHome(); };
   $("kJump").onclick = e => { const b = e.target.closest("button[data-g]"); if (!b) return; const el = $("sec-" + b.dataset.g); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + scrollY - $("kJump").offsetHeight - 70, behavior: "smooth" }); };
   $("omBtn").onclick = () => { prefs.omEach = !prefs.omEach; save(); applyPrefs(); renderReader(); };
   $("fsUp").onclick = () => { prefs.fs = Math.min(3.2, +(prefs.fs + 0.15).toFixed(2)); save(); applyPrefs(); };
@@ -626,6 +657,11 @@
   new ResizeObserver(setHdr).observe(document.querySelector(".bar")); setHdr();
   applyPrefs(); applyLang();
   if (!prefs.setupDone) openSetup();
-  Promise.all([fetch("data/index.json").then(r => r.json()), fetch("data/pujas.json").then(r => r.json()).catch(() => []), fetch("data/days.json").then(r => r.json()).catch(() => null), fetch("data/glossary.json").then(r => r.json()).catch(() => ({}))]).then(([j, pj, dy, gl]) => { INDEX = j; PUJAS = pj; DAYS = dy; GLOSS = gl; renderDrawer(); $("dFavN").textContent = prefs.fav.length || ""; route(); })
+  // no selecting or copying of the texts (search box excepted); screenshots remain possible
+  ["copy", "cut", "contextmenu", "selectstart", "dragstart"].forEach(ev => document.addEventListener(ev, e => {
+    const el = e.target && e.target.nodeType === 1 ? e.target : e.target && e.target.parentElement;
+    if (!(el && el.closest("input,textarea"))) e.preventDefault();
+  }));
+  Promise.all([getJSON("data/index.json"), getJSON("data/pujas.json").catch(() => []), getJSON("data/days.json").catch(() => null), getJSON("data/glossary.json").catch(() => ({})), getJSON("data/stotras.json").catch(() => [])]).then(([j, pj, dy, gl, st]) => { INDEX = j; PUJAS = pj; DAYS = dy; GLOSS = gl; STOTRAS = st; renderDrawer(); $("dFavN").textContent = prefs.fav.length || ""; route(); })
     .catch(() => ($("tiles").innerHTML = `<p class="empty">${t("listFail")}</p>`));
 })();

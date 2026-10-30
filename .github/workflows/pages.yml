@@ -23,6 +23,8 @@ jobs:
           python-version: "3.12"
       - name: Build pujas from content/ text files
         run: python3 tools/build_puja.py --strict
+      - name: Pack data files
+        run: python3 tools/pack.py
       - name: Refresh offline cache list
         run: python3 tools/make_sw.py
       - uses: actions/configure-pages@v5
