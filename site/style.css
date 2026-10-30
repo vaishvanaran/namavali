@@ -368,3 +368,7 @@ html[data-script="gran"] :is(.names .x,.blk-shloka,.blk-para,.blk-head,.blk-end,
 html[data-script="gran"] :is(.blk-shloka p,.blk-para p,.mangala span,.gshloka span){overflow-wrap:break-word}
 .gran,.card .g{-webkit-text-stroke:.3px currentColor;word-break:keep-all}
 .nw{display:inline-block;max-width:100%;text-indent:0}
+.rmode{margin-top:12px}
+.rmode button{font-size:1rem;padding:6px 16px}
+body.sto .hint{display:none}
+.mk{font-size:.7em;color:var(--muted,#8a7a6a);margin-inline-start:.4em;white-space:nowrap}

@@ -4,7 +4,7 @@
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const FONT = { deva: "var(--deva)", taml: "var(--tamil)", gran: "var(--gran)", latn: "var(--latn)" };
   const CONV = { deva: s => s, taml: T.tamil, gran: T.grantha, latn: T.iast };
-  const VERSION = "2026.10.30x";
+  const VERSION = "2026.10.30y";
   const KINDS = [
     { k: "108", deva: "अष्टोत्तरशतनामावलिः", ta: "அஷ்டோத்தரம்", en: "Ashtottaram", sub: { ta: "108 நாமங்கள்", en: "108 names" } },
     { k: "300", deva: "त्रिशतीनामावलिः", ta: "த்ரிஶதீ", en: "Trishati", sub: { ta: "300 நாமங்கள்", en: "300 names" } },
@@ -25,7 +25,7 @@
       tapHint: "ஒரு நாமத்தைத் தொட்டால் அது குறிக்கப்படும். பூஜையில் எங்கே இருக்கிறோம் என்று தெரியும்.",
       archana: "அர்ச்சனை", archanaTitle: "அர்ச்சனை — ஒவ்வொரு நாமமாக", omTitle: "ஒவ்வொரு நாமத்துக்கும் ஓம்",
       smaller: "எழுத்து சிறிதாக", larger: "எழுத்து பெரிதாக", prev: "← முன்", next: "அடுத்து →", done: "நிறைவு ✓", tapNext: "பெயரைத் தொட்டால் அடுத்தது",
-      nVar: n => `${n} பாடங்கள்`, paatha: "பாடம்", veda: "வேத மந்த்ரங்கள்", yajur: "க்ருஷ்ண யஜுர்வேதம்", sama: "ஸாமவேதம்",
+      nVar: n => `${n} பாடங்கள்`, paatha: "பாடம்", mNama: "நாமாவளி", mStotra: "ஸ்தோத்ரம்", veda: "வேத மந்த்ரங்கள்", yajur: "க்ருஷ்ண யஜுர்வேதம்", sama: "ஸாமவேதம்",
       names: n => `${n} நாமங்கள்`, nNamavalis: n => `${n} நாமாவளிகள்`, notFound: q => `“${q}” — எதுவும் கிடைக்கவில்லை.`,
       loadFail: "ஏற்ற முடியவில்லை. இணைய இணைப்பைச் சரிபார்க்கவும்.", listFail: "பட்டியலை ஏற்ற முடியவில்லை.",
       svaraNote: "ஸ்வரக் குறிகள் தேவநாகரி, க்ரந்தத்தில் மட்டும் காட்டப்படும்.", version: "பதிப்பு",
@@ -45,7 +45,7 @@
       tapHint: "Tap a name to mark it, so you keep your place during the puja.",
       archana: "Archana", archanaTitle: "Archana — one name at a time", omTitle: "Om before every name",
       smaller: "Smaller text", larger: "Larger text", prev: "← Back", next: "Next →", done: "Done ✓", tapNext: "Tap the name for the next one",
-      nVar: n => `${n} versions`, paatha: "Version", veda: "Veda mantras", yajur: "Krishna Yajurveda", sama: "Samaveda",
+      nVar: n => `${n} versions`, paatha: "Version", mNama: "Nāmāvalī", mStotra: "Stotram", veda: "Veda mantras", yajur: "Krishna Yajurveda", sama: "Samaveda",
       names: n => `${n} names`, nNamavalis: n => `${n} namavalis`, notFound: q => `Nothing found for “${q}”.`,
       loadFail: "Could not load. Check your internet connection.", listFail: "Could not load the list.",
       svaraNote: "Svara marks are shown only in Devanagari and Grantha.", version: "Version",
@@ -395,11 +395,16 @@
     if (!r.ok) throw new Error(r.status);
     return (docs[id] = await r.json());
   }
+  const stos = {};
+  async function loadSto(id) { if (stos[id]) return stos[id]; const r = await fetch(`data/stotra/${id}.json`); if (!r.ok) throw new Error(r.status); return (stos[id] = await r.json()); }
+  const rMode = id => ((byId(id) || {}).st && !prefs.returnTo && (prefs.rmode || {})[id] === "s") ? "s" : "n";
   let flat = []; // names of the current doc, in order
   const nameHTML = (x, i, d) => {
     const pre = (prefs.omEach && !/^(ॐ|ओं)/.test(x)) || (!d.svara && i === 0 && !/^(ॐ|ओं)/.test(x)) ? `<span class="om">${esc(tr("ॐ"))}</span> ` : "";
     return pre + esc(tr(x));
   };
+  const markHTML = l => esc(tr(l)).replace(/\[([^\]]+)\]/g, '<span class="mk">$1</span>');
+  const blocksHTML = bl => bl.map(b => b.t === "head" ? `<div class="blk-head">${esc(tr(b.x))}</div>` : `<div class="blk-${b.t}">${b.x.map(l => `<p>${markHTML(l)}</p>`).join("")}</div>`).join("");
   function renderReader() {
     const d = current; if (!d) return;
     const meta = byId(d.id) || {};
@@ -418,6 +423,18 @@
     $("rVar").innerHTML = vs.length < 2 ? "" : `<span class="vl">${esc(t("paatha"))}:</span>` + vs.map(v =>
       `<a class="chip" href="#${v.id}" ${v.id === d.id ? 'aria-current="true"' : ""}>${esc(noteL(v.note))}</a>`).join("");
     document.body.classList.toggle("svara", !!d.svara);
+    $("rMode").hidden = !meta.st;
+    $("rMode").innerHTML = meta.st ? `<button data-m="n" aria-pressed="${rMode(d.id) === "n"}">${esc(t("mNama"))}</button><button data-m="s" aria-pressed="${rMode(d.id) === "s"}">${esc(t("mStotra"))}</button>` : "";
+    const stoMode = rMode(d.id) === "s";
+    document.body.classList.toggle("sto", stoMode);
+    if (view === "reader") $("archBtn").hidden = stoMode;
+    if (stoMode) {
+      const want = d.id;
+      loadSto(d.id).then(S => { if (!current || current.id !== want || rMode(want) !== "s") return; $("rBody").innerHTML = blocksHTML(S.blocks); })
+        .catch(() => { $("rBody").innerHTML = `<p class="empty">${t("loadFail")}</p>`; });
+      flat = d.blocks.filter(b => b.t === "names").flatMap(b => b.x);
+      return;
+    }
     const curI = prefs.cur[d.id];
     let n = 0, h = ""; flat = [];
     for (const b of d.blocks) {
@@ -476,7 +493,7 @@
     view = v;
     ["home", "kind", "group", "fav", "puja", "reader", "about"].forEach(x => ($(x).hidden = x !== v));
     $("rtools").hidden = v !== "reader" && v !== "puja";
-    $("archBtn").hidden = $("omBtn").hidden = v !== "reader";
+    $("omBtn").hidden = v !== "reader"; $("archBtn").hidden = v !== "reader" || document.body.classList.contains("sto");
     if (v !== "puja") $("suktaBtns").innerHTML = "";
     if (v !== "reader" && !$("archana").hidden) closeArchana();
     keepAwake(v === "reader" || v === "puja");
@@ -555,6 +572,7 @@
     if (prefs.cur[current.id] === i) { delete prefs.cur[current.id]; save(); li.classList.remove("cur"); } else setCur(i);
   };
   $("archBtn").onclick = openArchana;
+  $("rMode").onclick = e => { const b = e.target.closest("button"); if (!b || !current) return; prefs.rmode = prefs.rmode || {}; prefs.rmode[current.id] = b.dataset.m; save(); renderReader(); };
   $("pSteps").onclick = e => { const b = e.target.closest("[data-step]"); if (!b) return; const el = $("part-" + b.dataset.step); window.scrollTo({ top: el.getBoundingClientRect().top + scrollY - $("pSteps").getBoundingClientRect().bottom + 2, behavior: "smooth" }); };
   $("pBody").onclick = e => {
     if (!pujaDoc) return;

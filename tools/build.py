@@ -71,6 +71,27 @@ for mem in vg.values():
     for it in mem:
         it['vg'] = mem[0]['id']
         if len(mem) > 1 and not it['note']: it['note'] = 'ப்ரஸித்த பாடம்'
+# mūla stotra beside a namavali: content/stotra/<namavali id>.txt  ('## head', ': prose', verses separated by blank lines)
+STO = pathlib.Path(__file__).parent.parent / 'content' / 'stotra'
+(OUT / 'stotra').mkdir(exist_ok=True)
+ids = {i['id']: i for i in index['items']}
+for f in sorted(STO.glob('*.txt')):
+    if f.stem not in ids: sys.exit(f'stotra {f.name}: no namavali with that id')
+    head, blocks, buf = {}, [], []
+    L = f.read_text(encoding='utf-8').split('\n'); i = 0
+    while i < len(L) and re.match(r'^[a-z_]+:\s', L[i]):
+        k, v = L[i].split(':', 1); head[k] = v.strip(); i += 1
+    def flush():
+        if buf: blocks.append({'t': 'shloka', 'x': buf[:]}); buf.clear()
+    for ln in L[i:]:
+        s = ln.strip()
+        if not s: flush(); continue
+        if s.startswith('## '): flush(); blocks.append({'t': 'head', 'x': s[3:]})
+        elif s.startswith(': '): flush(); blocks.append({'t': 'para', 'x': [s[2:]]})
+        else: buf.append(s)
+    flush()
+    (OUT / 'stotra' / f'{f.stem}.json').write_text(json.dumps({'id': f.stem, 'title': head.get('title', ''), 'blocks': blocks}, ensure_ascii=False, separators=(',', ':')))
+    ids[f.stem]['st'] = 1
 index['sources'] = SRC
 (OUT / 'index.json').write_text(json.dumps(index, ensure_ascii=False, separators=(',', ':')))
 print(len(index['items']), 'lists;', sum(i['count'] for i in index['items']), 'names')
