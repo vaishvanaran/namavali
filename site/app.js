@@ -4,7 +4,7 @@
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const FONT = { deva: "var(--deva)", taml: "var(--tamil)", gran: "var(--gran)", latn: "var(--latn)" };
   const CONV = { deva: s => s, taml: T.tamil, gran: T.grantha, latn: T.iast };
-  const VERSION = "2026.10.30";
+  const VERSION = "2026.10.30b";
   const KINDS = [
     { k: "108", deva: "अष्टोत्तरशतनामावलिः", ta: "அஷ்டோத்தரம்", en: "Ashtottaram", sub: { ta: "108 நாமங்கள்", en: "108 names" } },
     { k: "300", deva: "त्रिशतीनामावलिः", ta: "த்ரிஶதீ", en: "Trishati", sub: { ta: "300 நாமங்கள்", en: "300 names" } },
@@ -12,7 +12,9 @@
   ];
   const STR = {
     ta: {
-      appName: "நாமாவளி", menu: "பட்டியல்", close: "மூடு", home: "முகப்பு", fav: "அடிக்கடி படிப்பவை", namavalis: "நாமாவளிகள்",
+      pujas: "பூஜை · வ்ரதம்", tagline: "பூஜை · வ்ரதம் · அர்ச்சனை", archanaH: "அர்ச்சனை · நாமாவளிகள்", backToPuja: t => `← ${t} பூஜைக்குத் திரும்பு`,
+      openNamavali: "நாமாவளியைத் திற", steps: "படிகள்", nParts: n => `${n} படிகள்`,
+      appName: "பூஜாநிதி", menu: "பட்டியல்", close: "மூடு", home: "முகப்பு", fav: "அடிக்கடி படிப்பவை", namavalis: "நாமாவளிகள்",
       devatas: "தேவதைகள்", settings: "அமைப்பு", about: "இந்த ஆப் பற்றி", aboutThanks: "இந்த ஆப் பற்றி · நன்றி",
       search: "நாமாவளியைத் தேடுக — लक्ष्मी · லக்ஷ்மீ · lakshmi", searchLabel: "தேடல்", install: "ஆப்பாக நிறுவு", all: "எல்லாம் →",
       recent: "சமீபத்தில் படித்தவை", backHome: "← முகப்பு", backNamavalis: "← நாமாவளிகள்",
@@ -29,7 +31,9 @@
       setupScript: "நாமாவளியைப் படிக்கும் எழுத்து", setupNote: "இவற்றைப் பிறகு எப்போது வேண்டுமானாலும் மாற்றலாம்: எழுத்தை மேலே உள்ள பொத்தானிலும், மொழியை ☰ பட்டியலிலும்.", start: "தொடங்கு →",
     },
     en: {
-      appName: "Namavali", menu: "Menu", close: "Close", home: "Home", fav: "Favourites", namavalis: "Namavalis",
+      pujas: "Puja · Vrata", tagline: "Puja · Vrata · Archana", archanaH: "Archana · Namavalis", backToPuja: t => `← Back to ${t}`,
+      openNamavali: "Open namavali", steps: "Steps", nParts: n => `${n} steps`,
+      appName: "Pujanidhi", menu: "Menu", close: "Close", home: "Home", fav: "Favourites", namavalis: "Namavalis",
       devatas: "Devatas", settings: "Settings", about: "About this app", aboutThanks: "About · Thanks",
       search: "Search — lakshmi · लक्ष्मी · லக்ஷ்மீ", searchLabel: "Search", install: "Install app", all: "All →",
       recent: "Recently read", backHome: "← Home", backNamavalis: "← Namavalis",
@@ -58,7 +62,7 @@
   if (!Array.isArray(prefs.fav)) prefs.fav = [];
   const save = () => { try { localStorage.setItem("nv-prefs", JSON.stringify(prefs)); } catch (e) {} };
 
-  let INDEX = null, current = null, view = "home", groupKey = null;
+  let INDEX = null, PUJAS = [], current = null, view = "home", groupKey = null, pujaDoc = null;
   const docs = {};
   const tr = (s, sc = prefs.script) => {
     const out = CONV[sc](s);
@@ -103,21 +107,28 @@
     `<span class="pill k">${it.count} · ${kindLabel(it.kind)}</span>` +
     (it.note ? `<span class="pill">${esc(noteL(it.note))}</span>` : "") + `</span></a>`;
 
+  const pujaName = p => (L() === "en" ? p.en : p.ta);
+  const pujaCard = p =>
+    `<a class="card pcard" href="#p-${p.id}">${star("p-" + p.id)}<span class="sym sm">${window.symbolSVG(p.deity)}</span>` +
+    `<span class="d">${esc(p.title)}</span><span class="t">${esc(pujaName(p))}</span>` +
+    `<span class="e">${esc(L() === "en" ? p.when_en : p.when_ta)}</span></a>`;
+  const favCard = id => (id.startsWith("p-") ? (PUJAS.find(p => "p-" + p.id === id) ? pujaCard(PUJAS.find(p => "p-" + p.id === id)) : "") : (byId(id) ? card(byId(id)) : ""));
+
   /* ---------- home ---------- */
   function renderHome() {
     if (!INDEX) return;
     $("mangala").innerHTML = MANGALA.map(l => `<span>${esc(tr(l))}</span>`).join("");
     const raw = $("q").value.trim();
     $("tilesBox").hidden = !!raw; $("results").hidden = !raw;
-    const favs = prefs.fav.map(byId).filter(Boolean);
+    const favs = prefs.fav.filter(id => id.startsWith("p-") ? PUJAS.some(p => "p-" + p.id === id) : byId(id));
     $("favBox").hidden = !!raw;
     $("favMore").hidden = favs.length <= 6;
     $("favHome").innerHTML = favs.length
-      ? `<div class="grid">${favs.slice(0, 6).map(card).join("")}</div>`
+      ? `<div class="grid">${favs.slice(0, 6).map(favCard).join("")}</div>`
       : `<p class="hint favempty">${t("favEmpty")}</p>`;
-    const rec = prefs.recent.map(byId).filter(Boolean);
+    const rec = prefs.recent.map(id => id.startsWith("p-") ? (p => p && { id, deva: p.title, en: p.en, ta: p.ta, count: "" })(PUJAS.find(p => "p-" + p.id === id)) : byId(id)).filter(Boolean);
     $("recentBox").hidden = !!raw || !rec.length;
-    $("recent").innerHTML = rec.map(it => `<a class="chip" href="#${it.id}"><span class="d">${esc(it.deva)}</span><span class="t">${esc(L() === "en" ? it.en : T.tamil(it.deva))}</span><span class="pill">${it.count}</span></a>`).join("");
+    $("recent").innerHTML = rec.map(it => `<a class="chip" href="#${it.id}"><span class="d">${esc(it.deva)}</span><span class="t">${esc(L() === "en" ? it.en : (it.ta || T.tamil(it.deva)))}</span>${it.count ? `<span class="pill">${it.count}</span>` : ""}</a>`).join("");
     if (raw) {
       const q = raw.toLowerCase(), ql = T.looseLatin(raw);
       const hit = it => {
@@ -132,6 +143,7 @@
         : `<p class="empty">${esc(t("notFound", raw))}</p>`;
       return;
     }
+    $("pujaTiles").innerHTML = PUJAS.map(pujaCard).join("");
     $("tiles").innerHTML = KINDS.map(K => {
       const items = INDEX.items.filter(i => i.kind === K.k);
       const gs = INDEX.groups.filter(g => items.some(i => i.group === g.key)).map(gShort);
@@ -182,20 +194,21 @@
   function refreshStars() {
     document.querySelectorAll("[data-fav]").forEach(b => { const on = isFav(b.dataset.fav); b.setAttribute("aria-pressed", on); b.textContent = on ? "★" : "☆"; });
     if (current) { const on = isFav(current.id); $("rFav").setAttribute("aria-pressed", on); $("rFav").querySelector(".star").textContent = on ? "★" : "☆"; $("rFav").querySelector(".fl").textContent = on ? t("inFav") : t("addFav"); }
+    if (pujaDoc) { const on = isFav("p-" + pujaDoc.id); $("pFav").setAttribute("aria-pressed", on); $("pFav").querySelector(".star").textContent = on ? "★" : "☆"; $("pFav").querySelector(".fl").textContent = on ? t("inFav") : t("addFav"); }
     $("dFavN").textContent = prefs.fav.length || "";
     if (view === "fav") renderFav();
     if (view === "home") renderHome();
   }
   function renderFav() {
-    const favs = prefs.fav.map(byId).filter(Boolean);
-    $("favHint").hidden = !!favs.length && false;
-    $("favList").innerHTML = favs.map((it, i) =>
-      `<li><a class="card" href="#${it.id}">${four(it.deva, it.en)}<span class="meta"><span class="pill k">${it.count} · ${kindLabel(it.kind)}</span>${it.note ? `<span class="pill">${esc(noteL(it.note))}</span>` : ""}</span></a>` +
-      `<span class="ord"><button class="icon" data-up="${it.id}" ${i === 0 ? "disabled" : ""} aria-label="${t("up")}">↑</button><button class="icon" data-down="${it.id}" ${i === favs.length - 1 ? "disabled" : ""} aria-label="${t("down")}">↓</button><button class="icon" data-fav="${it.id}" aria-pressed="true" title="${t("remove")}">★</button></span></li>`).join("");
+    const favs = prefs.fav.filter(id => id.startsWith("p-") ? PUJAS.some(p => "p-" + p.id === id) : byId(id));
+    $("favList").innerHTML = favs.map((id, i) =>
+      `<li>${favCard(id).replace(/<button class="cstar"[^>]*>.<\/button>/, "")}` +
+      `<span class="ord"><button class="icon" data-up="${id}" ${i === 0 ? "disabled" : ""} aria-label="${t("up")}">↑</button><button class="icon" data-down="${id}" ${i === favs.length - 1 ? "disabled" : ""} aria-label="${t("down")}">↓</button><button class="icon" data-fav="${id}" aria-pressed="true" title="${t("remove")}">★</button></span></li>`).join("");
   }
 
   /* ---------- side menu ---------- */
   function renderDrawer() {
+    $("dPujas").innerHTML = PUJAS.map(p => `<a class="dl" href="#p-${p.id}"><span class="sym xs">${window.symbolSVG(p.deity)}</span><span><span class="dd">${esc(p.title)}</span><span class="dt">${esc(pujaName(p))}</span></span></a>`).join("");
     $("dKinds").innerHTML = KINDS.map(K => `<a class="dl" href="#k-${K.k}"><span class="sym xs num">${K.k}</span><span><span class="dd">${esc(K.deva)}</span><span class="dt">${esc(K[L()])}</span></span></a>`).join("");
     $("dGroups").innerHTML = INDEX.groups.map(g => `<a class="dl" href="#g-${g.key}"><span class="sym xs">${window.symbolSVG(g.key)}</span><span><span class="dd">${esc(g.deva)}</span><span class="dt">${esc(gName(g))}</span></span><span class="dn">${INDEX.items.filter(i => i.group === g.key).length}</span></a>`).join("");
   }
@@ -208,6 +221,62 @@
     $("drawer").setAttribute("aria-hidden", !open); $("menuBtn").setAttribute("aria-expanded", open);
     document.body.classList.toggle("noscroll", open);
   }
+
+  /* ---------- puja reader ---------- */
+  const pdocs = {};
+  async function loadPuja(id) {
+    if (pdocs[id]) return pdocs[id];
+    const r = await fetch(`data/puja/${id}.json`); if (!r.ok) throw new Error(r.status);
+    return (pdocs[id] = await r.json());
+  }
+  function blockHTML(b) {
+    switch (b.t) {
+      case "h3": return `<h4 class="ph3">${esc(tr(b.x))}</h4>`;
+      case "verse": return `<div class="pverse">${b.x.map(l => `<p>${esc(tr(l))}</p>`).join("")}</div>`;
+      case "prose": return `<div class="pprose">${b.x.map(l => `<p>${esc(tr(l))}</p>`).join("")}</div>`;
+      case "offer": return `<div class="poffer">${b.x.map(l => `<p>${esc(tr(l))}</p>`).join("")}</div>`;
+      case "rubric": {
+        const tl = L() === "en" ? b.en : b.ta;
+        return `<div class="prubric">${b.sa ? `<span class="rs">(${esc(tr(b.sa))})</span>` : ""}${tl ? `<span class="rt">${esc(tl)}</span>` : ""}</div>`;
+      }
+      case "note": return `<div class="pnote">${esc(L() === "en" ? b.en || b.ta : b.ta)}</div>`;
+      case "list": {
+        const two = b.x.some(r => r.length > 1);
+        return `<ol class="plist${two ? " two" : ""}">` + b.x.map(r => `<li><span class="a">${esc(tr(r[0]))}</span>${r[1] ? `<span class="b">${esc(tr(r[1]))}</span>` : ""}</li>`).join("") + `</ol>`;
+      }
+      case "namavali": return `<div class="plinks">` + b.ids.map(id => { const it = byId(id); if (!it) return ""; return `<button class="nlink" data-nv="${id}"><span class="sym sm num">${it.count}</span><span class="nl"><span class="d">${esc(it.deva)}</span><span class="t">${esc(tr(it.title))}</span></span><span class="go">→</span></button>`; }).join("") + `</div>`;
+    }
+    return "";
+  }
+  function renderPuja() {
+    const d = pujaDoc; if (!d) return;
+    $("pTitle").textContent = tr(d.title);
+    $("pAlt").innerHTML = `<span>${esc(pujaName(d))}</span>` + ["deva", "taml", "gran", "latn"].filter(s => s !== prefs.script).map(s => `<span class="${s}">${esc(tr(d.title, s))}</span>`).join("");
+    $("pWhen").textContent = L() === "en" ? d.when_en : d.when_ta;
+    $("pSteps").innerHTML = d.parts.map((p, i) => `<button class="chip" data-step="${i}"><span class="sn">${i + 1}</span>${esc(tr(p.title))}</button>`).join("");
+    let h = "", k = 0;
+    d.parts.forEach((p, i) => {
+      h += `<section class="ppart" id="part-${i}"><h2 class="ptitle"><span class="sn">${i + 1}</span>${esc(tr(p.title))}</h2>`;
+      for (const sec of p.sections) {
+        h += `<div class="psec" id="sec${k++}">` + (sec.title ? `<h3 class="psub">${esc(tr(sec.title))}</h3>` : "") + sec.blocks.map(blockHTML).join("") + `</div>`;
+      }
+      h += `</section>`;
+    });
+    $("pBody").innerHTML = h;
+  }
+  function markStep() {
+    if (view !== "puja") return;
+    const top = $("pSteps").getBoundingClientRect().bottom + 8;
+    let cur = 0;
+    document.querySelectorAll(".ppart").forEach((el, i) => { if (el.getBoundingClientRect().top <= top + 4) cur = i; });
+    document.querySelectorAll("#pSteps .chip").forEach((c, i) => c.setAttribute("aria-current", i === cur ? "step" : "false"));
+    const on = $("pSteps").querySelector('[aria-current="step"]'); if (on && on.scrollIntoViewIfNeeded) on.scrollIntoViewIfNeeded(false);
+  }
+  let scrollSaveT = null;
+  window.addEventListener("scroll", () => {
+    if (view !== "puja") return; markStep();
+    clearTimeout(scrollSaveT); scrollSaveT = setTimeout(() => { if (pujaDoc) { prefs.pscroll = prefs.pscroll || {}; prefs.pscroll[pujaDoc.id] = Math.round(scrollY); save(); } }, 400);
+  }, { passive: true });
 
   /* ---------- reader ---------- */
   async function loadDoc(id) {
@@ -225,6 +294,8 @@
     const d = current; if (!d) return;
     const meta = byId(d.id) || {};
     $("backBtn").textContent = "← " + (kindLabel(meta.kind) || t("namavalis"));
+    const rt = prefs.returnTo && PUJAS.find(p => p.id === prefs.returnTo.puja);
+    $("retPuja").hidden = !rt; if (rt) $("retPuja").textContent = t("backToPuja", pujaName(rt));
     const sc = prefs.script;
     $("rTitle").textContent = tr(d.title);
     $("rAlt").innerHTML = ["deva", "taml", "gran", "latn"].filter(s => s !== sc).map(s => `<span class="${s}">${esc(tr(d.title, s))}</span>`).join("");
@@ -289,15 +360,26 @@
   }
   function show(v) {
     view = v;
-    ["home", "kind", "group", "fav", "reader", "about"].forEach(x => ($(x).hidden = x !== v));
-    $("rtools").hidden = v !== "reader";
+    ["home", "kind", "group", "fav", "puja", "reader", "about"].forEach(x => ($(x).hidden = x !== v));
+    $("rtools").hidden = v !== "reader" && v !== "puja";
+    $("archBtn").hidden = $("omBtn").hidden = v !== "reader";
     if (v !== "reader" && !$("archana").hidden) closeArchana();
-    keepAwake(v === "reader");
+    keepAwake(v === "reader" || v === "puja");
   }
   async function route() {
     const id = decodeURIComponent(location.hash.slice(1));
     if (id === "about") { show("about"); window.scrollTo(0, 0); return; }
     if (id === "fav") { show("fav"); renderFav(); window.scrollTo(0, 0); return; }
+    if (id.startsWith("p-") && PUJAS.some(p => p.id === id.slice(2))) {
+      try { pujaDoc = await loadPuja(id.slice(2)); } catch (e) { $("pBody").innerHTML = `<p class="empty">${t("loadFail")}</p>`; }
+      prefs.recent = [id, ...prefs.recent.filter(x => x !== id)].slice(0, 6); save();
+      show("puja"); renderPuja(); refreshStars();
+      const back = prefs.returnTo && prefs.returnTo.puja === pujaDoc.id ? prefs.returnTo.y : (prefs.pscroll || {})[pujaDoc.id];
+      if (prefs.returnTo && prefs.returnTo.puja === pujaDoc.id) { delete prefs.returnTo; save(); }
+      requestAnimationFrame(() => { window.scrollTo(0, back || 0); markStep(); });
+      return;
+    }
+    if (!byId(id) && prefs.returnTo) { delete prefs.returnTo; save(); }
     markDrawer();
     if (id.startsWith("g-") && INDEX.groups.some(g => g.key === id.slice(2))) {
       groupKey = id.slice(2); show("group"); renderGroup(); window.scrollTo(0, 0); return;
@@ -319,7 +401,7 @@
     applyLang(); if (!INDEX) return;
     renderDrawer(); $("dFavN").textContent = prefs.fav.length || "";
     if (view === "home") renderHome(); else if (view === "kind") renderKind(); else if (view === "group") renderGroup();
-    else if (view === "fav") renderFav(); else if (view === "reader") { renderReader(); refreshStars(); }
+    else if (view === "fav") renderFav(); else if (view === "reader") { renderReader(); refreshStars(); } else if (view === "puja") { renderPuja(); refreshStars(); }
   }
   function setLang(l) { prefs.lang = l; save(); rerenderAll(); }
   function paintSetup() {
@@ -338,7 +420,7 @@
   $("langSeg").onclick = e => { const b = e.target.closest("button"); if (b) setLang(b.dataset.l); };
 
   /* ---------- events ---------- */
-  $("scripts").onclick = e => { const b = e.target.closest("button"); if (!b) return; prefs.script = b.dataset.s; save(); applyPrefs(); if (view === "reader") renderReader(); if (view === "home") renderHome(); };
+  $("scripts").onclick = e => { const b = e.target.closest("button"); if (!b) return; prefs.script = b.dataset.s; save(); applyPrefs(); if (view === "reader") renderReader(); if (view === "puja") renderPuja(); if (view === "home") renderHome(); };
   $("kJump").onclick = e => { const b = e.target.closest("button[data-g]"); if (!b) return; const el = $("sec-" + b.dataset.g); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + scrollY - $("kJump").offsetHeight - 70, behavior: "smooth" }); };
   $("omBtn").onclick = () => { prefs.omEach = !prefs.omEach; save(); applyPrefs(); renderReader(); };
   $("fsUp").onclick = () => { prefs.fs = Math.min(3.2, +(prefs.fs + 0.15).toFixed(2)); save(); applyPrefs(); };
@@ -352,6 +434,10 @@
     if (prefs.cur[current.id] === i) { delete prefs.cur[current.id]; save(); li.classList.remove("cur"); } else setCur(i);
   };
   $("archBtn").onclick = openArchana;
+  $("pSteps").onclick = e => { const b = e.target.closest("[data-step]"); if (!b) return; const el = $("part-" + b.dataset.step); window.scrollTo({ top: el.getBoundingClientRect().top + scrollY - $("pSteps").getBoundingClientRect().bottom + 2, behavior: "smooth" }); };
+  $("pBody").onclick = e => { const b = e.target.closest("[data-nv]"); if (!b || !pujaDoc) return; prefs.returnTo = { puja: pujaDoc.id, y: Math.round(scrollY) }; save(); location.hash = b.dataset.nv; };
+  $("pFav").onclick = () => pujaDoc && toggleFav("p-" + pujaDoc.id);
+  $("retPuja").onclick = () => { if (prefs.returnTo) location.hash = "p-" + prefs.returnTo.puja; };
   $("rFav").onclick = () => current && toggleFav(current.id);
   document.addEventListener("click", e => {
     const f = e.target.closest("[data-fav]"), u = e.target.closest("[data-up]"), d = e.target.closest("[data-down]");
@@ -383,8 +469,10 @@
 
   if ("serviceWorker" in navigator && location.protocol === "https:") navigator.serviceWorker.register("sw.js").catch(() => {});
 
+  const setHdr = () => document.documentElement.style.setProperty("--hdr", document.querySelector(".bar").offsetHeight + "px");
+  new ResizeObserver(setHdr).observe(document.querySelector(".bar")); setHdr();
   applyPrefs(); applyLang();
   if (!prefs.setupDone) openSetup();
-  fetch("data/index.json").then(r => r.json()).then(j => { INDEX = j; renderDrawer(); $("dFavN").textContent = prefs.fav.length || ""; route(); })
+  Promise.all([fetch("data/index.json").then(r => r.json()), fetch("data/pujas.json").then(r => r.json()).catch(() => [])]).then(([j, pj]) => { INDEX = j; PUJAS = pj; renderDrawer(); $("dFavN").textContent = prefs.fav.length || ""; route(); })
     .catch(() => ($("tiles").innerHTML = `<p class="empty">${t("listFail")}</p>`));
 })();

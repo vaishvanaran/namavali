@@ -1,7 +1,7 @@
 {
-  "name": "Namavali",
-  "short_name": "Namavali",
-  "description": "Ashtottara, Trishati and Sahasra namavalis for puja — Devanagari, Tamil, Grantha, English. Works offline.",
+  "name": "Pujanidhi",
+  "short_name": "Pujanidhi",
+  "description": "Puja vidhanam, vratas and namavalis for archana — Devanagari, Tamil, Grantha, English. Works offline.",
   "lang": "ta",
   "start_url": "./",
   "scope": "./",
