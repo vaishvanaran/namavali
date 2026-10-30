@@ -4,7 +4,7 @@
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const FONT = { deva: "var(--deva)", taml: "var(--tamil)", gran: "var(--gran)", latn: "var(--latn)" };
   const CONV = { deva: s => s, taml: T.tamil, gran: T.grantha, latn: T.iast };
-  const VERSION = "2026.10.30p";
+  const VERSION = "2026.10.30q";
   const KINDS = [
     { k: "108", deva: "अष्टोत्तरशतनामावलिः", ta: "அஷ்டோத்தரம்", en: "Ashtottaram", sub: { ta: "108 நாமங்கள்", en: "108 names" } },
     { k: "300", deva: "त्रिशतीनामावलिः", ta: "த்ரிஶதீ", en: "Trishati", sub: { ta: "300 நாமங்கள்", en: "300 names" } },
@@ -57,6 +57,7 @@
     "க்ஷேத்ர நாமங்கள்": "sacred places", "பத்ம புராணம்": "Padma Purana", "ராம ரஹஸ்யம்": "Rama Rahasya", "100 நாமங்கள்": "100 names",
     "பாடம் 2": "version 2", "வராஹ புராணம்": "Varaha Purana", "27 நாமங்கள்": "27 names", "ஆனந்த ராமாயணம்": "Ananda Ramayana",
     "மஹாபாரதம்": "Mahabharata", "மஹாபாகவதம்": "Mahabhagavata", "ப்ரஸித்த பாடம்": "common version", "லிங்க புராணம்": "Linga Purana", "ருத்ரயாமளம்": "Rudrayamala", "ஸுப்ரஹ்மண்ய ஶாஸ்த்ரிகள்": "by Subrahmanya Shastri", "10 நாமங்கள்": "10 names", "8 நாமங்கள்": "8 names" };
+  const GURU_SHLOKA = ["कामाक्षीकरुणारूपं कामकोटिजगद्गुरुम् ।", "चिन्मूर्तिं कलये चित्ते शङ्कराचार्यमव्ययम् ॥"];
   const MANGALA = ["शुक्लाम्बरधरं विष्णुं शशिवर्णं चतुर्भुजम् ।", "प्रसन्नवदनं ध्यायेत् सर्वविघ्नोपशान्तये ॥"];
 
   let prefs = { script: "taml", omEach: false, fs: 1.45, kind: "", cur: {}, recent: [], fav: [] };
@@ -147,6 +148,7 @@
   function renderHome() {
     if (!INDEX) return;
     $("mangala").innerHTML = MANGALA.map(l => `<span>${esc(tr(l))}</span>`).join("");
+    $("gshloka").innerHTML = GURU_SHLOKA.map(l => `<span>${esc(tr(l))}</span>`).join("");
     const raw = $("q").value.trim();
     $("tilesBox").hidden = !!raw; $("results").hidden = !raw;
     const favs = prefs.fav.filter(id => id.startsWith("p-") ? PUJAS.some(p => "p-" + p.id === id) : byId(id));
