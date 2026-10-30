@@ -50,7 +50,6 @@ ITEMS = [
     ("rama", "100/Rama_108.tex", "रामः", "Rama", "vishnu", "பத்ம புராணம்"),
     ("rama-ramarahasya", "100/Rama_Ramarahasya_108.tex", "रामः", "Rama", "vishnu", "ராம ரஹஸ்யம்"),
     ("rama-1000", "1000/Rama_1000.tex", "रामः", "Rama", "vishnu", ""),
-    ("jagadanandakaraka", "100/Jagadanandakaraka_100.tex", "जगदानन्दकारकः", "Jagadanandakaraka", "vishnu", "100 நாமங்கள்"),
     ("krishna", "100/Krishna_108.tex", "कृष्णः", "Krishna", "vishnu", ""),
     ("lakshmi-nrisimha", "100/LakshmiNrisimha_108.tex", "लक्ष्मीनृसिंहः", "Lakshmi Nrisimha", "vishnu", ""),
     ("nrisimha", "100/Nrisimha_108.tex", "नृसिंहः", "Nrisimha", "vishnu", ""),
