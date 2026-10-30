@@ -25,15 +25,6 @@ P = [  # file, id, ta, en, deity, when_ta, when_en, order
  ('kaveri-puja', 'kaveri-puja', 'காவேரீ பூஜை', 'Kaveri Puja', 'others', 'ஆடிப் பெருக்கு, துலா மாஸம்', 'Āḍi perukku, Tulā māsa', 43),
  ('ganga-puja', 'ganga-puja', 'கங்கா பூஜை', 'Ganga Puja', 'others', 'கங்கா ஸ்நானம், தீபாவளி', 'Gaṅgā snāna days', 44),
  ('laghu-panchayatana-puja', 'panchayatana-puja', 'லகு பஞ்சாயதன பூஜை', 'Laghu Panchayatana Puja', 'others', 'நித்ய பூஜை', 'Daily worship', 45),
- ('panchanga-puja', 'panchanga-puja', 'பஞ்சாங்க பூஜை (வருடப் பிறப்பு)', 'Panchanga Puja (New Year)', 'navagraha', 'சித்திரை வருடப் பிறப்பு', 'Tamil new year', 46),
- ('ekadashi-purusha-sukta-vidhana-puja', 'ekadashi-vratam', 'ஏகாதஶீ வ்ரதம் — மஹாவிஷ்ணு பூஜை', 'Ekadashi Vratam — Mahavishnu Puja', 'vishnu', 'ஏகாதஶீ (புருஷஸூக்த விதானம், ஸ்வரத்துடன்)', 'Ekādaśī (Puruṣa-sūkta vidhāna, with svara)', 34, True),
- ('yajur-upakarma', 'yajur-upakarma', 'யஜுர் உபாகர்மா (ஆவணி அவிட்டம்)', 'Yajur Upakarma (Avani Avittam)', 'others', 'ஶ்ராவண பௌர்ணமீ', 'Śrāvaṇa pūrṇimā', 50, True),
- ('surya-namaskara', 'surya-namaskara', 'ஸூர்ய நமஸ்காரம் (அருணப்ரஶ்னம்)', 'Surya Namaskara (Aruna Prashna)', 'navagraha', 'ரத ஸப்தமீ, ஞாயிறு', 'Ratha saptamī, Sundays', 51, True),
- ('sankramana-snanam', 'sankramana-snanam', 'ஸங்க்ரமண புண்யகால ஸ்நான ஸங்கல்பம்', 'Sankramana Snana Sankalpa', 'navagraha', 'மாதப் பிறப்பு', 'Month-beginning (saṅkramaṇa)', 60),
- ('surya-arghyam', 'surya-arghyam', 'ஸூர்ய அர்க்ய ப்ரதானம்', 'Surya Arghya Pradanam', 'navagraha', 'ரத ஸப்தமீ', 'Ratha saptamī', 61),
- ('kartika-somavara-arghyam', 'kartika-somavara-arghyam', 'கார்த்திக ஸோமவார அர்க்யம்', 'Kartika Somavara Arghyam', 'shiva', 'கார்த்திகை ஸோமவாரங்கள்', 'Kārttika Mondays', 62),
- ('bhishma-tarpanam', 'bhishma-tarpanam', 'பீஷ்ம தர்ப்பணம்', 'Bhishma Tarpanam', 'others', 'பீஷ்மாஷ்டமீ', 'Bhīṣmāṣṭamī', 63),
- ('yama-tarpanam', 'yama-tarpanam', 'யம தர்ப்பணம்', 'Yama Tarpanam', 'others', 'க்ருஷ்ணாங்காரக சதுர்தஶீ / நரக சதுர்தஶீ', 'Kṛṣṇāṅgāraka / Naraka caturdaśī', 64),
 ]
 done_k = set()
 for f, pid, ta, en, deity, wta, wen, order, *veda in P:
