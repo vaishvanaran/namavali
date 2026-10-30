@@ -12,7 +12,7 @@
   ];
   const STR = {
     ta: {
-      pujas: "பூஜை · வ்ரதம்", tagline: "பூஜை · வ்ரதம் · அர்ச்சனை", archanaH: "அர்ச்சனை · நாமாவளிகள்", backToPuja: t => `← ${t} பூஜைக்குத் திரும்பு`,
+      today: "இன்று", upcoming: "வரும் நாட்கள்", pujas: "பூஜை · வ்ரதம்", tagline: "பூஜை · வ்ரதம் · அர்ச்சனை", archanaH: "அர்ச்சனை · நாமாவளிகள்", backToPuja: t => `← ${t} பூஜைக்குத் திரும்பு`,
       openNamavali: "நாமாவளியைத் திற", steps: "படிகள்", nParts: n => `${n} படிகள்`,
       appName: "பூஜாநிதி", menu: "பட்டியல்", close: "மூடு", home: "முகப்பு", fav: "அடிக்கடி படிப்பவை", namavalis: "நாமாவளிகள்",
       devatas: "தேவதைகள்", settings: "அமைப்பு", about: "இந்த ஆப் பற்றி", aboutThanks: "இந்த ஆப் பற்றி · நன்றி",
@@ -31,7 +31,7 @@
       setupScript: "நாமாவளியைப் படிக்கும் எழுத்து", setupNote: "இவற்றைப் பிறகு எப்போது வேண்டுமானாலும் மாற்றலாம்: எழுத்தை மேலே உள்ள பொத்தானிலும், மொழியை ☰ பட்டியலிலும்.", start: "தொடங்கு →",
     },
     en: {
-      pujas: "Puja · Vrata", tagline: "Puja · Vrata · Archana", archanaH: "Archana · Namavalis", backToPuja: t => `← Back to ${t}`,
+      today: "Today", upcoming: "Coming up", pujas: "Puja · Vrata", tagline: "Puja · Vrata · Archana", archanaH: "Archana · Namavalis", backToPuja: t => `← Back to ${t}`,
       openNamavali: "Open namavali", steps: "Steps", nParts: n => `${n} steps`,
       appName: "Pujanidhi", menu: "Menu", close: "Close", home: "Home", fav: "Favourites", namavalis: "Namavalis",
       devatas: "Devatas", settings: "Settings", about: "About this app", aboutThanks: "About · Thanks",
@@ -62,7 +62,7 @@
   if (!Array.isArray(prefs.fav)) prefs.fav = [];
   const save = () => { try { localStorage.setItem("nv-prefs", JSON.stringify(prefs)); } catch (e) {} };
 
-  let INDEX = null, PUJAS = [], current = null, view = "home", groupKey = null, pujaDoc = null;
+  let DAYS = null, INDEX = null, PUJAS = [], current = null, view = "home", groupKey = null, pujaDoc = null;
   const docs = {};
   const tr = (s, sc = prefs.script) => {
     const out = CONV[sc](s);
@@ -114,6 +114,25 @@
     `<span class="e">${esc(L() === "en" ? p.when_en : p.when_ta)}</span></a>`;
   const favCard = id => (id.startsWith("p-") ? (PUJAS.find(p => "p-" + p.id === id) ? pujaCard(PUJAS.find(p => "p-" + p.id === id)) : "") : (byId(id) ? card(byId(id)) : ""));
 
+  function renderToday(raw) {
+    const box = $("todayBox");
+    if (!DAYS || raw) { box.hidden = true; return; }
+    const now = new Date(), wd = DAYS.weekdays[now.getDay()];
+    const iso = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+    const today = iso(now), in7 = iso(new Date(now.getTime() + 7 * 864e5));
+    const todays = (DAYS.dates || []).filter(x => x.date === today);
+    const soon = (DAYS.dates || []).filter(x => x.date > today && x.date <= in7);
+    const linkFor = id => { if (id.startsWith("p-")) { const p = PUJAS.find(q => "p-" + q.id === id); return p ? `<a class="chip" href="#${id}"><span class="d">${esc(p.title)}</span><span class="t">${esc(pujaName(p))}</span></a>` : ""; }
+      const it = byId(id); return it ? `<a class="chip" href="#${id}"><span class="d">${esc(it.deva)}</span><span class="t">${esc(L() === "en" ? it.en : T.tamil(it.deva))}</span><span class="pill">${it.count}</span></a>` : ""; };
+    const dateLbl = d => new Date(d + "T00:00").toLocaleDateString(L() === "en" ? "en-IN" : "ta-IN", { day: "numeric", month: "short", weekday: "short" });
+    box.innerHTML = `<div class="tcard"><span class="sym">${window.symbolSVG(wd.deity)}</span><div class="tc"><div class="lbl2">${t("today")} · ${esc(L() === "en" ? wd.en : wd.ta)}</div>` +
+      todays.map(x => `<div class="fest">${esc(L() === "en" ? x.en : x.ta)}</div>`).join("") +
+      `<div class="tshl">${wd.shloka.map(l => `<p>${esc(tr(l))}</p>`).join("")}</div>` +
+      `<div class="chips wrap2">${[...todays.flatMap(x => x.links || []), ...wd.links].map(linkFor).join("")}</div></div></div>` +
+      (soon.length ? `<div class="soon"><div class="lbl2">${t("upcoming")}</div>${soon.map(x => `<a class="srow" ${x.links && x.links[0] ? `href="#${x.links[0]}"` : ""}><span class="sd">${esc(dateLbl(x.date))}</span><span>${esc(L() === "en" ? x.en : x.ta)}</span></a>`).join("")}</div>` : "");
+    box.hidden = false;
+  }
+
   /* ---------- home ---------- */
   function renderHome() {
     if (!INDEX) return;
@@ -144,6 +163,7 @@
       return;
     }
     $("pujaTiles").innerHTML = PUJAS.map(pujaCard).join("");
+    renderToday(raw);
     $("tiles").innerHTML = KINDS.map(K => {
       const items = INDEX.items.filter(i => i.kind === K.k);
       const gs = INDEX.groups.filter(g => items.some(i => i.group === g.key)).map(gShort);
@@ -473,6 +493,6 @@
   new ResizeObserver(setHdr).observe(document.querySelector(".bar")); setHdr();
   applyPrefs(); applyLang();
   if (!prefs.setupDone) openSetup();
-  Promise.all([fetch("data/index.json").then(r => r.json()), fetch("data/pujas.json").then(r => r.json()).catch(() => [])]).then(([j, pj]) => { INDEX = j; PUJAS = pj; renderDrawer(); $("dFavN").textContent = prefs.fav.length || ""; route(); })
+  Promise.all([fetch("data/index.json").then(r => r.json()), fetch("data/pujas.json").then(r => r.json()).catch(() => []), fetch("data/days.json").then(r => r.json()).catch(() => null)]).then(([j, pj, dy]) => { INDEX = j; PUJAS = pj; DAYS = dy; renderDrawer(); $("dFavN").textContent = prefs.fav.length || ""; route(); })
     .catch(() => ($("tiles").innerHTML = `<p class="empty">${t("listFail")}</p>`));
 })();
