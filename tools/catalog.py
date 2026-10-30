@@ -28,7 +28,7 @@ ITEMS = [
     ("ganesha", "100/Ganesha_108.tex", "गणपतिः", "Ganapati", "ganapati", ""),
     ("gakaradi-ganapati", "100/GakaradiGanapati_108.tex", "गकारादि गणपतिः", "Gakaradi Ganapati", "ganapati", ""),
     ("gakaradi-ganapati-1000", "1000/GakaradiGanapati_1000.tex", "गकारादि गणपतिः", "Gakaradi Ganapati", "ganapati", ""),
-    ("vakratunda-1000", "1000/VakratundaMahaganapati_1000.tex", "वक्रतुण्ड महागणपतिः", "Vakratunda Mahaganapati", "ganapati", ""),
+    ("vakratunda-1000", "1000/VakratundaMahaganapati_1000.tex", "गणपतिः", "Ganapati", "ganapati", "கணேச புராணம்"),
     # subrahmanya
     ("subrahmanya", "100/Subrahmanya_108.tex", "सुब्रह्मण्यः", "Subrahmanya", "subrahmanya", ""),
     ("kartikeya", "100/Kartikeya_108.tex", "कार्त्तिकेयः", "Kartikeya", "subrahmanya", "ஸ்காந்தம்"),
@@ -45,7 +45,7 @@ ITEMS = [
     ("harihara", "100/Harihara_108.tex", "हरिहरः", "Harihara", "shiva", ""),
     ("shiva-divyasthaniya", "100/Shiva_divyasthaniya_108.tex", "शिवः — दिव्यस्थानानि", "Shiva — sacred places", "shiva", "க்ஷேத்ர நாமங்கள்"),
     # vishnu
-    ("vishnu-1000", "1000/Vishnu_1000.tex", "विष्णुः", "Vishnu", "vishnu", ""),
+    ("vishnu-1000", "1000/Vishnu_1000.tex", "विष्णुः", "Vishnu", "vishnu", "மஹாபாரதம்"),
     ("vishnu-divyasthaniya", "100/Vishnu_divyasthaniya_108.tex", "विष्णुः — दिव्यस्थानानि", "Vishnu — sacred places", "vishnu", "க்ஷேத்ர நாமங்கள்"),
     ("rama", "100/Rama_108.tex", "रामः", "Rama", "vishnu", "பத்ம புராணம்"),
     ("rama-ramarahasya", "100/Rama_Ramarahasya_108.tex", "रामः", "Rama", "vishnu", "ராம ரஹஸ்யம்"),

@@ -4,11 +4,12 @@
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const FONT = { deva: "var(--deva)", taml: "var(--tamil)", gran: "var(--gran)", latn: "var(--latn)" };
   const CONV = { deva: s => s, taml: T.tamil, gran: T.grantha, latn: T.iast };
-  const VERSION = "2026.10.30m";
+  const VERSION = "2026.10.30n";
   const KINDS = [
     { k: "108", deva: "अष्टोत्तरशतनामावलिः", ta: "அஷ்டோத்தரம்", en: "Ashtottaram", sub: { ta: "108 நாமங்கள்", en: "108 names" } },
     { k: "300", deva: "त्रिशतीनामावलिः", ta: "த்ரிஶதீ", en: "Trishati", sub: { ta: "300 நாமங்கள்", en: "300 names" } },
     { k: "1000", deva: "सहस्रनामावलिः", ta: "ஸஹஸ்ரநாமம்", en: "Sahasranamam", sub: { ta: "1000 நாமங்கள்", en: "1000 names" } },
+    { k: "small", n: "24", deva: "लघुनामावलयः", ta: "சிறு நாமாவளிகள்", en: "Short namavalis", sub: { ta: "12, 16, 21, 24 நாமங்கள் — நேரம் குறைவானபோது", en: "12, 16, 21, 24 names — when time is short" } },
   ];
   const STR = {
     ta: {
@@ -55,7 +56,7 @@
   const NOTE_EN = { "கணேச புராணம்": "Ganesha Purana", "ஸ்காந்தம்": "Skanda Purana", "ஸ்வரத்துடன்": "with svaras", "216 நாமங்கள்": "216 names",
     "க்ஷேத்ர நாமங்கள்": "sacred places", "பத்ம புராணம்": "Padma Purana", "ராம ரஹஸ்யம்": "Rama Rahasya", "100 நாமங்கள்": "100 names",
     "பாடம் 2": "version 2", "வராஹ புராணம்": "Varaha Purana", "27 நாமங்கள்": "27 names", "ஆனந்த ராமாயணம்": "Ananda Ramayana",
-    "மஹாபாரதம்": "Mahabharata", "மஹாபாகவதம்": "Mahabhagavata", "ப்ரஸித்த பாடம்": "common version", "லிங்க புராணம்": "Linga Purana" };
+    "மஹாபாரதம்": "Mahabharata", "மஹாபாகவதம்": "Mahabhagavata", "ப்ரஸித்த பாடம்": "common version", "லிங்க புராணம்": "Linga Purana", "ருத்ரயாமளம்": "Rudrayamala", "ஸுப்ரஹ்மண்ய ஶாஸ்த்ரிகள்": "by Subrahmanya Shastri", "10 நாமங்கள்": "10 names", "8 நாமங்கள்": "8 names" };
   const MANGALA = ["शुक्लाम्बरधरं विष्णुं शशिवर्णं चतुर्भुजम् ।", "प्रसन्नवदनं ध्यायेत् सर्वविघ्नोपशान्तये ॥"];
 
   let prefs = { script: "taml", omEach: false, fs: 1.45, kind: "", cur: {}, recent: [], fav: [] };
@@ -179,7 +180,7 @@
     $("tiles").innerHTML = KINDS.map(K => {
       const items = prim(INDEX.items.filter(i => i.kind === K.k));
       const gs = INDEX.groups.filter(g => items.some(i => i.group === g.key)).map(gShort);
-      return `<a class="ktile" href="#k-${K.k}"><span class="sym num">${K.k}</span><span class="kt">` +
+      return `<a class="ktile" href="#k-${K.k}"><span class="sym num">${K.n || K.k}</span><span class="kt">` +
         `<span class="d">${esc(K.deva)}</span><span class="t">${esc(K[L()])}</span><span class="e">${esc(K.sub[L()])}</span>` +
         `<span class="n">${t("nNamavalis", items.length)} · ${esc(gs.slice(0, 5).join(", "))}${gs.length > 5 ? "…" : ""}</span></span></a>`;
     }).join("");
@@ -189,7 +190,7 @@
   let kindKey = null;
   function renderKind() {
     const K = KINDS.find(x => x.k === kindKey); if (!K) return;
-    $("kNum").textContent = K.k;
+    $("kNum").textContent = K.n || K.k;
     $("kDeva").textContent = K.deva;
     $("kAlt").innerHTML = `<span>${esc(K[L()])} · ${esc(K.sub[L()])}</span><span class="gran">${esc(T.grantha(K.deva))}</span>`;
     const items = INDEX.items.filter(i => i.kind === K.k);
@@ -209,7 +210,7 @@
     $("gAlt").innerHTML = `<span>${esc(gName(g))}</span><span class="gran">${esc(T.grantha(g.deva))}</span>`;
     const items = INDEX.items.filter(i => i.group === g.key);
     $("glist").innerHTML = KINDS.filter(K => items.some(i => i.kind === K.k)).map(K =>
-      `<section class="sec"><h2><span class="sym sm num">${K.k}</span><span class="d">${esc(K.deva)}</span><span class="t">${esc(K[L()])}</span></h2>` +
+      `<section class="sec"><h2><span class="sym sm num">${K.n || K.k}</span><span class="d">${esc(K.deva)}</span><span class="t">${esc(K[L()])}</span></h2>` +
       `<div class="grid">${prim(items.filter(i => i.kind === K.k)).map(card).join("")}</div></section>`).join("");
   }
 
@@ -248,7 +249,7 @@
     $("dKinds").innerHTML = KINDS.map(K => {
       const kits = prim(INDEX.items.filter(i => i.kind === K.k));
       const gs = INDEX.groups.filter(g => kits.some(i => i.group === g.key));
-      return `<details class="dg dk" data-k="${K.k}"><summary class="dl"><span class="sym xs num">${K.k}</span><span><span class="dd">${esc(K.deva)}</span><span class="dt">${esc(K[L()])}</span></span><span class="dn">${kits.length}</span><span class="chev" aria-hidden="true">›</span></summary><div class="dsub">` +
+      return `<details class="dg dk" data-k="${K.k}"><summary class="dl"><span class="sym xs num">${K.n || K.k}</span><span><span class="dd">${esc(K.deva)}</span><span class="dt">${esc(K[L()])}</span></span><span class="dn">${kits.length}</span><span class="chev" aria-hidden="true">›</span></summary><div class="dsub">` +
         gs.map(g => {
           const its = kits.filter(i => i.group === g.key);
           return `<details class="dg" data-k="${K.k}" data-g="${g.key}"><summary class="dl sub gsum"><span class="sym xxs">${window.symbolSVG(g.key)}</span><span><span class="dd">${esc(g.deva)}</span><span class="dt">${esc(gName(g))}</span></span><span class="dn">${its.length}</span><span class="chev" aria-hidden="true">›</span></summary>` +
