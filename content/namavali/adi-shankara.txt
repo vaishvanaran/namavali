@@ -1,5 +1,5 @@
-deva: आदिशङ्कराचार्यः
-en: Adi Shankaracharya
+deva: श्रीशङ्करभगवत्पादाः
+en: Sri Shankara Bhagavatpada
 group: guru
 title: श्रीमच्छङ्करभगवत्पादाष्टोत्तरशतनामावलिः
 source: guru

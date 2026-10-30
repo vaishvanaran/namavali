@@ -21,8 +21,8 @@ ITEMS = [
     # guru
     ("dakshinamurti", "100/Dakshinamurti_108.tex", "दक्षिणामूर्तिः", "Dakshinamurti", "guru", ""),
     ("vyasa", "100/Vyasa_108.tex", "वेदव्यासः", "Veda Vyasa", "guru", ""),
-    ("adi-shankara", "100/AdiShankaracharya_108.tex", "आदिशङ्कराचार्यः", "Adi Shankaracharya", "guru", ""),
-    ("chandrashekharendra", "100/ChandrashekharendraSaraswati_108.tex", "चन्द्रशेखरेन्द्रसरस्वती", "Chandrashekharendra Saraswati", "guru", ""),
+    ("adi-shankara", "100/AdiShankaracharya_108.tex", "श्रीशङ्करभगवत्पादाः", "Sri Shankara Bhagavatpada", "guru", ""),
+    ("chandrashekharendra", "100/ChandrashekharendraSaraswati_108.tex", "श्रीचन्द्रशेखरेन्द्रसरस्वती-श्रीचरणाः", "Sri Chandrashekharendra Saraswati Sri Charanah", "guru", ""),
     # ganapati
     ("ganapati", "100/Ganapati_108.tex", "गणपतिः", "Ganapati", "ganapati", "கணேச புராணம்"),
     ("ganesha", "100/Ganesha_108.tex", "गणपतिः", "Ganapati", "ganapati", ""),

@@ -1,5 +1,5 @@
-deva: जयेन्द्रसरस्वती
-en: Jayendra Saraswati
+deva: श्रीजयेन्द्रसरस्वती-श्रीचरणाः
+en: Sri Jayendra Saraswati Sri Charanah
 group: guru
 title: श्रीजयेन्द्रसरस्वतीश्रीचरणाष्टोत्तरशतनामावलिः
 source: guru

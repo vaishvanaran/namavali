@@ -60,7 +60,7 @@ for (iid, src, deva, en, group, note) in ITEMS:
                            'count': n, 'kind': kindOf(n), 'title': doc['title'], 'source': s, 'svara': svara})
 for f in sorted(TXT.glob('[a-z]*.txt')):
     if f.stem not in used: index['items'].append(txt_item(f))
-ORDER = 'dakshinamurti vyasa adi-shankara adi-shankara-24 acharya-parampara chandrashekharendra-guru chandrashekharendra jayendra lalita-300 lalita-1000 lakshmi-1000 durga-1000 saraswati-1008 navagraha surya surya-mahabharata chandra angaraka budha brihaspati shukra shani rahu ketu indra agni yama nirriti varuna vayu soma kubera ishana brahma vastu'.split()
+ORDER = 'dakshinamurti vyasa adi-shankara adi-shankara-24 acharya-parampara chandrashekharendra jayendra lalita-300 lalita-1000 lakshmi-1000 durga-1000 saraswati-1008 navagraha surya surya-mahabharata chandra angaraka budha brihaspati shukra shani rahu ketu indra agni yama nirriti varuna vayu soma kubera ishana brahma vastu'.split()
 index['items'].sort(key=lambda i: ORDER.index(i['id']) if i['id'] in ORDER else 500)
 index['items'].sort(key=lambda i: [g[0] for g in GROUPS].index(i['group']))
 # variants: lists of the same deity and kind become one card with a choice of pāṭha inside
