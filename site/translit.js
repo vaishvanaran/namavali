@@ -12,6 +12,7 @@
   const SUP = ["", "", "²", "³", "⁴"];
   const isDeva = c => c && /[ऀ-ॿ]/.test(c);
 
+  const NA_MEMBERS = ["नामाव", "नामानि", "नामस्तोत्र", "नारायण", "नाथ", "नायक", "नायिका", "निधि", "निधये", "नेत्र", "निलय", "निवास", "नाशन", "नाशिन", "नमः", "नमो", "नन्दन", "नन्दिन"];
   function tamil(s) {
     s = s.replace(SVARA, "");
     let o = "";
@@ -22,7 +23,9 @@
         if (ch === "न") {
           const wordStart = !isDeva(s[i - 1]);
           const beforeDental = s[i + 1] === "्" && "तथदध".includes(s[i + 2] || "");
-          if (!wordStart && !beforeDental) base = "ன";
+          // inside a word ன, but ந where a compound member starts (…नामावलिः, …नारायण, विनायक, त्रिनेत्र …)
+          const memberStart = NA_MEMBERS.some(w => s.startsWith(w, i));
+          if (!wordStart && !beforeDental && !memberStart) base = "ன";
         }
         const sup = SUP[c[1]] || "", m = s[i + 1];
         if (m === "ृ" || m === "ॄ") { o += base + "்" + sup + (m === "ृ" ? "ரு" : "ரூ"); i++; continue; }
