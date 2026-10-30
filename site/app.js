@@ -4,7 +4,7 @@
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const FONT = { deva: "var(--deva)", taml: "var(--tamil)", gran: "var(--gran)", latn: "var(--latn)" };
   const CONV = { deva: s => s, taml: T.tamil, gran: T.grantha, latn: T.iast };
-  const VERSION = "2026.10.31b";
+  const VERSION = "2026.10.31c";
   const KINDS = [
     { k: "108", deva: "अष्टोत्तरशतनामावलिः", ta: "அஷ்டோத்தரம்", en: "Ashtottaram", sub: { ta: "108 நாமங்கள்", en: "108 names" } },
     { k: "300", deva: "त्रिशतीनामावलिः", ta: "த்ரிஶதீ", en: "Trishati", sub: { ta: "300 நாமங்கள்", en: "300 names" } },
@@ -321,7 +321,7 @@
     $("dStotra").innerHTML = sgs.map(g => {
       const xs = STOTRAS.filter(x => x.group === g.key);
       return `<details class="dg ds" data-g="${g.key}"><summary class="dl gsum"><span class="sym xs">${window.symbolSVG(g.key)}</span><span><span class="dd">${esc(g.deva)}</span><span class="dt">${esc(gName(g))}</span></span><span class="dn">${xs.length}</span><span class="chev" aria-hidden="true">›</span></summary><div class="dsub">` +
-        xs.map(x => `<a class="dl sub" href="#s-${x.id}"><span class="cnt">${x.verses}</span><span><span class="dd">${esc(x.title)}</span><span class="dt">${esc(L() === "en" ? x.en : x.ta)}</span></span></a>`).join("") + `</div></details>`;
+        xs.map(x => `<a class="dl sub" href="#s-${x.id}"><span class="cnt">${x.verses || ""}</span><span><span class="dd">${esc(x.title)}</span><span class="dt">${esc(L() === "en" ? x.en : x.ta)}</span></span></a>`).join("") + `</div></details>`;
     }).join("");
     // namavalis: kind (108 / 300 / 1000) → devata → that devata's lists of this kind only
     const subRow = i => `<a class="dl sub" href="#${i.id}"><span class="cnt">${i.count}</span><span><span class="dd">${esc(i.deva)}</span><span class="dt">${esc(T.tamil(i.deva))}${variants(i).length > 1 ? " · " + esc(t("nVar", variants(i).length)) : i.note ? " · " + esc(noteL(i.note)) : ""}</span></span></a>`;
