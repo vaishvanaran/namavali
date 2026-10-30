@@ -4,7 +4,7 @@
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const FONT = { deva: "var(--deva)", taml: "var(--tamil)", gran: "var(--gran)", latn: "var(--latn)" };
   const CONV = { deva: s => s, taml: T.tamil, gran: T.grantha, latn: T.iast };
-  const VERSION = "2026.10.31d";
+  const VERSION = "2026.10.31e";
   const KINDS = [
     { k: "108", deva: "अष्टोत्तरशतनामावलिः", ta: "அஷ்டோத்தரம்", en: "Ashtottaram", sub: { ta: "108 நாமங்கள்", en: "108 names" } },
     { k: "300", deva: "त्रिशतीनामावलिः", ta: "த்ரிஶதீ", en: "Trishati", sub: { ta: "300 நாமங்கள்", en: "300 names" } },
@@ -146,7 +146,10 @@
     `<a class="card pcard" href="#p-${p.id}">${star("p-" + p.id)}<span class="sym sm">${window.symbolSVG(p.deity)}</span>` +
     `<span class="d">${esc(p.title)}</span><span class="t">${esc(pujaName(p))}</span>` +
     `<span class="e">${esc(L() === "en" ? p.when_en : p.when_ta)}</span></a>`;
-  const favCard = id => (id.startsWith("p-") ? (PUJAS.find(p => "p-" + p.id === id) ? pujaCard(PUJAS.find(p => "p-" + p.id === id)) : "") : (byId(id) ? card(byId(id)) : ""));
+  const favOk = id => id.startsWith("s-") ? STOTRAS.some(x => "s-" + x.id === id) : id.startsWith("p-") ? PUJAS.some(p => "p-" + p.id === id) : !!byId(id);
+  const stoCard = x => `<a class="card pcard" href="#s-${x.id}">${star("s-" + x.id)}<span class="sym sm">${window.symbolSVG(x.group)}</span>` +
+    `<span class="d">${esc(x.title)}</span><span class="t">${esc(L() === "en" ? x.en : x.ta)}</span><span class="e">${esc(t("toSto"))}</span></a>`;
+  const favCard = id => id.startsWith("s-") ? ((x => x ? stoCard(x) : "")(STOTRAS.find(x => "s-" + x.id === id))) : (id.startsWith("p-") ? (PUJAS.find(p => "p-" + p.id === id) ? pujaCard(PUJAS.find(p => "p-" + p.id === id)) : "") : (byId(id) ? card(byId(id)) : ""));
 
   function renderToday(raw) {
     const box = $("todayBox");
@@ -234,7 +237,7 @@
     $("gshloka").innerHTML = GURU_SHLOKA.map(l => `<span>${esc(tr(l))}</span>`).join("");
     const raw = $("q").value.trim();
     $("tilesBox").hidden = !!raw; $("results").hidden = !raw;
-    const favs = prefs.fav.filter(id => id.startsWith("p-") ? PUJAS.some(p => "p-" + p.id === id) : byId(id));
+    const favs = prefs.fav.filter(favOk);
     $("favBox").hidden = !!raw;
     $("favMore").hidden = favs.length <= 6;
     $("favHome").innerHTML = favs.length
@@ -299,13 +302,14 @@
   function refreshStars() {
     document.querySelectorAll("[data-fav]").forEach(b => { const on = isFav(b.dataset.fav); b.setAttribute("aria-pressed", on); b.textContent = on ? "★" : "☆"; });
     if (current) { const on = isFav(current.id); $("rFav").setAttribute("aria-pressed", on); $("rFav").querySelector(".star").textContent = on ? "★" : "☆"; $("rFav").querySelector(".fl").textContent = on ? t("inFav") : t("addFav"); }
+    if (stoDoc) { const on = isFav("s-" + stoDoc.id); $("sFav").setAttribute("aria-pressed", on); $("sFav").querySelector(".star").textContent = on ? "★" : "☆"; $("sFav").querySelector(".fl").textContent = on ? t("inFav") : t("addFav"); }
     if (pujaDoc) { const on = isFav("p-" + pujaDoc.id); $("pFav").setAttribute("aria-pressed", on); $("pFav").querySelector(".star").textContent = on ? "★" : "☆"; $("pFav").querySelector(".fl").textContent = on ? t("inFav") : t("addFav"); }
     $("dFavN").textContent = prefs.fav.length || "";
     if (view === "fav") renderFav();
     if (view === "home") renderHome();
   }
   function renderFav() {
-    const favs = prefs.fav.filter(id => id.startsWith("p-") ? PUJAS.some(p => "p-" + p.id === id) : byId(id));
+    const favs = prefs.fav.filter(favOk);
     $("favList").innerHTML = favs.map((id, i) =>
       `<li>${favCard(id).replace(/<button class="cstar"[^>]*>.<\/button>/, "")}` +
       `<span class="ord"><button class="icon" data-up="${id}" ${i === 0 ? "disabled" : ""} aria-label="${t("up")}">↑</button><button class="icon" data-down="${id}" ${i === favs.length - 1 ? "disabled" : ""} aria-label="${t("down")}">↓</button><button class="icon" data-fav="${id}" aria-pressed="true" title="${t("remove")}">★</button></span></li>`).join("");
@@ -592,7 +596,7 @@
       const sid = id.slice(2);
       try { stoDoc = await loadSto(sid); } catch (e) { stoDoc = null; $("sBody").innerHTML = `<p class="empty">${t("loadFail")}</p>`; }
       prefs.recent = [id, ...prefs.recent.filter(x => x !== id)].slice(0, 6); save();
-      markDrawer(); show("stotra"); renderStotra(); window.scrollTo(0, 0); return;
+      markDrawer(); show("stotra"); renderStotra(); refreshStars(); window.scrollTo(0, 0); return;
     }
     if (!byId(id) && prefs.returnTo) { delete prefs.returnTo; save(); }
     markDrawer();
@@ -664,6 +668,7 @@
   $("suktaBtns").onclick = e => { const b = e.target.closest("[data-sk]"); if (!b) return; const y = scrollY, anchor = [...document.querySelectorAll("#pBody .psec")].find(el => el.getBoundingClientRect().bottom > 120); prefs.suktaOn = prefs.suktaOn || {}; prefs.suktaOn[b.dataset.sk] = !skOn(b.dataset.sk); save(); renderPuja(); if (anchor) { const el = document.getElementById(anchor.id); window.scrollTo(0, el.getBoundingClientRect().top + scrollY - 120); } else window.scrollTo(0, y); };
   $("pRet").onclick = () => { if (prefs.returnTo) location.hash = "p-" + prefs.returnTo.puja; };
   $("pFav").onclick = () => pujaDoc && toggleFav("p-" + pujaDoc.id);
+  $("sFav").onclick = () => stoDoc && toggleFav("s-" + stoDoc.id);
   $("retPuja").onclick = () => { if (prefs.returnTo) location.hash = "p-" + prefs.returnTo.puja; };
   $("rFav").onclick = () => current && toggleFav(current.id);
   document.addEventListener("click", e => {
