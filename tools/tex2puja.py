@@ -19,6 +19,7 @@ PURVANGA = {'vighneshwara-puja': 'विघ्नेश्वर-पूजा', 
 IGNORE = set('medskip smallskip bigskip hfill nobreak clearpage newpage small scriptsize footnotesize normalsize large Large '
              'sffamily bfseries rmfamily centering begingroup endgroup closesection closesub noindent par relax footnotemark '
              'vfill linebreak pagebreak tamfamily itshape'.split())
+VEDA = False   # True for Vedic karmas (upākarma, sūrya-namaskāra …): svara mantras are kept
 SVARA = re.compile('[॒॑᳚᳛]')
 PARISHECHANA = re.compile('परिषिञ्चामि|प्राणाय स्वाहा|अपानाय स्वाहा|अमृतोपस्तरण|अमृतापिधान|ब्रह्मणि म आत्मा|देव सवितः|तत्सवितु')
 
@@ -56,7 +57,7 @@ class TeX:
             if i < len(s) and s[i] == '{':
                 a, i = self.group(s, i)
             else:
-                m = re.match(r'\\[A-Za-z]+|.', s[i:]); a = m.group(0); i += len(a)
+                m = re.match(r'\\[A-Za-z]+|.', s[i:], re.S); a = m.group(0) if m else ''; i += len(a)
             out.append(a)
         return out, i
 
@@ -69,6 +70,8 @@ class TeX:
         n = 0
         m = re.match(r'\s*\[(\d)\]', s[i:])
         if m: n = int(m.group(1)); i += m.end()
+        m2 = re.match(r'\s*\[[^\]]*\]', s[i:])
+        if m2: i += m2.end()
         while s[i] in ' \n': i += 1
         body, i = self.group(s, i)
         self.macros[name] = (n, body)
@@ -143,7 +146,7 @@ class TeX:
         if name == 'ifbool':
             a, i = self.args(s, i, 3, False)
             flag = a[0].strip()
-            pick = a[2] if flag == 'veda' else a[1]   # no Vedic mantras inline; kathas included
+            pick = a[2] if flag == 'veda' and not VEDA else a[1]   # no Vedic mantras inline (unless a Vedic karma); kathas included
             return self.run(pick), i
         if name == 'ifblank':
             a, i = self.args(s, i, 3, False); return self.run(a[1] if not a[0].strip() else a[2]), i
@@ -205,7 +208,7 @@ class TeX:
             k = r.find('\\ifbool')
             if k < 0: return r
             a, j = self.args(r, k + len('\\ifbool'), 3, False)
-            r = r[:k] + (a[2] if a[0].strip() == 'veda' else a[1]) + r[j:]
+            r = r[:k] + (a[2] if a[0].strip() == 'veda' and not VEDA else a[1]) + r[j:]
 
     def colseps(self, spec):
         """'ll@{~नमः — }l@{-पत्रं समर्पयामि}' -> text after each column: ['', ' ', ' नमः — ', '-पत्रं समर्पयामि']"""
@@ -263,10 +266,22 @@ def tidy(text):
     # merge, drop vedic (svara) lines except naivedya parishechana
     res = []
     for s in out:
-        if SVARA.search(s):
+        if SVARA.search(s) and not VEDA:
             if PARISHECHANA.search(s): s = SVARA.sub('', s)
             else: continue
         res.append(s)
+    # English explanations from the book are left out (the app has its own Tamil/English notes)
+    res = [x for x in res if not (re.search('[A-Za-z]{3}', x) and not re.search('[ऀ-ॿ]', x) and not x.startswith(('#', '@', '(')))]
+    # a sankalpa printed one item per line becomes one paragraph
+    j = 0
+    while j < len(res):
+        if 'ममोपात्त' in res[j] and not res[j].startswith('>'):
+            k = j
+            while k < len(res) - 1 and 'करिष्ये' not in res[k] and k - j < 40 and not res[k + 1].startswith(('#', '>', '@')): k += 1
+            if 'करिष्ये' in res[k]:
+                joined = ' '.join(x.lstrip('! ').strip() for x in res[j:k + 1] if x.strip())
+                res[j:k + 1] = [re.sub(r'\s+', ' ', joined).replace('- ', '-').replace(' -', '-')]
+        j += 1
     t = '\n'.join(res)
     t = re.sub(r'\n{3,}', '\n\n', t)
     t = re.sub(r'\(\s*___\s*\)', '___', t)
@@ -364,7 +379,8 @@ def naivedya(t):
     return '\n'.join(out)
 
 
-def convert(path):
+def convert(path, veda=False):
+    global VEDA; VEDA = veda
     t = TeX(); load_preamble(t)
     src = pathlib.Path(path).read_text(encoding='utf-8')
     raw = t.run(src)
