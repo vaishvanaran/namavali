@@ -264,7 +264,7 @@ order: 26
 - ॐ क्रौञ्चभित्रे नमः
 - ॐ शिखिवाहनाय नमः
 
-@namavali shanmukha-1000
+@namavali shanmukha-pratimukha-1 shanmukha-1000
 
 @namavali subrahmanya
 
