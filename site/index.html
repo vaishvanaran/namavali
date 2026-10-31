@@ -40,6 +40,7 @@
   <nav>
     <a href="#" class="dl"><span class="sym xs">⌂</span><span data-t="home">முகப்பு</span></a>
     <a href="#fav" class="dl"><span class="sym xs star">★</span><span data-t="fav">அடிக்கடி படிப்பவை</span><span class="dn" id="dFavN"></span></a>
+    <a href="#lists" class="dl"><span class="sym xs lsym">☰</span><span data-t="myLists">என் பட்டியல்கள்</span><span class="dn" id="dListN"></span></a>
     <div class="dsec" data-t="pujas">பூஜை · வ்ரதம்</div>
     <div id="dPujas"></div>
     <div class="dsec" data-t="vidhana">விதான பூஜை</div>
@@ -75,6 +76,7 @@
   <section id="results" hidden></section>
   <section id="todayBox" class="today" hidden></section>
   <section id="favBox" class="favbox"><h2 class="lbl"><span class="star">★</span> <span data-t="fav">அடிக்கடி படிப்பவை</span><a href="#fav" class="more" id="favMore" data-t="all">எல்லாம் →</a></h2><div id="favHome"></div></section>
+  <section id="listBox" class="favbox" hidden><h2 class="lbl"><span class="lsym">☰</span> <span data-t="myLists">என் பட்டியல்கள்</span><a href="#lists" class="more" data-t="all">எல்லாம் →</a></h2><div id="listHome"></div></section>
   <section id="recentBox" class="recent" hidden><h2 class="lbl" data-t="recent">சமீபத்தில் படித்தவை</h2><div id="recent" class="chips"></div></section>
   <section id="tilesBox"><h2 class="lbl" data-t="pujas">பூஜை · வ்ரதம்</h2><div id="pujaTiles" class="grid pujas"></div><h2 class="lbl" data-t="vidhana">விதான பூஜை</h2><div id="vidhanaTiles" class="grid pujas"></div><h2 class="lbl" data-t="veda">வேத மந்த்ரங்கள்</h2><div id="vedaTiles"></div><h2 class="lbl" data-t="archanaH">அர்ச்சனை · நாமாவளிகள்</h2><div id="tiles" class="kinds3"></div></section>
   <footer class="foot"><a href="#about" data-t="aboutThanks">இந்த ஆப் பற்றி · நன்றி</a><span id="ver"></span></footer>
@@ -97,6 +99,26 @@
   <div id="glist"></div>
 </main>
 
+<main id="lists" class="wrap" hidden>
+  <div class="ghead">
+    <button class="back" data-home data-t="backHome">← முகப்பு</button>
+    <div class="gtitle"><span class="sym big lsym">☰</span><div><h1 data-t="myLists">என் பட்டியல்கள்</h1></div></div>
+  </div>
+  <p class="hint" data-t="listsHint"></p>
+  <form class="newlist" id="newListForm"><input id="newListName" maxlength="40" autocomplete="off" data-tp="listName" data-ta="listName"><button class="pbtn" type="submit" data-t="create">உருவாக்கு</button></form>
+  <div id="listsBox"></div>
+</main>
+
+<main id="list" class="wrap" hidden>
+  <div class="ghead">
+    <a class="back" href="#lists" data-t="backLists">← என் பட்டியல்கள்</a>
+    <div class="gtitle"><span class="sym big lsym">☰</span><div><h1 id="lTitle"></h1><div class="note" id="lCount"></div></div></div>
+  </div>
+  <div class="lacts"><button class="pbtn" id="lStart" data-t="startPara">▶ பாராயணம் தொடங்கு</button><button class="btn2" id="lRename" data-t="rename">பெயர் மாற்று</button><button class="btn2" id="lDelete" data-t="delList">பட்டியலை நீக்கு</button></div>
+  <p class="hint" data-t="listHint"></p>
+  <ol id="lItems" class="favlist litems"></ol>
+</main>
+
 <main id="fav" class="wrap" hidden>
   <div class="ghead">
     <button class="back" data-home data-t="backHome">← முகப்பு</button>
@@ -109,7 +131,7 @@
 <main id="puja" class="wrap" hidden>
   <div class="rhead">
     <button class="back" data-home data-t="backHome">← முகப்பு</button>
-    <div class="rtitle"><h1 id="pTitle"></h1><button class="favbtn" id="pFav" aria-pressed="false"><span class="star">☆</span><span class="fl"></span></button></div>
+    <div class="rtitle"><h1 id="pTitle"></h1><button class="favbtn" id="pFav" aria-pressed="false"><span class="star">☆</span><span class="fl"></span></button><button class="favbtn addl" data-addlist aria-haspopup="dialog"><span class="star">＋</span><span data-t="toList">பட்டியலில் சேர்</span></button></div>
     <div class="alt" id="pAlt"></div>
     <div class="note" id="pWhen"></div>
     <button class="retpuja" id="pRet" hidden></button>
@@ -122,7 +144,7 @@
   <div class="rhead">
     <button class="back" id="backBtn">←</button>
     <button class="retpuja" id="retPuja" hidden></button>
-    <div class="rtitle"><h1 id="rTitle"></h1><button class="favbtn" id="rFav" aria-pressed="false"><span class="star">☆</span><span class="fl"></span></button></div>
+    <div class="rtitle"><h1 id="rTitle"></h1><button class="favbtn" id="rFav" aria-pressed="false"><span class="star">☆</span><span class="fl"></span></button><button class="favbtn addl" data-addlist aria-haspopup="dialog"><span class="star">＋</span><span data-t="toList">பட்டியலில் சேர்</span></button></div>
     <div class="alt" id="rAlt"></div>
     <div class="note" id="rNote" hidden></div>
     <div class="chips wrap2 vchips" id="rVar" hidden></div>
@@ -135,7 +157,7 @@
 <main id="stotra" class="wrap" hidden>
   <div class="rhead">
     <button class="back" data-home data-t="backHome">← முகப்பு</button>
-    <div class="rtitle"><h1 id="sTitle"></h1><button class="favbtn" id="sFav" aria-pressed="false"><span class="star">☆</span><span class="fl"></span></button></div>
+    <div class="rtitle"><h1 id="sTitle"></h1><button class="favbtn" id="sFav" aria-pressed="false"><span class="star">☆</span><span class="fl"></span></button><button class="favbtn addl" data-addlist aria-haspopup="dialog"><span class="star">＋</span><span data-t="toList">பட்டியலில் சேர்</span></button></div>
     <div class="alt" id="sAlt"></div>
     <div class="note" id="sNote" hidden></div>
     <a class="nlink" id="sNama" hidden></a>
@@ -222,6 +244,8 @@
   </div>
 </div>
 
+<div id="sheet" class="sheet" hidden role="dialog" aria-modal="true" aria-labelledby="sheetT"><div class="sheetbox"><h2 id="sheetT" data-t="addToList">பட்டியலில் சேர்</h2><div id="sheetItem" class="note"></div><div id="sheetLists"></div><form id="sheetNew" class="newlist"><input id="sheetNewName" maxlength="40" autocomplete="off" data-tp="listName" data-ta="listName"><button class="btn2" type="submit" data-t="create">உருவாக்கு</button></form><button class="pbtn" id="sheetDone" data-t="done">முடிந்தது</button></div></div>
+<nav id="paraBar" class="parabar" hidden aria-label="பாராயணம்"><button class="icon" id="paraPrev" aria-label="முந்தையது">‹</button><div class="pmid"><div class="pl" id="paraLbl"></div><div class="pn" id="paraNext"></div></div><button class="pbtn" id="paraGo">→</button><button class="icon px" id="paraStop" aria-label="நிறுத்து">✕</button></nav>
 <div id="archana" class="archana" hidden role="dialog" data-ta="archana">
   <div class="atop"><span id="aCount"></span><span id="aTitle"></span><button class="icon" id="aClose">✕</button></div>
   <button class="aname" id="aName"></button>

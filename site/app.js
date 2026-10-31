@@ -4,7 +4,7 @@
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const FONT = { deva: "var(--deva)", taml: "var(--tamil)", gran: "var(--gran)", latn: "var(--latn)" };
   const CONV = { deva: s => s, taml: T.tamil, gran: T.grantha, latn: T.iast };
-  const VERSION = "2026.10.31h";
+  const VERSION = "2026.10.31i";
   const KINDS = [
     { k: "108", deva: "अष्टोत्तरशतनामावलिः", ta: "அஷ்டோத்தரம்", en: "Ashtottaram", sub: { ta: "108 நாமங்கள்", en: "108 names" } },
     { k: "300", deva: "त्रिशतीनामावलिः", ta: "த்ரிஶதீ", en: "Trishati", sub: { ta: "300 நாமங்கள்", en: "300 names" } },
@@ -25,7 +25,7 @@
       tapHint: "ஒரு நாமத்தைத் தொட்டால் அது குறிக்கப்படும். பூஜையில் எங்கே இருக்கிறோம் என்று தெரியும்.",
       archana: "அர்ச்சனை", archanaTitle: "அர்ச்சனை — ஒவ்வொரு நாமமாக", omTitle: "ஒவ்வொரு நாமத்துக்கும் ஓம்",
       smaller: "எழுத்து சிறிதாக", larger: "எழுத்து பெரிதாக", prev: "← முன்", next: "அடுத்து →", done: "நிறைவு ✓", tapNext: "பெயரைத் தொட்டால் அடுத்தது",
-      nVar: n => `${n} பாடங்கள்`, paatha: "பாடம்", stotras: "ஸ்தோத்ரங்கள்", toNama: "நாமாவளி", toSto: "ஸ்தோத்ரம்", nVerses: n => `${n} ஶ்லோகங்கள்`, mNama: "நாமாவளி", mStotra: "ஸ்தோத்ரம்", veda: "வேத மந்த்ரங்கள்", yajur: "க்ருஷ்ண யஜுர்வேதம்", sama: "ஸாமவேதம்",
+      nVar: n => `${n} பாடங்கள்`, paatha: "பாடம்", myLists: "என் பட்டியல்கள்", toList: "பட்டியலில் சேர்", addToList: "பட்டியலில் சேர்", listName: "புதிய பட்டியலின் பெயர் — உதா: காலை பாராயணம்", create: "உருவாக்கு", done: "முடிந்தது", startPara: "▶ பாராயணம் தொடங்கு", rename: "பெயர் மாற்று", delList: "பட்டியலை நீக்கு", backLists: "← என் பட்டியல்கள்", listsHint: "தினமும் படிப்பவற்றைப் பெயரிட்ட பட்டியல்களாக வைத்துக்கொள்ளலாம். எந்த ஸ்தோத்ரம், நாமாவளி, பூஜைப் பக்கத்திலும் உள்ள ＋ பட்டியலில் சேர் பொத்தானைத் தொடுங்கள்.", listHint: "⠿ குறியைப் பிடித்து இழுத்தோ ↑ ↓ தொட்டோ வரிசையை மாற்றலாம்.", noLists: "இன்னும் பட்டியல் இல்லை. மேலே பெயர் கொடுத்து உருவாக்குங்கள்.", emptyList: "இந்தப் பட்டியல் காலியாக உள்ளது. ஸ்தோத்ர/நாமாவளி பக்கங்களில் ＋ பட்டியலில் சேர் தொடுங்கள்.", nItems: n => `${n} பகுதிகள்`, paraOf: (i, n, name) => `பாராயணம் · ${name} · ${i}/${n}`, nextIs: x => `அடுத்தது: ${x}`, lastOne: "இது கடைசி — ✓ முடிக்கவும்", confirmDel: "நிச்சயமாக நீக்கவா? மீண்டும் தொடுங்கள்", newName: "புதிய பெயர்", stotras: "ஸ்தோத்ரங்கள்", toNama: "நாமாவளி", toSto: "ஸ்தோத்ரம்", nVerses: n => `${n} ஶ்லோகங்கள்`, mNama: "நாமாவளி", mStotra: "ஸ்தோத்ரம்", veda: "வேத மந்த்ரங்கள்", yajur: "க்ருஷ்ண யஜுர்வேதம்", sama: "ஸாமவேதம்",
       names: n => `${n} நாமங்கள்`, nNamavalis: n => `${n} நாமாவளிகள்`, notFound: q => `“${q}” — எதுவும் கிடைக்கவில்லை.`,
       loadFail: "ஏற்ற முடியவில்லை. இணைய இணைப்பைச் சரிபார்க்கவும்.", listFail: "பட்டியலை ஏற்ற முடியவில்லை.",
       svaraNote: "ஸ்வரக் குறிகள் தேவநாகரி, க்ரந்தத்தில் மட்டும் காட்டப்படும்.", version: "பதிப்பு",
@@ -45,7 +45,7 @@
       tapHint: "Tap a name to mark it, so you keep your place during the puja.",
       archana: "Archana", archanaTitle: "Archana — one name at a time", omTitle: "Om before every name",
       smaller: "Smaller text", larger: "Larger text", prev: "← Back", next: "Next →", done: "Done ✓", tapNext: "Tap the name for the next one",
-      nVar: n => `${n} versions`, paatha: "Version", stotras: "Stotras", toNama: "Nāmāvalī", toSto: "Stotram", nVerses: n => `${n} verses`, mNama: "Nāmāvalī", mStotra: "Stotram", veda: "Veda mantras", yajur: "Krishna Yajurveda", sama: "Samaveda",
+      nVar: n => `${n} versions`, paatha: "Version", myLists: "My lists", toList: "Add to list", addToList: "Add to a list", listName: "New list name — e.g. Morning parayana", create: "Create", done: "Done", startPara: "▶ Start parayana", rename: "Rename", delList: "Delete list", backLists: "← My lists", listsHint: "Keep what you read daily as named lists. Tap ＋ Add to list on any stotra, namavali or puja page.", listHint: "Drag ⠿ or use ↑ ↓ to set the order.", noLists: "No lists yet. Give a name above and create one.", emptyList: "This list is empty. Tap ＋ Add to list on a stotra or namavali page.", nItems: n => `${n} items`, paraOf: (i, n, name) => `Parayana · ${name} · ${i}/${n}`, nextIs: x => `Next: ${x}`, lastOne: "Last one — tap ✓ to finish", confirmDel: "Tap again to delete", newName: "New name", stotras: "Stotras", toNama: "Nāmāvalī", toSto: "Stotram", nVerses: n => `${n} verses`, mNama: "Nāmāvalī", mStotra: "Stotram", veda: "Veda mantras", yajur: "Krishna Yajurveda", sama: "Samaveda",
       names: n => `${n} names`, nNamavalis: n => `${n} namavalis`, notFound: q => `Nothing found for “${q}”.`,
       loadFail: "Could not load. Check your internet connection.", listFail: "Could not load the list.",
       svaraNote: "Svara marks are shown only in Devanagari and Grantha.", version: "Version",
@@ -64,6 +64,7 @@
   try { Object.assign(prefs, JSON.parse(localStorage.getItem("nv-prefs") || "{}")); } catch (e) {}
   if (!Array.isArray(prefs.recent)) prefs.recent = [];
   if (!Array.isArray(prefs.fav)) prefs.fav = [];
+  if (!Array.isArray(prefs.lists)) prefs.lists = [];
   if (prefs.sukta === true) { prefs.suktaOn = { "purusha-sukta-vidhana": true }; delete prefs.sukta; }
   const save = () => { try { localStorage.setItem("nv-prefs", JSON.stringify(prefs)); } catch (e) {} };
 
@@ -246,6 +247,9 @@
       : `<p class="hint favempty">${t("favEmpty")}</p>`;
     const rec = prefs.recent.map(id => id.startsWith("s-") ? (x => x && { id, deva: x.title, en: x.en, ta: x.ta, count: "" })(STOTRAS.find(x => "s-" + x.id === id)) : id.startsWith("p-") ? (p => p && { id, deva: p.title, en: p.en, ta: p.ta, count: "" })(PUJAS.find(p => "p-" + p.id === id)) : byId(id)).filter(Boolean);
     $("recentBox").hidden = !!raw || !rec.length;
+    $("listBox").hidden = !!raw || !prefs.lists.length;
+    $("listHome").innerHTML = prefs.lists.map(l => { const n = l.items.filter(itemInfo).length;
+      return `<div class="lcard"><a class="lmain" href="#list-${l.id}"><span class="lname">${esc(l.name)}</span><span class="lsub">${esc(t("nItems", n))}</span></a>${n ? `<button class="pbtn" data-start="${l.id}">${esc(t("startPara"))}</button>` : ""}</div>`; }).join("");
     $("recent").innerHTML = rec.map(it => `<a class="chip" href="#${it.id}"><span class="d">${esc(it.deva)}</span><span class="t">${esc(L() === "en" ? it.en : (it.ta || T.tamil(it.deva)))}</span>${it.count ? `<span class="pill">${it.count}</span>` : ""}</a>`).join("");
     if (raw) { renderToday(raw); renderSearch(raw); return; }
     $("pujaTiles").innerHTML = PUJAS.filter(p => !p.kind || p.kind === "common").map(pujaCard).join("");
@@ -458,6 +462,86 @@
     }
     const j = await fetch(path); if (!j.ok) throw new Error(j.status); return j.json();
   }
+
+  /* ---------- my lists & parayana ---------- */
+  // prefs.lists = [{id, name, items: [itemId]}]; itemId: namavali id, "p-<puja>", "s-<stotra>". prefs.para = {list, i} while reading through a list.
+  function itemInfo(id) {
+    if (id.startsWith("s-")) { const x = STOTRAS.find(x => "s-" + x.id === id); return x && { id, deva: x.title, name: L() === "en" ? x.en : x.ta, sub: t("toSto"), sym: x.group }; }
+    if (id.startsWith("p-")) { const p = PUJAS.find(p => "p-" + p.id === id); return p && { id, deva: p.title, name: pujaName(p), sub: L() === "en" ? p.when_en : p.when_ta, sym: p.deity }; }
+    const it = byId(id); return it && { id, deva: it.title || it.deva, name: L() === "en" ? it.en : T.tamil(it.deva), sub: `${it.count} · ${kindLabel(it.kind)}`, sym: it.group };
+  }
+  const listById = id => prefs.lists.find(l => l.id === id);
+  const curItemId = () => view === "stotra" && stoDoc ? "s-" + stoDoc.id : view === "puja" && pujaDoc ? "p-" + pujaDoc.id : view === "reader" && current ? current.id : null;
+  function newList(name) {
+    name = (name || "").trim(); if (!name) return null;
+    const l = { id: Date.now().toString(36) + Math.random().toString(36).slice(2, 5), name, items: [] };
+    prefs.lists.push(l); save(); return l;
+  }
+  function renderLists() {
+    $("dListN").textContent = prefs.lists.length || "";
+    if (view !== "lists") return;
+    $("listsBox").innerHTML = prefs.lists.length ? prefs.lists.map(l => {
+      const first = l.items.map(itemInfo).filter(Boolean);
+      return `<div class="lcard"><a class="lmain" href="#list-${l.id}"><span class="lname">${esc(l.name)}</span><span class="lsub">${esc(t("nItems", first.length))}${first.length ? " · " + first.slice(0, 3).map(x => esc(x.name)).join(", ") + (first.length > 3 ? "…" : "") : ""}</span></a>` +
+        (first.length ? `<button class="pbtn" data-start="${l.id}">${esc(t("startPara"))}</button>` : "") + `</div>`;
+    }).join("") : `<p class="empty">${esc(t("noLists"))}</p>`;
+  }
+  let listKey = null, delArm = false;
+  function renderList() {
+    const l = listById(listKey); if (!l) { location.hash = "lists"; return; }
+    l.items = l.items.filter(id => itemInfo(id));
+    $("lTitle").textContent = l.name; $("lCount").textContent = t("nItems", l.items.length);
+    $("lStart").hidden = !l.items.length; delArm = false; $("lDelete").textContent = t("delList");
+    $("lItems").innerHTML = l.items.length ? l.items.map((id, i) => { const x = itemInfo(id);
+      return `<li data-id="${esc(id)}"><span class="grip" aria-hidden="true">⠿</span><a class="lit" href="#${esc(id)}"><span class="sym xs">${window.symbolSVG(x.sym)}</span><span class="hb"><span class="d">${esc(x.deva)}</span><span class="t">${esc(x.name)}</span><span class="hs">${esc(x.sub || "")}</span></span></a>` +
+        `<span class="ord"><button class="icon" data-lup="${i}" ${i === 0 ? "disabled" : ""} aria-label="${t("up")}">↑</button><button class="icon" data-ldown="${i}" ${i === l.items.length - 1 ? "disabled" : ""} aria-label="${t("down")}">↓</button><button class="icon" data-ldel="${i}" aria-label="${t("remove")}">✕</button></span></li>`; }).join("")
+      : `<li class="empty">${esc(t("emptyList"))}</li>`;
+  }
+  function moveItem(l, i, j) { if (j < 0 || j >= l.items.length) return; const [x] = l.items.splice(i, 1); l.items.splice(j, 0, x); save(); renderList(); }
+  // drag by the ⠿ grip (works with touch and mouse)
+  (function () {
+    let drag = null;
+    document.addEventListener("pointerdown", e => {
+      const g = e.target.closest("#lItems .grip"); if (!g) return;
+      const li = g.closest("li"); drag = { li, id: li.dataset.id }; li.classList.add("dragging"); g.setPointerCapture(e.pointerId); e.preventDefault();
+    });
+    document.addEventListener("pointermove", e => {
+      if (!drag) return; const ol = $("lItems"), y = e.clientY;
+      const sibs = [...ol.children].filter(x => x !== drag.li);
+      const after = sibs.find(x => { const r = x.getBoundingClientRect(); return y < r.top + r.height / 2; });
+      if (after) { if (drag.li.nextElementSibling !== after) ol.insertBefore(drag.li, after); } else if (ol.lastElementChild !== drag.li) ol.appendChild(drag.li);
+      if (y < 60) window.scrollBy(0, -12); else if (y > innerHeight - 60) window.scrollBy(0, 12);
+    });
+    const end = () => { if (!drag) return; drag.li.classList.remove("dragging"); const l = listById(listKey);
+      if (l) { l.items = [...$("lItems").children].map(x => x.dataset.id).filter(Boolean); save(); renderList(); } drag = null; };
+    document.addEventListener("pointerup", end); document.addEventListener("pointercancel", end);
+  })();
+  // add-to-list sheet
+  let sheetFor = null;
+  function openSheet(id) {
+    sheetFor = id; const x = itemInfo(id); if (!x) return;
+    $("sheetItem").textContent = x.name;
+    paintSheet(); $("sheet").hidden = false; document.body.classList.add("noscroll");
+  }
+  function paintSheet() {
+    $("sheetLists").innerHTML = prefs.lists.length ? prefs.lists.map(l => `<label class="srowl"><input type="checkbox" data-sl="${l.id}" ${l.items.includes(sheetFor) ? "checked" : ""}><span>${esc(l.name)}</span><span class="hs">${l.items.length}</span></label>`).join("") : `<p class="hint">${esc(t("noLists"))}</p>`;
+  }
+  function closeSheet() { $("sheet").hidden = true; document.body.classList.remove("noscroll"); renderLists(); refreshListBtns(); }
+  function refreshListBtns() { const id = curItemId(); const n = id ? prefs.lists.filter(l => l.items.includes(id)).length : 0;
+    document.querySelectorAll("[data-addlist]").forEach(b => { b.setAttribute("aria-pressed", n > 0); b.querySelector(".star").textContent = n ? "✓" : "＋"; }); }
+  // parayana bar
+  function paraStart(lid, i) { const l = listById(lid); if (!l || !l.items.length) return; prefs.para = { list: lid, i: i || 0 }; save(); location.hash = l.items[prefs.para.i]; }
+  function paintPara() {
+    const P = prefs.para, l = P && listById(P.list), id = curItemId();
+    const on = !!(l && id && l.items[P.i] === id);
+    $("paraBar").hidden = !on; document.body.classList.toggle("para", on);
+    if (!on) return;
+    const n = l.items.length, nx = l.items[P.i + 1] && itemInfo(l.items[P.i + 1]);
+    $("paraLbl").textContent = t("paraOf", P.i + 1, n, l.name);
+    $("paraNext").textContent = nx ? t("nextIs", nx.name) : t("lastOne");
+    $("paraGo").textContent = nx ? "→" : "✓"; $("paraPrev").disabled = P.i === 0;
+  }
+
   /* ---------- reader ---------- */
   async function loadDoc(id) {
     if (docs[id]) return docs[id];
@@ -569,17 +653,20 @@
   }
   function show(v) {
     view = v;
-    ["home", "kind", "group", "fav", "puja", "reader", "stotra", "about"].forEach(x => ($(x).hidden = x !== v));
+    ["home", "kind", "group", "fav", "lists", "list", "puja", "reader", "stotra", "about"].forEach(x => ($(x).hidden = x !== v));
     $("rtools").hidden = v !== "reader" && v !== "puja" && v !== "stotra";
     $("omBtn").hidden = v !== "reader"; $("archBtn").hidden = v !== "reader" || document.body.classList.contains("sto");
     if (v !== "puja") $("suktaBtns").innerHTML = "";
     if (v !== "reader" && !$("archana").hidden) closeArchana();
     keepAwake(v === "reader" || v === "puja" || v === "stotra");
+    setTimeout(() => { paintPara(); refreshListBtns(); }, 0);
   }
   async function route() {
     const id = decodeURIComponent(location.hash.slice(1));
     if (id === "about") { show("about"); window.scrollTo(0, 0); return; }
     if (id === "fav") { show("fav"); renderFav(); window.scrollTo(0, 0); return; }
+    if (id === "lists") { show("lists"); renderLists(); window.scrollTo(0, 0); return; }
+    if (id.startsWith("list-") && listById(id.slice(5))) { listKey = id.slice(5); show("list"); renderList(); window.scrollTo(0, 0); return; }
     if (id.startsWith("p-") && PUJAS.some(p => p.id === id.slice(2))) {
       try { pujaDoc = await loadPuja(id.slice(2)); } catch (e) { $("pBody").innerHTML = `<p class="empty">${t("loadFail")}</p>`; }
       prefs.recent = [id, ...prefs.recent.filter(x => x !== id)].slice(0, 6); save();
@@ -672,6 +759,29 @@
   $("pRet").onclick = () => { if (prefs.returnTo) location.hash = "p-" + prefs.returnTo.puja; };
   $("pFav").onclick = () => pujaDoc && toggleFav("p-" + pujaDoc.id);
   $("sFav").onclick = () => stoDoc && toggleFav("s-" + stoDoc.id);
+  document.querySelectorAll("[data-addlist]").forEach(b => b.onclick = () => { const id = curItemId(); if (id) openSheet(id); });
+  $("sheet").onclick = e => { if (e.target === $("sheet")) closeSheet(); };
+  $("sheetDone").onclick = closeSheet;
+  $("sheetLists").onchange = e => { const c = e.target.closest("[data-sl]"); if (!c) return; const l = listById(c.dataset.sl);
+    if (c.checked) { if (!l.items.includes(sheetFor)) l.items.push(sheetFor); } else l.items = l.items.filter(x => x !== sheetFor); save(); paintSheet(); };
+  $("sheetNew").onsubmit = e => { e.preventDefault(); const l = newList($("sheetNewName").value); if (l) { l.items.push(sheetFor); save(); $("sheetNewName").value = ""; paintSheet(); } };
+  $("newListForm").onsubmit = e => { e.preventDefault(); const l = newList($("newListName").value); if (l) { $("newListName").value = ""; renderLists(); } };
+  $("listHome").onclick = e => { const b = e.target.closest("[data-start]"); if (b) paraStart(b.dataset.start, 0); };
+  $("listsBox").onclick = e => { const b = e.target.closest("[data-start]"); if (b) paraStart(b.dataset.start, 0); };
+  $("lStart").onclick = () => paraStart(listKey, 0);
+  $("lRename").onclick = () => { const l = listById(listKey); const h = $("lTitle"); h.contentEditable = "true"; h.focus();
+    const r = document.createRange(); r.selectNodeContents(h); const sl = getSelection(); sl.removeAllRanges(); sl.addRange(r);
+    const fin = () => { h.contentEditable = "false"; const v = h.textContent.trim(); if (v) { l.name = v.slice(0, 40); save(); } renderList(); renderLists(); };
+    h.onblur = fin; h.onkeydown = ev => { if (ev.key === "Enter") { ev.preventDefault(); h.blur(); } }; };
+  $("lDelete").onclick = () => { if (!delArm) { delArm = true; $("lDelete").textContent = t("confirmDel"); return; }
+    prefs.lists = prefs.lists.filter(l => l.id !== listKey); if (prefs.para && prefs.para.list === listKey) delete prefs.para; save(); renderLists(); location.hash = "lists"; };
+  $("lItems").onclick = e => { const l = listById(listKey); if (!l) return; const u = e.target.closest("[data-lup]"), d = e.target.closest("[data-ldown]"), x = e.target.closest("[data-ldel]");
+    if (u) moveItem(l, +u.dataset.lup, +u.dataset.lup - 1); else if (d) moveItem(l, +d.dataset.ldown, +d.dataset.ldown + 1);
+    else if (x) { l.items.splice(+x.dataset.ldel, 1); save(); renderList(); } };
+  $("paraGo").onclick = () => { const P = prefs.para, l = P && listById(P.list); if (!l) return;
+    if (P.i + 1 < l.items.length) { P.i++; save(); location.hash = l.items[P.i]; } else { delete prefs.para; save(); location.hash = "list-" + l.id; } };
+  $("paraPrev").onclick = () => { const P = prefs.para, l = P && listById(P.list); if (!l || P.i === 0) return; P.i--; save(); location.hash = l.items[P.i]; };
+  $("paraStop").onclick = () => { delete prefs.para; save(); paintPara(); };
   $("retPuja").onclick = () => { if (prefs.returnTo) location.hash = "p-" + prefs.returnTo.puja; };
   $("rFav").onclick = () => current && toggleFav(current.id);
   document.addEventListener("click", e => {
@@ -720,6 +830,6 @@
     const el = e.target && e.target.nodeType === 1 ? e.target : e.target && e.target.parentElement;
     if (!(el && el.closest("input,textarea"))) e.preventDefault();
   }));
-  Promise.all([getJSON("data/index.json"), getJSON("data/pujas.json").catch(() => []), getJSON("data/days.json").catch(() => null), getJSON("data/glossary.json").catch(() => ({})), getJSON("data/stotras.json").catch(() => [])]).then(([j, pj, dy, gl, st]) => { INDEX = j; PUJAS = pj; DAYS = dy; GLOSS = gl; STOTRAS = st; renderDrawer(); $("dFavN").textContent = prefs.fav.length || ""; route(); })
+  Promise.all([getJSON("data/index.json"), getJSON("data/pujas.json").catch(() => []), getJSON("data/days.json").catch(() => null), getJSON("data/glossary.json").catch(() => ({})), getJSON("data/stotras.json").catch(() => [])]).then(([j, pj, dy, gl, st]) => { INDEX = j; PUJAS = pj; DAYS = dy; GLOSS = gl; STOTRAS = st; renderDrawer(); $("dFavN").textContent = prefs.fav.length || ""; renderLists(); route(); })
     .catch(() => ($("tiles").innerHTML = `<p class="empty">${t("listFail")}</p>`));
 })();
