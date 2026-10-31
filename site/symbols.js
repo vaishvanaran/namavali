@@ -1,6 +1,7 @@
 /* Simple original line symbols for each deity group (drawn for this app). viewBox 0 0 64 64, stroke = currentColor. */
 window.SYMBOLS = {
   // Ganapati — modaka on a plate
+  nitya: `<path d="M8 44h48"/><path d="M18 44a14 14 0 0 1 28 0"/><path d="M32 18v6M17 25l4 4M47 25l-4 4M10 36h5M49 36h5"/><path d="M14 52h36"/>`,
   ganapati: `<path d="M32 12c-3 6-12 13-12 22a12 12 0 0 0 24 0c0-9-9-16-12-22z"/><path d="M32 12v34M26 22c-1 7-1 15 0 23M38 22c1 7 1 15 0 23"/><path d="M12 50h40M16 50c2 4 6 5 16 5s14-1 16-5"/>`,
   // Guru — kamandalu
   guru: `<path d="M22 30h20c2 0 4 2 4 5 0 9-6 17-14 17s-14-8-14-17c0-3 2-5 4-5z"/><path d="M26 30v-6h12v6"/><path d="M24 24h16"/><path d="M38 26c6-4 12-3 14 1"/><path d="M28 18c0-4 8-4 8 0v6"/><path d="M24 42h16"/>`,

@@ -4,7 +4,7 @@
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const FONT = { deva: "var(--deva)", taml: "var(--tamil)", gran: "var(--gran)", latn: "var(--latn)" };
   const CONV = { deva: s => s, taml: T.tamil, gran: T.grantha, latn: T.iast };
-  const VERSION = "2026.10.31g";
+  const VERSION = "2026.10.31h";
   const KINDS = [
     { k: "108", deva: "अष्टोत्तरशतनामावलिः", ta: "அஷ்டோத்தரம்", en: "Ashtottaram", sub: { ta: "108 நாமங்கள்", en: "108 names" } },
     { k: "300", deva: "त्रिशतीनामावलिः", ta: "த்ரிஶதீ", en: "Trishati", sub: { ta: "300 நாமங்கள்", en: "300 names" } },
@@ -56,7 +56,7 @@
   const NOTE_EN = { "கணேச புராணம்": "Ganesha Purana", "ஸ்காந்தம்": "Skanda Purana", "ஸ்வரத்துடன்": "with svaras", "216 நாமங்கள்": "216 names",
     "க்ஷேத்ர நாமங்கள்": "sacred places", "பத்ம புராணம்": "Padma Purana", "ராம ரஹஸ்யம்": "Rama Rahasya", "100 நாமங்கள்": "100 names",
     "பாடம் 2": "version 2", "வராஹ புராணம்": "Varaha Purana", "27 நாமங்கள்": "27 names", "ஆனந்த ராமாயணம்": "Ananda Ramayana",
-    "மஹாபாரதம்": "Mahabharata", "மஹாபாகவதம்": "Mahabhagavata", "ப்ரஸித்த பாடம்": "common version", "லிங்க புராணம்": "Linga Purana", "ருத்ரயாமளம்": "Rudrayamala", "ஸுப்ரஹ்மண்ய ஶாஸ்த்ரிகள்": "by Subrahmanya Shastri", "10 நாமங்கள்": "10 names", "8 நாமங்கள்": "8 names", "மஹாஸிம்ஹாதி": "Mahāsiṃhādi", "புஷ்கராக்ஷாதி": "Puṣkarākṣādi", "த்ரிபுரா ரஹஸ்யம்": "Tripura Rahasya", "மார்க்கண்டேய புராணம் · ஶாந்தி செய்தது": "Markandeya Purana · by Shanti", "மார்க்கண்டேய புராணம் · ருசி செய்தது": "Markandeya Purana · by Ruci", "ஶ்ரீஶங்கரபகவத்பாதர்களுடைய பாஷ்யத்தை அனுசரித்த பாடம்": "the reading followed in Śrī Śaṅkara Bhagavatpāda’s bhāṣya" };
+    "மஹாபாரதம்": "Mahabharata", "மஹாபாகவதம்": "Mahabhagavata", "ப்ரஸித்த பாடம்": "common version", "லிங்க புராணம்": "Linga Purana", "ருத்ரயாமளம்": "Rudrayamala", "ஸுப்ரஹ்மண்ய ஶாஸ்த்ரிகள்": "by Subrahmanya Shastri", "10 நாமங்கள்": "10 names", "8 நாமங்கள்": "8 names", "மஹாஸிம்ஹாதி": "Mahāsiṃhādi", "புஷ்கராக்ஷாதி": "Puṣkarākṣādi", "த்ரிபுரா ரஹஸ்யம்": "Tripura Rahasya", "நித்யகர்ம ப்ரயோகமாலா": "Nityakarma Prayogamala", "மார்க்கண்டேய புராணம் · ஶாந்தி செய்தது": "Markandeya Purana · by Shanti", "மார்க்கண்டேய புராணம் · ருசி செய்தது": "Markandeya Purana · by Ruci", "ஶ்ரீஶங்கரபகவத்பாதர்களுடைய பாஷ்யத்தை அனுசரித்த பாடம்": "the reading followed in Śrī Śaṅkara Bhagavatpāda’s bhāṣya" };
   const GURU_SHLOKA = ["कामाक्षीकरुणारूपं कामकोटिजगद्गुरुम् ।", "चिन्मूर्तिं कलये चित्ते शङ्कराचार्यमव्ययम् ॥"];
   const MANGALA = ["शुक्लाम्बरधरं विष्णुं शशिवर्णं चतुर्भुजम् ।", "प्रसन्नवदनं ध्यायेत् सर्वविघ्नोपशान्तये ॥"];
 
@@ -175,13 +175,13 @@
   const tl = x => (x || "").replace(/[²³⁴₂₃₄\u200c\u200d:ः]/g, "").replace(/க்ஷ/g, "ட்ச").replace(/ட்சு/g, "ட்ச").replace(/ஶ்ரீ|ஸ்ரீ/g, "ஸ்ரீ")
     .replace(/[ஶஸஷஜச]/g, "ச").replace(/[னண]/g, "ந").replace(/[ளழ]/g, "ல").replace(/ற/g, "ர").replace(/ஹ/g, "க")
     .replace(/ீ/g, "ி").replace(/ூ/g, "ு").replace(/ே/g, "ெ").replace(/ோ/g, "ொ").replace(/ை/g, "ெ")
-    .replace(/ஈ/g, "இ").replace(/ஊ/g, "உ").replace(/ஏ/g, "எ").replace(/ஓ/g, "ஒ").replace(/ட்ட/g, "ட்").replace(/த்த/g, "த்").replace(/[்\s]/g, "").toLowerCase();
+    .replace(/ஈ/g, "இ").replace(/ஊ/g, "உ").replace(/ஏ/g, "எ").replace(/ஓ/g, "ஒ").replace(/ட்ட/g, "ட்").replace(/த்த/g, "த்").replace(/[்\s]/g, "").replace(/ி(?=ர)/g, "").toLowerCase();
   const KIND_WORDS = { "108": "அஷ்டோத்தரம் அஷ்டோத்திரம் நாமாவளி ashtottaram ashtothram 108 namavali", "300": "த்ரிஶதீ திரிசதி நாமாவளி trishati trisati 300 namavali",
     "1000": "ஸஹஸ்ரநாமம் சகஸ்ரநாமம் நாமாவளி sahasranamam sahasranama 1000 namavali", small: "நாமாவளி namavali" };
   const GROUP_ALIAS = { ganapati: "ganesha ganesh vinayaka pillaiyar பிள்ளையார் விநாயகர் கணேசர் கணபதி", shiva: "siva sivan shivan சிவன் ஈஸ்வரன் ஈசன் மகாதேவன்",
     devi: "amman ambal ambika devi அம்மன் அம்பாள் தேவி", subrahmanya: "murugan muruga skanda kartikeya subramanya முருகன் கந்தன் சுப்பிரமணியர் ஷண்முகர்",
     vishnu: "perumal narayana பெருமாள் நாராயணன்", hanuman: "anjaneya hanuman ஆஞ்சநேயர் அனுமன் ஹனுமான்", navagraha: "navagraha graha நவகிரகம் நவக்கிரகம் கிரகம்",
-    guru: "acharya guru ஆசார்யர் குரு", dikpala: "dikpalaka திக்பாலகர்" };
+    guru: "acharya guru ஆசார்யர் குரு", nitya: "காலை ப்ராதஸ்மரணம் பிராதஸ்மரணம் நித்ய morning daily pratah smaranam suprabhatam", dikpala: "dikpalaka திக்பாலகர்" };
   let SEARCH = null;
   function searchIndex() {
     if (SEARCH) return SEARCH;
@@ -207,7 +207,8 @@
     return (SEARCH = E);
   }
   function searchFind(raw) {
-    const toks = raw.trim().split(/\s+/).filter(Boolean);
+    let toks = raw.trim().split(/\s+/).filter(Boolean);
+    if (toks.length > 1) toks = toks.filter(q => !/^(ஸ்ரீ|ஶ்ரீ|ஷ்ரீ|श्री|sri|shri|sree|śrī)$/i.test(q));
     const test = (e, q, name) => {
       if (/[\u0B80-\u0BFF]/.test(q)) { const z = tl(q), H = name ? e.nameTA : e.TA; return !!z && (H.includes(z) || (z.length > 4 && /ம$/.test(z) && H.includes(z.slice(0, -1)))); }
       if (/[\u0900-\u097F]/.test(q)) return (name ? e.deva : e.DV).includes(q) || (name ? e.nameTA : e.TA).includes(tl(T.tamil(q)));

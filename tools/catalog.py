@@ -3,6 +3,7 @@
 
 GROUPS = [
     # key, Devanagari, Tamil, English
+    ("nitya", "नित्यश्लोकाः", "நித்ய ஶ்லோகங்கள்", "Daily shlokas"),
     ("ganapati", "गणपतिः", "கணபதி", "Ganapati"),
     ("guru", "गुरवः", "குரு, ஆசார்யர்கள்", "Guru & Acharyas"),
     ("shiva", "शिवः", "சிவன்", "Shiva"),
