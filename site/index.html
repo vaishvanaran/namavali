@@ -40,6 +40,7 @@
   <nav>
     <a href="#" class="dl"><span class="sym xs">⌂</span><span data-t="home">முகப்பு</span></a>
     <a href="#fav" class="dl"><span class="sym xs star">★</span><span data-t="fav">அடிக்கடி படிப்பவை</span><span class="dn" id="dFavN"></span></a>
+    <a href="#marks" class="dl"><span class="sym xs lsym">✎</span><span data-t="myMarks">என் குறிப்புகள்</span><span class="dn" id="dMarkN"></span></a>
     <a href="#lists" class="dl"><span class="sym xs lsym">☰</span><span data-t="myLists">என் பட்டியல்கள்</span><span class="dn" id="dListN"></span></a>
     <div class="dsec" data-t="pujas">பூஜை · வ்ரதம்</div>
     <div id="dPujas"></div>
@@ -119,6 +120,17 @@
   <ol id="lItems" class="favlist litems"></ol>
 </main>
 
+<main id="marks" class="wrap" hidden>
+  <div class="ghead">
+    <button class="back" data-home data-t="backHome">← முகப்பு</button>
+    <div class="gtitle"><span class="sym big lsym">✎</span><div><h1 data-t="myMarks">என் குறிப்புகள்</h1></div></div>
+  </div>
+  <p class="hint" data-t="markHint"></p>
+  <div id="marksBox"></div>
+  <section class="bk"><h2 class="lbl" data-t="backup">பின்னெடுப்பு</h2><p class="hint" data-t="backupNote"></p>
+    <div class="lacts"><button class="btn2" id="bkSave" data-t="backupSave">கோப்பாகச் சேமி</button><label class="btn2" for="bkFile" data-t="backupLoad">கோப்பிலிருந்து மீட்டெடு</label><input type="file" id="bkFile" accept="application/json,.json" hidden></div><p class="note" id="bkMsg"></p></section>
+</main>
+
 <main id="fav" class="wrap" hidden>
   <div class="ghead">
     <button class="back" data-home data-t="backHome">← முகப்பு</button>
@@ -160,9 +172,10 @@
     <div class="rtitle"><h1 id="sTitle"></h1><button class="favbtn" id="sFav" aria-pressed="false"><span class="star">☆</span><span class="fl"></span></button><button class="favbtn addl" data-addlist aria-haspopup="dialog"><span class="star">＋</span><span data-t="toList">பட்டியலில் சேர்</span></button></div>
     <div class="alt" id="sAlt"></div>
     <div class="note" id="sNote" hidden></div>
-    <a class="nlink" id="sNama" hidden></a>
+    <a class="stonav" id="sNama" hidden></a>
   </div>
   <div class="body" id="sBody"></div>
+  <p class="hint" data-t="markHint"></p>
 </main>
 
 <main id="about" class="wrap" hidden>
@@ -244,6 +257,10 @@
   </div>
 </div>
 
+<div id="markSheet" class="sheet" hidden role="dialog" aria-modal="true" aria-labelledby="markT"><div class="sheetbox"><h2 id="markT" data-t="markT">குறி · குறிப்பு</h2><div id="markSnip" class="msnip"></div>
+  <div class="swatches"><button class="sw sw0" data-c="0" aria-label="குறி இல்லை">○</button><button class="sw sw1" data-c="1" aria-label="மஞ்சள்"></button><button class="sw sw2" data-c="2" aria-label="பச்சை"></button><button class="sw sw3" data-c="3" aria-label="நீலம்"></button></div>
+  <textarea id="markNote" rows="3" maxlength="600" data-tp="notePh"></textarea>
+  <div class="lacts"><button class="pbtn" id="markSave" data-t="save">சேமி</button><button class="btn2" id="markClear" data-t="clearMark">குறியை நீக்கு</button></div></div></div>
 <div id="sheet" class="sheet" hidden role="dialog" aria-modal="true" aria-labelledby="sheetT"><div class="sheetbox"><h2 id="sheetT" data-t="addToList">பட்டியலில் சேர்</h2><div id="sheetItem" class="note"></div><div id="sheetLists"></div><form id="sheetNew" class="newlist"><input id="sheetNewName" maxlength="40" autocomplete="off" data-tp="listName" data-ta="listName"><button class="btn2" type="submit" data-t="create">உருவாக்கு</button></form><button class="pbtn" id="sheetDone" data-t="done">முடிந்தது</button></div></div>
 <nav id="paraBar" class="parabar" hidden aria-label="பாராயணம்"><button class="icon" id="paraPrev" aria-label="முந்தையது">‹</button><div class="pmid"><div class="pl" id="paraLbl"></div><div class="pn" id="paraNext"></div></div><button class="pbtn" id="paraGo">→</button><button class="icon px" id="paraStop" aria-label="நிறுத்து">✕</button></nav>
 <div id="archana" class="archana" hidden role="dialog" data-ta="archana">

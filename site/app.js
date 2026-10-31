@@ -4,7 +4,7 @@
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const FONT = { deva: "var(--deva)", taml: "var(--tamil)", gran: "var(--gran)", latn: "var(--latn)" };
   const CONV = { deva: s => s, taml: T.tamil, gran: T.grantha, latn: T.iast };
-  const VERSION = "2026.10.31i";
+  const VERSION = "2026.10.31j";
   const KINDS = [
     { k: "108", deva: "अष्टोत्तरशतनामावलिः", ta: "அஷ்டோத்தரம்", en: "Ashtottaram", sub: { ta: "108 நாமங்கள்", en: "108 names" } },
     { k: "300", deva: "त्रिशतीनामावलिः", ta: "த்ரிஶதீ", en: "Trishati", sub: { ta: "300 நாமங்கள்", en: "300 names" } },
@@ -22,10 +22,10 @@
       favEmpty: 'அடிக்கடி படிக்கும் நாமாவளிகளில் உள்ள <b class="star">☆</b> குறியைத் தொட்டால் அவை இங்கே முதலிலேயே வரும்.',
       favHint: "அடிக்கடி படிக்கும் நாமாவளிகளில் உள்ள ☆ குறியைத் தொட்டால் இங்கே சேரும். ↑ ↓ பொத்தான்களால் வரிசையை மாற்றலாம்.",
       addFav: "அடிக்கடி படிப்பவையில் சேர்", inFav: "அடிக்கடி படிப்பவையில் உள்ளது",
-      tapHint: "ஒரு நாமத்தைத் தொட்டால் அது குறிக்கப்படும். பூஜையில் எங்கே இருக்கிறோம் என்று தெரியும்.",
+      tapHint: "ஒரு நாமத்தைத் தொட்டால் அது குறிக்கப்படும். பூஜையில் எங்கே இருக்கிறோம் என்று தெரியும். அழுத்திப் பிடித்தால் வண்ணக் குறியிடலாம், குறிப்பு எழுதலாம்.",
       archana: "அர்ச்சனை", archanaTitle: "அர்ச்சனை — ஒவ்வொரு நாமமாக", omTitle: "ஒவ்வொரு நாமத்துக்கும் ஓம்",
       smaller: "எழுத்து சிறிதாக", larger: "எழுத்து பெரிதாக", prev: "← முன்", next: "அடுத்து →", done: "நிறைவு ✓", tapNext: "பெயரைத் தொட்டால் அடுத்தது",
-      nVar: n => `${n} பாடங்கள்`, paatha: "பாடம்", myLists: "என் பட்டியல்கள்", toList: "பட்டியலில் சேர்", addToList: "பட்டியலில் சேர்", listName: "புதிய பட்டியலின் பெயர் — உதா: காலை பாராயணம்", create: "உருவாக்கு", done: "முடிந்தது", startPara: "▶ பாராயணம் தொடங்கு", rename: "பெயர் மாற்று", delList: "பட்டியலை நீக்கு", backLists: "← என் பட்டியல்கள்", listsHint: "தினமும் படிப்பவற்றைப் பெயரிட்ட பட்டியல்களாக வைத்துக்கொள்ளலாம். எந்த ஸ்தோத்ரம், நாமாவளி, பூஜைப் பக்கத்திலும் உள்ள ＋ பட்டியலில் சேர் பொத்தானைத் தொடுங்கள்.", listHint: "⠿ குறியைப் பிடித்து இழுத்தோ ↑ ↓ தொட்டோ வரிசையை மாற்றலாம்.", noLists: "இன்னும் பட்டியல் இல்லை. மேலே பெயர் கொடுத்து உருவாக்குங்கள்.", emptyList: "இந்தப் பட்டியல் காலியாக உள்ளது. ஸ்தோத்ர/நாமாவளி பக்கங்களில் ＋ பட்டியலில் சேர் தொடுங்கள்.", nItems: n => `${n} பகுதிகள்`, paraOf: (i, n, name) => `பாராயணம் · ${name} · ${i}/${n}`, nextIs: x => `அடுத்தது: ${x}`, lastOne: "இது கடைசி — ✓ முடிக்கவும்", confirmDel: "நிச்சயமாக நீக்கவா? மீண்டும் தொடுங்கள்", newName: "புதிய பெயர்", stotras: "ஸ்தோத்ரங்கள்", toNama: "நாமாவளி", toSto: "ஸ்தோத்ரம்", nVerses: n => `${n} ஶ்லோகங்கள்`, mNama: "நாமாவளி", mStotra: "ஸ்தோத்ரம்", veda: "வேத மந்த்ரங்கள்", yajur: "க்ருஷ்ண யஜுர்வேதம்", sama: "ஸாமவேதம்",
+      nVar: n => `${n} பாடங்கள்`, paatha: "பாடம்", myMarks: "என் குறிப்புகள்", markT: "குறி · குறிப்பு", notePh: "உங்கள் குறிப்பு (உங்கள் ஃபோனில் மட்டும்)", save: "சேமி", clearMark: "குறியை நீக்கு", noMarks: "இன்னும் குறிப்பு இல்லை. ஸ்தோத்ரம், நாமாவளி அல்லது பூஜையில் ஒரு ஶ்லோகத்தை அழுத்திப் பிடித்தால் வண்ணக் குறியிடலாம், குறிப்பு எழுதலாம்.", markHint: "ஒரு ஶ்லோகத்தையோ நாமத்தையோ அழுத்திப் பிடித்தால் வண்ணக் குறியிடலாம், குறிப்பு எழுதலாம்.", backup: "பின்னெடுப்பு", backupSave: "கோப்பாகச் சேமி", backupLoad: "கோப்பிலிருந்து மீட்டெடு", backupDone: "மீட்டெடுக்கப்பட்டது ✓", backupBad: "இந்தக் கோப்பைப் படிக்க முடியவில்லை", backupNote: "அடிக்கடி படிப்பவை, என் பட்டியல்கள், குறிப்புகள் இந்த ஃபோனில் மட்டுமே இருக்கும். ஃபோன் மாற்றும் முன் கோப்பாகச் சேமித்து, புதிய ஃபோனில் மீட்டெடுக்கலாம்.", myLists: "என் பட்டியல்கள்", toList: "பட்டியலில் சேர்", addToList: "பட்டியலில் சேர்", listName: "புதிய பட்டியலின் பெயர் — உதா: காலை பாராயணம்", create: "உருவாக்கு", done: "முடிந்தது", startPara: "▶ பாராயணம் தொடங்கு", rename: "பெயர் மாற்று", delList: "பட்டியலை நீக்கு", backLists: "← என் பட்டியல்கள்", listsHint: "தினமும் படிப்பவற்றைப் பெயரிட்ட பட்டியல்களாக வைத்துக்கொள்ளலாம். எந்த ஸ்தோத்ரம், நாமாவளி, பூஜைப் பக்கத்திலும் உள்ள ＋ பட்டியலில் சேர் பொத்தானைத் தொடுங்கள்.", listHint: "⠿ குறியைப் பிடித்து இழுத்தோ ↑ ↓ தொட்டோ வரிசையை மாற்றலாம்.", noLists: "இன்னும் பட்டியல் இல்லை. மேலே பெயர் கொடுத்து உருவாக்குங்கள்.", emptyList: "இந்தப் பட்டியல் காலியாக உள்ளது. ஸ்தோத்ர/நாமாவளி பக்கங்களில் ＋ பட்டியலில் சேர் தொடுங்கள்.", nItems: n => `${n} பகுதிகள்`, paraOf: (i, n, name) => `பாராயணம் · ${name} · ${i}/${n}`, nextIs: x => `அடுத்தது: ${x}`, lastOne: "இது கடைசி — ✓ முடிக்கவும்", confirmDel: "நிச்சயமாக நீக்கவா? மீண்டும் தொடுங்கள்", newName: "புதிய பெயர்", stotras: "ஸ்தோத்ரங்கள்", toNama: "நாமாவளி", toSto: "ஸ்தோத்ரம்", nVerses: n => `${n} ஶ்லோகங்கள்`, mNama: "நாமாவளி", mStotra: "ஸ்தோத்ரம்", veda: "வேத மந்த்ரங்கள்", yajur: "க்ருஷ்ண யஜுர்வேதம்", sama: "ஸாமவேதம்",
       names: n => `${n} நாமங்கள்`, nNamavalis: n => `${n} நாமாவளிகள்`, notFound: q => `“${q}” — எதுவும் கிடைக்கவில்லை.`,
       loadFail: "ஏற்ற முடியவில்லை. இணைய இணைப்பைச் சரிபார்க்கவும்.", listFail: "பட்டியலை ஏற்ற முடியவில்லை.",
       svaraNote: "ஸ்வரக் குறிகள் தேவநாகரி, க்ரந்தத்தில் மட்டும் காட்டப்படும்.", version: "பதிப்பு",
@@ -42,10 +42,10 @@
       favEmpty: 'Tap the <b class="star">☆</b> on any namavali you read often and it will appear here first.',
       favHint: "Tap ☆ on a namavali to add it here. Use ↑ ↓ to set the order.",
       addFav: "Add to favourites", inFav: "In favourites",
-      tapHint: "Tap a name to mark it, so you keep your place during the puja.",
+      tapHint: "Tap a name to mark it, so you keep your place during the puja. Press and hold to highlight or add a note.",
       archana: "Archana", archanaTitle: "Archana — one name at a time", omTitle: "Om before every name",
       smaller: "Smaller text", larger: "Larger text", prev: "← Back", next: "Next →", done: "Done ✓", tapNext: "Tap the name for the next one",
-      nVar: n => `${n} versions`, paatha: "Version", myLists: "My lists", toList: "Add to list", addToList: "Add to a list", listName: "New list name — e.g. Morning parayana", create: "Create", done: "Done", startPara: "▶ Start parayana", rename: "Rename", delList: "Delete list", backLists: "← My lists", listsHint: "Keep what you read daily as named lists. Tap ＋ Add to list on any stotra, namavali or puja page.", listHint: "Drag ⠿ or use ↑ ↓ to set the order.", noLists: "No lists yet. Give a name above and create one.", emptyList: "This list is empty. Tap ＋ Add to list on a stotra or namavali page.", nItems: n => `${n} items`, paraOf: (i, n, name) => `Parayana · ${name} · ${i}/${n}`, nextIs: x => `Next: ${x}`, lastOne: "Last one — tap ✓ to finish", confirmDel: "Tap again to delete", newName: "New name", stotras: "Stotras", toNama: "Nāmāvalī", toSto: "Stotram", nVerses: n => `${n} verses`, mNama: "Nāmāvalī", mStotra: "Stotram", veda: "Veda mantras", yajur: "Krishna Yajurveda", sama: "Samaveda",
+      nVar: n => `${n} versions`, paatha: "Version", myMarks: "My notes", markT: "Highlight · note", notePh: "Your note (kept only on this phone)", save: "Save", clearMark: "Remove", noMarks: "No notes yet. Press and hold a verse or name in any stotra, namavali or puja to highlight it or add a note.", markHint: "Press and hold a verse or name to highlight it or add a note.", backup: "Backup", backupSave: "Save to a file", backupLoad: "Restore from a file", backupDone: "Restored ✓", backupBad: "Could not read this file", backupNote: "Favourites, lists and notes live only on this phone. Save them to a file before changing phones and restore them on the new one.", myLists: "My lists", toList: "Add to list", addToList: "Add to a list", listName: "New list name — e.g. Morning parayana", create: "Create", done: "Done", startPara: "▶ Start parayana", rename: "Rename", delList: "Delete list", backLists: "← My lists", listsHint: "Keep what you read daily as named lists. Tap ＋ Add to list on any stotra, namavali or puja page.", listHint: "Drag ⠿ or use ↑ ↓ to set the order.", noLists: "No lists yet. Give a name above and create one.", emptyList: "This list is empty. Tap ＋ Add to list on a stotra or namavali page.", nItems: n => `${n} items`, paraOf: (i, n, name) => `Parayana · ${name} · ${i}/${n}`, nextIs: x => `Next: ${x}`, lastOne: "Last one — tap ✓ to finish", confirmDel: "Tap again to delete", newName: "New name", stotras: "Stotras", toNama: "Nāmāvalī", toSto: "Stotram", nVerses: n => `${n} verses`, mNama: "Nāmāvalī", mStotra: "Stotram", veda: "Veda mantras", yajur: "Krishna Yajurveda", sama: "Samaveda",
       names: n => `${n} names`, nNamavalis: n => `${n} namavalis`, notFound: q => `Nothing found for “${q}”.`,
       loadFail: "Could not load. Check your internet connection.", listFail: "Could not load the list.",
       svaraNote: "Svara marks are shown only in Devanagari and Grantha.", version: "Version",
@@ -65,6 +65,7 @@
   if (!Array.isArray(prefs.recent)) prefs.recent = [];
   if (!Array.isArray(prefs.fav)) prefs.fav = [];
   if (!Array.isArray(prefs.lists)) prefs.lists = [];
+  if (!prefs.marks || typeof prefs.marks !== "object") prefs.marks = {};
   if (prefs.sukta === true) { prefs.suktaOn = { "purusha-sukta-vidhana": true }; delete prefs.sukta; }
   const save = () => { try { localStorage.setItem("nv-prefs", JSON.stringify(prefs)); } catch (e) {} };
 
@@ -435,7 +436,7 @@
       }
       h += `</section>`;
     });
-    $("pBody").innerHTML = h;
+    $("pBody").innerHTML = h; markUnits($("pBody"), "p-" + pujaDoc.id);
   }
   function markStep() {
     if (view !== "puja") return;
@@ -542,6 +543,74 @@
     $("paraGo").textContent = nx ? "→" : "✓"; $("paraPrev").disabled = P.i === 0;
   }
 
+
+  /* ---------- highlights & notes ---------- */
+  // prefs.marks["<doc>#<n>"] = {c: 1-3 colour (0 = none), note, x: first words, at}; units are whole verses/names, so no text selection is needed
+  const UNIT = ".blk-shloka,.blk-para,.names>li,.pverse,.pprose,.poffer,.plist>li";
+  function markUnits(root, doc) {
+    root.querySelectorAll(UNIT).forEach((el, n) => { el.dataset.hk = doc + "#" + n; paintMark(el); });
+    const j = prefs.jumpMark; if (j && j.startsWith(doc + "#")) { delete prefs.jumpMark; save();
+      const el = root.querySelector(`[data-hk="${j}"]`); if (el) setTimeout(() => { el.scrollIntoView({ block: "center" }); el.classList.add("flash"); setTimeout(() => el.classList.remove("flash"), 1600); }, 120); }
+  }
+  function paintMark(el) {
+    const m = prefs.marks[el.dataset.hk]; el.classList.remove("hl1", "hl2", "hl3"); const old = el.querySelector(":scope > .mnote"); if (old) old.remove();
+    if (!m) return; if (m.c) el.classList.add("hl" + m.c);
+    if (m.note) { const d = document.createElement(el.tagName === "LI" ? "span" : "div"); d.className = "mnote"; d.textContent = "✎ " + m.note; el.appendChild(d); }
+  }
+  let markKey = null, markEl = null, markC = 0;
+  function openMark(el) {
+    markEl = el; markKey = el.dataset.hk; const m = prefs.marks[markKey] || {}; markC = m.c || 0;
+    const clone = el.cloneNode(true); clone.querySelectorAll(".mnote,.n").forEach(x => x.remove());
+    $("markSnip").textContent = clone.textContent.trim().replace(/\s+/g, " ").slice(0, 120);
+    $("markNote").value = m.note || ""; paintSwatches(); $("markSheet").hidden = false; document.body.classList.add("noscroll");
+  }
+  function paintSwatches() { document.querySelectorAll("#markSheet [data-c]").forEach(b => b.setAttribute("aria-pressed", +b.dataset.c === markC)); }
+  function closeMark() { $("markSheet").hidden = true; document.body.classList.remove("noscroll"); }
+  function saveMark() {
+    const note = $("markNote").value.trim();
+    if (!markC && !note) delete prefs.marks[markKey];
+    else prefs.marks[markKey] = { c: markC, note, x: $("markSnip").textContent.slice(0, 80), at: Date.now() };
+    save(); if (markEl) paintMark(markEl); closeMark(); renderMarksCount();
+  }
+  function renderMarksCount() { $("dMarkN").textContent = Object.keys(prefs.marks).length || ""; }
+  function docInfo(doc) { return itemInfo(doc) || null; }
+  function renderMarks() {
+    const keys = Object.keys(prefs.marks).sort((a, b) => (prefs.marks[b].at || 0) - (prefs.marks[a].at || 0));
+    const byDoc = {}; keys.forEach(k => { const d = k.split("#")[0]; (byDoc[d] = byDoc[d] || []).push(k); });
+    $("marksBox").innerHTML = keys.length ? Object.entries(byDoc).map(([d, ks]) => { const x = docInfo(d); if (!x) return "";
+      return `<section class="mdoc"><h2 class="lbl">${esc(x.name)}</h2>` + ks.sort((a, b) => +a.split("#")[1] - +b.split("#")[1]).map(k => { const m = prefs.marks[k];
+        return `<button class="mrow hl${m.c || 0}" data-goto="${esc(k)}"><span class="mx">${esc(m.x || "")}</span>${m.note ? `<span class="mn">✎ ${esc(m.note)}</span>` : ""}</button>`; }).join("") + `</section>`; }).join("")
+      : `<p class="empty">${esc(t("noMarks"))}</p>`;
+  }
+  // press and hold
+  (function () {
+    let tm = null, sx = 0, sy = 0, fired = false;
+    document.addEventListener("pointerdown", e => {
+      const el = e.target.closest("[data-hk]"); if (!el || e.button > 0) return;
+      sx = e.clientX; sy = e.clientY; fired = false; clearTimeout(tm);
+      tm = setTimeout(() => { fired = true; if (navigator.vibrate) try { navigator.vibrate(15); } catch (x) {} openMark(el); }, 550);
+    });
+    document.addEventListener("pointermove", e => { if (tm && Math.hypot(e.clientX - sx, e.clientY - sy) > 10) { clearTimeout(tm); tm = null; } });
+    ["pointerup", "pointercancel", "scroll"].forEach(ev => document.addEventListener(ev, () => { clearTimeout(tm); tm = null; }, { passive: true }));
+    document.addEventListener("click", e => { if (fired) { fired = false; e.stopPropagation(); e.preventDefault(); } }, true);
+  })();
+  // backup of favourites, lists, notes
+  function backupSave() {
+    const data = { app: "pujanidhi", v: 1, fav: prefs.fav, lists: prefs.lists, marks: prefs.marks, rmode: prefs.rmode || {} };
+    const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([JSON.stringify(data)], { type: "application/json" }));
+    a.download = "pujanidhi-backup-" + new Date().toISOString().slice(0, 10) + ".json"; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+  }
+  function backupLoad(file) {
+    const r = new FileReader();
+    r.onload = () => { try { const d = JSON.parse(r.result); if (d.app !== "pujanidhi") throw 0;
+        prefs.fav = [...new Set([...(prefs.fav || []), ...(d.fav || [])])];
+        const have = new Set(prefs.lists.map(l => l.id)); (d.lists || []).forEach(l => { if (!have.has(l.id)) prefs.lists.push(l); });
+        Object.assign(prefs.marks, d.marks || {}); prefs.rmode = Object.assign(prefs.rmode || {}, d.rmode || {});
+        save(); renderDrawer(); renderLists(); renderMarksCount(); $("dFavN").textContent = prefs.fav.length || ""; $("bkMsg").textContent = t("backupDone"); }
+      catch (x) { $("bkMsg").textContent = t("backupBad"); } };
+    r.readAsText(file);
+  }
+
   /* ---------- reader ---------- */
   async function loadDoc(id) {
     if (docs[id]) return docs[id];
@@ -565,7 +634,7 @@
     const nv = x.namavali && byId(x.namavali);
     $("sNote").textContent = [x.note ? noteL(x.note) : ""].filter(Boolean).join(" · "); $("sNote").hidden = !x.note;
     $("sNama").hidden = !nv; if (nv) { $("sNama").href = "#" + nv.id; $("sNama").textContent = t("toNama") + " · " + tr(nv.deva) + " →"; }
-    $("sBody").innerHTML = blocksHTML(stoDoc.blocks);
+    $("sBody").innerHTML = blocksHTML(stoDoc.blocks); markUnits($("sBody"), "s-" + stoDoc.id);
   }
   function renderReader() {
     const d = current; if (!d) return;
@@ -592,7 +661,7 @@
     if (view === "reader") $("archBtn").hidden = stoMode;
     if (stoMode) {
       const want = d.id;
-      loadSto(meta.st).then(S => { if (!current || current.id !== want || rMode(want) !== "s") return; $("rBody").innerHTML = blocksHTML(S.blocks); })
+      loadSto(meta.st).then(S => { if (!current || current.id !== want || rMode(want) !== "s") return; $("rBody").innerHTML = blocksHTML(S.blocks); markUnits($("rBody"), "s-" + meta.st); })
         .catch(() => { $("rBody").innerHTML = `<p class="empty">${t("loadFail")}</p>`; });
       flat = d.blocks.filter(b => b.t === "names").flatMap(b => b.x);
       return;
@@ -608,7 +677,7 @@
         return `<li data-i="${i}"${curI === i ? ' class="cur"' : ""}><span class="n">${i + 1}</span><span class="x">${nameHTML(x, i, d)}</span></li>`;
       }).join("") + `</ol>`;
     }
-    $("rBody").innerHTML = h;
+    $("rBody").innerHTML = h; markUnits($("rBody"), d.id);
     if (!$("archana").hidden) renderArchana();
   }
   function setCur(i) {
@@ -653,7 +722,7 @@
   }
   function show(v) {
     view = v;
-    ["home", "kind", "group", "fav", "lists", "list", "puja", "reader", "stotra", "about"].forEach(x => ($(x).hidden = x !== v));
+    ["home", "kind", "group", "fav", "lists", "list", "marks", "puja", "reader", "stotra", "about"].forEach(x => ($(x).hidden = x !== v));
     $("rtools").hidden = v !== "reader" && v !== "puja" && v !== "stotra";
     $("omBtn").hidden = v !== "reader"; $("archBtn").hidden = v !== "reader" || document.body.classList.contains("sto");
     if (v !== "puja") $("suktaBtns").innerHTML = "";
@@ -665,6 +734,7 @@
     const id = decodeURIComponent(location.hash.slice(1));
     if (id === "about") { show("about"); window.scrollTo(0, 0); return; }
     if (id === "fav") { show("fav"); renderFav(); window.scrollTo(0, 0); return; }
+    if (id === "marks") { show("marks"); renderMarks(); window.scrollTo(0, 0); return; }
     if (id === "lists") { show("lists"); renderLists(); window.scrollTo(0, 0); return; }
     if (id.startsWith("list-") && listById(id.slice(5))) { listKey = id.slice(5); show("list"); renderList(); window.scrollTo(0, 0); return; }
     if (id.startsWith("p-") && PUJAS.some(p => p.id === id.slice(2))) {
@@ -781,6 +851,13 @@
   $("paraGo").onclick = () => { const P = prefs.para, l = P && listById(P.list); if (!l) return;
     if (P.i + 1 < l.items.length) { P.i++; save(); location.hash = l.items[P.i]; } else { delete prefs.para; save(); location.hash = "list-" + l.id; } };
   $("paraPrev").onclick = () => { const P = prefs.para, l = P && listById(P.list); if (!l || P.i === 0) return; P.i--; save(); location.hash = l.items[P.i]; };
+  $("markSheet").onclick = e => { if (e.target === $("markSheet")) closeMark(); const b = e.target.closest("[data-c]"); if (b) { markC = +b.dataset.c; paintSwatches(); } };
+  $("markSave").onclick = saveMark;
+  $("markClear").onclick = () => { markC = 0; $("markNote").value = ""; saveMark(); };
+  $("marksBox").onclick = e => { const b = e.target.closest("[data-goto]"); if (!b) return; const k = b.dataset.goto, d = k.split("#")[0];
+    prefs.jumpMark = k; if (!d.startsWith("s-") && !d.startsWith("p-")) { prefs.rmode = prefs.rmode || {}; prefs.rmode[d] = "n"; } save(); location.hash = d; };
+  $("bkSave").onclick = backupSave;
+  $("bkFile").onchange = e => { const f = e.target.files[0]; if (f) backupLoad(f); e.target.value = ""; };
   $("paraStop").onclick = () => { delete prefs.para; save(); paintPara(); };
   $("retPuja").onclick = () => { if (prefs.returnTo) location.hash = "p-" + prefs.returnTo.puja; };
   $("rFav").onclick = () => current && toggleFav(current.id);
@@ -830,6 +907,6 @@
     const el = e.target && e.target.nodeType === 1 ? e.target : e.target && e.target.parentElement;
     if (!(el && el.closest("input,textarea"))) e.preventDefault();
   }));
-  Promise.all([getJSON("data/index.json"), getJSON("data/pujas.json").catch(() => []), getJSON("data/days.json").catch(() => null), getJSON("data/glossary.json").catch(() => ({})), getJSON("data/stotras.json").catch(() => [])]).then(([j, pj, dy, gl, st]) => { INDEX = j; PUJAS = pj; DAYS = dy; GLOSS = gl; STOTRAS = st; renderDrawer(); $("dFavN").textContent = prefs.fav.length || ""; renderLists(); route(); })
+  Promise.all([getJSON("data/index.json"), getJSON("data/pujas.json").catch(() => []), getJSON("data/days.json").catch(() => null), getJSON("data/glossary.json").catch(() => ({})), getJSON("data/stotras.json").catch(() => [])]).then(([j, pj, dy, gl, st]) => { INDEX = j; PUJAS = pj; DAYS = dy; GLOSS = gl; STOTRAS = st; renderDrawer(); $("dFavN").textContent = prefs.fav.length || ""; renderLists(); renderMarksCount(); route(); })
     .catch(() => ($("tiles").innerHTML = `<p class="empty">${t("listFail")}</p>`));
 })();
