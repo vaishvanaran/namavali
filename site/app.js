@@ -4,7 +4,7 @@
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const FONT = { deva: "var(--deva)", taml: "var(--tamil)", gran: "var(--gran)", latn: "var(--latn)" };
   const CONV = { deva: s => s, taml: T.tamil, gran: T.grantha, latn: T.iast };
-  const VERSION = "2026.10.31l";
+  const VERSION = "2026.10.31m";
   const KINDS = [
     { k: "108", deva: "अष्टोत्तरशतनामावलिः", ta: "அஷ்டோத்தரம்", en: "Ashtottaram", sub: { ta: "108 நாமங்கள்", en: "108 names" } },
     { k: "300", deva: "त्रिशतीनामावलिः", ta: "த்ரிஶதீ", en: "Trishati", sub: { ta: "300 நாமங்கள்", en: "300 names" } },
@@ -404,19 +404,63 @@
     for (const id of suktaIds()) { try { suktaDocs.push(await loadPuja(id)); } catch (e) {} }
   }
   const titles = t => (t || "").split("|").map(x => x.trim());
-  function suktaFor(title) {
-    let h = "";
-    for (const sd of suktaDocs) {
-      if (!skOn(sd.id)) continue;
-      for (const p of sd.parts) for (const sc of p.sections) {
-        const key = sd.id + "/" + sc.title;
-        if (usedSk.has(key) || !titles(sc.title).includes(title)) continue;
-        usedSk.add(key);
-        h += `<div class="pvedic"><span class="vl">${esc((SB[sd.id] || [sd.ta, sd.en])[L() === "en" ? 1 : 0])}</span>` + sc.blocks.filter(b => b.t === "verse" || b.t === "prose" || b.t === "list").map(blockHTML).join("") + `</div>`;
+  // Where each vidhana mantra goes: before the upachara it belongs to, found by the offering line
+  // ("…, आसनं समर्पयामि") wherever it sits in the puja, then moved back over that upachara's own verses.
+  // Falls back to a section with the same title. Each mantra is placed once (first occurrence).
+  const OFFER_V = /(समर्पयामि|कल्पयामि|आवाहयामि|ध्यायामि|स्नपयामि|पूजयामि|दर्शयामि|निवेदयामि|धारयामि|करोमि|समर्पये|अर्पयामि|आघ्रापयामि|परिकल्पयामि|बध्नामि)/;
+  const UPA = [
+    ["ध्यान", [/ध्यायामि/]], ["आवाहन", [/[आा]वाहयामि|इहागच्छ|[आा]वाहनं/]], ["आसन", [/[आा]सन/]],
+    ["पाद्य", [/पाद्य/]], ["अर्घ्य", [/र्घ्य/]], ["आचमनीय", [/[आा]चमन/]],
+    ["मधुपर्क", [/मधुपर्क/]], ["अभिषेक", [/भिषेक/]], ["स्नान", [/शुद्धोदक/, /स्नपयामि|स्नान/]],
+    ["वस्त्र", [/वस्त्र/]], ["यज्ञोपवीत", [/उपवीत/]],
+    ["कण्ठसूत्र", [/कण्ठसूत्र|मङ्गलसूत्र/]], ["आभरण", [/आभरण|आभूषण|भूषणं|अलङ्कार/]],
+    ["गन्ध", [/गन्ध|चन्दनं/]], ["अक्षत", [/^(?!.*र्थम्?अक्षतान्)(?!.*र्थेअक्षतान्).*(अक्षतान्|अक्षताः)/]],
+    ["पुष्प", [/(?<!मन्त्र)पुष्पाणि|(?<!मन्त्र)पुष्पैः|(?<!मन्त्र)पुष्पं|पुष्पमाल/]],
+    ["अर्चना", [/नामभिः|अर्चनां|नामपूजां|अष्टोत्तर/]], ["धूप", [/धूप/]],
+    ["दीप", [/(?<!कर्पूर|नीराजन)दीप/]], ["नैवेद्य", [/नैवेद्य|निवेदयामि/]],
+    ["ताम्बूल", [/ताम्बूल/]], ["नीराजन", [/नीराजन|कर्पूरदीप/]],
+    ["मन्त्रपुष्प", [/मन्त्रपुष्प/]], ["प्रदक्षिण", [/प्रदक्षिण/]],
+    ["राजोपचार", [/राजोपचार|छत्रं|चामरं/]], ["रक्षा", [/रक्षा|दोरक|कङ्कण/]], ["प्रार्थना", [/प्रार्थनां|प्रार्थयामि/]],
+  ];
+  const plain = x => (x || "").replace(/[॒॑᳚॓॔\-]/g, "");
+  function planSukta(d, sd) {
+    // flat list of blocks: {s: section index, b: block index, txt}
+    const flat = []; let si = 0, start = -1;
+    d.parts.forEach(p => p.sections.forEach(sec => { if (start < 0 && /षोडशोपचार/.test(p.title || "")) start = flat.length; sec.blocks.forEach((bl, bi) => flat.push({ s: si, b: bi, t: bl.t, txt: plain([].concat(bl.x || []).flat().join(" ")) })); flat.push({ s: si, b: sec.blocks.length, t: "end", txt: "" }); si++; }));
+    const secTitles = []; d.parts.forEach(p => p.sections.forEach(sec => secTitles.push(titles(sec.title))));
+    const plan = {}; // "s:b" -> [html]
+    const add = (s, b, html) => { (plan[s + ":" + b] = plan[s + ":" + b] || []).push(html); };
+    const vhtml = sc => `<div class="pvedic"><span class="vl">${esc((SB[sd.id] || [sd.ta, sd.en])[L() === "en" ? 1 : 0])}</span>` + sc.blocks.filter(b => b.t === "verse" || b.t === "prose" || b.t === "list").map(blockHTML).join("") + `</div>`;
+    const taken = new Set(), anchors = [], pending = []; let lastPos = null;
+    // a line that names several upacharas at once ("ध्यायामि। आवाहयामि। आसनं…") is a short sub-puja, not the main one
+    const many = txt => UPA.filter(([, rs]) => rs.some(r => r.test(txt))).length >= 3;
+    for (const p of sd.parts) for (const sc of p.sections) {
+      const keys = titles(sc.title).filter(Boolean); if (!keys.length) continue;
+      let at = -1;
+      for (const k of keys) {
+        const u = UPA.find(([n]) => plain(k).startsWith(n)); if (!u) continue;
+        for (const re of u[1]) {
+          const from = anchors.length > 1 ? anchors[anchors.length - 2] : Math.max(start, 0);
+          const i = flat.findIndex((f, j) => j >= from && !taken.has(j) && !/अनन्तरम्|उत्तरम्/.test(f.txt) && !many(f.txt.replace(/\s+/g, "")) && (f.t === "offer" || f.t === "prose" || (u[0] === "अर्चना" && f.t === "namavali")) && (f.t === "namavali" || f.t === "offer" || OFFER_V.test(f.txt) || (f.t === "prose" && f.txt.length < 40 && /॥\s*$/.test(f.txt))) && re.test(f.txt.replace(/\s+/g, "")));
+          if (i >= 0 && (at < 0 || i < at)) at = i;
+          if (i >= 0) break;
+        }
       }
+      if (at >= 0) {
+        taken.add(at); anchors.push(at);
+        let j = at; // move back over this upachara's verses and bare markers ("आवाहनम्।")
+        while (j > 0 && flat[j - 1].s === flat[at].s && (flat[j - 1].t === "verse" || flat[j - 1].t === "rubric" || flat[j - 1].t === "note" || ((flat[j - 1].t === "offer" || (flat[j - 1].t === "prose" && /परिषि|भूर्भुवः|स्वाहा/.test(flat[j - 1].txt))) && !OFFER_V.test(flat[j - 1].txt) && !/॥इति|इति |नमः/.test(flat[j - 1].txt) && !UPA.some(([, rs]) => rs.some(r => r.test(flat[j - 1].txt.replace(/\s+/g, ""))))))) j--;
+        pending.forEach(h => add(flat[j].s, flat[j].b, h)); pending.length = 0;
+        add(flat[j].s, flat[j].b, vhtml(sc)); lastPos = [flat[at].s, flat[at].b + 1]; continue;
+      }
+      const s2 = secTitles.findIndex(ts => ts.some(x => keys.includes(x)));
+      if (s2 >= 0) add(s2, 0, vhtml(sc)); else pending.push(vhtml(sc));
     }
-    return h;
+    // mantras whose upachara this puja does not have go right after the last placed one
+    if (pending.length && lastPos) pending.forEach(h => add(lastPos[0], lastPos[1], h));
+    return plan;
   }
+  window.__planSukta = (d, sd) => planSukta(d, sd);
   function renderPuja() {
     const d = pujaDoc; if (!d) return;
     usedSk = new Set();
@@ -428,11 +472,14 @@
     $("pRet").hidden = !rt; if (rt) $("pRet").textContent = t("backToPuja", pujaName(rt));
     $("pSteps").innerHTML = d.parts.map((p, i) => `<button class="chip" data-step="${i}"><span class="sn">${i + 1}</span>${esc(tr(titles(p.title)[0]))}</button>`).join("");
     let h = "", k = 0;
+    const plans = suktaDocs.filter(sd => skOn(sd.id)).map(sd => planSukta(d, sd));
+    const at = (s, b) => plans.map(pl => (pl[s + ":" + b] || []).join("")).join("");
     d.parts.forEach((p, i) => {
       h += `<section class="ppart" id="part-${i}" data-title="${esc(titles(p.title)[0])}"><h2 class="ptitle"><span class="sn">${i + 1}</span>${esc(tr(titles(p.title)[0]))}</h2>`;
       for (const sec of p.sections) {
         const t0 = titles(sec.title)[0];
-        h += `<div class="psec" id="sec${k++}" data-title="${esc(t0)}">` + (t0 ? `<h3 class="psub">${esc(tr(t0))}</h3>` : "") + suktaFor(t0) + sec.blocks.map(blockHTML).join("") + `</div>`;
+        const si = k;
+        h += `<div class="psec" id="sec${k++}" data-title="${esc(t0)}">` + (t0 ? `<h3 class="psub">${esc(tr(t0))}</h3>` : "") + sec.blocks.map((bl, bi) => at(si, bi) + blockHTML(bl)).join("") + at(si, sec.blocks.length) + `</div>`;
       }
       h += `</section>`;
     });

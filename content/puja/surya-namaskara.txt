@@ -5,6 +5,7 @@ deity: navagraha
 when_ta: ரத ஸப்தமீ, ஞாயிறு
 when_en: Ratha saptamī, Sundays
 order: 51
+sukta: none
 
 # न्यासः
 
