@@ -4,7 +4,7 @@
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const FONT = { deva: "var(--deva)", taml: "var(--tamil)", gran: "var(--gran)", latn: "var(--latn)" };
   const CONV = { deva: s => s, taml: T.tamil, gran: T.grantha, latn: T.iast };
-  const VERSION = "2026.10.31m";
+  const VERSION = "2026.10.31n";
   const KINDS = [
     { k: "108", deva: "अष्टोत्तरशतनामावलिः", ta: "அஷ்டோத்தரம்", en: "Ashtottaram", sub: { ta: "108 நாமங்கள்", en: "108 names" } },
     { k: "300", deva: "त्रिशतीनामावलिः", ta: "த்ரிஶதீ", en: "Trishati", sub: { ta: "300 நாமங்கள்", en: "300 names" } },
@@ -391,14 +391,17 @@
   }
   let suktaDocs = [], usedSk = null;
   const SB = { "purusha-sukta-vidhana": ["புருஷஸூக்தம்", "Purusha Suktam"], "sri-sukta-vidhana": ["ஶ்ரீஸூக்தம்", "Sri Suktam"], "rudra-vidhana": ["ருத்ர விதானம்", "Rudra Vidhanam"] };
-  // exactly one Vedic vidhana per puja, by deity: Shiva → Rudra, Ambal → Sri Sukta, every other deity → Purusha Sukta
-  const VIDHANA_BY_DEITY = { shiva: "rudra-vidhana", devi: "sri-sukta-vidhana" };
+  // Vedic vidhana by deity: Ambal → Sri Sukta, Vishnu → Purusha Sukta, Shiva → Rudra; every other deity may choose
+  // Rudra or Purusha Sukta. A puja's "sukta:" header overrides (several ids = a choice; "none" = no vidhana).
+  const VIDHANA_BY_DEITY = { shiva: ["rudra-vidhana"], devi: ["sri-sukta-vidhana"], vishnu: ["purusha-sukta-vidhana"] };
   const suktaIds = () => {
     if (!pujaDoc || pujaDoc.kind) return [];
-    const id = (pujaDoc.sukta || "").split(/\s+/)[0] || VIDHANA_BY_DEITY[pujaDoc.deity] || "purusha-sukta-vidhana";
-    return PUJAS.some(p => p.id === id) ? [id] : [];
+    const ids = (pujaDoc.sukta || "").trim() ? pujaDoc.sukta.trim().split(/\s+/) : (VIDHANA_BY_DEITY[pujaDoc.deity] || ["rudra-vidhana", "purusha-sukta-vidhana"]);
+    return ids.filter(id => PUJAS.some(p => p.id === id));
   };
-  const skOn = id => !!(prefs.suktaOn || {})[id];
+  // one vidhana at a time, remembered per puja
+  const skOn = id => { if (!pujaDoc) return false; const v = (prefs.vid || {})[pujaDoc.id];
+    if (v !== undefined) return v === id; return suktaIds().find(x => (prefs.suktaOn || {})[x]) === id; };
   async function ensureSukta() {
     suktaDocs = [];
     for (const id of suktaIds()) { try { suktaDocs.push(await loadPuja(id)); } catch (e) {} }
@@ -430,7 +433,7 @@
     const secTitles = []; d.parts.forEach(p => p.sections.forEach(sec => secTitles.push(titles(sec.title))));
     const plan = {}; // "s:b" -> [html]
     const add = (s, b, html) => { (plan[s + ":" + b] = plan[s + ":" + b] || []).push(html); };
-    const vhtml = sc => `<div class="pvedic"><span class="vl">${esc((SB[sd.id] || [sd.ta, sd.en])[L() === "en" ? 1 : 0])}</span>` + sc.blocks.filter(b => b.t === "verse" || b.t === "prose" || b.t === "list").map(blockHTML).join("") + `</div>`;
+    const vhtml = sc => `<div class="pvedic"><span class="vl">${esc((SB[sd.id] || [sd.ta, sd.en])[L() === "en" ? 1 : 0])}</span>` + sc.blocks.filter(b => b.t === "verse" || b.t === "list" || (b.t === "prose" && !/ध्यायामि|आवाहयामि|समर्पयामि/.test([].concat(b.x || []).join(" ")))).map(blockHTML).join("") + `</div>`;
     const taken = new Set(), anchors = [], pending = []; let lastPos = null;
     // a line that names several upacharas at once ("ध्यायामि। आवाहयामि। आसनं…") is a short sub-puja, not the main one
     const many = txt => UPA.filter(([, rs]) => rs.some(r => r.test(txt))).length >= 3;
@@ -872,7 +875,7 @@
     if (b) { prefs.returnTo = { puja: pujaDoc.id, y: Math.round(scrollY) }; save(); location.hash = b.dataset.nv; }
     else if (l) { prefs.returnTo = { puja: pujaDoc.id, y: Math.round(scrollY) }; prefs.jumpTo = l.dataset.sec; save(); location.hash = "p-" + l.dataset.pl; }
   };
-  $("suktaBtns").onclick = e => { const b = e.target.closest("[data-sk]"); if (!b) return; const y = scrollY, anchor = [...document.querySelectorAll("#pBody .psec")].find(el => el.getBoundingClientRect().bottom > 120); prefs.suktaOn = prefs.suktaOn || {}; prefs.suktaOn[b.dataset.sk] = !skOn(b.dataset.sk); save(); renderPuja(); if (anchor) { const el = document.getElementById(anchor.id); window.scrollTo(0, el.getBoundingClientRect().top + scrollY - 120); } else window.scrollTo(0, y); };
+  $("suktaBtns").onclick = e => { const b = e.target.closest("[data-sk]"); if (!b) return; const y = scrollY, anchor = [...document.querySelectorAll("#pBody .psec")].find(el => el.getBoundingClientRect().bottom > 120); prefs.vid = prefs.vid || {}; prefs.vid[pujaDoc.id] = skOn(b.dataset.sk) ? null : b.dataset.sk; save(); renderPuja(); if (anchor) { const el = document.getElementById(anchor.id); window.scrollTo(0, el.getBoundingClientRect().top + scrollY - 120); } else window.scrollTo(0, y); };
   $("pRet").onclick = () => { if (prefs.returnTo) location.hash = "p-" + prefs.returnTo.puja; };
   $("pFav").onclick = () => pujaDoc && toggleFav("p-" + pujaDoc.id);
   $("sFav").onclick = () => stoDoc && toggleFav("s-" + stoDoc.id);

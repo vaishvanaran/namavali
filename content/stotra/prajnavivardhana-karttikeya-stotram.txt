@@ -3,6 +3,7 @@ ta: ப்ரஜ்ஞாவிவர்தன-கார்த்திகேய
 en: Prajñāvivardhana-kārttikeya-stotram
 group: subrahmanya
 order: 153
+namavali: kartikeya-28
 source: stotrasamhita
 
 : स्कन्द उवाच

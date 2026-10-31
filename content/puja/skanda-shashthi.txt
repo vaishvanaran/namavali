@@ -30,9 +30,15 @@ order: 26
 ( इति पात्रस्थं जलं स्पृशेत् | என்று சொல்லி பாத்ரத்திலுள்ள ஜலத்தைத் தொடவும் | Touch the water in the vessel )
 
 @link purvanga विघ्नेश्वर-उद्वासनम्
+@link purvanga महद्वन्दनम्
+
+@link purvanga दीप-पूजा
+
 @link purvanga आसन-पूजा
 @link purvanga घण्टा-पूजा
 @link purvanga कलश-पूजा
+
+@link purvanga शङ्ख-पूजा
 @link purvanga आत्म-पूजा
 @link purvanga पीठ-पूजा
 @link purvanga गुरु-ध्यानम्

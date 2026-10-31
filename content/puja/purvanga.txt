@@ -11,9 +11,12 @@ order: 1
 kind: common
 
 @include vighneshwara
+@include mahat
+@include dipa
 @include aasana
 @include ghanta
 @include kalasha
+@include shankha
 @include atma
 @include pitha
 @include guru
