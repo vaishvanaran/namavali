@@ -6,6 +6,7 @@ when_ta: தைத்திரீய ஆரண்யகம் 1.22 — பூஜ
 when_en: Taittiriya Aranyaka 1.22 — at the close of a puja
 order: 27
 kind: veda
+hidden: yes
 veda: yajur
 
 # मन्त्रपुष्पम्

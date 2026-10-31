@@ -6,6 +6,7 @@ when_ta: தைத்திரீய ஆரண்யகம் 3.12, 3.13 — உ
 when_en: Taittiriya Aranyaka 3.12–13, with Uttara Narayanam
 order: 22
 kind: veda
+hidden: yes
 veda: yajur
 
 # पुरुषसूक्तम्

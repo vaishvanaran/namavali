@@ -6,6 +6,7 @@ when_ta: ருக்வேத கிலம் — யஜுர்வேதி�
 when_en: Rigveda Khila, as recited by Yajurvedins
 order: 24
 kind: veda
+hidden: yes
 veda: yajur
 
 # श्रीसूक्तम्

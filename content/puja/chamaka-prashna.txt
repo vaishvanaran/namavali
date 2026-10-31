@@ -6,6 +6,7 @@ when_ta: தைத்திரீய ஸம்ஹிதை 4.7 — ருத்�
 when_en: Taittiriya Samhita 4.7 — recited after Rudram
 order: 21
 kind: veda
+hidden: yes
 veda: yajur
 
 # चमकप्रश्नः

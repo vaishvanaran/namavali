@@ -29,6 +29,7 @@
     <button class="icon arch" id="archBtn" data-tt="archanaTitle" data-t="archana">அர்ச்சனை</button>
     <span id="suktaBtns" class="sktools"></span>
     <button class="icon" id="omBtn" data-tt="omTitle">ॐ</button>
+    <button class="icon" id="asBtn" data-tt="autoTitle" aria-pressed="false">⇊</button>
     <button class="icon" id="fsDown" data-tt="smaller">அ−</button>
     <button class="icon" id="fsUp" data-tt="larger">அ+</button>
   </div>
@@ -46,7 +47,7 @@
     <div id="dPujas"></div>
     <div class="dsec" data-t="vidhana">விதான பூஜை</div>
     <div id="dVidhana"></div>
-    <div class="dsec" data-t="veda">வேத மந்த்ரங்கள்</div>
+    <div class="dsec" id="dVedaH" data-t="veda">வேத மந்த்ரங்கள்</div>
     <div id="dVeda"></div>
     <div id="dStotraSec" hidden><div class="dsec" data-t="stotras">ஸ்தோத்ரங்கள்</div>
     <div id="dStotra"></div></div>
@@ -79,7 +80,7 @@
   <section id="favBox" class="favbox"><h2 class="lbl"><span class="star">★</span> <span data-t="fav">அடிக்கடி படிப்பவை</span><a href="#fav" class="more" id="favMore" data-t="all">எல்லாம் →</a></h2><div id="favHome"></div></section>
   <section id="listBox" class="favbox" hidden><h2 class="lbl"><span class="lsym">☰</span> <span data-t="myLists">என் பட்டியல்கள்</span><a href="#lists" class="more" data-t="all">எல்லாம் →</a></h2><div id="listHome"></div></section>
   <section id="recentBox" class="recent" hidden><h2 class="lbl" data-t="recent">சமீபத்தில் படித்தவை</h2><div id="recent" class="chips"></div></section>
-  <section id="tilesBox"><h2 class="lbl" data-t="pujas">பூஜை · வ்ரதம்</h2><div id="pujaTiles" class="grid pujas"></div><h2 class="lbl" data-t="vidhana">விதான பூஜை</h2><div id="vidhanaTiles" class="grid pujas"></div><h2 class="lbl" data-t="veda">வேத மந்த்ரங்கள்</h2><div id="vedaTiles"></div><h2 class="lbl" data-t="archanaH">அர்ச்சனை · நாமாவளிகள்</h2><div id="tiles" class="kinds3"></div></section>
+  <section id="tilesBox"><h2 class="lbl" data-t="pujas">பூஜை · வ்ரதம்</h2><div id="pujaTiles" class="grid pujas"></div><h2 class="lbl" data-t="vidhana">விதான பூஜை</h2><div id="vidhanaTiles" class="grid pujas"></div><h2 class="lbl" id="vedaH" data-t="veda">வேத மந்த்ரங்கள்</h2><div id="vedaTiles"></div><h2 class="lbl" data-t="archanaH">அர்ச்சனை · நாமாவளிகள்</h2><div id="tiles" class="kinds3"></div></section>
   <footer class="foot"><a href="#about" data-t="aboutThanks">இந்த ஆப் பற்றி · நன்றி</a><span id="ver"></span></footer>
 </main>
 
@@ -198,6 +199,7 @@
         <li><b>அர்ச்சனை</b> பொத்தான்: ஒரு நாமம் மட்டும் பெரிதாக வரும்; தொட்டால் அடுத்தது.</li>
         <li><b>☆</b> குறி: அடிக்கடி படிப்பவையில் சேர்க்க.</li>
         <li><b>ॐ</b> பொத்தான்: ஒவ்வொரு நாமத்துக்கும் முன் ஓம். <b>அ− அ+</b>: எழுத்தின் அளவு.</li>
+        <li><b>⇊</b> பொத்தான்: தொடாமலே பக்கம் தானாக மெல்ல நகரும். கீழே உள்ள <b>− +</b> பொத்தான்களால் உங்கள் வாசிப்பு வேகத்துக்கு ஏற்ப மாற்றலாம் (1 — எழுத்துக்கூட்டி, 20 — மிக வேகமாக). விரலால் பக்கத்தைத் தொட்டால் நின்று, விட்டதும் அங்கிருந்து தொடரும்.</li>
       </ul>
       <h2>போனில் ஆப்பாக நிறுவ</h2>
       <ul>
@@ -223,6 +225,7 @@
         <li><b>Archana</b>: one name at a time, large; tap the name for the next one.</li>
         <li><b>☆</b>: add to Favourites, shown first on the home screen.</li>
         <li><b>ॐ</b>: Om before every name. <b>A− A+</b>: text size.</li>
+        <li><b>⇊</b>: the page scrolls slowly by itself, hands-free. Use <b>− +</b> in the bar at the bottom to match your reading pace (1 — letter by letter, 20 — very fast). Touch the page to hold it; let go and it carries on from there.</li>
       </ul>
       <h2>Install on your phone</h2>
       <ul>
@@ -262,6 +265,7 @@
   <textarea id="markNote" rows="3" maxlength="600" data-tp="notePh"></textarea>
   <div class="lacts"><button class="pbtn" id="markSave" data-t="save">சேமி</button><button class="btn2" id="markClear" data-t="clearMark">குறியை நீக்கு</button></div></div></div>
 <div id="sheet" class="sheet" hidden role="dialog" aria-modal="true" aria-labelledby="sheetT"><div class="sheetbox"><h2 id="sheetT" data-t="addToList">பட்டியலில் சேர்</h2><div id="sheetItem" class="note"></div><div id="sheetLists"></div><form id="sheetNew" class="newlist"><input id="sheetNewName" maxlength="40" autocomplete="off" data-tp="listName" data-ta="listName"><button class="btn2" type="submit" data-t="create">உருவாக்கு</button></form><button class="pbtn" id="sheetDone" data-t="done">முடிந்தது</button></div></div>
+<div id="asBar" class="asbar" hidden role="group"><button class="icon" id="asPlay" aria-label="▶">❚❚</button><button class="icon" id="asSlow" data-tt="slower">−</button><div class="asmid"><div class="asl" data-t="autoS">தானாக நகர்தல்</div><div class="asv" id="asVal"></div></div><button class="icon" id="asFast" data-tt="faster">+</button><button class="icon px" id="asStop" data-ta="close">✕</button></div>
 <nav id="paraBar" class="parabar" hidden aria-label="பாராயணம்"><button class="icon" id="paraPrev" aria-label="முந்தையது">‹</button><div class="pmid"><div class="pl" id="paraLbl"></div><div class="pn" id="paraNext"></div></div><button class="pbtn" id="paraGo">→</button><button class="icon px" id="paraStop" aria-label="நிறுத்து">✕</button></nav>
 <div id="archana" class="archana" hidden role="dialog" data-ta="archana">
   <div class="atop"><span id="aCount"></span><span id="aTitle"></span><button class="icon" id="aClose">✕</button></div>

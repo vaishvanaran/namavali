@@ -6,6 +6,7 @@ when_ta: தைத்திரீய ஆரண்யகம் 10.41–44
 when_en: Taittiriya Aranyaka 10.41–44
 order: 26
 kind: veda
+hidden: yes
 veda: yajur
 
 # मेधासूक्तम्

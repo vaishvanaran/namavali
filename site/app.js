@@ -4,7 +4,7 @@
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const FONT = { deva: "var(--deva)", taml: "var(--tamil)", gran: "var(--gran)", latn: "var(--latn)" };
   const CONV = { deva: s => s, taml: T.tamil, gran: T.grantha, latn: T.iast };
-  const VERSION = "2026.10.31s";
+  const VERSION = "2026.10.31t";
   const KINDS = [
     { k: "108", deva: "अष्टोत्तरशतनामावलिः", ta: "அஷ்டோத்தரம்", en: "Ashtottaram", sub: { ta: "108 நாமங்கள்", en: "108 names" } },
     { k: "300", deva: "त्रिशतीनामावलिः", ta: "த்ரிஶதீ", en: "Trishati", sub: { ta: "300 நாமங்கள்", en: "300 names" } },
@@ -25,7 +25,7 @@
       tapHint: "ஒரு நாமத்தைத் தொட்டால் அது குறிக்கப்படும். பூஜையில் எங்கே இருக்கிறோம் என்று தெரியும். அழுத்திப் பிடித்தால் வண்ணக் குறியிடலாம், குறிப்பு எழுதலாம்.",
       archana: "அர்ச்சனை", archanaTitle: "அர்ச்சனை — ஒவ்வொரு நாமமாக", omTitle: "ஒவ்வொரு நாமத்துக்கும் ஓம்",
       smaller: "எழுத்து சிறிதாக", larger: "எழுத்து பெரிதாக", prev: "← முன்", next: "அடுத்து →", done: "நிறைவு ✓", tapNext: "பெயரைத் தொட்டால் அடுத்தது",
-      nVar: n => `${n} பாடங்கள்`, paatha: "பாடம்", myMarks: "என் குறிப்புகள்", markT: "குறி · குறிப்பு", notePh: "உங்கள் குறிப்பு (உங்கள் ஃபோனில் மட்டும்)", save: "சேமி", clearMark: "குறியை நீக்கு", noMarks: "இன்னும் குறிப்பு இல்லை. ஸ்தோத்ரம், நாமாவளி அல்லது பூஜையில் ஒரு ஶ்லோகத்தை அழுத்திப் பிடித்தால் வண்ணக் குறியிடலாம், குறிப்பு எழுதலாம்.", markHint: "ஒரு ஶ்லோகத்தையோ நாமத்தையோ அழுத்திப் பிடித்தால் வண்ணக் குறியிடலாம், குறிப்பு எழுதலாம்.", backup: "பின்னெடுப்பு", backupSave: "கோப்பாகச் சேமி", backupLoad: "கோப்பிலிருந்து மீட்டெடு", backupDone: "மீட்டெடுக்கப்பட்டது ✓", backupBad: "இந்தக் கோப்பைப் படிக்க முடியவில்லை", backupNote: "அடிக்கடி படிப்பவை, என் பட்டியல்கள், குறிப்புகள் இந்த ஃபோனில் மட்டுமே இருக்கும். ஃபோன் மாற்றும் முன் கோப்பாகச் சேமித்து, புதிய ஃபோனில் மீட்டெடுக்கலாம்.", myLists: "என் பட்டியல்கள்", toList: "பட்டியலில் சேர்", addToList: "பட்டியலில் சேர்", listName: "புதிய பட்டியலின் பெயர் — உதா: காலை பாராயணம்", create: "உருவாக்கு", done: "முடிந்தது", startPara: "▶ பாராயணம் தொடங்கு", rename: "பெயர் மாற்று", delList: "பட்டியலை நீக்கு", backLists: "← என் பட்டியல்கள்", listsHint: "தினமும் படிப்பவற்றைப் பெயரிட்ட பட்டியல்களாக வைத்துக்கொள்ளலாம். எந்த ஸ்தோத்ரம், நாமாவளி, பூஜைப் பக்கத்திலும் உள்ள ＋ பட்டியலில் சேர் பொத்தானைத் தொடுங்கள்.", listHint: "⠿ குறியைப் பிடித்து இழுத்தோ ↑ ↓ தொட்டோ வரிசையை மாற்றலாம்.", noLists: "இன்னும் பட்டியல் இல்லை. மேலே பெயர் கொடுத்து உருவாக்குங்கள்.", emptyList: "இந்தப் பட்டியல் காலியாக உள்ளது. ஸ்தோத்ர/நாமாவளி பக்கங்களில் ＋ பட்டியலில் சேர் தொடுங்கள்.", nItems: n => `${n} பகுதிகள்`, paraOf: (i, n, name) => `பாராயணம் · ${name} · ${i}/${n}`, nextIs: x => `அடுத்தது: ${x}`, lastOne: "இது கடைசி — ✓ முடிக்கவும்", confirmDel: "நிச்சயமாக நீக்கவா? மீண்டும் தொடுங்கள்", newName: "புதிய பெயர்", stotras: "ஸ்தோத்ரங்கள்", toNama: "நாமாவளி", toSto: "ஸ்தோத்ரம்", nVerses: n => `${n} ஶ்லோகங்கள்`, mNama: "நாமாவளி", mStotra: "ஸ்தோத்ரம்", veda: "வேத மந்த்ரங்கள்", yajur: "க்ருஷ்ண யஜுர்வேதம்", sama: "ஸாமவேதம்",
+      nVar: n => `${n} பாடங்கள்`, paatha: "பாடம்", myMarks: "என் குறிப்புகள்", markT: "குறி · குறிப்பு", notePh: "உங்கள் குறிப்பு (உங்கள் ஃபோனில் மட்டும்)", save: "சேமி", clearMark: "குறியை நீக்கு", noMarks: "இன்னும் குறிப்பு இல்லை. ஸ்தோத்ரம், நாமாவளி அல்லது பூஜையில் ஒரு ஶ்லோகத்தை அழுத்திப் பிடித்தால் வண்ணக் குறியிடலாம், குறிப்பு எழுதலாம்.", markHint: "ஒரு ஶ்லோகத்தையோ நாமத்தையோ அழுத்திப் பிடித்தால் வண்ணக் குறியிடலாம், குறிப்பு எழுதலாம்.", backup: "பின்னெடுப்பு", backupSave: "கோப்பாகச் சேமி", backupLoad: "கோப்பிலிருந்து மீட்டெடு", backupDone: "மீட்டெடுக்கப்பட்டது ✓", backupBad: "இந்தக் கோப்பைப் படிக்க முடியவில்லை", backupNote: "அடிக்கடி படிப்பவை, என் பட்டியல்கள், குறிப்புகள் இந்த ஃபோனில் மட்டுமே இருக்கும். ஃபோன் மாற்றும் முன் கோப்பாகச் சேமித்து, புதிய ஃபோனில் மீட்டெடுக்கலாம்.", myLists: "என் பட்டியல்கள்", toList: "பட்டியலில் சேர்", addToList: "பட்டியலில் சேர்", listName: "புதிய பட்டியலின் பெயர் — உதா: காலை பாராயணம்", create: "உருவாக்கு", done: "முடிந்தது", startPara: "▶ பாராயணம் தொடங்கு", rename: "பெயர் மாற்று", delList: "பட்டியலை நீக்கு", backLists: "← என் பட்டியல்கள்", listsHint: "தினமும் படிப்பவற்றைப் பெயரிட்ட பட்டியல்களாக வைத்துக்கொள்ளலாம். எந்த ஸ்தோத்ரம், நாமாவளி, பூஜைப் பக்கத்திலும் உள்ள ＋ பட்டியலில் சேர் பொத்தானைத் தொடுங்கள்.", listHint: "⠿ குறியைப் பிடித்து இழுத்தோ ↑ ↓ தொட்டோ வரிசையை மாற்றலாம்.", noLists: "இன்னும் பட்டியல் இல்லை. மேலே பெயர் கொடுத்து உருவாக்குங்கள்.", emptyList: "இந்தப் பட்டியல் காலியாக உள்ளது. ஸ்தோத்ர/நாமாவளி பக்கங்களில் ＋ பட்டியலில் சேர் தொடுங்கள்.", nItems: n => `${n} பகுதிகள்`, paraOf: (i, n, name) => `பாராயணம் · ${name} · ${i}/${n}`, nextIs: x => `அடுத்தது: ${x}`, lastOne: "இது கடைசி — ✓ முடிக்கவும்", confirmDel: "நிச்சயமாக நீக்கவா? மீண்டும் தொடுங்கள்", newName: "புதிய பெயர்", stotras: "ஸ்தோத்ரங்கள்", toNama: "நாமாவளி", toSto: "ஸ்தோத்ரம்", nVerses: n => `${n} ஶ்லோகங்கள்`, mNama: "நாமாவளி", mStotra: "ஸ்தோத்ரம்", veda: "வேத மந்த்ரங்கள்", autoS: "தானாக நகர்தல்", autoTitle: "தொடாமலே பக்கம் தானாக மெல்ல நகரும் — வேகத்தை மாற்றலாம்", slower: "மெதுவாக", faster: "வேகமாக", asLv: ["எழுத்துக்கூட்டி", "மிக மெதுவாக", "மெதுவாக", "மிதமாக", "சற்று வேகமாக", "வேகமாக", "மிக வேகமாக"], yajur: "க்ருஷ்ண யஜுர்வேதம்", sama: "ஸாமவேதம்",
       names: n => `${n} நாமங்கள்`, nNamavalis: n => `${n} நாமாவளிகள்`, notFound: q => `“${q}” — எதுவும் கிடைக்கவில்லை.`,
       loadFail: "ஏற்ற முடியவில்லை. இணைய இணைப்பைச் சரிபார்க்கவும்.", listFail: "பட்டியலை ஏற்ற முடியவில்லை.",
       svaraNote: "ஸ்வரக் குறிகள் தேவநாகரி, க்ரந்தத்தில் மட்டும் காட்டப்படும்.", version: "பதிப்பு",
@@ -45,7 +45,7 @@
       tapHint: "Tap a name to mark it, so you keep your place during the puja. Press and hold to highlight or add a note.",
       archana: "Archana", archanaTitle: "Archana — one name at a time", omTitle: "Om before every name",
       smaller: "Smaller text", larger: "Larger text", prev: "← Back", next: "Next →", done: "Done ✓", tapNext: "Tap the name for the next one",
-      nVar: n => `${n} versions`, paatha: "Version", myMarks: "My notes", markT: "Highlight · note", notePh: "Your note (kept only on this phone)", save: "Save", clearMark: "Remove", noMarks: "No notes yet. Press and hold a verse or name in any stotra, namavali or puja to highlight it or add a note.", markHint: "Press and hold a verse or name to highlight it or add a note.", backup: "Backup", backupSave: "Save to a file", backupLoad: "Restore from a file", backupDone: "Restored ✓", backupBad: "Could not read this file", backupNote: "Favourites, lists and notes live only on this phone. Save them to a file before changing phones and restore them on the new one.", myLists: "My lists", toList: "Add to list", addToList: "Add to a list", listName: "New list name — e.g. Morning parayana", create: "Create", done: "Done", startPara: "▶ Start parayana", rename: "Rename", delList: "Delete list", backLists: "← My lists", listsHint: "Keep what you read daily as named lists. Tap ＋ Add to list on any stotra, namavali or puja page.", listHint: "Drag ⠿ or use ↑ ↓ to set the order.", noLists: "No lists yet. Give a name above and create one.", emptyList: "This list is empty. Tap ＋ Add to list on a stotra or namavali page.", nItems: n => `${n} items`, paraOf: (i, n, name) => `Parayana · ${name} · ${i}/${n}`, nextIs: x => `Next: ${x}`, lastOne: "Last one — tap ✓ to finish", confirmDel: "Tap again to delete", newName: "New name", stotras: "Stotras", toNama: "Nāmāvalī", toSto: "Stotram", nVerses: n => `${n} verses`, mNama: "Nāmāvalī", mStotra: "Stotram", veda: "Veda mantras", yajur: "Krishna Yajurveda", sama: "Samaveda",
+      nVar: n => `${n} versions`, paatha: "Version", myMarks: "My notes", markT: "Highlight · note", notePh: "Your note (kept only on this phone)", save: "Save", clearMark: "Remove", noMarks: "No notes yet. Press and hold a verse or name in any stotra, namavali or puja to highlight it or add a note.", markHint: "Press and hold a verse or name to highlight it or add a note.", backup: "Backup", backupSave: "Save to a file", backupLoad: "Restore from a file", backupDone: "Restored ✓", backupBad: "Could not read this file", backupNote: "Favourites, lists and notes live only on this phone. Save them to a file before changing phones and restore them on the new one.", myLists: "My lists", toList: "Add to list", addToList: "Add to a list", listName: "New list name — e.g. Morning parayana", create: "Create", done: "Done", startPara: "▶ Start parayana", rename: "Rename", delList: "Delete list", backLists: "← My lists", listsHint: "Keep what you read daily as named lists. Tap ＋ Add to list on any stotra, namavali or puja page.", listHint: "Drag ⠿ or use ↑ ↓ to set the order.", noLists: "No lists yet. Give a name above and create one.", emptyList: "This list is empty. Tap ＋ Add to list on a stotra or namavali page.", nItems: n => `${n} items`, paraOf: (i, n, name) => `Parayana · ${name} · ${i}/${n}`, nextIs: x => `Next: ${x}`, lastOne: "Last one — tap ✓ to finish", confirmDel: "Tap again to delete", newName: "New name", stotras: "Stotras", toNama: "Nāmāvalī", toSto: "Stotram", nVerses: n => `${n} verses`, mNama: "Nāmāvalī", mStotra: "Stotram", veda: "Veda mantras", autoS: "Auto-scroll", autoTitle: "The page scrolls slowly by itself, hands-free — speed can be changed", slower: "Slower", faster: "Faster", asLv: ["Letter by letter", "Very slow", "Slow", "Moderate", "Brisk", "Fast", "Very fast"], yajur: "Krishna Yajurveda", sama: "Samaveda",
       names: n => `${n} names`, nNamavalis: n => `${n} namavalis`, notFound: q => `Nothing found for “${q}”.`,
       loadFail: "Could not load. Check your internet connection.", listFail: "Could not load the list.",
       svaraNote: "Svara marks are shown only in Devanagari and Grantha.", version: "Version",
@@ -257,6 +257,7 @@
     $("vidhanaTiles").innerHTML = PUJAS.filter(p => p.kind === "vidhana").map(pujaCard).join("");
     $("vedaTiles").innerHTML = VEDAS.filter(v => PUJAS.some(p => p.kind === "veda" && p.veda === v)).map(v =>
       `<h3 class="lbl2 vedah">${esc(t(v))}</h3><div class="grid pujas">${PUJAS.filter(p => p.kind === "veda" && p.veda === v).map(pujaCard).join("")}</div>`).join("");
+    $("vedaH").hidden = !$("vedaTiles").innerHTML;
     renderToday(raw);
     $("tiles").innerHTML = KINDS.map(K => {
       const items = prim(INDEX.items.filter(i => i.kind === K.k));
@@ -325,6 +326,7 @@
   function renderDrawer() {
     $("dVidhana").innerHTML = PUJAS.filter(p => p.kind === "vidhana").map(p => `<a class="dl" href="#p-${p.id}"><span class="sym xs">${window.symbolSVG(p.deity)}</span><span><span class="dd">${esc(p.title)}</span><span class="dt">${esc(pujaName(p))}</span></span></a>`).join("");
     $("dVeda").innerHTML = PUJAS.filter(p => p.kind === "veda").map(p => `<a class="dl" href="#p-${p.id}"><span class="sym xs">${window.symbolSVG(p.deity)}</span><span><span class="dd">${esc(p.title)}</span><span class="dt">${esc(pujaName(p))}</span></span></a>`).join("");
+    $("dVedaH").hidden = !$("dVeda").innerHTML;
     $("dPujas").innerHTML = PUJAS.filter(p => !p.kind || p.kind === "common").map(p => `<a class="dl" href="#p-${p.id}"><span class="sym xs">${window.symbolSVG(p.deity)}</span><span><span class="dd">${esc(p.title)}</span><span class="dt">${esc(pujaName(p))}</span></span></a>`).join("");
     const sgs = INDEX.groups.filter(g => STOTRAS.some(x => x.group === g.key));
     $("dStotraSec").hidden = !STOTRAS.length;
@@ -585,7 +587,7 @@
   function paintPara() {
     const P = prefs.para, l = P && listById(P.list), id = curItemId();
     const on = !!(l && id && l.items[P.i] === id);
-    $("paraBar").hidden = !on; document.body.classList.toggle("para", on);
+    $("paraBar").hidden = !on; document.body.classList.toggle("para", on); if (asOn) asPaint();
     if (!on) return;
     const n = l.items.length, nx = l.items[P.i + 1] && itemInfo(l.items[P.i + 1]);
     $("paraLbl").textContent = t("paraOf", P.i + 1, n, l.name);
@@ -770,12 +772,50 @@
       else if (!on && wake) { await wake.release(); wake = null; }
     } catch (e) {}
   }
+  /* ---------- auto-scroll: the page moves by itself at a chosen pace ---------- */
+  // speed levels 1..20; px per second grows gently and with the font size, so the
+  // reading pace (lines per minute) stays about the same at any text size.
+  let view0 = null, asOn = false, asRun = false, asY = 0, asT = 0, asHold = false, asRaf = 0;
+  const asPx = lv => (3 + lv * lv * 0.3) * (prefs.fs || 1);
+  function asLabel() { const lv = prefs.asLv || 5, names = t("asLv"); return `${lv} · ${names[Math.min(names.length - 1, Math.floor((lv - 1) / 3))]}`; }
+  function asPaint() {
+    $("asBar").hidden = !asOn; document.body.classList.toggle("autos", asOn);
+    $("asBtn").setAttribute("aria-pressed", asOn);
+    $("asPlay").textContent = asRun ? "❚❚" : "▶"; $("asPlay").setAttribute("aria-label", asRun ? "Pause" : "Play");
+    $("asVal").textContent = asLabel();
+    $("asBar").style.bottom = document.body.classList.contains("para") ? ($("paraBar").offsetHeight || 64) + "px" : "0px";
+  }
+  function asTick(ts) {
+    if (!asRun) return;
+    if (asHold) { asT = ts; asY = scrollY; asRaf = requestAnimationFrame(asTick); return; }
+    const dt = asT ? Math.min(0.1, (ts - asT) / 1000) : 0; asT = ts;
+    asY += asPx(prefs.asLv || 5) * dt;
+    const max = document.documentElement.scrollHeight - innerHeight;
+    if (asY >= max - 1) { window.scrollTo(0, max); asRun = false; asPaint(); return; }
+    window.scrollTo(0, asY);
+    asRaf = requestAnimationFrame(asTick);
+  }
+  function autoPlay() { asOn = true; asRun = true; asY = scrollY; asT = 0; cancelAnimationFrame(asRaf); asRaf = requestAnimationFrame(asTick); asPaint(); }
+  function autoPause() { asRun = false; cancelAnimationFrame(asRaf); asPaint(); }
+  function autoStop() { if (!asOn) return; asOn = false; autoPause(); }
+  $("asBtn").onclick = () => (asOn ? autoStop() : autoPlay());
+  $("asPlay").onclick = () => (asRun ? autoPause() : autoPlay());
+  $("asStop").onclick = autoStop;
+  const asStep = d => { prefs.asLv = Math.max(1, Math.min(20, (prefs.asLv || 5) + d)); save(); asPaint(); };
+  $("asSlow").onclick = () => asStep(-1); $("asFast").onclick = () => asStep(1);
+  // a finger on the page holds the scroll; on release it carries on from where the finger left it
+  addEventListener("touchstart", e => { if (asRun && !e.target.closest("#asBar,.bar,#paraBar")) asHold = true; }, { passive: true });
+  addEventListener("touchend", () => { if (asHold) setTimeout(() => { asHold = false; asY = scrollY; }, 350); }, { passive: true });
+  addEventListener("wheel", () => { if (asRun) asY = scrollY + 0; setTimeout(() => { asY = scrollY; }, 60); }, { passive: true });
+  document.addEventListener("visibilitychange", () => { if (document.hidden && asRun) autoPause(); });
+
   function show(v) {
     view = v;
     ["home", "kind", "group", "fav", "lists", "list", "marks", "puja", "reader", "stotra", "about"].forEach(x => ($(x).hidden = x !== v));
     $("rtools").hidden = v !== "reader" && v !== "puja" && v !== "stotra";
     $("omBtn").hidden = v !== "reader"; $("archBtn").hidden = v !== "reader" || document.body.classList.contains("sto");
     if (v !== "puja") $("suktaBtns").innerHTML = "";
+    if (v !== view0) autoStop(); view0 = v;
     if (v !== "reader" && !$("archana").hidden) closeArchana();
     keepAwake(v === "reader" || v === "puja" || v === "stotra");
     setTimeout(() => { paintPara(); refreshListBtns(); }, 0);
@@ -832,7 +872,7 @@
     if (view === "home") renderHome(); else if (view === "kind") renderKind(); else if (view === "group") renderGroup();
     else if (view === "fav") renderFav(); else if (view === "reader") { renderReader(); refreshStars(); } else if (view === "puja") { renderPuja(); refreshStars(); } else if (view === "stotra") renderStotra();
   }
-  function setLang(l) { prefs.lang = l; save(); SEARCH = null; rerenderAll(); }
+  function setLang(l) { prefs.lang = l; save(); SEARCH = null; rerenderAll(); asPaint(); }
   function paintSetup() {
     const l = L();
     document.querySelectorAll("#setupLang button").forEach(b => b.setAttribute("aria-pressed", b.dataset.l === prefs.lang));

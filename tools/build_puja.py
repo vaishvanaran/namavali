@@ -114,9 +114,21 @@ def main():
     if idx_path.exists():
         known = {i['id'] for i in json.loads(idx_path.read_text(encoding='utf-8'))['items']}
     listing, problems, links, titles = [], [], [], {}
-    for f in sorted((CONTENT / 'puja').glob('*.txt')):
-        head, parts = parse(f)
-        pid = f.stem
+    parsed = [(f.stem, *parse(f)) for f in sorted((CONTENT / 'puja').glob('*.txt'))]
+    # `hidden: yes` keeps a page out of the app (e.g. until its svara is re-checked);
+    # links to it, and a note just before such a link, are dropped from other pages.
+    hidden = {pid for pid, head, _ in parsed if head.get('hidden', '').strip()}
+    for pid in hidden: (OUT / f'{pid}.json').unlink(missing_ok=True)
+    for pid, head, parts in parsed:
+        if pid in hidden: continue
+        for p in parts:
+            for s in p['sections']:
+                bl, keep = s['blocks'], []
+                for i, b in enumerate(bl):
+                    if b['t'] == 'link' and b['puja'] in hidden: continue
+                    if b['t'] == 'note' and i + 1 < len(bl) and bl[i + 1]['t'] == 'link' and bl[i + 1]['puja'] in hidden: continue
+                    keep.append(b)
+                s['blocks'] = keep
         for p in parts:
             for s in p['sections']:
                 for b in s['blocks']:
@@ -132,11 +144,12 @@ def main():
                         'when_ta': doc['when_ta'], 'when_en': doc['when_en'], 'order': int(head.get('order', 100)), 'kind': head.get('kind', ''), 'sukta': head.get('sukta', ''), 'veda': head.get('veda', ''),
                         'parts': [p['title'] for p in parts]})
     for src, tgt, sec in links:
+        if tgt in hidden: continue
         if tgt not in titles: problems.append(f'{src}: link to unknown puja "{tgt}"')
         elif sec and sec not in titles[tgt]: problems.append(f'{src}: "{tgt}" has no part or section "{sec}"')
     listing.sort(key=lambda x: (x['order'], x['id']))
     (ROOT / 'site' / 'data' / 'pujas.json').write_text(json.dumps(listing, ensure_ascii=False, separators=(',', ':')), encoding='utf-8')
-    print(f'{len(listing)} pujas')
+    print(f'{len(listing)} pujas ({len(hidden)} hidden)')
     for p in problems: print('WARNING:', p)
     if problems and '--strict' in sys.argv: sys.exit(1)
 

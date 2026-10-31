@@ -6,6 +6,7 @@ when_ta: தைத்திரீய ஆரண்யகம் 10.13
 when_en: Taittiriya Aranyaka 10.13
 order: 23
 kind: veda
+hidden: yes
 veda: yajur
 
 # नारायणसूक्तम्

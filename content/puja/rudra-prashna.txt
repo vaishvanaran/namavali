@@ -6,6 +6,7 @@ when_ta: ருத்ராபிஷேகம், ப்ரதோஷம், ஶ�
 when_en: For Rudrabhishekam, Pradosham and Shiva pujas
 order: 20
 kind: veda
+hidden: yes
 veda: yajur
 
 # रुद्रप्रश्नः

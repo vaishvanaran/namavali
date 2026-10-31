@@ -6,6 +6,7 @@ when_ta: தைத்திரீய ஆரண்யகம் 10.2 (மஹாந
 when_en: Taittiriya Aranyaka 10.2 (Mahanarayana Upanishad)
 order: 25
 kind: veda
+hidden: yes
 veda: yajur
 
 # दुर्गासूक्तम्
