@@ -4,7 +4,7 @@
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const FONT = { deva: "var(--deva)", taml: "var(--tamil)", gran: "var(--gran)", latn: "var(--latn)" };
   const CONV = { deva: s => s, taml: T.tamil, gran: T.grantha, latn: T.iast };
-  const VERSION = "2026.10.31n";
+  const VERSION = "2026.10.31o";
   const KINDS = [
     { k: "108", deva: "अष्टोत्तरशतनामावलिः", ta: "அஷ்டோத்தரம்", en: "Ashtottaram", sub: { ta: "108 நாமங்கள்", en: "108 names" } },
     { k: "300", deva: "त्रिशतीनामावलिः", ta: "த்ரிஶதீ", en: "Trishati", sub: { ta: "300 நாமங்கள்", en: "300 names" } },
@@ -410,7 +410,7 @@
   // Where each vidhana mantra goes: before the upachara it belongs to, found by the offering line
   // ("…, आसनं समर्पयामि") wherever it sits in the puja, then moved back over that upachara's own verses.
   // Falls back to a section with the same title. Each mantra is placed once (first occurrence).
-  const OFFER_V = /(समर्पयामि|कल्पयामि|आवाहयामि|ध्यायामि|स्नपयामि|पूजयामि|दर्शयामि|निवेदयामि|धारयामि|करोमि|समर्पये|अर्पयामि|आघ्रापयामि|परिकल्पयामि|बध्नामि)/;
+  const OFFER_V = /(समर्पयामि|कल्पयामि|आवाहयामि|ध्यायामि|स्नपयामि|पूजयामि|दर्शयामि|निवेदयामि|धारयामि|करोमि|समर्पये|र्पयामि|घ्रापयामि|परिकल्पयामि|बध्नामि)/;
   const UPA = [
     ["ध्यान", [/ध्यायामि/]], ["आवाहन", [/[आा]वाहयामि|इहागच्छ|[आा]वाहनं/]], ["आसन", [/[आा]सन/]],
     ["पाद्य", [/पाद्य/]], ["अर्घ्य", [/र्घ्य/]], ["आचमनीय", [/[आा]चमन/]],
@@ -433,7 +433,7 @@
     const secTitles = []; d.parts.forEach(p => p.sections.forEach(sec => secTitles.push(titles(sec.title))));
     const plan = {}; // "s:b" -> [html]
     const add = (s, b, html) => { (plan[s + ":" + b] = plan[s + ":" + b] || []).push(html); };
-    const vhtml = sc => `<div class="pvedic"><span class="vl">${esc((SB[sd.id] || [sd.ta, sd.en])[L() === "en" ? 1 : 0])}</span>` + sc.blocks.filter(b => b.t === "verse" || b.t === "list" || (b.t === "prose" && !/ध्यायामि|आवाहयामि|समर्पयामि/.test([].concat(b.x || []).join(" ")))).map(blockHTML).join("") + `</div>`;
+    const vhtml = sc => `<div class="pvedic"><span class="vl">${esc((SB[sd.id] || [sd.ta, sd.en])[L() === "en" ? 1 : 0])}</span>` + sc.blocks.filter(b => b.t === "verse" || b.t === "list" || (b.t === "prose" && !/ध्यायामि|आवाहयामि|समर्पयामि|परिषिञ्चामि|स्वाहा|तत्सवितु/.test([].concat(b.x || []).join(" ")))).map(blockHTML).join("") + `</div>`;
     const taken = new Set(), anchors = [], pending = []; let lastPos = null;
     // a line that names several upacharas at once ("ध्यायामि। आवाहयामि। आसनं…") is a short sub-puja, not the main one
     const many = txt => UPA.filter(([, rs]) => rs.some(r => r.test(txt))).length >= 3;
@@ -457,7 +457,7 @@
         add(flat[j].s, flat[j].b, vhtml(sc)); lastPos = [flat[at].s, flat[at].b + 1]; continue;
       }
       const s2 = secTitles.findIndex(ts => ts.some(x => keys.includes(x)));
-      if (s2 >= 0) add(s2, 0, vhtml(sc)); else pending.push(vhtml(sc));
+      if (s2 >= 0) add(s2, 0, vhtml(sc)); else if (!keys.some(k => /रक्षा|प्रार्थना/.test(k))) pending.push(vhtml(sc));
     }
     // mantras whose upachara this puja does not have go right after the last placed one
     if (pending.length && lastPos) pending.forEach(h => add(lastPos[0], lastPos[1], h));
