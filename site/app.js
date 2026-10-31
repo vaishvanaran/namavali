@@ -4,7 +4,7 @@
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const FONT = { deva: "var(--deva)", taml: "var(--tamil)", gran: "var(--gran)", latn: "var(--latn)" };
   const CONV = { deva: s => s, taml: T.tamil, gran: T.grantha, latn: T.iast };
-  const VERSION = "2026.10.31k";
+  const VERSION = "2026.10.31l";
   const KINDS = [
     { k: "108", deva: "अष्टोत्तरशतनामावलिः", ta: "அஷ்டோத்தரம்", en: "Ashtottaram", sub: { ta: "108 நாமங்கள்", en: "108 names" } },
     { k: "300", deva: "त्रिशतीनामावलिः", ta: "த்ரிஶதீ", en: "Trishati", sub: { ta: "300 நாமங்கள்", en: "300 names" } },
@@ -626,7 +626,7 @@
     return pre + esc(tr(x));
   };
   const markHTML = l => esc(tr(l)).replace(/\[([^\]]+)\]/g, '<span class="mk">$1</span>');
-  const blocksHTML = bl => bl.map(b => b.t === "head" ? `<div class="blk-head">${esc(tr(b.x))}</div>` : `<div class="blk-${b.t}">${b.x.map(l => `<p>${markHTML(l)}</p>`).join("")}</div>`).join("");
+  const blocksHTML = bl => bl.map(b => b.t === "note" ? `<div class="blk-note">${esc(L() === "en" ? (b.en || b.ta || "") : (b.ta || b.en || ""))}</div>` : b.t === "head" ? `<div class="blk-head">${esc(tr(b.x))}</div>` : `<div class="blk-${b.t}">${b.x.map(l => `<p>${markHTML(l)}</p>`).join("")}</div>`).join("");
   function renderStotra() {
     const x = stoDoc && STOTRAS.find(s => s.id === stoDoc.id); if (!x) return;
     $("sTitle").textContent = tr(x.title);

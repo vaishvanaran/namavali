@@ -2,7 +2,7 @@
 and mark linked namavalis in site/data/index.json ('st'). Runs on GitHub too, so edits to
 content/stotra/*.txt reach the site without a local build.
 Format: header lines (title, ta, en, group, optional namavali/order/note), then
-'## heading', ': prose line', and verses as consecutive lines separated by blank lines."""
+'## heading', ': prose line', 'ta> '/'en> ' explanation in Tamil/English, and verses as consecutive lines separated by blank lines."""
 import json, pathlib, re, sys
 ROOT = pathlib.Path(__file__).parent.parent
 OUT = ROOT / 'site' / 'data'
@@ -27,11 +27,18 @@ for f in sorted(STO.glob('*.txt')):
         if buf: blocks.append({'t': 'shloka', 'x': buf[:]}); buf.clear()
     for ln in L[i:]:
         s = ln.strip()
-        if not s: flush(); continue
+        if not s: flush(); [b.pop('_open', None) for b in blocks[-1:]]; continue
+        if s.startswith('ta> ') or s.startswith('en> '):
+            flush(); k = s[:2]
+            if not (blocks and blocks[-1]['t'] == 'note' and blocks[-1].get('_open')): blocks.append({'t': 'note', '_open': True})
+            blocks[-1][k] = (blocks[-1][k] + '\n' if k in blocks[-1] else '') + s[4:]
+            continue
+        if blocks and blocks[-1].get('_open'): blocks[-1].pop('_open')
         if s.startswith('## '): flush(); blocks.append({'t': 'head', 'x': s[3:]})
         elif s.startswith(': '): flush(); blocks.append({'t': 'para', 'x': [s[2:]]})
         else: buf.append(s)
     flush()
+    for b in blocks: b.pop('_open', None)
     (OUT / 'stotra' / f'{f.stem}.json').write_text(json.dumps({'id': f.stem, 'title': head['title'], 'blocks': blocks}, ensure_ascii=False, separators=(',', ':')))
     stotras.append({'id': f.stem, 'title': head['title'], 'ta': head['ta'], 'en': head['en'], 'group': head['group'],
                     'namavali': nv, 'note': head.get('note', ''), 'order': int(head.get('order', 500) or 500),

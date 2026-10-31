@@ -450,3 +450,6 @@ body.en .mnote{font-family:var(--ui)}
 .bk{margin-top:24px}
 label.btn2{display:inline-flex;align-items:center}
 @media (prefers-reduced-motion:reduce){.flash{animation:none}}
+.blk-note{font-family:var(--tamil);font-size:.92rem;line-height:1.6;background:var(--hl);border-radius:10px;padding:10px 14px;margin:10px 0 14px;color:var(--fg)}
+body.en .blk-note{font-family:var(--ui)}
+.blk-note{white-space:pre-line}
