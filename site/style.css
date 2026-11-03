@@ -1,3 +1,4 @@
+@font-face{font-family:"NV S2003";src:url(fonts/sama-deva.woff2) format("woff2");font-display:swap}
 @font-face{font-family:"NV Deva";src:url(fonts/deva.woff2) format("woff2");font-display:swap}
 @font-face{font-family:"NV Tamil";src:url(fonts/tamil.woff2) format("woff2");font-weight:100 900;font-display:swap}
 @font-face{font-family:"NV Grantha";src:url(fonts/grantha-2.woff2) format("woff2");font-display:swap}
@@ -7,7 +8,7 @@
 :root{
   --bg:#F6F3EE; --paper:#FFFFFF; --fg:#24191A; --muted:#6F6163; --line:#E3DAD3;
   --kumkum:#8E1B2C; --haldi:#A86F05; --hl:#FBEBC8; --chip:#EFE7E0;
-  --deva:"NV Deva","Noto Serif Devanagari",serif;
+  --deva:"NV S2003","NV Deva","Noto Serif Devanagari",serif;
   --tamil:"NV Tamil","Noto Serif Tamil","Latha",serif;
   --gran:"NV Grantha","NV Deva",serif;
   --latn:"NV Deva",Georgia,serif;
@@ -876,7 +877,7 @@ body.en .thsw .sl{font-family:var(--ui)}
 .chx-flash{animation:chxFlash 1.6s ease-out 2;border-radius:10px}
 /* Sāmaveda svaras: drawn by the app in one row above the line, clear of every vowel sign (2026.11.04g) */
 .saman{line-height:2.7}
-.saman.s-deva{font-size:1.05em}   /* Sanskrit 2003 (content/fonts-pending) goes here once the Ashram allows it */
+.saman.s-deva{font-size:1.05em}
 .saman .saw{white-space:nowrap}
 .saman .sak{display:inline-block;position:relative;line-height:1.25}
 .saman .sav{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(100% + .14em);font-size:.66em;line-height:1;white-space:nowrap;font-weight:700;color:var(--kumkum);letter-spacing:.05em;-webkit-text-stroke:0}
