@@ -701,3 +701,15 @@ body.en .thsw .sl{font-family:var(--ui)}
 .chx-b.gs{margin-right:6px}
 .chx-b.yt{box-shadow:3px 0 0 -1px var(--haldi)}
 .chx-wsum{padding:10px 12px;border-radius:10px;background:var(--paper);border:1px solid var(--line)}
+
+/* gaṇa groups: label above each group of three boxes */
+.chx-row,.chx-boxes{display:flex;flex-wrap:wrap;gap:8px 8px;align-items:flex-end}
+.chx-grp{display:flex;flex-direction:column;gap:2px;flex:0 0 auto}
+.chx-gl{display:flex;justify-content:center;align-items:baseline;gap:6px;min-height:1.4em;border-bottom:2px solid var(--haldi);padding-bottom:1px;margin:0 2px}
+.chx-gl .gw{font-family:var(--script);font-weight:700;color:var(--haldi);font-size:1rem}
+.chx-gl .gw.dim{color:var(--muted);font-weight:600}
+.chx-gl .gg{font-family:var(--script);font-weight:700;color:var(--kumkum);font-size:.9rem;text-decoration:line-through}
+.chx-gl .gf{color:var(--muted);font-size:.8rem}
+.chx-gb{display:flex;gap:3px}
+.chx-b{width:2.55em}
+.chx-s.gb{margin-right:0}
