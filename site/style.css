@@ -857,25 +857,23 @@ body.en .thsw .sl{font-family:var(--ui)}
   .ctile .kt{width:100%}
   .ctile .t{font-size:.84rem;overflow-wrap:break-word;hyphens:auto}
 }
-/* முகப்பு தோற்றம் · "தங்க ஒளி": a dark, gold home page in the style of the anuṣṭubh film (prefs.home = "gold") */
-:root[data-home="gold"] #home{--bg:#0f0c09;--paper:#1a140e;--fg:#f3ead8;--muted:#b9a88f;--line:#4a3c2c;--kumkum:#e6c47e;--haldi:#d9a640;--hl:#3a2c16;--chip:#241c14;
-  color:var(--fg);background:radial-gradient(ellipse at 50% 0%,#2a2014 0%,#120e0a 45%,#0f0c09 100%);box-shadow:0 0 0 100vmax #0f0c09;clip-path:inset(0 -100vmax);color-scheme:dark}
-:root[data-home="gold"] #home .welcome h1{color:#e6c47e;text-shadow:0 0 22px #e6c47e66;animation:hgGlow 2.4s ease-out both}
-:root[data-home="gold"] #home .shrih{color:#d9a640;letter-spacing:.3em}
-:root[data-home="gold"] #home .sub{color:#cdbb9f;letter-spacing:.12em}
-:root[data-home="gold"] #home .guru img{border-radius:12px;box-shadow:0 0 0 1px #6a5434,0 10px 30px #0008;filter:saturate(1.05)}
-:root[data-home="gold"] #home .ctile,:root[data-home="gold"] #home .card,:root[data-home="gold"] #home details.sgrp{background:#18130e;border-color:#4a3c2c}
-:root[data-home="gold"] #home .ctile:hover{border-color:#e6c47e;box-shadow:0 0 14px #e6c47e33}
-:root[data-home="gold"] #home .sym{border-color:#8a6d3a;color:#e6c47e;background:#221a10}
-:root[data-home="gold"] #home .lbl{color:#d9a640;letter-spacing:.25em;font-size:.8rem;text-transform:uppercase}
-:root[data-home="gold"] #home input{background:#18130e;color:#f3ead8;border-color:#4a3c2c}
-:root[data-home="gold"] #home .ctile{animation:hgUp .6s both;animation-delay:calc(var(--i,0) * 70ms)}
-@keyframes hgUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-@keyframes hgGlow{from{opacity:0;text-shadow:0 0 0 transparent}to{opacity:1}}
-@media (prefers-reduced-motion:reduce){:root[data-home="gold"] #home *{animation:none!important}}
+/* முகப்பு தோற்றம் · "பன்னீர் ரோஜா": a soft rose home page (prefs.home = "rose"); the top bar and page colour follow while the home is shown */
+:root[data-home="rose"] body:has(#home:not([hidden])){--bg:#FDF1F4;--paper:#FFFAFB;--fg:#3A1F2A;--muted:#86626E;--line:#F1D2DC;--kumkum:#A3305A;--haldi:#B9566F;--hl:#FBE0E8;--chip:#FBE6EE;
+  background:linear-gradient(180deg,#FCE8EE 0%,#FDF3F6 38%,#FFF8FA 100%) fixed;color:var(--fg);color-scheme:light}
+:root[data-home="rose"] body:has(#home:not([hidden])) header.bar{background:linear-gradient(90deg,#FBE3EB,#FDEFF3);border-bottom-color:#F0C9D6}
+:root[data-home="rose"] #home .welcome h1{color:#A3305A;animation:hrUp .8s ease-out both}
+:root[data-home="rose"] #home .shrih{color:#B9566F;letter-spacing:.2em}
+:root[data-home="rose"] #home .guru img{border-radius:14px;box-shadow:0 0 0 2px #F4C6D4,0 10px 26px #A3305A22}
+:root[data-home="rose"] #home .ctile,:root[data-home="rose"] #home details.sgrp,:root[data-home="rose"] #home .card{background:#FFFAFB;border-color:#F1D2DC;box-shadow:0 2px 10px #A3305A10}
+:root[data-home="rose"] #home .ctile:hover{border-color:#D9789A;box-shadow:0 4px 16px #A3305A22}
+:root[data-home="rose"] #home .sym{border-color:#D9789A;color:#A3305A;background:#FDE9F0}
+:root[data-home="rose"] #home .lbl{color:#B9566F;letter-spacing:.06em}
+:root[data-home="rose"] #home .ctile{animation:hrUp .55s both;animation-delay:calc(var(--i,0) * 60ms)}
+@keyframes hrUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){:root[data-home="rose"] #home *{animation:none!important}}
 .homeseg{display:flex;gap:8px;flex-wrap:wrap}
 .homeseg button{flex:1;min-width:8em;font:inherit;font-size:.85rem;padding:8px;border-radius:10px;border:1px solid var(--line);background:var(--paper);color:inherit;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px}
 .homeseg button i{display:block;width:100%;height:22px;border-radius:6px;background:linear-gradient(90deg,var(--bg),var(--paper));border:1px solid var(--line)}
-.homeseg button[data-h="gold"] i{background:radial-gradient(ellipse at 50% 0%,#3a2c16,#0f0c09);border-color:#8a6d3a;box-shadow:inset 0 0 6px #e6c47e55}
+.homeseg button[data-h="rose"] i{background:linear-gradient(90deg,#FBE3EB,#FFF8FA);border-color:#F0C9D6;box-shadow:inset 0 0 0 3px #FDE9F0}
 .homeseg button[aria-pressed="true"]{border-color:var(--kumkum);box-shadow:0 0 0 1px var(--kumkum)}
 .dsub2{font-size:.8rem;color:var(--muted);margin:2px 0 6px}
