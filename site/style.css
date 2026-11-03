@@ -858,3 +858,8 @@ body.en .thsw .sl{font-family:var(--ui)}
   .ctile .t{font-size:.84rem;overflow-wrap:break-word;hyphens:auto}
 }
 .dsub2{font-size:.8rem;color:var(--muted);margin:2px 0 6px}
+/* home background picture (2026-11-04) */
+#home{position:relative;isolation:isolate}
+#home::before{content:"";position:absolute;left:50%;transform:translateX(-50%);top:0;width:100vw;height:min(620px,90vh);background:url(home-bg.webp) center 30%/cover no-repeat;opacity:.18;-webkit-mask-image:linear-gradient(#000 35%,transparent);mask-image:linear-gradient(#000 35%,transparent);pointer-events:none;z-index:-1}
+:root:is([data-theme="dark"],[data-theme="dusk"],[data-theme="black"]) #home::before{opacity:.08}
+@media (prefers-color-scheme:dark){:root:not([data-theme]) #home::before,:root[data-theme="auto"] #home::before{opacity:.08}}
