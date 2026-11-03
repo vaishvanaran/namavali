@@ -848,3 +848,4 @@ body.en .thsw .sl{font-family:var(--ui)}
 .dfold[open]>summary .chev{transform:rotate(90deg)}
 .dfold[open]>summary.dfs{color:var(--kumkum)}
 .dfold>div{padding-left:4px;border-left:2px solid color-mix(in srgb,var(--kumkum) 18%,transparent);margin-left:8px}
+.sgsub{margin:10px 4px 2px;padding-top:6px;border-top:1px dashed var(--line);font-size:.85rem;color:var(--haldi)}.sgsub .d{font-family:var(--script);font-weight:600}.sgsub:first-child{border-top:0;margin-top:2px}
