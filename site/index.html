@@ -66,26 +66,33 @@
 </aside>
 
 <main id="home" class="wrap">
-  <section class="welcome">
+  <section class="welcome" id="welcomeSec">
     <div class="shrih">॥ श्रीः ॥</div>
     <h1 class="deva">पूजानिधिः</h1>
     <div class="sub" data-t="tagline">பூஜை · வ்ரதம் · அர்ச்சனை</div>
     <figure class="guru">
       <img src="guru-parampara-800.jpg" srcset="guru-parampara-800.jpg 800w, guru-parampara.jpg 1600w" sizes="(max-width: 840px) 100vw, 800px" width="1600" height="367" alt="श्री कामाक्षी, श्रीशङ्करभगवत्पादाः, काञ्ची कामकोटि पीठ आचार्याः">
-      <figcaption class="gshloka" id="gshloka"></figcaption>
     </figure>
-    <blockquote class="mangala" id="mangala"></blockquote>
   </section>
   <div class="find">
     <input id="q" type="search" autocomplete="off" data-tp="search" data-ta="searchLabel">
     <button class="install" id="installBtn" hidden data-t="install">ஆப்பாக நிறுவு</button>
   </div>
   <section id="results" hidden></section>
-  <section id="todayBox" class="today" hidden></section>
   <section id="favBox" class="favbox"><h2 class="lbl"><span class="star">★</span> <span data-t="fav">அடிக்கடி படிப்பவை</span><a href="#fav" class="more" id="favMore" data-t="all">எல்லாம் →</a></h2><div id="favHome"></div></section>
   <section id="listBox" class="favbox" hidden><h2 class="lbl"><span class="lsym">☰</span> <span data-t="myLists">என் பட்டியல்கள்</span><a href="#lists" class="more" data-t="all">எல்லாம் →</a></h2><div id="listHome"></div></section>
   <section id="recentBox" class="recent" hidden><h2 class="lbl" data-t="recent">சமீபத்தில் படித்தவை</h2><div id="recent" class="chips"></div></section>
-  <section id="tilesBox"><h2 class="lbl" data-t="pujas">பூஜை · வ்ரதம்</h2><div id="pujaTiles" class="grid pujas"></div><h2 class="lbl" data-t="vidhana">விதான பூஜை</h2><div id="vidhanaTiles" class="grid pujas"></div><h2 class="lbl" id="vedaH" data-t="veda">வேத மந்த்ரங்கள்</h2><div id="vedaTiles"></div><h2 class="lbl" data-t="archanaH">அர்ச்சனை · நாமாவளிகள்</h2><div id="tiles" class="kinds3"></div><h2 class="lbl" id="parH" data-t="parayana" hidden>பாராயண நூல்கள்</h2><div id="parTiles" class="grid pujas"></div><h2 class="lbl" id="stoH" data-t="stotras">ஸ்தோத்ரங்கள்</h2><div id="stoHome" class="stohome"></div></section>
+  <section id="catBox"><h2 class="lbl" data-t="browse">தொகுப்புகள்</h2><div id="catGrid" class="catgrid"></div></section>
+  <section id="todayBox" class="today" hidden></section>
+  <section id="tilesBox"><div class="cathead"><a href="#" class="catback" data-t="home">முகப்பு</a></div>
+<div class="cat" data-c="puja"><h2 class="lbl" data-t="pujas">பூஜை · வ்ரதம்</h2><div id="pujaTiles" class="grid pujas"></div></div>
+<div class="cat" data-c="vidhana"><h2 class="lbl" data-t="vidhana">விதான பூஜை</h2><div id="vidhanaTiles" class="grid pujas"></div></div>
+<div class="cat" data-c="veda"><h2 class="lbl" id="vedaH" data-t="veda">வேத மந்த்ரங்கள்</h2><div id="vedaTiles"></div></div>
+<div class="cat" data-c="parayana"><h2 class="lbl" id="parH" data-t="parayana">பாராயண நூல்கள்</h2><div id="parTiles" class="grid pujas"></div></div>
+<div class="cat" data-c="stotra"><h2 class="lbl" id="stoH" data-t="stotras">ஸ்தோத்ரங்கள்</h2><div id="stoHome" class="stohome"></div></div>
+<div class="cat" data-c="none" hidden><div id="tiles" class="kinds3"></div></div>
+</section>
+  <section class="welcome mangsec" id="mangSec"><div class="gshloka" id="gshloka"></div><blockquote class="mangala" id="mangala"></blockquote></section>
   <footer class="foot"><a href="#about" data-t="aboutThanks">இந்த ஆப் பற்றி · நன்றி</a><span id="ver"></span></footer>
 </main>
 
