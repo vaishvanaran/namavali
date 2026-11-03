@@ -849,3 +849,33 @@ body.en .thsw .sl{font-family:var(--ui)}
 .dfold[open]>summary.dfs{color:var(--kumkum)}
 .dfold>div{padding-left:4px;border-left:2px solid color-mix(in srgb,var(--kumkum) 18%,transparent);margin-left:8px}
 .sgsub{margin:10px 4px 2px;padding-top:6px;border-top:1px dashed var(--line);font-size:.85rem;color:var(--haldi)}.sgsub .d{font-family:var(--script);font-weight:600}.sgsub:first-child{border-top:0;margin-top:2px}
+
+/* category tiles on phones: icon above, text full width, so long Tamil words never spill out */
+@media (max-width:520px){
+  .ctile{flex-direction:column;align-items:flex-start;gap:6px;padding:10px}
+  .ctile .sym.num{width:36px;height:36px;font-size:.78rem}
+  .ctile .kt{width:100%}
+  .ctile .t{font-size:.84rem;overflow-wrap:break-word;hyphens:auto}
+}
+/* முகப்பு தோற்றம் · "தங்க ஒளி": a dark, gold home page in the style of the anuṣṭubh film (prefs.home = "gold") */
+:root[data-home="gold"] #home{--bg:#0f0c09;--paper:#1a140e;--fg:#f3ead8;--muted:#b9a88f;--line:#4a3c2c;--kumkum:#e6c47e;--haldi:#d9a640;--hl:#3a2c16;--chip:#241c14;
+  color:var(--fg);background:radial-gradient(ellipse at 50% 0%,#2a2014 0%,#120e0a 45%,#0f0c09 100%);box-shadow:0 0 0 100vmax #0f0c09;clip-path:inset(0 -100vmax);color-scheme:dark}
+:root[data-home="gold"] #home .welcome h1{color:#e6c47e;text-shadow:0 0 22px #e6c47e66;animation:hgGlow 2.4s ease-out both}
+:root[data-home="gold"] #home .shrih{color:#d9a640;letter-spacing:.3em}
+:root[data-home="gold"] #home .sub{color:#cdbb9f;letter-spacing:.12em}
+:root[data-home="gold"] #home .guru img{border-radius:12px;box-shadow:0 0 0 1px #6a5434,0 10px 30px #0008;filter:saturate(1.05)}
+:root[data-home="gold"] #home .ctile,:root[data-home="gold"] #home .card,:root[data-home="gold"] #home details.sgrp{background:#18130e;border-color:#4a3c2c}
+:root[data-home="gold"] #home .ctile:hover{border-color:#e6c47e;box-shadow:0 0 14px #e6c47e33}
+:root[data-home="gold"] #home .sym{border-color:#8a6d3a;color:#e6c47e;background:#221a10}
+:root[data-home="gold"] #home .lbl{color:#d9a640;letter-spacing:.25em;font-size:.8rem;text-transform:uppercase}
+:root[data-home="gold"] #home input{background:#18130e;color:#f3ead8;border-color:#4a3c2c}
+:root[data-home="gold"] #home .ctile{animation:hgUp .6s both;animation-delay:calc(var(--i,0) * 70ms)}
+@keyframes hgUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes hgGlow{from{opacity:0;text-shadow:0 0 0 transparent}to{opacity:1}}
+@media (prefers-reduced-motion:reduce){:root[data-home="gold"] #home *{animation:none!important}}
+.homeseg{display:flex;gap:8px;flex-wrap:wrap}
+.homeseg button{flex:1;min-width:8em;font:inherit;font-size:.85rem;padding:8px;border-radius:10px;border:1px solid var(--line);background:var(--paper);color:inherit;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px}
+.homeseg button i{display:block;width:100%;height:22px;border-radius:6px;background:linear-gradient(90deg,var(--bg),var(--paper));border:1px solid var(--line)}
+.homeseg button[data-h="gold"] i{background:radial-gradient(ellipse at 50% 0%,#3a2c16,#0f0c09);border-color:#8a6d3a;box-shadow:inset 0 0 6px #e6c47e55}
+.homeseg button[aria-pressed="true"]{border-color:var(--kumkum);box-shadow:0 0 0 1px var(--kumkum)}
+.dsub2{font-size:.8rem;color:var(--muted);margin:2px 0 6px}
