@@ -597,3 +597,25 @@ body.en .thsw .sl{font-family:var(--ui)}
 #welcomeSec .guru{max-width:560px;margin-top:6px}
 .lchip{gap:6px;padding-right:4px}.lchip a{display:inline-flex;align-items:center;gap:6px;text-decoration:none;color:inherit}
 .lplay{border:0;background:var(--kumkum);color:#fff;border-radius:999px;width:28px;height:28px;font-size:.8rem;cursor:pointer;display:grid;place-items:center}
+
+/* छन्दःपरीक्षा */
+.chx{display:flex;flex-direction:column;gap:12px;margin-top:8px}
+#chxIn{font-family:var(--deva);font-size:1.15rem;line-height:1.7;width:100%;box-sizing:border-box;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);color:inherit;resize:vertical}
+.chx-btns{display:flex;flex-wrap:wrap;gap:8px}
+.chx-verdict{font-size:1.05rem;padding:10px 12px;border-radius:10px;background:var(--paper);border:1px solid var(--line)}
+.chx-verdict b{font-family:var(--script);color:var(--kumkum)}
+.chx-l{color:var(--muted);font-size:.85rem;margin-right:6px}
+.chx-notes{margin:6px 0 0;padding-left:20px;color:var(--muted);font-size:.92rem}
+.chx-pada{margin-top:12px}
+.chx-ph{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 12px;font-size:.85rem;color:var(--muted);margin-bottom:4px}
+.chx-g{font-family:var(--script);color:var(--haldi);font-weight:600}
+.chx-row{display:flex;flex-wrap:wrap;gap:3px}
+.chx-s{display:flex;flex-direction:column;align-items:center;min-width:2.1em;padding:3px 4px;border-radius:6px;border:1px solid var(--line);background:var(--paper)}
+.chx-s.g{border-color:var(--kumkum)}
+.chx-s.gb{margin-right:7px}
+.chx-s.bad{background:var(--kumkum);color:var(--paper)}
+.chx-s.bad .chx-w{color:var(--paper)}
+.chx-w{font-family:var(--deva);font-size:.75rem;color:var(--muted)}
+.chx-s.g .chx-w{color:var(--kumkum);font-weight:700}
+.chx-t{font-family:var(--script);font-size:1.05rem}
+.chx-legend,.chx-empty{color:var(--muted);font-size:.85rem}
