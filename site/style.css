@@ -752,3 +752,6 @@ body.en .thsw .sl{font-family:var(--ui)}
 .tour-dots{display:flex;gap:4px;flex-wrap:wrap;justify-content:center}
 .tour-dots i{width:7px;height:7px;border-radius:50%;background:var(--line)}
 .tour-dots i.on{background:var(--kumkum)}
+
+#chxTq{font:inherit;color:inherit;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:6px 10px;min-width:12em;flex:1 1 12em;max-width:100%}
+.chx-tgt select{flex:1 1 14em}
