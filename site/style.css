@@ -619,3 +619,59 @@ body.en .thsw .sl{font-family:var(--ui)}
 .chx-s.g .chx-w{color:var(--kumkum);font-weight:700}
 .chx-t{font-family:var(--script);font-size:1.05rem}
 .chx-legend,.chx-empty{color:var(--muted);font-size:.85rem}
+
+/* metre checker v2: tabs, expected row, lakṣaṇa cards, learning pages */
+.chx-tabs{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 4px}
+.chx-tabs button{font:inherit;font-size:.9rem;padding:6px 11px;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:inherit;cursor:pointer}
+.chx-tabs button[aria-selected="true"]{background:var(--kumkum);border-color:var(--kumkum);color:var(--paper)}
+.chx-tgt{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;font-size:.9rem;color:var(--muted)}
+.chx-tgt select{font:inherit;color:inherit;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:6px 8px;max-width:100%}
+.chx-verdict .chx-kind{font-size:.88rem;color:var(--muted);margin-top:4px}
+.chx-stat{margin-top:6px;font-weight:600;font-size:.95rem}
+.chx-stat.ok{color:#2f7a4a}.chx-stat.bad{color:var(--kumkum)}
+.chx-e{font-family:var(--deva);font-size:.72rem;color:var(--haldi);line-height:1.1;border-bottom:1px dashed var(--line);width:100%;text-align:center;padding-bottom:1px;margin-bottom:1px}
+.chx-g.want{color:var(--kumkum)}
+.chx-notes li{margin:2px 0}
+.chx-lak{margin-top:16px;padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--paper);display:flex;flex-direction:column;gap:6px}
+.chx-lt b{font-family:var(--script);color:var(--kumkum);font-size:1.15rem}
+.chx-jati{color:var(--muted);font-size:.85rem}
+.chx-sub{font-size:.8rem;color:var(--haldi);font-weight:600;margin-top:6px;letter-spacing:.02em}
+.chx-small{font-size:.88rem;color:var(--muted);margin:2px 0}
+.chx-small a{color:var(--kumkum)}
+.chx-gstrip{display:flex;flex-wrap:wrap;gap:6px}
+.chx-gc{display:flex;flex-direction:column;align-items:center;padding:4px 8px;border:1px solid var(--line);border-radius:8px;min-width:2.4em}
+.chx-gc b{font-family:var(--script);color:var(--kumkum);font-size:1.05rem;font-weight:600}
+.chx-gc i{font-style:normal;font-family:var(--deva);font-size:.78rem;color:var(--muted);letter-spacing:.08em}
+.chx-src{border-left:3px solid var(--haldi);padding:2px 0 2px 10px}
+.chx-src span{font-size:.78rem;color:var(--muted)}
+.chx-src p{margin:2px 0;font-family:var(--script);font-size:1.02rem}
+.chx-ex{border-top:1px dashed var(--line);padding-top:6px}
+.chx-ex p{margin:0;font-family:var(--script);font-size:1rem;line-height:1.6}
+.chx-exf{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:6px;font-size:.8rem;color:var(--muted);margin-top:4px}
+.chx-tmpl{display:flex;flex-wrap:wrap;gap:3px}
+.chx-tc{display:flex;flex-direction:column;align-items:center;min-width:1.9em;padding:2px 4px;border:1px solid var(--kumkum);border-radius:6px;font-family:var(--deva)}
+.chx-tc.f{border-color:var(--line);color:var(--muted)}
+.chx-tc i{font-style:normal;font-size:.65rem;color:var(--muted)}
+.chx-tmpl.sm{display:inline-flex}
+.chx-rules{margin:4px 0;padding-left:20px;font-size:.92rem}
+.chx-rules li{margin:3px 0}
+.chx-ref{margin-top:8px}
+.chx-bs{margin:14px 0;padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--paper)}
+.chx-bs h3{margin:0 0 6px;font-family:var(--script);color:var(--kumkum);font-weight:600;font-size:1.1rem}
+.chx-bs p,.chx-bs li{line-height:1.6}
+.chx-bs blockquote{margin:8px 0 0;padding:6px 10px;border-left:3px solid var(--haldi);font-family:var(--script)}
+.chx-bs .deva,.chx-st .deva,.chx-gt .deva{font-family:var(--script)}
+.chx-gt,.chx-st{border-collapse:collapse;width:100%;font-size:.92rem}
+.chx-gt td,.chx-gt th,.chx-st td{border-bottom:1px solid var(--line);padding:5px 6px;text-align:left;vertical-align:top}
+.chx-st td:first-child{color:var(--muted);white-space:nowrap;width:3.5em}
+.chx-vip{border-top:1px dashed var(--line);padding:8px 0}
+.chx-jd{border-bottom:1px solid var(--line);padding:8px 0}
+.chx-jd>summary{cursor:pointer;display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline}
+.chx-jd>summary b{font-family:var(--script);color:var(--kumkum);font-size:1.1rem;font-weight:600}
+.chx-jd>summary span{color:var(--muted);font-size:.85rem}
+.chx-mc{margin:6px 0 6px 8px;border:1px solid var(--line);border-radius:10px;padding:6px 10px;background:var(--paper)}
+.chx-mc>summary{cursor:pointer;display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline}
+.chx-mc>summary b{font-family:var(--script)}
+.chx-mc .chx-lak{border:0;padding:4px 0;margin-top:4px}
+.chx-more{margin:8px 0 0 8px}
+.chx-more>summary{cursor:pointer;color:var(--muted);font-size:.9rem}
