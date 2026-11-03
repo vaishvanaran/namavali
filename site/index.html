@@ -205,10 +205,14 @@
   </div>
   <div class="chx-tabs" role="tablist" id="chxTabs"><button role="tab" data-tab="check" aria-selected="true"></button><button role="tab" data-tab="list"></button><button role="tab" data-tab="anu"></button><button role="tab" data-tab="basics"></button></div>
   <div class="chx" id="chxCheck">
+    <div class="chx-mode" id="chxMode"><button data-m="write" aria-pressed="true"></button><button data-m="check" aria-pressed="false"></button></div>
     <label class="chx-tgt"><span data-t="chxTarget">நான் எழுதும் வ்ருத்தம்</span> <select id="chxTarget"></select></label>
-    <textarea id="chxIn" rows="4" spellcheck="false" autocomplete="off" lang="sa"></textarea>
-    <div class="chx-btns"><button class="btn2" id="chxEx1" data-t="chxEx1">உதா: ஶ்லோகம்</button><button class="btn2" id="chxEx2" data-t="chxEx2">உதா: வஸந்ததிலகா</button><button class="btn2" id="chxClr" data-t="chxClr">அழி</button></div>
-    <div id="chxOut" class="chx-out" aria-live="polite"></div>
+    <div id="chxWrite"></div>
+    <div id="chxFree" hidden>
+      <textarea id="chxIn" rows="4" spellcheck="false" autocomplete="off" lang="sa"></textarea>
+      <div class="chx-btns"><button class="btn2" id="chxEx1" data-t="chxEx1">உதா: ஶ்லோகம்</button><button class="btn2" id="chxEx2" data-t="chxEx2">உதா: வஸந்ததிலகா</button><button class="btn2" id="chxClr" data-t="chxClr">அழி</button></div>
+      <div id="chxOut" class="chx-out" aria-live="polite"></div>
+    </div>
   </div>
   <div class="chx-ref" id="chxRef" hidden></div>
 </main>
