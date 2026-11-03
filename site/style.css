@@ -837,3 +837,14 @@ body.en .thsw .sl{font-family:var(--ui)}
 @media (max-width:520px){.fz,.fr{grid-template-columns:1em repeat(8,minmax(0,1fr)) 2.6em;gap:2px}.ft{font-size:.9rem}.fc{min-height:2.8em}.ftag{font-size:.75rem}.fcap{font-size:.95rem}.ftitle b{font-size:1.6rem}.flv span{font-size:.82rem}}
 .chx-tourbox summary{cursor:pointer;list-style:none}.chx-tourbox summary h3{display:inline}
 .chx-grp.gbad .chx-gl{border-bottom-color:var(--kumkum)}.chx-grp.gbad .chx-gl .gw{color:var(--kumkum)}
+
+/* drawer: sections fold to their headings */
+.dfold{margin:2px 0}
+.dfold>summary.dfs{list-style:none;display:flex;align-items:center;gap:8px;cursor:pointer;font-size:.95rem;color:var(--ink,inherit);font-weight:600;margin:4px 0;padding:11px 10px;border-radius:10px;letter-spacing:0;min-height:44px;box-sizing:border-box}
+.dfold>summary.dfs::-webkit-details-marker{display:none}
+.dfold>summary.dfs:hover{background:color-mix(in srgb,var(--kumkum) 6%,transparent)}
+.dfold>summary.dfs>span:first-child{flex:1}
+.dfold>summary .chev{transition:transform .2s;color:var(--muted)}
+.dfold[open]>summary .chev{transform:rotate(90deg)}
+.dfold[open]>summary.dfs{color:var(--kumkum)}
+.dfold>div{padding-left:4px;border-left:2px solid color-mix(in srgb,var(--kumkum) 18%,transparent);margin-left:8px}

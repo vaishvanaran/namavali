@@ -13,7 +13,7 @@
 <meta name="apple-mobile-web-app-title" content="Pujanidhi">
 <link rel="preload" href="fonts/deva.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/tamil.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="style.css?v=2026.11.03w">
+<link rel="stylesheet" href="style.css?v=2026.11.03x">
 </head>
 <body>
 <header class="bar"><div class="wrap">
@@ -46,20 +46,13 @@
     <a href="#fav" class="dl"><span class="sym xs star">★</span><span data-t="fav">அடிக்கடி படிப்பவை</span><span class="dn" id="dFavN"></span></a>
     <a href="#marks" class="dl"><span class="sym xs lsym">✎</span><span data-t="myMarks">என் குறிப்புகள்</span><span class="dn" id="dMarkN"></span></a>
     <a href="#lists" class="dl"><span class="sym xs lsym">☰</span><span data-t="myLists">என் பட்டியல்கள்</span><span class="dn" id="dListN"></span></a>
-    <div class="dsec" data-t="pujas">பூஜை · வ்ரதம்</div>
-    <div id="dPujas"></div>
-    <div class="dsec" data-t="vidhana">விதான பூஜை</div>
-    <div id="dVidhana"></div>
-    <div class="dsec" id="dVedaH" data-t="veda">வேத மந்த்ரங்கள்</div>
-    <div id="dVeda"></div>
-    <div id="dShaSec" hidden><div class="dsec" data-t="shadanga">ஷடங்கம் — வேதாங்கங்கள்</div>
-    <div id="dSha"></div></div>
-    <div id="dParSec" hidden><div class="dsec" data-t="parayana">பாராயண நூல்கள்</div>
-    <div id="dPar"></div></div>
-    <div id="dStotraSec" hidden><div class="dsec" data-t="stotras">ஸ்தோத்ரங்கள்</div>
-    <div id="dStotra"></div></div>
-    <div class="dsec" data-t="namavalis">நாமாவளிகள்</div>
-    <div id="dKinds"></div>
+    <details class="dfold" data-k="pujas"><summary class="dsec dfs"><span data-t="pujas">பூஜை · வ்ரதம்</span><span class="dn dfn"></span><span class="chev" aria-hidden="true">›</span></summary><div id="dPujas"></div></details>
+    <details class="dfold" data-k="vidhana"><summary class="dsec dfs"><span data-t="vidhana">விதான பூஜை</span><span class="dn dfn"></span><span class="chev" aria-hidden="true">›</span></summary><div id="dVidhana"></div></details>
+    <details class="dfold" data-k="veda" id="dVedaH"><summary class="dsec dfs"><span data-t="veda">வேத மந்த்ரங்கள்</span><span class="dn dfn"></span><span class="chev" aria-hidden="true">›</span></summary><div id="dVeda"></div></details>
+    <div id="dShaSec" hidden><details class="dfold" data-k="shadanga"><summary class="dsec dfs"><span data-t="shadanga">ஷடங்கம் — வேதாங்கங்கள்</span><span class="dn dfn"></span><span class="chev" aria-hidden="true">›</span></summary><div id="dSha"></div></details></div>
+    <div id="dParSec" hidden><details class="dfold" data-k="parayana"><summary class="dsec dfs"><span data-t="parayana">பாராயண நூல்கள்</span><span class="dn dfn"></span><span class="chev" aria-hidden="true">›</span></summary><div id="dPar"></div></details></div>
+    <div id="dStotraSec" hidden><details class="dfold" data-k="stotras"><summary class="dsec dfs"><span data-t="stotras">ஸ்தோத்ரங்கள்</span><span class="dn dfn"></span><span class="chev" aria-hidden="true">›</span></summary><div id="dStotra"></div></details></div>
+    <details class="dfold" data-k="namavalis"><summary class="dsec dfs"><span data-t="namavalis">நாமாவளிகள்</span><span class="dn dfn"></span><span class="chev" aria-hidden="true">›</span></summary><div id="dKinds"></div></details>
     <div class="dsec" data-t="settings">அமைப்பு</div>
     <div class="dlang"><div class="seg" id="langSeg" role="group" aria-label="Language"><button data-l="ta">தமிழ்</button><button data-l="en">English</button></div></div>
     <div class="dlang"><div class="thgrid" id="themeSeg" role="group" aria-label="Theme"></div></div>
@@ -316,9 +309,9 @@
   <div class="anav"><button class="icon" id="aPrev" data-t="prev">← முன்</button><span class="ahint" data-t="tapNext"></span><button class="icon" id="aNext">அடுத்து →</button></div>
 </div>
 
-<script src="translit.js?v=2026.11.03w"></script>
-<script src="symbols.js?v=2026.11.03w"></script>
-<script src="chandas.js?v=2026.11.03w"></script>
-<script src="app.js?v=2026.11.03w"></script>
+<script src="translit.js?v=2026.11.03x"></script>
+<script src="symbols.js?v=2026.11.03x"></script>
+<script src="chandas.js?v=2026.11.03x"></script>
+<script src="app.js?v=2026.11.03x"></script>
 </body>
 </html>
