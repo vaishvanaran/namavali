@@ -874,3 +874,21 @@ body.en .thsw .sl{font-family:var(--ui)}
 .chx-back[hidden]{display:none}
 @keyframes chxFlash{0%{box-shadow:0 0 0 3px color-mix(in srgb,var(--kumkum) 45%,transparent)}100%{box-shadow:0 0 0 3px transparent}}
 .chx-flash{animation:chxFlash 1.6s ease-out 2;border-radius:10px}
+/* Sāmaveda svaras: drawn by the app in one row above the line, clear of every vowel sign (2026.11.04g) */
+.saman{line-height:2.7}
+.saman.s-deva{font-size:1.05em}   /* Sanskrit 2003 (content/fonts-pending) goes here once the Ashram allows it */
+.saman .saw{white-space:nowrap}
+.saman .sak{display:inline-block;position:relative;line-height:1.25}
+.saman .sav{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(100% + .14em);font-size:.66em;line-height:1;white-space:nowrap;font-weight:700;color:var(--kumkum);letter-spacing:.05em;-webkit-text-stroke:0}
+.saman.s-gran .sav{font-family:var(--tamil);font-size:.62em;bottom:calc(100% + .1em)}
+.saman .sav.bar{width:max(110%,1.5em);height:.16em;border-radius:.08em;background:currentColor;bottom:calc(100% + .5em)}
+.saman .sad{margin:0 .12em 0 .32em}
+html[data-script="taml"] .vg{-webkit-text-stroke:.3px currentColor;overflow-wrap:anywhere}
+html[data-script="taml"] :is(.pverse,.pprose,.blk-shloka,.blk-para) p:has(.vg){line-height:2.1}
+.dl :is(.dt,.dd){overflow-wrap:anywhere;min-width:0}
+.ptitle,.rhead h1{overflow-wrap:anywhere}
+.saman .san{margin:0 .03em}
+.saman.s-gran .san{font-family:var(--tamil);font-size:.8em;margin:0 .07em;vertical-align:.06em}
+
+/* pinch on the text resizes the letters (app.js); the browser keeps vertical panning */
+:is(#reader,#puja,#stotra) main, #rBody,#pBody,#sBody{touch-action:pan-y}
