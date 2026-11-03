@@ -876,7 +876,7 @@ body.en .thsw .sl{font-family:var(--ui)}
 @keyframes chxFlash{0%{box-shadow:0 0 0 3px color-mix(in srgb,var(--kumkum) 45%,transparent)}100%{box-shadow:0 0 0 3px transparent}}
 .chx-flash{animation:chxFlash 1.6s ease-out 2;border-radius:10px}
 /* Sāmaveda svaras: drawn by the app in one row above the line, clear of every vowel sign (2026.11.04g) */
-.saman{line-height:2.7}
+.saman{line-height:2.7;position:relative;z-index:0}
 .saman.s-deva{font-size:1.05em}
 .saman .saw{white-space:nowrap}
 .saman .sak{display:inline-block;position:relative;line-height:1.25}
