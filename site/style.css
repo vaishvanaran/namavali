@@ -955,3 +955,4 @@ details.chx-src[open]>summary::after{content:" ▾"}
 .chx-s.bad{border:2px solid var(--kumkum)!important;background:color-mix(in srgb,var(--kumkum) 22%,var(--paper))!important}
 .chx-s.bad .chx-e{color:var(--kumkum);font-weight:700;border-bottom:none;font-size:.8rem}
 .chx-grp.gbad .chx-gl .gw{color:var(--kumkum);font-weight:700}
+.chx-wlist{list-style:none;padding:0;margin:6px 0;display:grid;gap:4px}.chx-wlist a{color:var(--kumkum);font-family:var(--script)}.chx-wlist small{color:var(--muted)}
