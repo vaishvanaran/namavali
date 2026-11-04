@@ -893,3 +893,28 @@ html[data-script="taml"] :is(.pverse,.pprose,.blk-shloka,.blk-para) p:has(.vg){l
 
 /* pinch on the text resizes the letters (app.js); the browser keeps vertical panning */
 :is(#reader,#puja,#stotra) main, #rBody,#pBody,#sBody{touch-action:pan-y}
+
+/* numbered section chips (Piṅgala khaṇḍas …): an even grid */
+#sHeads.hgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(3.1em,1fr));gap:.45em;justify-items:stretch}
+#sHeads.hgrid .hglab{grid-column:1/-1;font-size:.85em;color:var(--muted,#777);text-align:center}
+#sHeads.hgrid .chip{justify-content:center;text-align:center;padding-left:0;padding-right:0;margin:0;min-width:0}
+#sHeads.hgrid .chip.wide{grid-column:span 3}
+.blk-shloka .nw{white-space:nowrap}
+
+/* chandas start screen */
+.chx-ht{font-size:1.05rem;margin:14px 0 10px;color:var(--muted)}
+h2.chx-ht{color:var(--ink,inherit);font-size:1.15rem}
+.chx-cards{display:grid;gap:12px}
+.chx-card{display:flex;gap:14px;align-items:flex-start;text-align:left;font:inherit;color:inherit;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px;cursor:pointer;box-shadow:0 1px 2px rgba(0,0,0,.05)}
+.chx-card .ic{font-size:1.8rem;line-height:1}
+.chx-card b{display:block;font-size:1.12rem;color:var(--kumkum);margin-bottom:4px}
+.chx-card small,.chx-lessons small{display:block;font-size:.9rem;color:var(--muted);line-height:1.45}
+.chx-lessons{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.chx-lessons button{display:flex;width:100%;gap:12px;align-items:center;text-align:left;font:inherit;color:inherit;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px 14px;cursor:pointer}
+.chx-lessons .ln{flex:none;width:2em;height:2em;border-radius:50%;display:grid;place-items:center;background:var(--kumkum);color:var(--paper);font-weight:700}
+.chx-lessons b{display:block}
+.chx-lessons .ar{margin-left:auto;font-size:1.4rem;color:var(--muted)}
+.chx-up{font:inherit;font-size:.95rem;background:none;border:none;color:var(--kumkum);padding:6px 0;margin:4px 0 6px;cursor:pointer}
+.chx-sum{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin:6px 0 10px;padding:10px 12px;border-radius:10px;background:var(--paper);border:1px solid var(--line);font-size:.95rem}
+.chx-sum b{color:var(--kumkum)}
+.chx-sum .btn2{margin-left:auto}
