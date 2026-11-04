@@ -918,3 +918,28 @@ h2.chx-ht{color:var(--ink,inherit);font-size:1.15rem}
 .chx-sum{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin:6px 0 10px;padding:10px 12px;border-radius:10px;background:var(--paper);border:1px solid var(--line);font-size:.95rem}
 .chx-sum b{color:var(--kumkum)}
 .chx-sum .btn2{margin-left:auto}
+
+/* chandas: folded sources, vipulā comparison, lakṣaṇa before writing, pāda icons */
+details.chx-src{border-left:3px solid var(--haldi);padding:2px 0 2px 10px;margin:6px 0}
+details.chx-src>summary{cursor:pointer;font-size:.82rem;color:var(--muted);list-style:none}
+details.chx-src>summary::-webkit-details-marker{display:none}
+details.chx-src>summary::after{content:" ▸";font-size:.75em}
+details.chx-src[open]>summary::after{content:" ▾"}
+.chx-tc.d{border-color:var(--kumkum)!important;background:color-mix(in srgb,var(--kumkum) 14%,var(--paper))!important;color:var(--kumkum)}
+.chx-cmp{display:grid;grid-template-columns:auto 1fr;gap:4px 8px;align-items:center;margin:6px 0}
+.chx-cmp .cl,.chx-qrow .cl{font-size:.8rem;color:var(--muted);white-space:nowrap}
+.chx-intro{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin:6px 0 12px;line-height:1.6;font-size:.95rem}
+.chx-quick{margin-bottom:4px}
+.chx-qrow{display:grid;grid-template-columns:5.2em 1fr;gap:8px;align-items:center;margin:4px 0}
+.chx-more{margin-top:10px}.chx-more>summary{cursor:pointer;color:var(--kumkum);font-size:.95rem;padding:6px 0}
+.chx-boxes.fit{flex-wrap:nowrap;gap:5px}
+.chx-boxes.fit .chx-grp{flex:var(--k) 1 0;min-width:0}
+.chx-boxes.fit .chx-gb{gap:2px}
+.chx-boxes.fit .chx-b{width:auto;flex:1 1 0;min-width:0}
+.fpi{display:inline-flex;gap:2px;vertical-align:middle}
+.fpi i{font-style:normal;font-size:.7em;width:1.35em;height:1.35em;display:grid;place-items:center;border-radius:4px;border:1px solid currentColor;opacity:.35}
+.fpi i.on{opacity:1;background:currentColor}.fpi i.on{color:inherit}
+.fpi i.on{background:var(--haldi);border-color:var(--haldi);color:#222}
+.chx-qrow .chx-tmpl,.chx-cmp .chx-tmpl{display:grid!important;grid-template-columns:repeat(8,minmax(0,1fr));gap:3px;flex-wrap:nowrap}
+.chx-qrow .chx-tc,.chx-cmp .chx-tc{width:auto!important;min-width:0!important;margin:0!important}
+.film .fpi{font-size:1.3rem}.film .fhint .fpi,.film .fn .fpi{font-size:1.05rem}
