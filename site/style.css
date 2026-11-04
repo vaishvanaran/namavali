@@ -980,3 +980,4 @@ details.chx-src[open]>summary::after{content:" ▾"}
 :root:is([data-theme=dark],[data-theme=black],[data-theme=dusk]) .samp.sm-p,:root:is([data-theme=dark],[data-theme=black],[data-theme=dusk]) .sm-p{--smc:#7cc489}:root:is([data-theme=dark],[data-theme=black],[data-theme=dusk]) .samp.sm-y,:root:is([data-theme=dark],[data-theme=black],[data-theme=dusk]) .sm-y{--smc:#86aee0}:root:is([data-theme=dark],[data-theme=black],[data-theme=dusk]) .samp.sm-s,:root:is([data-theme=dark],[data-theme=black],[data-theme=dusk]) .sm-s{--smc:#e48a74}
 .sampbar .sm-pr{margin-bottom:.45rem}
 .blk-note{white-space:normal}
+.updbar{position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:60;max-width:calc(100% - 32px);padding:.55rem 1rem;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--fg);font:inherit;font-size:.88rem;box-shadow:0 4px 18px rgba(0,0,0,.18);cursor:pointer}
