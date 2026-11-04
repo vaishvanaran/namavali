@@ -949,3 +949,9 @@ details.chx-src[open]>summary::after{content:" ▾"}
 .chx-qrow .chx-tc,.chx-cmp .chx-tc{width:auto!important;min-width:0!important;margin:0!important}
 .film .fpi{font-size:1.3rem}.film .fhint .fpi,.film .fn .fpi{font-size:1.05rem}
 .chx-where{margin-top:4px;font-weight:600;color:var(--kumkum)}.chx-info{color:var(--muted);font-size:.9em}
+
+/* checker boxes: heavy = bold letter only (no red border); only faults are red */
+.chx-s.g{border-color:var(--line)}
+.chx-s.bad{border:2px solid var(--kumkum)!important;background:color-mix(in srgb,var(--kumkum) 22%,var(--paper))!important}
+.chx-s.bad .chx-e{color:var(--kumkum);font-weight:700;border-bottom:none;font-size:.8rem}
+.chx-grp.gbad .chx-gl .gw{color:var(--kumkum);font-weight:700}
