@@ -956,3 +956,22 @@ details.chx-src[open]>summary::after{content:" ▾"}
 .chx-s.bad .chx-e{color:var(--kumkum);font-weight:700;border-bottom:none;font-size:.8rem}
 .chx-grp.gbad .chx-gl .gw{color:var(--kumkum);font-weight:700}
 .chx-wlist{list-style:none;padding:0;margin:6px 0;display:grid;gap:4px}.chx-wlist a{color:var(--kumkum);font-family:var(--script)}.chx-wlist small{color:var(--muted)}
+/* Saptaśatī pallava / yojana / sampuṭa */
+.sampbar{margin:.4rem 0 .8rem;padding:.55rem .7rem;border:1px solid color-mix(in srgb,currentColor 14%,transparent);border-radius:12px;font-size:.92rem}
+.sampbar .sm-row{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem .6rem}
+.sampbar .seg{display:inline-flex;flex-wrap:wrap;border:1px solid color-mix(in srgb,currentColor 22%,transparent);border-radius:16px;overflow:hidden}
+.sampbar .seg button{border:0;background:none;color:inherit;font:inherit;padding:.32rem .6rem;border-radius:14px;cursor:pointer}
+.sampbar .seg button.on{font-weight:700;background:color-mix(in srgb,var(--smc,currentColor) 18%,transparent)}
+.sampbar .sm-hint{margin:.35rem 0 .3rem;opacity:.75;font-size:.85rem}
+.sampbar .sm-om{display:block;margin:.4rem 0 0;font-size:.85rem;opacity:.85}
+.sampbar .sm-chg,.sampbar .sm-x,.sm-own button{font:inherit;font-size:.85rem;border:1px solid color-mix(in srgb,currentColor 25%,transparent);background:none;color:inherit;border-radius:999px;padding:.2rem .7rem;margin-top:.35rem;cursor:pointer}
+.sampbar .sm-pick input[type=search],.sm-own textarea{width:100%;box-sizing:border-box;margin:.4rem 0;padding:.45rem .6rem;font:inherit;border-radius:8px;border:1px solid color-mix(in srgb,currentColor 25%,transparent);background:transparent;color:inherit}
+.sampbar .sm-list{display:flex;flex-direction:column;gap:.3rem;margin:.25rem 0 .5rem}
+.sampbar .sm-list button{text-align:left;font:inherit;font-family:var(--deva);background:color-mix(in srgb,currentColor 5%,transparent);border:1px solid color-mix(in srgb,currentColor 12%,transparent);color:inherit;border-radius:8px;padding:.4rem .6rem;cursor:pointer;line-height:1.5}
+.sampbar .sm-list .pill{font-size:.75rem;opacity:.7;margin-right:.3rem}
+.sm-p,.seg button.on.sm-p{--smc:#3f8f4f}.sm-y,.seg button.on.sm-y{--smc:#3a6fb0}.sm-s,.seg button.on.sm-s{--smc:#b8432f}
+.samp{--smc:currentColor;margin:.1rem 0 .55rem .2rem;padding:.15rem 0 .15rem .7rem;border-left:3px solid color-mix(in srgb,var(--smc) 70%,transparent);color:color-mix(in srgb,var(--smc) 55%,var(--fg,currentColor));font-size:.86em;line-height:1.55;opacity:.9}
+.samp.sm-p{--smc:#3f8f4f}.samp.sm-y{--smc:#3a6fb0}.samp.sm-s{--smc:#b8432f}
+.samp p{margin:0}
+.sampbar .sm-cur{margin:.3rem 0 0;font-size:.95em}
+:root[data-theme=dark] .samp,:root[data-theme=black] .samp,:root[data-theme=dusk] .samp{filter:brightness(1.5)}
