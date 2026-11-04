@@ -978,3 +978,5 @@ details.chx-src[open]>summary::after{content:" ▾"}
 .sampbar .sm-cur{margin:.4rem 0 0}
 :root[data-theme=dark] .samp,:root[data-theme=black] .samp,:root[data-theme=dusk] .samp{--tint:1}
 :root:is([data-theme=dark],[data-theme=black],[data-theme=dusk]) .samp.sm-p,:root:is([data-theme=dark],[data-theme=black],[data-theme=dusk]) .sm-p{--smc:#7cc489}:root:is([data-theme=dark],[data-theme=black],[data-theme=dusk]) .samp.sm-y,:root:is([data-theme=dark],[data-theme=black],[data-theme=dusk]) .sm-y{--smc:#86aee0}:root:is([data-theme=dark],[data-theme=black],[data-theme=dusk]) .samp.sm-s,:root:is([data-theme=dark],[data-theme=black],[data-theme=dusk]) .sm-s{--smc:#e48a74}
+.sampbar .sm-pr{margin-bottom:.45rem}
+.blk-note{white-space:normal}
