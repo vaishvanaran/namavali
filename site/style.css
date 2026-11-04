@@ -970,8 +970,11 @@ details.chx-src[open]>summary::after{content:" ▾"}
 .sampbar .sm-list button{text-align:left;font:inherit;font-family:var(--deva);background:color-mix(in srgb,currentColor 5%,transparent);border:1px solid color-mix(in srgb,currentColor 12%,transparent);color:inherit;border-radius:8px;padding:.4rem .6rem;cursor:pointer;line-height:1.5}
 .sampbar .sm-list .pill{font-size:.75rem;opacity:.7;margin-right:.3rem}
 .sm-p,.seg button.on.sm-p{--smc:#3f8f4f}.sm-y,.seg button.on.sm-y{--smc:#3a6fb0}.sm-s,.seg button.on.sm-s{--smc:#b8432f}
-.samp{--smc:currentColor;margin:.1rem 0 .55rem .2rem;padding:.15rem 0 .15rem .7rem;border-left:3px solid color-mix(in srgb,var(--smc) 70%,transparent);color:color-mix(in srgb,var(--smc) 55%,var(--fg,currentColor));font-size:.86em;line-height:1.55;opacity:.9}
+.samp{--smc:#b8432f;margin:-4px 0 12px 14px;padding:8px 14px 9px;border-left:4px solid var(--smc);background:color-mix(in srgb,var(--smc) 9%,var(--paper));border-radius:0 10px 10px 0;font-family:var(--script);font-size:calc(var(--fs)*.74);line-height:1.8;color:color-mix(in srgb,var(--smc) 40%,var(--fg))}
+.samp .smk{display:inline-block;font-size:.62em;font-weight:700;letter-spacing:.02em;color:var(--smc);border:1px solid color-mix(in srgb,var(--smc) 45%,transparent);border-radius:999px;padding:0 .6em;margin-bottom:.15em;line-height:1.6}
+.samp.sm-y{margin:6px 0 -2px 14px}
 .samp.sm-p{--smc:#3f8f4f}.samp.sm-y{--smc:#3a6fb0}.samp.sm-s{--smc:#b8432f}
 .samp p{margin:0}
-.sampbar .sm-cur{margin:.3rem 0 0;font-size:.95em}
-:root[data-theme=dark] .samp,:root[data-theme=black] .samp,:root[data-theme=dusk] .samp{filter:brightness(1.5)}
+.sampbar .sm-cur{margin:.4rem 0 0}
+:root[data-theme=dark] .samp,:root[data-theme=black] .samp,:root[data-theme=dusk] .samp{--tint:1}
+:root:is([data-theme=dark],[data-theme=black],[data-theme=dusk]) .samp.sm-p,:root:is([data-theme=dark],[data-theme=black],[data-theme=dusk]) .sm-p{--smc:#7cc489}:root:is([data-theme=dark],[data-theme=black],[data-theme=dusk]) .samp.sm-y,:root:is([data-theme=dark],[data-theme=black],[data-theme=dusk]) .sm-y{--smc:#86aee0}:root:is([data-theme=dark],[data-theme=black],[data-theme=dusk]) .samp.sm-s,:root:is([data-theme=dark],[data-theme=black],[data-theme=dusk]) .sm-s{--smc:#e48a74}
