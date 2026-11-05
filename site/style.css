@@ -1005,3 +1005,33 @@ body.para .vpos{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 .here{position:relative;background:color-mix(in srgb,var(--kumkum) 7%,var(--paper))!important;box-shadow:inset 5px 0 0 var(--kumkum),0 0 0 2px color-mix(in srgb,var(--kumkum) 55%,transparent)!important}
 .here::after{content:"📍";position:absolute;top:-.55em;left:-.35em;font-size:1.1rem;line-height:1}
 .asbar .asv{font-size:1.15rem;font-weight:700}
+/* anuṣṭubh film v2 (one idea per slide) */
+.fleaves.big,.fbans.big{gap:12px}
+.fleaves.big .fch,.fbans.big .fch{min-width:5.2em;padding:10px 16px}
+.fleaves.big .fch b,.fbans.big .fch b{font-size:2rem}
+.fleaves.big .fch u,.fbans.big .fch u{font-size:1.15rem}
+.fch.hv{border-color:var(--fgold);background:#2a2014}.fch.hv u{color:var(--fgold);font-weight:700}
+.farr{font-size:1.8rem;color:var(--fgold)}
+.fword{display:flex;gap:10px;justify-content:center}
+.fword .fc{min-width:4.2em;min-height:4.2em}.fword .ft{font-size:2rem}
+.fpads p{display:flex;align-items:center;gap:10px;justify-content:center}
+.fpn{display:inline-flex;align-items:center;justify-content:center;width:1.6em;height:1.6em;border-radius:50%;border:1px solid var(--fgold);color:var(--fgold);font-family:var(--ui);font-size:.75rem}
+.fplain .fdim{opacity:.25}
+.fg.one .fc{min-height:4em}.fg.one .ft{font-size:1.45rem}.fg.one .fc em{font-size:.9rem}
+.fz.fnum{font-size:.8rem;color:var(--fgold2)}
+@media (max-width:520px){.fg.one .ft{font-size:1.15rem}.fleaves.big .fch b,.fbans.big .fch b{font-size:1.6rem}.fleaves.big .fch{min-width:4em;padding:8px 10px}}
+
+/* pallava / yojana / sampuṭa frame v2 — clearly visible: coloured border, tinted ground, a label tab on the border */
+.sgrp{position:relative;border:2.5px solid color-mix(in srgb,var(--sgc) 85%,transparent);background:color-mix(in srgb,var(--sgc) 7%,transparent);border-radius:16px;padding:16px 8px 4px;margin:22px -6px 14px;box-shadow:0 3px 14px color-mix(in srgb,var(--sgc) 22%,transparent)}
+.sgrp.sg-s{--sgc:#C4620A;box-shadow:0 3px 14px color-mix(in srgb,var(--sgc) 22%,transparent)}
+.sgrp.sg-y{border-style:solid}
+.sgrp::before{content:attr(data-lab);position:absolute;top:-.85em;left:14px;padding:.05em .8em;border-radius:999px;background:var(--sgc);color:#fff;font-family:var(--deva);font-size:.78rem;font-weight:700;line-height:1.6;letter-spacing:.02em}
+:root[data-theme=dark] .sgrp::before,:root[data-theme=black] .sgrp::before,:root[data-theme=dusk] .sgrp::before{color:#111}
+:root[data-theme=dark] .sgrp.sg-s,:root[data-theme=black] .sgrp.sg-s,:root[data-theme=dusk] .sgrp.sg-s{--sgc:#F09A4A}
+:root[data-theme=dark] .sgrp.sg-p,:root[data-theme=black] .sgrp.sg-p,:root[data-theme=dusk] .sgrp.sg-p{--sgc:#6CC27E}
+:root[data-theme=dark] .sgrp.sg-y,:root[data-theme=black] .sgrp.sg-y,:root[data-theme=dusk] .sgrp.sg-y{--sgc:#7FA8E8}
+.samp.sm-s,.sm-s,.seg button.on.sm-s{--smc:#C4620A}
+.sgrp .samp .smk{display:none}
+.vpn{font-size:.72rem;color:var(--muted);margin-right:auto;font-family:var(--script)}.vpn i{font-style:normal;font-family:var(--ui);font-size:.85em;opacity:.7;margin-right:.2em}
+@media (prefers-color-scheme:dark){:root:not([data-theme]) .sgrp.sg-s{--sgc:#F09A4A}:root:not([data-theme]) .sgrp.sg-p{--sgc:#6CC27E}:root:not([data-theme]) .sgrp.sg-y{--sgc:#7FA8E8}:root:not([data-theme]) .sgrp::before{color:#111}}
+.vch-row{align-items:center;gap:8px;flex-wrap:wrap}
