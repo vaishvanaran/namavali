@@ -1048,7 +1048,7 @@ body.para .vpos{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 :root[data-theme=dark],:root[data-theme=black],:root[data-theme=dusk]{--cxa:#6FC7BE;--cxb:#E9A06E;--cxe:#A99D90}
 @media (prefers-color-scheme:dark){:root:not([data-theme]){--cxa:#6FC7BE;--cxb:#E9A06E;--cxe:#A99D90}}
 .cx-a{color:var(--cxa)}.cx-b{color:var(--cxb)}.cx-e{color:var(--cxe)}
-.cx.yt::after{content:"";display:inline-block;width:2px;height:.85em;background:var(--haldi);margin:0 .14em 0 .1em;vertical-align:-.05em;border-radius:1px;opacity:.8}
+.cx.yt::after{content:"";display:inline-block;width:.24em;height:.24em;border-radius:50%;background:var(--haldi);margin:0 .2em 0 .12em;vertical-align:.95em;opacity:.85}
 .cxl{font-family:var(--deva);font-size:calc(var(--fs)*.62);color:var(--muted);margin-top:.45em;line-height:1.55}
 .cxl + .cxl{margin-top:.15em}
 .cxn{font-family:var(--ui);font-size:.72em;margin-right:.5em;padding:0 .45em;border:1px solid var(--line);border-radius:999px;white-space:nowrap}
