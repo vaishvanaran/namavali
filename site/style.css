@@ -969,11 +969,11 @@ details.chx-src[open]>summary::after{content:" ▾"}
 .sampbar .sm-list{display:flex;flex-direction:column;gap:.3rem;margin:.25rem 0 .5rem}
 .sampbar .sm-list button{text-align:left;font:inherit;font-family:var(--deva);background:color-mix(in srgb,currentColor 5%,transparent);border:1px solid color-mix(in srgb,currentColor 12%,transparent);color:inherit;border-radius:8px;padding:.4rem .6rem;cursor:pointer;line-height:1.5}
 .sampbar .sm-list .pill{font-size:.75rem;opacity:.7;margin-right:.3rem}
-.sm-p,.seg button.on.sm-p{--smc:#3f8f4f}.sm-y,.seg button.on.sm-y{--smc:#3a6fb0}.sm-s,.seg button.on.sm-s{--smc:#b8432f}
+.sm-p,.seg button.on.sm-p{--smc:#3f8f4f}.sm-y,.seg button.on.sm-y{--smc:#3a6fb0}.sm-s,.seg button.on.sm-s{--smc:#a67c12}
 .samp{--smc:#b8432f;margin:-4px 0 12px 14px;padding:8px 14px 9px;border-left:4px solid var(--smc);background:color-mix(in srgb,var(--smc) 9%,var(--paper));border-radius:0 10px 10px 0;font-family:var(--script);font-size:calc(var(--fs)*.74);line-height:1.8;color:color-mix(in srgb,var(--smc) 40%,var(--fg))}
 .samp .smk{display:inline-block;font-size:.62em;font-weight:700;letter-spacing:.02em;color:var(--smc);border:1px solid color-mix(in srgb,var(--smc) 45%,transparent);border-radius:999px;padding:0 .6em;margin-bottom:.15em;line-height:1.6}
 .samp.sm-y{margin:6px 0 -2px 14px}
-.samp.sm-p{--smc:#3f8f4f}.samp.sm-y{--smc:#3a6fb0}.samp.sm-s{--smc:#b8432f}
+.samp.sm-p{--smc:#3f8f4f}.samp.sm-y{--smc:#3a6fb0}.samp.sm-s{--smc:#a67c12}
 .samp p{margin:0}
 .sampbar .sm-cur{margin:.4rem 0 0}
 :root[data-theme=dark] .samp,:root[data-theme=black] .samp,:root[data-theme=dusk] .samp{--tint:1}
@@ -981,3 +981,22 @@ details.chx-src[open]>summary::after{content:" ▾"}
 .sampbar .sm-pr{margin-bottom:.45rem}
 .blk-note{white-space:normal}
 .updbar{position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:60;max-width:calc(100% - 32px);padding:.55rem 1rem;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--fg);font:inherit;font-size:.88rem;box-shadow:0 4px 18px rgba(0,0,0,.18);cursor:pointer}
+
+/* pallava / yojana / sampuṭa: the inserted mantra(s) and their verse framed as one group */
+.sgrp{--sgc:#a67c12;border:1.5px solid color-mix(in srgb,var(--sgc) 55%,transparent);border-radius:14px;padding:6px 8px 2px;margin:10px -6px 12px}
+.sgrp.sg-p{--sgc:#3f8f4f;border-color:color-mix(in srgb,var(--sgc) 45%,transparent);background:color-mix(in srgb,var(--sgc) 3%,transparent)}
+.sgrp.sg-y{--sgc:#3a6fb0;border-style:dashed;border-color:color-mix(in srgb,var(--sgc) 45%,transparent)}
+.sgrp.sg-s{box-shadow:0 0 0 3px color-mix(in srgb,var(--sgc) 8%,transparent)}
+.sgrp > .samp{margin-left:6px}
+.sgrp > .samp:last-child{margin-bottom:6px}
+.sgrp > .samp.sm-y:first-child,.sgrp > .samp.sm-s:first-child{margin-top:2px}
+/* a mantra said again (या देवी … three times): which time this is */
+.blk-shloka[data-rep]{position:relative}
+.vrep{float:right;margin:.1em 0 0 .5em;font-size:.62em;line-height:1.5;padding:0 .55em;border-radius:999px;border:1px solid color-mix(in srgb,var(--kumkum) 40%,transparent);color:var(--kumkum);font-weight:700;font-family:var(--deva)}
+/* where am I in the text */
+.vpos{position:fixed;right:max(10px,env(safe-area-inset-right,0px));bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:18;padding:.32em .85em;border-radius:999px;border:1px solid var(--line);background:color-mix(in srgb,var(--paper) 90%,transparent);color:var(--muted);font:inherit;font-size:.82rem;line-height:1.5;box-shadow:0 2px 10px rgba(0,0,0,.12);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);cursor:pointer;white-space:nowrap}
+.vpos[hidden]{display:none}
+.vpos b{color:var(--fg);font-weight:700}
+.vpos input{width:4.2em;font:inherit;padding:.1em .3em;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--fg)}
+body.autos:not(.immersive) .vpos{bottom:calc(72px + env(safe-area-inset-bottom,0px))}
+body.para .vpos{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
