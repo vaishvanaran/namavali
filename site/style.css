@@ -1000,3 +1000,8 @@ details.chx-src[open]>summary::after{content:" ▾"}
 .vpos input{width:4.2em;font:inherit;padding:.1em .3em;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--fg)}
 body.autos:not(.immersive) .vpos{bottom:calc(72px + env(safe-area-inset-bottom,0px))}
 body.para .vpos{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
+
+/* where the reader stopped (tap during auto-scroll) */
+.here{position:relative;background:color-mix(in srgb,var(--kumkum) 7%,var(--paper))!important;box-shadow:inset 5px 0 0 var(--kumkum),0 0 0 2px color-mix(in srgb,var(--kumkum) 55%,transparent)!important}
+.here::after{content:"📍";position:absolute;top:-.55em;left:-.35em;font-size:1.1rem;line-height:1}
+.asbar .asv{font-size:1.15rem;font-weight:700}
