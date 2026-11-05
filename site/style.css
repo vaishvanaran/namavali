@@ -1085,3 +1085,4 @@ details.chx-box[open] > summary::after{transform:rotate(90deg)}
 details.chx-box > summary h3{margin:0;font-size:1rem}
 .chx-sg{font-family:var(--deva);font-size:.8rem;color:var(--muted)}
 details.chx-box[open]{padding-bottom:.6rem}
+.chx-wait{margin:.6rem 0;padding:.7rem .9rem;border-left:4px solid var(--haldi);background:color-mix(in srgb,var(--haldi) 8%,var(--paper));border-radius:0 10px 10px 0}
