@@ -1110,3 +1110,5 @@ details.chx-box[open]{padding-bottom:.6rem}
 .chx-slate .chx-wi{font-size:1.3rem;padding:10px 12px;background:var(--paper);border-color:color-mix(in srgb,var(--haldi) 30%,var(--line))}
 .chx-slate .chx-wi:focus{outline:none;border-color:var(--kumkum);box-shadow:0 0 0 2px color-mix(in srgb,var(--kumkum) 18%,transparent)}
 .chx-slate .chx-wi::placeholder{font-family:var(--tamil);font-size:.95rem;color:color-mix(in srgb,var(--muted) 80%,transparent)}
+.chx-s.vy{border:2px dashed var(--haldi);background:color-mix(in srgb,var(--hl) 60%,var(--paper))}
+.chx-s.vy::after{content:"+1";font-size:.6rem;color:var(--haldi);line-height:1}
