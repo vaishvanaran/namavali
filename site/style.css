@@ -1086,3 +1086,9 @@ details.chx-box > summary h3{margin:0;font-size:1rem}
 .chx-sg{font-family:var(--deva);font-size:.8rem;color:var(--muted)}
 details.chx-box[open]{padding-bottom:.6rem}
 .chx-wait{margin:.6rem 0;padding:.7rem .9rem;border-left:4px solid var(--haldi);background:color-mix(in srgb,var(--haldi) 8%,var(--paper));border-radius:0 10px 10px 0}
+
+/* a shape that is allowed but not the one shown: a note, not a fault */
+.chx-b.note{border:2px dashed #3E6FA8;background:color-mix(in srgb,#3E6FA8 9%,var(--paper))}
+.chx-b.note .bw{color:#3E6FA8;font-weight:700}
+.chx-notes .chx-info{color:#3E6FA8;list-style:none;margin-left:-1em}
+:root[data-theme="dark"] .chx-b.note,:root[data-theme="black"] .chx-b.note,:root[data-theme="dusk"] .chx-b.note{border-color:#8DB4E2}
