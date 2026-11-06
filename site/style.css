@@ -1092,3 +1092,21 @@ details.chx-box[open]{padding-bottom:.6rem}
 .chx-b.note .bw{color:#3E6FA8;font-weight:700}
 .chx-notes .chx-info{color:#3E6FA8;list-style:none;margin-left:-1em}
 :root[data-theme="dark"] .chx-b.note,:root[data-theme="black"] .chx-b.note,:root[data-theme="dusk"] .chx-b.note{border-color:#8DB4E2}
+
+/* write mode: folded lakṣaṇa + a writing slate (user, 2026-11-06) */
+.chx-lakf{border:1px solid var(--line);border-radius:12px;background:var(--paper)}
+.chx-lakf>summary{list-style:none;cursor:pointer;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;padding:10px 14px}
+.chx-lakf>summary::-webkit-details-marker{display:none}
+.chx-lakf>summary b{font-family:var(--deva);color:var(--kumkum);font-size:1.15rem}
+.chx-lakf>summary .chx-lakh{margin-left:auto;color:var(--haldi);font-size:.9rem;white-space:nowrap}
+.chx-lakf>summary .chx-lakh::after{content:" ▾"}
+.chx-lakf[open]>summary .chx-lakh::after{content:" ▴"}
+.chx-lakf>.chx-lak{border:0;border-top:1px dashed var(--line);border-radius:0 0 12px 12px;margin:0}
+.chx-lakf .chx-quick>.chx-lt{display:none}
+.chx-slate{display:flex;flex-direction:column;gap:14px;padding:14px 14px 16px;border-radius:14px;border:1px solid color-mix(in srgb,var(--haldi) 35%,var(--line));border-top:3px solid var(--kumkum);background:color-mix(in srgb,var(--hl) 45%,var(--paper))}
+.chx-slh{display:flex;flex-direction:column;gap:2px}
+.chx-slh b{font-size:1.2rem;color:var(--kumkum)}
+.chx-slh span{font-size:.85rem;color:var(--muted)}
+.chx-slate .chx-wi{font-size:1.3rem;padding:10px 12px;background:var(--paper);border-color:color-mix(in srgb,var(--haldi) 30%,var(--line))}
+.chx-slate .chx-wi:focus{outline:none;border-color:var(--kumkum);box-shadow:0 0 0 2px color-mix(in srgb,var(--kumkum) 18%,transparent)}
+.chx-slate .chx-wi::placeholder{font-family:var(--tamil);font-size:.95rem;color:color-mix(in srgb,var(--muted) 80%,transparent)}
