@@ -1112,3 +1112,5 @@ details.chx-box[open]{padding-bottom:.6rem}
 .chx-slate .chx-wi::placeholder{font-family:var(--tamil);font-size:.95rem;color:color-mix(in srgb,var(--muted) 80%,transparent)}
 .chx-s.vy{border:2px dashed var(--haldi);background:color-mix(in srgb,var(--hl) 60%,var(--paper))}
 .chx-s.vy::after{content:"+1";font-size:.6rem;color:var(--haldi);line-height:1}
+.chx-s.vy.vq{border-style:dotted;background:var(--paper)}
+.chx-s.vy.vq::after{content:"+1?"}
