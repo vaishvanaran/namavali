@@ -714,7 +714,7 @@ body.en .thsw .sl{font-family:var(--ui)}
 .chx-gl{display:flex;justify-content:center;align-items:baseline;gap:6px;min-height:1.4em;border-bottom:2px solid var(--haldi);padding-bottom:1px;margin:0 2px}
 .chx-gl .gw{font-family:var(--script);font-weight:700;color:var(--haldi);font-size:1rem}
 .chx-gl .gw.dim{color:var(--muted);font-weight:600}
-.chx-gl .gg{font-family:var(--script);font-weight:700;color:var(--kumkum);font-size:.9rem;text-decoration:line-through}
+.chx-gl .gg{font-family:var(--script);font-weight:700;color:var(--kumkum);font-size:.85rem;margin-left:.3em}
 .chx-gl .gf{color:var(--muted);font-size:.8rem}
 .chx-gb{display:flex;gap:3px}
 .chx-b{width:2.55em}
