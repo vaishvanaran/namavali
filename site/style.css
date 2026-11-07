@@ -1187,3 +1187,20 @@ details.chx-box[open]{padding-bottom:.6rem}
 .blk-fold .blk-para{background:none;box-shadow:none;border:0;border-radius:0;padding:.08rem .1rem;margin:0}
 .blk-fold .blk-para p{margin:.12rem 0}
 .blk-fold .blk-para:has(.mk:only-child){margin-top:.55rem}
+
+/* folded puja sections ({fold}) and runs of pūrvāṅga link cards */
+details.pfold{border:1px solid var(--line);border-radius:12px;margin:.6rem 0;padding:0 .7rem;background:color-mix(in srgb,var(--paper) 96%,#8E1B2C)}
+details.pfold>summary{list-style:none;cursor:pointer;display:flex;align-items:baseline;gap:.6rem;flex-wrap:wrap}
+details.pfold>summary::-webkit-details-marker,details.plinks>summary::-webkit-details-marker{display:none}
+details.pfold>summary .psub{margin:.5rem 0}
+details.pfold>summary .psub::before{content:"▸ ";color:var(--muted)}
+details.pfold[open]>summary .psub::before{content:"▾ "}
+details.pfold .pf-h{color:var(--muted);font-size:.78em}
+details.pfold[open] .pf-h{display:none}
+details.plinks{border:1.5px dashed color-mix(in srgb,var(--kumkum,#8E1B2C) 55%,transparent);border-radius:12px;margin:.5rem 0;padding:.35rem .8rem}
+details.plinks>summary{list-style:none;cursor:pointer;display:flex;flex-direction:column;gap:.15rem}
+details.plinks .pl-a{color:var(--kumkum,#8E1B2C);font-weight:700;font-size:.9em}
+details.plinks .pl-a::before{content:"▸ ";color:var(--muted)}
+details.plinks[open] .pl-a::before{content:"▾ "}
+details.plinks .pl-n{color:var(--muted);font-size:.8em;line-height:1.5}
+details.plinks[open] .pl-n{display:none}
