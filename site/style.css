@@ -1123,3 +1123,29 @@ details.chx-box[open]{padding-bottom:.6rem}
 .chx-sc.w i{color:var(--kumkum,#9b1c2c)}
 .chx-sc.f{border:2px dashed var(--haldi);background:color-mix(in srgb,var(--hl) 50%,var(--paper))}
 .chx-sc.f i{color:var(--haldi)}
+.chx-sc.s{box-shadow:inset 0 -3px 0 var(--leaf,#2e7d32)}
+.chx-sc i.st{color:var(--leaf,#2e7d32)}
+.chx-stated{margin-top:.4rem}
+.names .pv{display:block;font-size:.72em;opacity:.75;margin-top:.1em;line-height:1.3}
+.names .pv b{font-weight:600;color:var(--haldi,#a67c12);margin-right:.25em}
+.blk-fn{margin:-.2rem 0 .6rem;font-size:.82em}
+.blk-fn summary{cursor:pointer;display:inline-block;padding:.05rem .55rem;border:1px solid var(--line,#ddd);border-radius:1rem;color:var(--muted,#777);font-size:.85em;list-style:none}
+.blk-fn summary::-webkit-details-marker{display:none}
+.blk-fn p{margin:.35rem 0 0;color:var(--muted,#666)}
+/* pañcāyatana arrangements (folded) */
+.ppanch{margin:.6rem 0 1rem;border:1px solid var(--line,#ddd);border-radius:12px;padding:.4rem .7rem;background:color-mix(in srgb,var(--paper) 92%,var(--haldi,#c89b2c))}
+.ppanch>summary{cursor:pointer;font-weight:600;padding:.3rem 0;color:var(--kumkum,#9b1c2c)}
+.ppanch .pcite{font-size:.82em;opacity:.75;text-align:center;margin:.2rem 0 .8rem}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:.8rem;margin:.6rem 0}
+.pfig{margin:0;border:1px solid var(--line,#ddd);border-radius:10px;padding:.4rem;background:var(--paper)}
+.pfig figcaption{display:flex;flex-direction:column;gap:.2rem;font-size:.86em;padding:.2rem .3rem;text-align:center}
+.pfig figcaption b{color:var(--kumkum,#9b1c2c);font-weight:600}
+.psvg{width:100%;height:auto;display:block}
+.psvg .pbox{fill:none;stroke:var(--line,#ccc);stroke-width:1.5}
+.psvg .pdot{fill:color-mix(in srgb,var(--haldi,#c89b2c) 14%,var(--paper));stroke:var(--haldi,#c89b2c);stroke-width:1.5}
+.psvg .pdot.m{fill:color-mix(in srgb,var(--kumkum,#9b1c2c) 12%,var(--paper));stroke:var(--kumkum,#9b1c2c);stroke-width:2}
+.psvg .pd{font-size:15px;fill:var(--fg);font-family:var(--deva),var(--tamil),sans-serif}
+.psvg .pd.m{font-size:17px;font-weight:700;fill:var(--kumkum,#9b1c2c)}
+.psvg .pc{font-size:10.5px;fill:var(--muted,#888);font-family:var(--deva),var(--tamil),sans-serif}
+.psvg .parr{stroke:var(--kumkum);stroke-width:2;fill:none}
+.ppanch .pnote2{font-size:.9em;margin:.3rem 0}
