@@ -1204,3 +1204,21 @@ details.plinks .pl-a::before{content:"▸ ";color:var(--muted)}
 details.plinks[open] .pl-a::before{content:"▾ "}
 details.plinks .pl-n{color:var(--muted);font-size:.8em;line-height:1.5}
 details.plinks[open] .pl-n{display:none}
+
+/* vidhāna inserts: a calm teal, so they are not mistaken for the (haldi) headings */
+:root{--vdc:#2E6E70}
+:root:is([data-theme="dark"],[data-theme="dusk"],[data-theme="black"]){--vdc:#7CC3C2}
+.pvedic{background:color-mix(in srgb,var(--vdc) 7%,var(--paper));border:1px solid color-mix(in srgb,var(--vdc) 45%,transparent);border-left:4px solid var(--vdc)}
+.pvedic .vl{color:var(--vdc)}
+/* deity links in pañcāyatana shape */
+.dvl{margin:1rem auto .6rem;max-width:340px;padding:.6rem .7rem .4rem;border-radius:16px;background:color-mix(in srgb,var(--paper) 92%,var(--haldi));border:1px solid color-mix(in srgb,var(--haldi) 30%,transparent)}
+.dvl-h{text-align:center;font-size:.78em;color:var(--muted);margin-bottom:.4rem;font-family:var(--tamil)}
+.dvl-g{display:grid;grid-template-columns:repeat(3,1fr);gap:.35rem;justify-items:center}
+.dvl-b{display:flex;flex-direction:column;align-items:center;gap:.15rem;text-decoration:none;color:inherit;padding:.25rem;border-radius:12px}
+.dvl-b .sym{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--paper);border:1px solid color-mix(in srgb,var(--haldi) 40%,transparent)}
+.dvl-b .sym svg{width:30px;height:30px}
+.dvl-b.c .sym{width:54px;height:54px;border-color:var(--haldi)}
+.dvl-b.c .sym svg{width:38px;height:38px}
+.dvl-n{font-size:.78em;color:var(--ink,inherit)}
+.dvl-b:active .sym{background:color-mix(in srgb,var(--haldi) 18%,var(--paper))}
+.dvl-e{text-align:center;font-size:.7em;color:var(--muted);margin-top:.1rem}
