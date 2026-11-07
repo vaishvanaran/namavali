@@ -1114,3 +1114,12 @@ details.chx-box[open]{padding-bottom:.6rem}
 .chx-s.vy::after{content:"+1";font-size:.6rem;color:var(--haldi);line-height:1}
 .chx-s.vy.vq{border-style:dotted;background:var(--paper)}
 .chx-s.vy.vq::after{content:"+1?"}
+.chx-vrow{margin:.25rem 0}
+.chx-scale{display:flex;gap:.3rem;margin:.5rem 0 .2rem;flex-wrap:wrap}
+.chx-sc{flex:1 1 0;min-width:3.6rem;border:1px solid var(--line,#ddd);border-radius:.5rem;padding:.25rem .3rem;text-align:center;display:flex;flex-direction:column;font-size:.85rem;line-height:1.25}
+.chx-sc small{font-size:.72rem;opacity:.8}
+.chx-sc i{font-style:normal;font-size:.68rem;font-weight:600}
+.chx-sc.w{border:2px solid var(--kumkum,#9b1c2c)}
+.chx-sc.w i{color:var(--kumkum,#9b1c2c)}
+.chx-sc.f{border:2px dashed var(--haldi);background:color-mix(in srgb,var(--hl) 50%,var(--paper))}
+.chx-sc.f i{color:var(--haldi)}
