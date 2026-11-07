@@ -1222,3 +1222,16 @@ details.plinks[open] .pl-n{display:none}
 .dvl-n{font-size:.78em;color:var(--ink,inherit)}
 .dvl-b:active .sym{background:color-mix(in srgb,var(--haldi) 18%,var(--paper))}
 .dvl-e{text-align:center;font-size:.7em;color:var(--muted);margin-top:.1rem}
+/* 2026.11.07k: a nyāsa as one framed unit; its closing इति… line small under it; place glosses */
+.blk-box{margin:10px 0 18px;padding:6px 10px 4px;border:1.5px solid color-mix(in srgb,var(--nyp) 35%,transparent);border-radius:14px;background:color-mix(in srgb,var(--nyp) 4%,var(--paper))}
+.blk-box .blk-shloka,.blk-box .blk-para{background:transparent;border-left-color:color-mix(in srgb,var(--haldi) 60%,transparent);margin:6px 0}
+.blk-box .bx-t{font-family:var(--script);color:var(--nyp);font-weight:600;padding:4px 6px}
+.blk-nyl{font-family:var(--script);font-size:calc(var(--fs)*.78);line-height:1.75;padding:6px 8px}
+.blk-nyl p{margin:0 0 2px;overflow-wrap:anywhere}
+.nyg{font-family:var(--tamil);font-size:.62em;font-weight:500;color:var(--muted);margin:0 .35em 0 .3em;padding:0 .4em;border-radius:6px;background:color-mix(in srgb,var(--nyp) 10%,transparent);white-space:nowrap;vertical-align:.12em}
+body.en .nyg{font-family:var(--ui)}
+.blk-iti{margin:6px 4px 6px;padding:7px 10px 3px;border-top:1px dashed color-mix(in srgb,var(--muted) 45%,transparent);text-align:center;font-family:var(--script);font-size:calc(var(--fs)*.62);color:var(--muted);font-style:italic}
+.blk-box .prubric{margin:8px 2px}
+.pd{display:inline-block}
+.pd2 .ph{display:none}
+.pd2.brk .ph{display:inline}
