@@ -1166,3 +1166,24 @@ details.chx-box[open]{padding-bottom:.6rem}
 #pSteps .ssub .chip.lk{border-style:dashed}
 #pSteps .ssub .chip.h3{opacity:.85;font-size:.92em}
 @media (min-width:900px){.steps .ssub{flex-wrap:wrap;overflow:visible}}
+
+/* folded part of a stotra (nyāsa …): closed until tapped */
+.blk-fold{margin:.5rem 0 .9rem;border:1px solid var(--line);border-radius:12px;background:color-mix(in srgb,var(--paper) 94%,#3a5fa0)}
+.blk-fold>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:.6rem;padding:.45rem .8rem;font-size:.92em}
+.blk-fold>summary::-webkit-details-marker{display:none}
+.blk-fold>summary::before{content:"▸";color:var(--muted);transition:transform .2s}
+.blk-fold[open]>summary::before{transform:rotate(90deg)}
+.blk-fold .fd-t{font-weight:700;color:var(--kumkum,#8E1B2C)}
+.blk-fold .fd-h{color:var(--muted);font-size:.8em}
+.blk-fold[open] .fd-h{display:none}
+.blk-fold .fold-in{padding:.1rem .9rem .6rem}
+/* nyāsa: mantra blue, the place of the body purple (as in the teacher's typed books) */
+:root{--nym:#1D4F91;--nyp:#7B2A8C}
+:root:is([data-theme="dark"],[data-theme="dusk"],[data-theme="black"]){--nym:#93B8EC;--nyp:#D9A1E6}
+.nym{color:var(--nym)}
+.nyp{color:var(--nyp);font-weight:600}
+.pp-d.m{font-size:11px}
+.pp-ar.m{stroke-width:2}
+.blk-fold .blk-para{background:none;box-shadow:none;border:0;border-radius:0;padding:.08rem .1rem;margin:0}
+.blk-fold .blk-para p{margin:.12rem 0}
+.blk-fold .blk-para:has(.mk:only-child){margin-top:.55rem}
