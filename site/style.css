@@ -1235,3 +1235,37 @@ body.en .nyg{font-family:var(--ui)}
 .pd{display:inline-block}
 .pd2 .ph{display:none}
 .pd2.brk .ph{display:inline}
+/* Śrīnagara picture (Lalitāstavaratna) */
+.blk-fold.ng .ng-box{padding:.4em 0}
+.ng-tabs{display:flex;gap:.35em;justify-content:center;flex-wrap:wrap;margin-bottom:.5em}
+.ng-tab{border:1px solid var(--line,#ccc);background:none;color:inherit;border-radius:999px;padding:.25em .8em;font:inherit;font-size:.9em}
+.ng-tab.on{background:#7a1022;color:#fff;border-color:#7a1022}
+.ng-stage{max-width:420px;margin:0 auto}
+.ng-svg{width:100%;height:auto;display:block}
+.ng-bg{fill:#1d1410}
+.ng-band{fill:#3a2f22;cursor:pointer}.ng-band.g{fill:#24452a}.ng-band.w{fill:#1f3b52}
+.ng-band.on{fill:#ffd36b;opacity:.9}
+.ng-wall{fill:none;stroke-width:1.7;cursor:pointer}
+.ng-wall.on{stroke-width:4.2;filter:drop-shadow(0 0 4px #fff)}
+.ng-house{fill:#c58a12;stroke:#ffe08a;stroke-width:1.5;cursor:pointer}
+.ng-house.on{fill:#ffcf3f}
+.ng-ht{fill:#3b0a0a;font-weight:700;font-size:15px;pointer-events:none}
+.ng-hs{fill:#3b0a0a;font-size:10px;pointer-events:none}
+.ng-all{fill:none;stroke:#ffd36b;stroke-width:3;stroke-dasharray:6 4}
+.ng-lotus{fill:#4a2333;cursor:pointer}.ng-lotus.on{fill:#a8456b}
+.ng-pd{fill:#e889a8;opacity:.7;pointer-events:none}
+.ng-ring{fill:none;stroke:#f5c46a;stroke-width:2;stroke-dasharray:3 4;cursor:pointer}.ng-ring.on{stroke:#fff;stroke-width:4}
+.ng-door{fill:#7a1022;stroke:#ffe08a;cursor:pointer}.ng-door.on{fill:#fff}
+.ng-mk{cursor:pointer}.ng-mk circle{fill:#2b2018;stroke:#e9c25a;stroke-width:1.5}.ng-mk text{fill:#ffe9b0;font-size:11px;pointer-events:none}
+.ng-mk.on circle{fill:#ffcf3f;stroke:#fff;stroke-width:3}.ng-mk.on text{fill:#3b0a0a;font-weight:700}
+.ng-d{fill:#d9c39a;font-size:11px}.ng-d.e{fill:#ffcf3f;font-weight:700}
+.ng-l{cursor:pointer}.ng-l *{fill:none;stroke:#c99a3a;stroke-width:1.4}
+.ng-l.l1 *{stroke:#6fa86f}.ng-l.l2 *{stroke:#d6738f}.ng-l.l3 *{stroke:#e89a3a}.ng-l.l4 *{stroke:#5aa0d6}
+.ng-l.l5 *,.ng-l.l6 *{stroke:#c94a4a}.ng-l.l7 *{stroke:#4aa0a0}.ng-l.l8 *{stroke:#b59cff}.ng-l.l9 *{stroke:#ff5a5a}
+.ng-l.l10 *{fill:#ff3b3b;stroke:#ffe08a}
+.ng-l.on *{stroke:#fff;stroke-width:3.2;fill:rgba(255,211,107,.18);filter:drop-shadow(0 0 3px #ffd36b)}
+.ng-l.l10.on *{fill:#ffd36b}
+.ng-cap{text-align:center;max-width:460px;margin:.5em auto 0;display:flex;flex-direction:column;gap:.3em;align-items:center}
+.ng-cap b{font-size:1.08em}.ng-cap span{opacity:.85;font-size:.95em}
+.ng-nav{display:flex;gap:1em;align-items:center}.ng-nav button{border:1px solid var(--line,#ccc);background:none;color:inherit;border-radius:50%;width:2.4em;height:2.4em;font-size:1em}
+.ng-go{border:none;background:#7a1022;color:#fff;border-radius:999px;padding:.35em 1em;font:inherit;font-size:.9em}
