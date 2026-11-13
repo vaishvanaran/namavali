@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="ta">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pujanidhi · पूजानिधिः</title>
+<meta name="description" content="பூஜா விதானம், வ்ரதங்கள், அஷ்டோத்தர, த்ரிஶதீ, ஸஹஸ்ர நாமாவளிகள் — தேவநாகரி, தமிழ், க்ரந்தம், English. இணையம் இல்லாமலும் வேலை செய்யும்.">
+<meta name="theme-color" content="#8E1B2C">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/favicon-32.png" sizes="32x32">
+<link rel="icon" href="icons/favicon-48.png" sizes="48x48">
+<link rel="icon" href="icons/favicon-96.png" sizes="96x96">
+<link rel="icon" href="icons/favicon-192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="icons/icon-180-om.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Pujanidhi">
+<link rel="preload" href="fonts/deva.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/tamil.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css?v=2026.11.13a">
+</head>
+<body>
+<header class="bar"><div class="wrap">
+  <button class="menu" id="menuBtn" aria-label="Menu" data-ta="menu" aria-controls="drawer" aria-expanded="false"><span></span><span></span><span></span></button>
+  <a class="brand" href="#"><b>पूजानिधिः</b><span data-t="appName">பூஜாநிதி</span></a>
+  <div class="seg" id="scripts" role="group" aria-label="எழுத்து / Script">
+    <button data-s="deva" class="deva" title="देवनागरी">देव</button>
+    <button data-s="taml" class="taml" title="தமிழ்">தமிழ்</button>
+    <button data-s="gran" class="gran" title="Grantha">𑌗𑍍𑌰</button>
+  </div>
+  <div class="tools" id="rtools" hidden>
+    <button class="icon arch" id="archBtn" data-tt="archanaTitle" data-t="archana">அர்ச்சனை</button>
+    <span id="suktaBtns" class="sktools"></span>
+    <button class="icon" id="omBtn" data-tt="omTitle">ॐ</button>
+    <button class="icon mulabtn" id="mulaBtn" data-tt="mulaTitle" aria-pressed="false" hidden>मूल</button>
+    <button class="icon mulabtn chmbtn" id="chmBtn" aria-pressed="false" title="छन्दः" hidden>छन्दः</button>
+    <button class="icon notebtn" id="noteBtn" aria-pressed="false" title="குறிப்பு / Note">✎</button>
+    <button class="icon" id="asBtn" data-tt="autoTitle" aria-pressed="false">⇊</button>
+    <button class="icon" id="fsDown" data-tt="smaller">அ−</button>
+    <button class="icon" id="fsUp" data-tt="larger">அ+</button>
+    <button class="icon thbtn" id="thBtn" data-tt="thTitle" aria-haspopup="true" aria-expanded="false">☾</button>
+  </div>
+  <div class="thpop" id="thPop" hidden></div>
+</div></header>
+
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer" data-ta="menu" aria-hidden="true">
+  <div class="dtop"><b class="deva">पूजानिधिः</b><button class="icon" id="drawerClose" data-ta="close">✕</button></div>
+  <nav>
+    <a href="#" class="dl"><span class="sym xs">⌂</span><span data-t="home">முகப்பு</span></a>
+    <a href="#fav" class="dl"><span class="sym xs star">★</span><span data-t="fav">அடிக்கடி படிப்பவை</span><span class="dn" id="dFavN"></span></a>
+    <a href="#marks" class="dl"><span class="sym xs lsym">✎</span><span data-t="myMarks">என் குறிப்புகள்</span><span class="dn" id="dMarkN"></span></a>
+    <a href="#lists" class="dl"><span class="sym xs lsym">☰</span><span data-t="myLists">என் பட்டியல்கள்</span><span class="dn" id="dListN"></span></a>
+    <div class="dgrp"><span class="dgi">🪔</span><span data-t="secPuja">பூஜை · ஸ்தோத்ரம்</span></div>
+    <details class="dfold" data-k="pujas"><summary class="dsec dfs"><span data-t="pujas">பூஜை · வ்ரதம்</span><span class="dn dfn"></span><span class="chev" aria-hidden="true">›</span></summary><div id="dPujas"></div></details>
+    <details class="dfold" data-k="namavalis"><summary class="dsec dfs"><span data-t="namavalis">நாமாவளிகள்</span><span class="dn dfn"></span><span class="chev" aria-hidden="true">›</span></summary><div id="dKinds"></div></details>
+    <div id="dStotraSec" hidden><details class="dfold" data-k="stotras"><summary class="dsec dfs"><span data-t="stotras">ஸ்தோத்ரங்கள்</span><span class="dn dfn"></span><span class="chev" aria-hidden="true">›</span></summary><div id="dStotra"></div></details></div>
+    <div id="dParSec" hidden><details class="dfold" data-k="parayana"><summary class="dsec dfs"><span data-t="parayana">பாராயண நூல்கள்</span><span class="dn dfn"></span><span class="chev" aria-hidden="true">›</span></summary><div id="dPar"></div></details></div>
+    <details class="dfold" data-k="review" id="dRevH" hidden><summary class="dsec dfs"><span>சரிபார்க்க வேண்டியவை</span><span class="dn dfn"></span><span class="chev" aria-hidden="true">›</span></summary><div id="dRev"></div></details>
+    <div class="dgrp"><span class="dgi">📜</span><span data-t="secVeda">வேதம் · ஷடங்கம்</span></div>
+    <details class="dfold" data-k="veda" id="dVedaH"><summary class="dsec dfs"><span data-t="veda">வேத மந்த்ரங்கள்</span><span class="dn dfn"></span><span class="chev" aria-hidden="true">›</span></summary><div id="dVeda"></div></details>
+    <details class="dfold" data-k="vidhana"><summary class="dsec dfs"><span data-t="vidhana">விதான பூஜை</span><span class="dn dfn"></span><span class="chev" aria-hidden="true">›</span></summary><div id="dVidhana"></div></details>
+    <div id="dShaSec" hidden><details class="dfold" data-k="shadanga"><summary class="dsec dfs"><span data-t="shadanga">ஷடங்கம் — வேதாங்கங்கள்</span><span class="dn dfn"></span><span class="chev" aria-hidden="true">›</span></summary><div id="dSha"></div></details></div>
+    <div class="dgrp"><span class="dgi">✍️</span><span data-t="secChandas">சந்தஸ்</span></div>
+    <a href="#chandas" class="dl"><span class="sym xs lsym">ल</span><span data-t="chxTitle">சந்தஸ் பரீக்ஷை</span></a>
+    <div class="dsec" data-t="settings">அமைப்பு</div>
+    <div class="dlang"><div class="seg" id="langSeg" role="group" aria-label="Language"><button data-l="ta">தமிழ்</button><button data-l="en">English</button></div></div>
+    <div class="dlang"><div class="thgrid" id="themeSeg" role="group" aria-label="Theme"></div></div>
+    <a href="#about" class="dl"><span class="sym xs">i</span><span data-t="about">இந்த ஆப் பற்றி</span></a>
+  </nav>
+</aside>
+
+<main id="home" class="wrap">
+  <section class="welcome" id="welcomeSec">
+    <div class="shrih">॥ श्रीः ॥</div>
+    <h1 class="deva">पूजानिधिः</h1>
+    <div class="sub" data-t="tagline">பூஜை · வ்ரதம் · அர்ச்சனை</div>
+    <figure class="guru">
+      <img src="guru-parampara-800.jpg" srcset="guru-parampara-800.jpg 800w, guru-parampara.jpg 1600w" sizes="(max-width: 840px) 100vw, 800px" width="1600" height="367" alt="श्री कामाक्षी, श्रीशङ्करभगवत्पादाः, काञ्ची कामकोटि पीठ आचार्याः">
+    </figure>
+  </section>
+  <div class="find">
+    <input id="q" type="search" autocomplete="off" data-tp="search" data-ta="searchLabel">
+    <button class="install" id="installBtn" hidden data-t="install">ஆப்பாக நிறுவு</button>
+  </div>
+  <section id="results" hidden></section>
+  <section id="todayBox" class="today" hidden></section>
+  <section id="catBox"><div id="catGrid" class="doors"></div></section>
+  <div id="quickRow" class="quickrow"></div>
+  <section id="favBox" class="favbox"><h2 class="lbl"><span class="star">★</span> <span data-t="fav">அடிக்கடி படிப்பவை</span><a href="#fav" class="more" id="favMore" data-t="all">எல்லாம் →</a></h2><div id="favHome"></div></section>
+  <section id="listBox" class="favbox" hidden><h2 class="lbl"><span class="lsym">☰</span> <span data-t="myLists">என் பட்டியல்கள்</span><a href="#lists" class="more" data-t="all">எல்லாம் →</a></h2><div id="listHome"></div></section>
+  <section id="recentBox" class="recent" hidden><h2 class="lbl" data-t="recent">சமீபத்தில் படித்தவை</h2><div id="recent" class="chips"></div></section>
+  
+  <section id="tilesBox"><div class="cathead"><a href="#" class="catback" data-t="home">முகப்பு</a></div>
+<div class="cat" data-c="sec-puja"><div id="secPujaT"></div></div>
+<div class="cat" data-c="sec-veda"><div id="secVedaT"></div></div>
+<div class="cat" data-c="sec-chandas"><div id="secChxT"></div></div>
+<div class="cat" data-c="puja"><h2 class="lbl" data-t="pujas">பூஜை · வ்ரதம்</h2><div id="pujaTiles" class="grid pujas"></div></div>
+<div class="cat" data-c="vidhana"><h2 class="lbl" data-t="vidhana">விதான பூஜை</h2><div id="vidhanaTiles" class="grid pujas"></div></div>
+<div class="cat" data-c="veda"><h2 class="lbl" id="vedaH" data-t="veda">வேத மந்த்ரங்கள்</h2><div id="vedaTiles"></div></div>
+<div class="cat" data-c="shadanga"><h2 class="lbl" id="shaH" data-t="shadanga">ஷடங்கம் — வேதாங்கங்கள்</h2><div id="shaTiles"></div></div>
+<div class="cat" data-c="parayana"><h2 class="lbl" id="parH" data-t="parayana">பாராயண நூல்கள்</h2><div id="parTiles" class="grid pujas"></div></div>
+<div class="cat" data-c="stotra"><h2 class="lbl" id="stoH" data-t="stotras">ஸ்தோத்ரங்கள்</h2><div id="stoHome" class="stohome"></div></div>
+<div class="cat" data-c="namavali" hidden><h2 class="lbl" data-t="namavalis">நாமாவளிகள்</h2><div id="tiles" class="kinds3"></div></div>
+</section>
+  <section class="welcome mangsec" id="mangSec"><div class="gshloka" id="gshloka"></div><blockquote class="mangala" id="mangala"></blockquote></section>
+  <footer class="foot"><a href="#about" data-t="aboutThanks">இந்த ஆப் பற்றி · நன்றி</a><span id="ver"></span></footer>
+</main>
+
+<main id="kind" class="wrap" hidden>
+  <div class="ghead">
+    <button class="back" id="kBack" data-home="#c-namavali">← நாமாவளிகள்</button>
+    <button class="retpuja" id="kRet" hidden></button>
+    <div class="gtitle"><span class="sym num" id="kNum"></span><div><h1 id="kDeva" class="deva"></h1><div id="kAlt" class="alt"></div></div></div>
+  </div>
+  <nav id="kJump" class="chips jump" data-ta="devatas"></nav>
+  <div id="klist"></div>
+</main>
+
+<main id="group" class="wrap" hidden>
+  <div class="ghead">
+    <button class="back" data-home data-t="backHome">← முகப்பு</button>
+    <button class="retpuja" id="gRet" hidden></button>
+    <div class="gtitle"><span class="sym" id="gSym"></span><div><h1 id="gDeva" class="deva"></h1><div id="gAlt" class="alt"></div></div></div>
+  </div>
+  <div id="glist"></div>
+</main>
+
+<main id="lists" class="wrap" hidden>
+  <div class="ghead">
+    <button class="back" data-home data-t="backHome">← முகப்பு</button>
+    <div class="gtitle"><span class="sym big lsym">☰</span><div><h1 data-t="myLists">என் பட்டியல்கள்</h1></div></div>
+  </div>
+  <p class="hint" data-t="listsHint"></p>
+  <form class="newlist" id="newListForm"><input id="newListName" maxlength="40" autocomplete="off" data-tp="listName" data-ta="listName"><button class="pbtn" type="submit" data-t="create">உருவாக்கு</button></form>
+  <div id="listsBox"></div>
+</main>
+
+<main id="list" class="wrap" hidden>
+  <div class="ghead">
+    <a class="back" href="#lists" data-t="backLists">← என் பட்டியல்கள்</a>
+    <div class="gtitle"><span class="sym big lsym">☰</span><div><h1 id="lTitle"></h1><div class="note" id="lCount"></div></div></div>
+  </div>
+  <div class="lacts"><button class="pbtn" id="lStart" data-t="startPara">▶ பாராயணம் தொடங்கு</button><button class="btn2" id="lRename" data-t="rename">பெயர் மாற்று</button><button class="btn2" id="lDelete" data-t="delList">பட்டியலை நீக்கு</button></div>
+  <p class="hint" data-t="listHint"></p>
+  <ol id="lItems" class="favlist litems"></ol>
+</main>
+
+<main id="marks" class="wrap" hidden>
+  <div class="ghead">
+    <button class="back" data-home data-t="backHome">← முகப்பு</button>
+    <div class="gtitle"><span class="sym big lsym">✎</span><div><h1 data-t="myMarks">என் குறிப்புகள்</h1></div></div>
+  </div>
+  <p class="hint" data-t="markHint"></p>
+  <div id="marksBox"></div>
+  <section class="bk"><h2 class="lbl" data-t="backup">பின்னெடுப்பு</h2><p class="hint" data-t="backupNote"></p>
+    <div class="lacts"><button class="btn2" id="bkSave" data-t="backupSave">கோப்பாகச் சேமி / அனுப்பு</button><label class="btn2" for="bkFile" data-t="backupLoad">கோப்பிலிருந்து மீட்டெடு</label><input type="file" id="bkFile" accept="application/json,.json" hidden></div><p class="note" id="bkMsg"></p></section>
+</main>
+
+<main id="fav" class="wrap" hidden>
+  <div class="ghead">
+    <button class="back" data-home data-t="backHome">← முகப்பு</button>
+    <div class="gtitle"><span class="sym star big">★</span><div><h1 data-t="fav">அடிக்கடி படிப்பவை</h1></div></div>
+  </div>
+  <p class="hint" id="favHint" data-t="favHint"></p>
+  <ol id="favList" class="favlist"></ol>
+</main>
+
+<main id="puja" class="wrap" hidden>
+  <div class="rhead">
+    <button class="back" data-home data-t="backHome">← முகப்பு</button>
+    <div class="rtitle"><h1 id="pTitle"></h1><button class="favbtn" id="pFav" aria-pressed="false"><span class="star">☆</span><span class="fl"></span></button><button class="favbtn addl" data-addlist aria-haspopup="dialog"><span class="star">＋</span><span data-t="toList">பட்டியலில் சேர்</span></button></div>
+    <div class="alt" id="pAlt"></div>
+    <div class="note" id="pWhen"></div>
+    <button class="retpuja" id="pRet" hidden></button>
+  </div>
+  <nav class="steps" id="pSteps" aria-label="படிகள்"></nav>
+  <div class="pbody" id="pBody"></div>
+</main>
+
+<main id="reader" class="wrap" hidden>
+  <div class="rhead">
+    <button class="back" id="backBtn">←</button>
+    <button class="retpuja" id="retPuja" hidden></button>
+    <div class="rtitle"><h1 id="rTitle"></h1><button class="favbtn" id="rFav" aria-pressed="false"><span class="star">☆</span><span class="fl"></span></button><button class="favbtn addl" data-addlist aria-haspopup="dialog"><span class="star">＋</span><span data-t="toList">பட்டியலில் சேர்</span></button></div>
+    <div class="alt" id="rAlt"></div>
+    <div class="note" id="rNote" hidden></div>
+    <div class="chips wrap2 vchips" id="rVar" hidden></div>
+    <div class="seg rmode" id="rMode" role="group" hidden></div>
+    <div class="seg rmode" id="rMula" role="group" hidden></div>
+    <nav class="chips wrap2 vchips facejump" id="rFaces" hidden></nav>
+  </div>
+  <nav class="rstick" id="rStick" hidden></nav>
+  <div class="body" id="rBody"></div>
+  <p class="hint" data-t="tapHint"></p>
+</main>
+
+<main id="serix" class="wrap" hidden>
+  <div class="ghead">
+    <button class="back" data-home="#c-parayana">←</button>
+    <div class="gtitle"><span class="sym" id="xSym"></span><div><h1 id="xDeva" class="deva"></h1><div id="xAlt" class="alt"></div></div></div>
+  </div>
+  <a class="xcont" id="xCont" href="#" hidden></a>
+  <div id="xLead"></div>
+  <div id="xTree" class="xtree"></div>
+</main>
+
+<main id="stotra" class="wrap" hidden>
+  <div class="rhead">
+    <button class="back" data-home data-t="backHome">← முகப்பு</button>
+    <div class="rtitle"><h1 id="sTitle"></h1><button class="favbtn" id="sFav" aria-pressed="false"><span class="star">☆</span><span class="fl"></span></button><button class="favbtn addl" data-addlist aria-haspopup="dialog"><span class="star">＋</span><span data-t="toList">பட்டியலில் சேர்</span></button></div>
+    <div class="alt" id="sAlt"></div>
+    <nav class="sparts vchips" id="sParts" hidden></nav>
+    <nav class="chips wrap2 vchips facejump sheads" id="sHeads" hidden></nav>
+    <div class="note" id="sNote" hidden></div>
+    <a class="stonav" id="sNama" hidden></a>
+  </div>
+  <div class="sampbar" id="sSamp" hidden></div>
+  <div class="body" id="sBody"></div>
+  <nav class="sernav" id="sSer" hidden></nav>
+  <p class="hint" data-t="markHint"></p>
+</main>
+
+<a class="chx-back" id="goBack" href="#" hidden></a>
+
+<main id="chandas" class="wrap" hidden>
+  <div class="rhead">
+    <button class="back" data-home data-t="backHome">← முகப்பு</button>
+    <div class="rtitle"><h1 data-t="chxTitle">சந்தஸ் பரீக்ஷை</h1></div>
+    <p class="note" data-t="chxIntro"></p>
+  </div>
+  <a class="chx-back" id="chxBack" href="#" hidden></a>
+  <div class="chx-home" id="chxHome" hidden></div>
+  <button class="chx-up" id="chxUp" hidden></button>
+  <div class="chx-tabs" role="tablist" id="chxTabs"><button role="tab" data-tab="check" aria-selected="true"></button><button role="tab" data-tab="list"></button><button role="tab" data-tab="anu"></button><button role="tab" data-tab="basics"></button></div>
+  <div class="chx" id="chxCheck">
+    <div class="chx-mode" id="chxMode"><button data-m="write" aria-pressed="false">வ்ருத்தத்தில் எழுது</button><button data-m="check" aria-pressed="true">🔍 பிரித்துப் பார்</button></div>
+    <div class="chx-tgt"><span data-t="chxTarget">எழுதப்போகும் வ்ருத்தம்</span> <input id="chxTq" type="search" placeholder="🔍 தேடு — பெயர், கணம், அக்ஷர எண்…" autocomplete="off" lang="sa"> <select id="chxTarget"></select></div>
+    <div class="chx-sum" id="chxSum"></div>
+    <div id="chxWrite"></div>
+    <div id="chxFree">
+      <textarea id="chxIn" rows="4" spellcheck="false" autocomplete="off" lang="sa"></textarea>
+      <div class="chx-btns"><button class="btn2" id="chxEx1" data-t="chxEx1">உதா: ஶ்லோகம்</button><button class="btn2" id="chxEx2" data-t="chxEx2">உதா: வஸந்ததிலகா</button><button class="btn2" id="chxEx3" data-t="chxEx3">உதா: ஆர்யா</button><button class="btn2" id="chxClr" data-t="chxClr">அழி</button></div>
+      <div id="chxOut" class="chx-out" aria-live="polite"></div>
+    </div>
+  </div>
+  <div class="chx-ref" id="chxRef" hidden></div>
+</main>
+
+<main id="about" class="wrap" hidden>
+  <div class="about">
+    <button class="back" data-home data-t="backHome">← முகப்பு</button>
+    <div class="lang-ta">
+      <h1>இந்த ஆப் பற்றி</h1>
+      <p>பூஜாநிதி — வைதிக பூஜை, வ்ரதங்கள், அர்ச்சனைக்கான நாமாவளிகள் எல்லாம் ஒரே இடத்தில். பூஜையின் நடுவில் அஷ்டோத்தரம் வரும் இடத்திலிருந்து நேராக அர்ச்சனைக்குப் போகலாம். எல்லோருக்கும் இலவசம், விளம்பரம் இல்லை. தேவநாகரி, தமிழ், க்ரந்தம் மூன்று எழுத்திலும் படிக்கலாம்.</p>
+      <h2>ஆக்கியோன்</h2>
+      <p>திருவிடைமருதூர் நிதீஶ்வர ஶர்மா</p>
+      <h2>உதவி புரிந்தவர்</h2>
+      <p>திருவிடைமருதூர் யோகேஶ ஶர்மா</p>
+      <h2>நன்றி</h2>
+      <p>ஸ்தோத்ர ஸம்ஹிதா — ப்ரொ. கார்த்திக் ராமன், IIT மெட்ராஸ்</p>
+      <h2>எப்படி உபயோகிப்பது</h2>
+      <ul>
+        <li>மேலே உள்ள <b>देव · தமிழ் · 𑌗𑍍𑌰</b> பொத்தானால் படிக்கும் எழுத்தை எப்போது வேண்டுமானாலும் மாற்றலாம்.</li>
+        <li>பூஜையில் மேலே உள்ள படிகளைத் (பூர்வாங்கம், ஷோடஶோபசாரம், அர்ச்சனை…) தொட்டால் நேராக அங்கே போகும்.</li>
+        <li><b>அர்ச்சனை</b> பொத்தான்: ஒரு நாமம் மட்டும் பெரிதாக வரும்; தொட்டால் அடுத்தது.</li>
+        <li><b>☆</b> குறி: அடிக்கடி படிப்பவையில் சேர்க்க.</li>
+        <li><b>ॐ</b> பொத்தான்: ஒவ்வொரு நாமத்துக்கும் முன் ஓம். <b>அ− அ+</b>: எழுத்தின் அளவு.</li>
+        <li><b>⇊</b> பொத்தான்: தொடாமலே பக்கம் தானாக மெல்ல நகரும். கீழே உள்ள <b>− +</b> பொத்தான்களால் உங்கள் வாசிப்பு வேகத்துக்கு ஏற்ப மாற்றலாம் (1 — எழுத்துக்கூட்டி, 20 — மிக வேகமாக). விரலால் பக்கத்தைத் தொட்டால் நின்று, விட்டதும் அங்கிருந்து தொடரும்.</li>
+      </ul>
+      <h2>போனில் ஆப்பாக நிறுவ</h2>
+      <ul>
+        <li><b>Android:</b> Chrome-ல் திறந்து ⋮ → “Install app” அல்லது “Add to Home screen”.</li>
+        <li><b>iPhone:</b> Safari-ல் திறந்து Share (□↑) → “Add to Home Screen”.</li>
+        <li>ஒருமுறை திறந்த பிறகு இணையம் இல்லாமலும் வேலை செய்யும்.</li>
+      </ul>
+    </div>
+    <div class="lang-en">
+      <h1>About this app</h1>
+      <p>Pujanidhi — Vaidika pūjā vidhānam, vratas and the nāmāvalis for archana, all in one place. From the point in a pūjā where the aṣṭottaram comes, one tap opens the archana. Free for everyone, no ads. Read in Devanagari, Tamil or Grantha.</p>
+      <h2>Made by</h2>
+      <p>Thiruvidaimarudur Nidhīśvara Śarmā</p>
+      <h2>Helped by</h2>
+      <p>Thiruvidaimarudur Yogeśa Śarmā</p>
+      <h2>Thanks</h2>
+      <p>Stotra Samhita — Prof. Karthik Raman, IIT Madras</p>
+      <h2>How to use</h2>
+      <ul>
+        <li>The <b>देव · தமிழ் · 𑌗𑍍𑌰</b> switch at the top changes the script, any time.</li>
+        <li>In a pūjā, tap a step at the top (Pūrvāṅgam, Ṣoḍaśopacāra, Archana…) to jump there.</li>
+        <li><b>Archana</b>: one name at a time, large; tap the name for the next one.</li>
+        <li><b>☆</b>: add to Favourites, shown first on the home screen.</li>
+        <li><b>ॐ</b>: Om before every name. <b>A− A+</b>: text size.</li>
+        <li><b>⇊</b>: the page scrolls slowly by itself, hands-free. Use <b>− +</b> in the bar at the bottom to match your reading pace (1 — letter by letter, 20 — very fast). Touch the page to hold it; let go and it carries on from there.</li>
+      </ul>
+      <h2>Install on your phone</h2>
+      <ul>
+        <li><b>Android:</b> open in Chrome, ⋮ → “Install app” or “Add to Home screen”.</li>
+        <li><b>iPhone:</b> open in Safari, Share (□↑) → “Add to Home Screen”.</li>
+        <li>After the first visit it works without internet.</li>
+      </ul>
+    </div>
+    <h2>Fonts</h2>
+    <p class="en">Tiro Devanagari Sanskrit, Noto Serif Tamil, Noto Serif Grantha, Noto Sans Tamil — SIL Open Font License.</p>
+  </div>
+</main>
+
+<div id="setup" class="setup" hidden role="dialog" aria-modal="true" aria-labelledby="setupTitle">
+  <div class="setup-card">
+    <img src="icons/icon-192-om.png" alt="" width="72" height="72">
+    <h1 id="setupTitle" class="deva">पूजानिधिः</h1>
+    <p class="st">மொழி · Language</p>
+    <div class="choices" id="setupLang">
+      <button data-l="ta"><b>தமிழ்</b><span>அறிவுரைகள் தமிழில்</span></button>
+      <button data-l="en"><b>English</b><span>Instructions in English</span></button>
+    </div>
+    <p class="st" id="setupScriptLbl">நாமாவளியைப் படிக்கும் எழுத்து</p>
+    <div class="choices three" id="setupScript">
+      <button data-s="deva"><b class="deva">ॐ गणेशाय नमः</b><span>देवनागरी</span></button>
+      <button data-s="taml"><b class="taml">ஓம் க³ணேஶாய நம:</b><span>தமிழ்</span></button>
+      <button data-s="gran"><b class="gran">𑍐 𑌗𑌣𑍇𑌶𑌾𑌯 𑌨𑌮𑌃</b><span>Grantha</span></button>
+    </div>
+    <p class="hint" id="setupNote"></p>
+    <button class="go" id="setupGo">தொடங்கு →</button>
+  </div>
+</div>
+
+<div id="markSheet" class="sheet" hidden role="dialog" aria-modal="true" aria-labelledby="markT"><div class="sheetbox"><h2 id="markT" data-t="markT">குறி · குறிப்பு</h2><div id="markSnip" class="msnip"></div><p class="hint mwh" id="markWHint" hidden></p><div id="markWords" class="mwords" hidden></div>
+  <div class="swatches" hidden><button class="sw sw0" data-c="0" aria-label="குறி இல்லை">○</button><button class="sw sw1" data-c="1" aria-label="மஞ்சள்"></button><button class="sw sw2" data-c="2" aria-label="பச்சை"></button><button class="sw sw3" data-c="3" aria-label="நீலம்"></button></div>
+  <textarea id="markNote" rows="3" maxlength="600" data-tp="notePh"></textarea>
+  <div class="lacts"><button class="pbtn" id="markSave" data-t="save">சேமி</button><button class="btn2" id="markClear" data-t="clearMark">குறியை நீக்கு</button></div></div></div>
+<div id="sheet" class="sheet" hidden role="dialog" aria-modal="true" aria-labelledby="sheetT"><div class="sheetbox"><h2 id="sheetT" data-t="addToList">பட்டியலில் சேர்</h2><div id="sheetItem" class="note"></div><div id="sheetLists"></div><form id="sheetNew" class="newlist"><input id="sheetNewName" maxlength="40" autocomplete="off" data-tp="listName" data-ta="listName"><button class="btn2" type="submit" data-t="create">உருவாக்கு</button></form><button class="pbtn" id="sheetDone" data-t="done">முடிந்தது</button></div></div>
+<button id="vPos" class="vpos" hidden aria-live="off"></button>
+<div id="asBar" class="asbar" hidden role="group"><button class="icon" id="asPlay" aria-label="▶">❚❚</button><button class="icon" id="asSlow" data-tt="slower">−</button><div class="asmid"><div class="asv" id="asVal"></div></div><button class="icon" id="asFast" data-tt="faster">+</button><button class="icon" id="asFull" data-tt="fullT">⛶</button><button class="icon px" id="asStop" data-ta="close">✕</button></div>
+<nav id="paraBar" class="parabar" hidden aria-label="பாராயணம்"><button class="icon" id="paraPrev" aria-label="முந்தையது">‹</button><div class="pmid"><div class="pl" id="paraLbl"></div><div class="pn" id="paraNext"></div></div><button class="pbtn" id="paraGo">→</button><button class="icon px" id="paraStop" aria-label="நிறுத்து">✕</button></nav>
+<div id="archana" class="archana" hidden role="dialog" data-ta="archana">
+  <div class="atop"><span id="aCount"></span><span id="aTitle"></span><button class="icon" id="aClose">✕</button></div>
+  <button class="aname" id="aName"></button>
+  <div class="anav"><button class="icon" id="aPrev" data-t="prev">← முன்</button><span class="ahint" data-t="tapNext"></span><button class="icon" id="aNext">அடுத்து →</button></div>
+</div>
+
+<script src="translit.js?v=2026.11.13a"></script>
+<script src="symbols.js?v=2026.11.13a"></script>
+<script src="chandas.js?v=2026.11.13a"></script>
+<script src="app.js?v=2026.11.13a"></script>
+</body>
+</html>
