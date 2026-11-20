@@ -1270,7 +1270,7 @@ body.en .nyg{font-family:var(--ui)}
 .blk-box .prubric{margin:8px 2px}
 .pd{display:inline-block}
 .pd2 .ph{display:none}
-.pd2.brk .ph{display:inline}
+.pd2 .pd.brk .ph{display:inline}
 /* Śrīnagara picture (Lalitāstavaratna) */
 .blk-fold.ng .ng-box{padding:.4em 0}
 .ng-tabs{display:flex;gap:.35em;justify-content:center;flex-wrap:wrap;margin-bottom:.5em}
