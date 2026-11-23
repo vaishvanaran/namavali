@@ -1561,9 +1561,27 @@ details.tday:not([open]) .tnext{white-space:nowrap;overflow:hidden;text-overflow
 .stile.k-small .sym{font-size:1.4em}
 
 /* a treatise (style: grantha) — plain prose paragraphs, the author's quotations set apart, mantras bold (user, 2026-11-23) */
-#sBody.grantha .blk-para{border:0;background:none;padding:2px 2px;margin:0 0 .75em;text-align:justify;hyphens:none;font-size:calc(var(--fs)*.74);line-height:1.9}
-#sBody.grantha .blk-shloka{background:none;border-left:2px solid color-mix(in srgb,var(--haldi) 60%,transparent);margin:.3em 0 .8em;padding:2px 12px}
-.blk-quote{margin:.35em 0 .9em .4em;padding:6px 12px;border-left:3px solid color-mix(in srgb,var(--kumkum) 55%,transparent);background:color-mix(in srgb,var(--kumkum) 5%,transparent);border-radius:0 8px 8px 0;font-family:var(--script);font-size:calc(var(--fs)*.72);line-height:1.8;color:color-mix(in srgb,var(--fg) 82%,var(--kumkum))}
+#sBody.grantha .blk-para{border:0;background:none;padding:2px 2px;margin:0 0 .9em;text-align:start;hyphens:none;font-size:calc(var(--fs)*.74);line-height:1.9}
+#sBody.grantha .blk-shloka{background:none;border:0;margin:.3em 0 .9em;padding:2px 2px;color:color-mix(in srgb,var(--fg) 85%,var(--haldi))}
+#sBody.grantha .pd2.big .pd{display:block}
+#sBody.grantha .pd2.big .ph{display:none!important}
+#sBody.grantha .blk-para.pp{padding-left:.7em;border-left:2px dotted color-mix(in srgb,var(--muted) 55%,transparent);color:color-mix(in srgb,var(--fg) 78%,var(--muted))}
+.ppl{display:inline-block;margin-right:.45em;padding:0 .45em;border-radius:6px;font-size:.72em;vertical-align:.12em;background:color-mix(in srgb,var(--muted) 16%,transparent);color:var(--muted);font-family:var(--script)}
+.gq{color:color-mix(in srgb,var(--kumkum) 62%,var(--fg))}
+.gsrc{color:var(--vdc,#2a7a78);font-weight:600}
+.blk-qsrc{margin:-.4em 0 .9em;font-family:var(--script);font-size:calc(var(--fs)*.66);line-height:1.7}
+.blk-pray{margin:.4em 0 1em;padding:.5em .8em;border-radius:10px;background:color-mix(in srgb,var(--haldi) 7%,var(--paper));font-family:var(--script);font-size:calc(var(--fs)*.74);line-height:1.75}
+.blk-pray p{margin:.18em 0}
+.blk-pray p.vi{font-style:italic;color:var(--muted);font-size:.9em}
+.bj{color:var(--kumkum);font-weight:700}
+.blk-quote{margin:.3em 0 .9em;padding:0 2px;font-family:var(--script);font-size:calc(var(--fs)*.74);line-height:1.85;color:color-mix(in srgb,var(--kumkum) 62%,var(--fg))}
 .blk-quote p{margin:.1em 0}
 .blk-mantra{margin:.4em 0 .9em;padding:6px 12px;font-family:var(--script);font-weight:700;font-size:calc(var(--fs)*.78);line-height:1.9;color:color-mix(in srgb,var(--fg) 70%,var(--kumkum));background:color-mix(in srgb,var(--haldi) 9%,transparent);border-radius:8px}
 #sBody.grantha .blk-head{margin-top:1.4em}
+
+/* metre dictionary: finder (search, well-known, A–Z) */
+.chx-az{margin:.2em 0 .8em}
+.chx-azq{width:100%;box-sizing:border-box;padding:.55em .8em;border-radius:10px;border:1px solid var(--line);background:var(--paper);color:var(--fg);font:inherit}
+.chx-azl,.chx-azr{display:flex;flex-wrap:wrap;gap:.4em;margin:.4em 0 .6em}
+.chx-azb{display:inline-flex;align-items:baseline;gap:.35em;padding:.3em .7em;border-radius:999px;border:1px solid color-mix(in srgb,var(--kumkum) 30%,var(--line));background:var(--paper);color:var(--fg);font-family:var(--script);font-size:.95em;cursor:pointer}
+.chx-azb small{color:var(--muted);font-family:var(--ui);font-size:.72em}
