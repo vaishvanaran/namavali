@@ -1585,3 +1585,8 @@ details.tday:not([open]) .tnext{white-space:nowrap;overflow:hidden;text-overflow
 .chx-azl,.chx-azr{display:flex;flex-wrap:wrap;gap:.4em;margin:.4em 0 .6em}
 .chx-azb{display:inline-flex;align-items:baseline;gap:.35em;padding:.3em .7em;border-radius:999px;border:1px solid color-mix(in srgb,var(--kumkum) 30%,var(--line));background:var(--paper);color:var(--fg);font-family:var(--script);font-size:.95em;cursor:pointer}
 .chx-azb small{color:var(--muted);font-family:var(--ui);font-size:.72em}
+
+/* sūrya namaskāra page */
+.nmno{display:inline-block;min-width:2.1em;margin-right:.25em;font-weight:700;font-size:1.12em;color:var(--kumkum)}
+.nmn{font-weight:700}
+.pforms .fnone{color:var(--muted);font-size:.9em;margin:.3em 0}
