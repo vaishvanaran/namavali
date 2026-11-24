@@ -1590,3 +1590,5 @@ details.tday:not([open]) .tnext{white-space:nowrap;overflow:hidden;text-overflow
 .nmno{display:inline-block;min-width:2.1em;margin-right:.25em;font-weight:700;font-size:1.12em;color:var(--kumkum)}
 .nmn{font-weight:700}
 .pforms .fnone{color:var(--muted);font-size:.9em;margin:.3em 0}
+.pforms.pvsel{display:flex;align-items:center;gap:.6em;flex-wrap:wrap;margin:.2em 0 .8em}
+.pforms.pvsel .vsl{font-size:.9em;color:var(--muted)}
