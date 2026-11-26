@@ -1035,6 +1035,8 @@ details.chx-src[open]>summary::after{content:" ▾"}
 .vpp{position:fixed;right:max(10px,env(safe-area-inset-right,0px));bottom:calc(52px + env(safe-area-inset-bottom,0px));z-index:19;width:min(92vw,25rem);max-height:55vh;display:flex;flex-direction:column;gap:.5em;padding:.6em;border-radius:14px;border:1px solid var(--line);background:var(--paper);box-shadow:0 6px 24px rgba(0,0,0,.22);font-size:.9rem}
 .vpp[hidden]{display:none}
 .vpp .vph{display:grid;grid-template-columns:repeat(4,1fr);gap:.35em;overflow-y:auto}
+.vpp .vph.va{grid-template-columns:repeat(8,1fr)}
+.vpp .vplab{font-size:.78rem;color:var(--muted);margin-bottom:-.25em}
 .vpp .vph .chip{margin:0;padding:.35em .2em;text-align:center;font-size:.85rem}
 .vpp .vpr{display:flex;align-items:center;gap:.4em;color:var(--muted)}
 .vpp input{width:4.6em;font:inherit;padding:.2em .35em;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--fg)}
@@ -1275,8 +1277,8 @@ details.plinks[open] .pl-n{display:none}
 .nyg{font-family:var(--tamil);font-size:.62em;font-weight:500;color:var(--muted);margin:0 .35em 0 .3em;padding:0 .4em;border-radius:6px;background:color-mix(in srgb,var(--nyp) 10%,transparent);white-space:nowrap;vertical-align:.12em}
 body.en .nyg{font-family:var(--ui)}
 .blk-iti{margin:6px 4px 6px;padding:7px 10px 3px;border-top:1px dashed color-mix(in srgb,var(--muted) 45%,transparent);text-align:center;font-family:var(--script);font-size:calc(var(--fs)*.62);color:var(--muted);font-style:italic}
-.blk-va{margin:2px 6px 8px 22px;padding:5px 10px;border-left:3px solid color-mix(in srgb,var(--accent,#a0522d) 55%,transparent);background:color-mix(in srgb,var(--accent,#a0522d) 6%,transparent);border-radius:0 8px 8px 0;font-family:var(--script);font-size:calc(var(--fs)*.82);line-height:1.6}
-.blk-va .val{font-size:.78em;font-weight:700;color:var(--kum,#b3261e);margin-right:4px}
+.blk-va{margin:2px 6px 8px 22px;padding:5px 10px;border-left:3px solid color-mix(in srgb,var(--accent,#a0522d) 55%,transparent);background:color-mix(in srgb,var(--accent,#a0522d) 6%,transparent);border-radius:0 8px 8px 0;font-family:var(--script);font-size:calc(var(--fs)*.9);line-height:1.7;color:color-mix(in srgb,var(--fg,#222) 72%,#0f6b5c)}
+.blk-va .val{font-size:.72em;font-weight:700;color:var(--kum,#b3261e);margin-right:4px}
 .blk-box .prubric{margin:8px 2px}
 .pd{display:inline-block}
 .pd2 .ph{display:none}
@@ -1602,3 +1604,6 @@ details.tday:not([open]) .tnext{white-space:nowrap;overflow:hidden;text-overflow
 .pforms .fnone{color:var(--muted);font-size:.9em;margin:.3em 0}
 .pforms.pvsel{display:flex;align-items:center;gap:.6em;flex-wrap:wrap;margin:.2em 0 .8em}
 .pforms.pvsel .vsl{font-size:.9em;color:var(--muted)}
+
+/* gaṇasūtra / quoted sūtra inside a gaṇapāṭha list — set apart, full size (user 2026-11-26) */
+.gsu{display:inline;font-weight:600;color:color-mix(in srgb,var(--fg,#222) 60%,#7a3e9d);background:color-mix(in srgb,#7a3e9d 9%,transparent);border-radius:5px;padding:0 .25em;margin:0 .1em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
