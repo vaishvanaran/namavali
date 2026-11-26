@@ -1032,6 +1032,14 @@ details.chx-src[open]>summary::after{content:" ▾"}
 /* where am I in the text */
 .vpos{position:fixed;right:max(10px,env(safe-area-inset-right,0px));bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:18;padding:.32em .85em;border-radius:999px;border:1px solid var(--line);background:color-mix(in srgb,var(--paper) 90%,transparent);color:var(--muted);font:inherit;font-size:.82rem;line-height:1.5;box-shadow:0 2px 10px rgba(0,0,0,.12);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);cursor:pointer;white-space:nowrap}
 .vpos[hidden]{display:none}
+.vpp{position:fixed;right:max(10px,env(safe-area-inset-right,0px));bottom:calc(52px + env(safe-area-inset-bottom,0px));z-index:19;width:min(92vw,25rem);max-height:55vh;display:flex;flex-direction:column;gap:.5em;padding:.6em;border-radius:14px;border:1px solid var(--line);background:var(--paper);box-shadow:0 6px 24px rgba(0,0,0,.22);font-size:.9rem}
+.vpp[hidden]{display:none}
+.vpp .vph{display:grid;grid-template-columns:repeat(4,1fr);gap:.35em;overflow-y:auto}
+.vpp .vph .chip{margin:0;padding:.35em .2em;text-align:center;font-size:.85rem}
+.vpp .vpr{display:flex;align-items:center;gap:.4em;color:var(--muted)}
+.vpp input{width:4.6em;font:inherit;padding:.2em .35em;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--fg)}
+.vpp .vpok,.vpp .vpx{font:inherit;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg);padding:.15em .6em;cursor:pointer}
+body.autos:not(.immersive) .vpp{bottom:calc(112px + env(safe-area-inset-bottom,0px))}
 .vpos b{color:var(--fg);font-weight:700}
 .vpos input{width:4.2em;font:inherit;padding:.1em .3em;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--fg)}
 body.autos:not(.immersive) .vpos{bottom:calc(72px + env(safe-area-inset-bottom,0px))}
