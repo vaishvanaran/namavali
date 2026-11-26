@@ -1267,6 +1267,8 @@ details.plinks[open] .pl-n{display:none}
 .nyg{font-family:var(--tamil);font-size:.62em;font-weight:500;color:var(--muted);margin:0 .35em 0 .3em;padding:0 .4em;border-radius:6px;background:color-mix(in srgb,var(--nyp) 10%,transparent);white-space:nowrap;vertical-align:.12em}
 body.en .nyg{font-family:var(--ui)}
 .blk-iti{margin:6px 4px 6px;padding:7px 10px 3px;border-top:1px dashed color-mix(in srgb,var(--muted) 45%,transparent);text-align:center;font-family:var(--script);font-size:calc(var(--fs)*.62);color:var(--muted);font-style:italic}
+.blk-va{margin:2px 6px 8px 22px;padding:5px 10px;border-left:3px solid color-mix(in srgb,var(--accent,#a0522d) 55%,transparent);background:color-mix(in srgb,var(--accent,#a0522d) 6%,transparent);border-radius:0 8px 8px 0;font-family:var(--script);font-size:calc(var(--fs)*.82);line-height:1.6}
+.blk-va .val{font-size:.78em;font-weight:700;color:var(--kum,#b3261e);margin-right:4px}
 .blk-box .prubric{margin:8px 2px}
 .pd{display:inline-block}
 .pd2 .ph{display:none}
