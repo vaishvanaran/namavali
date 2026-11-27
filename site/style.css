@@ -531,7 +531,12 @@ html[data-script="gran"] .names .x{line-height:1.9}
 
 .asbar .astip{font-size:.7rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 /* full-screen reading while auto-scrolling */
-body.immersive .bar,body.immersive .steps,body.immersive .jump,body.immersive #asBar,body.immersive #paraBar,body.immersive .retpuja{display:none!important}
+body.immersive .bar,body.immersive .steps,body.immersive .jump,body.immersive #paraBar,body.immersive .retpuja{display:none!important}
+/* full screen keeps a small floating speed pill: ▶/❚❚ − n + ⤡(leave full screen) ✕ */
+body.immersive #asBar:not([hidden]){right:auto;left:max(10px,env(safe-area-inset-left,0px));bottom:calc(10px + env(safe-area-inset-bottom,0px))!important;width:auto;gap:2px;padding:3px 6px;border:1px solid var(--line);border-radius:28px;background:color-mix(in srgb,var(--paper) 78%,transparent);box-shadow:0 4px 14px rgba(0,0,0,.18);opacity:.5;transition:opacity .2s}
+body.immersive #asBar:hover,body.immersive #asBar:focus-within,body.immersive #asBar:active{opacity:1}
+body.immersive #asBar .icon{min-width:40px;min-height:40px}
+body.immersive #asBar .asmid{flex:0 0 auto;min-width:1.6em}
 body.immersive main.wrap{padding-bottom:40vh}
 
 /* searched word, word-level marks */
@@ -1607,3 +1612,4 @@ details.tday:not([open]) .tnext{white-space:nowrap;overflow:hidden;text-overflow
 
 /* gaṇasūtra / quoted sūtra inside a gaṇapāṭha list — set apart, full size (user 2026-11-26) */
 .gsu{display:inline;font-weight:600;color:color-mix(in srgb,var(--fg,#222) 60%,#7a3e9d);background:color-mix(in srgb,#7a3e9d 9%,transparent);border-radius:5px;padding:0 .25em;margin:0 .1em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+body.autos.immersive .vpos{bottom:calc(64px + env(safe-area-inset-bottom,0px))}
